@@ -1,5 +1,5 @@
 # SMERSH
-<img width="1280" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png">
+<img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png">
 
 Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions.
 

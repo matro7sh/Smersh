@@ -1,0 +1,22 @@
+
+<div class="container vertical-align center size-100-prc">
+    <div class="rounded bg-light-grey flex columns width-500-px">
+        <div class="bg-purple rounded-top vertical-align center height-100-px width-600-prc relative">
+            <div class="circle absolute vertical-align center bottom-0-px left-0-px bg-purple-complement size-110-px margin-left-20-px margin-bottom-20-px">
+                <img src="./assets/logo.png" width="80%">
+            </div>
+            <div class="vertical-align title-text">
+                Smersh authentification
+            </div>
+        </div>
+        <div class="content vertical-align center size-100-prc">
+            <div class="vertical-align center columns width-75-prc height-100-prc">
+                <form (submit)="submit()" class="form">
+                <input class="custom-input margin-bottom-10-px margin-top-40-px height-60-px width-80-prc padding-10-px font-input" type="text" name="login" [(ngModel)]="username" placeholder="username">
+                <input class="custom-input margin-bottom-40-px margin-top-40-px height-60-px width-80-prc padding-10-px font-input" placeholder="password" type="password" name="password" [(ngModel)]="password">
+                <button class="vertical-align center title-text width-100-prc height-80-px rounded-light bg-purple-complement margin-bottom-40-px">connection</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

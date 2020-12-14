@@ -1,0 +1,46 @@
+# api/config/packages/security.yaml
+security:
+  encoders:
+    App\Entity\User:
+      algorithm: argon2i
+
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    #il ajwt:
+      #lexik_jwt: ~
+    # used to reload user from session & other features (e.g. switch_user)
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: username
+
+  firewalls:
+    dev:
+      pattern: ^/_(profiler|wdt)
+      security: false
+    api:
+      pattern: ^/api/
+      stateless: true
+      anonymous: true
+      provider: app_user_provider
+      guard:
+        authenticators:
+          - lexik_jwt_authentication.jwt_token_authenticator
+    login:
+      pattern:  ^/authentication_token
+      stateless: true
+      anonymous: true
+      json_login:
+        check_path: /authentication_token
+        username_path: username
+        password_path: password
+        success_handler: lexik_jwt_authentication.handler.authentication_success
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+    main:
+      anonymous: true
+
+
+  access_control:
+    - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
+    - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY } # IS_AUTHENTICATED_FULLY
+    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }

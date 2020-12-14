@@ -1,0 +1,39 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by name">
+</mat-form-field>
+
+<div *ngIf="dataSource" class="mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+            <mat-cell *matCellDef="let row">  {{ row.id }}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="technology">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Technology </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.technology }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+            <mat-cell *matCellDef="let row"><button mat-raised-button (click)="editHost(row.id)">Edit</button></mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let row"><button mat-raised-button color="warn" (click)="deleteHost(row.id)">delete</button></mat-cell>
+        </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+</div>

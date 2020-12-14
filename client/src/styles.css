@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    background-color:black
+}
+
+
+.yolo {
+    padding: 30px;
+}
+
+.mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #3f51b5;
+}
+
+
+.violet {
+    color: #3f51b5;
+}
+
+.yoyo {
+    display: flex;
+}
+
+.mat-drawer-content {
+    margin-left: 240px;
+}
+
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #3f51b5;
+}

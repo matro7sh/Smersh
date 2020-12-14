@@ -1,0 +1,28 @@
+<h1>Welcome to u're dashboard</h1>
+<mat-card-content>
+    <mat-tab-group>
+        <mat-tab label="My missions" >
+            <div *ngIf="missions.length ; else loggedOut">
+            <mat-list>
+                <mat-list-item *ngFor="let mission of missions">
+                    <mat-icon mat-list-icon>label_important</mat-icon>
+                    <div mat-line>{{mission.name}} - <button mat-raised-button color="primary" [routerLink]="['/missions/details/',mission.id]">Show</button> - <button mat-raised-button (click)="editMission(mission.id)">Edit</button></div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+            </div>
+            <ng-template #loggedOut>
+                You don't have mission yet.
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="My roles" *ngIf="missions">
+            <mat-list>
+                <mat-list-item *ngFor="let role of roles">
+                    <mat-icon mat-list-icon>label_important</mat-icon>
+                    <div mat-line>{{role}}</div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </mat-tab>
+    </mat-tab-group>
+</mat-card-content>

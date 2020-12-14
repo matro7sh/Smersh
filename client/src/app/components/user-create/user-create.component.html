@@ -1,0 +1,14 @@
+<h1>Create User</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput type = "text" name="username" placeholder = "Username" ngModel autocomplete="off">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Password : </mat-label>
+        <input matInput type="password" name="password" placeholder = "Password" ngModel autocomplete="off">
+    </mat-form-field>
+    <div class="example-button-row">
+        <button mat-button type="submit" mat-raised-button color="primary">Create</button>
+    </div>
+</form>

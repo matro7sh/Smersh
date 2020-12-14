@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "api.fullname" . }}
+  labels:
+    {{- include "api.labels" . | nindent 4 }}
+data:
+  env: {{ .Values.php.env | quote }}
+  debug: {{ .Values.php.debug | quote }}
+  cors-allow-origin: {{ .Values.php.corsAllowOrigin | quote }}
+  varnish-url: {{ if .Values.varnish.url }}{{ .Values.varnish.url | quote }}{{ else }}http://varnish{{ end }}
+  trusted-hosts: {{ .Values.php.trustedHosts | quote }}
+  trusted-proxies: {{ join "," .Values.php.trustedProxies }}
+  mercure-publish-url: {{ .Values.mercure.publishUrl | quote }}
+  mercure-subscribe-url: {{ .Values.mercure.subscribeUrl | quote }}

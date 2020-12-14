@@ -1,0 +1,71 @@
+<h1 xmlns="http://www.w3.org/1999/html">Edit Mission</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+<span>Nmap check : </span>
+    <input #saveUserNameCheckBox
+           id="saveUserNameCheckBox"
+           type="checkbox"
+           [checked]="nmapChecked"
+           (change)="onSaveUsernameChanged(saveUserNameCheckBox.checked)" />
+<br/>
+    <span>Nessus check :</span>
+
+
+    <input #saveUserNameCheckBox
+           id="saveUserNameCheckBox"
+           type="checkbox"
+           [checked]="nessusChecked"
+           (change)="onSaveChanged(saveUserNameCheckBox.checked)" />
+
+    <br/><br/>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="mission.startDate" name="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>End date</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="mission.EndDate" name="EndDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>Client Name</mat-label>
+        <input matInput type = "text" name="name" [(ngModel)]="mission.name"   autocomplete="off">
+    </mat-form-field><br/>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>credentials : </mat-label>
+        <textarea matInput type="text" name="credentials" placeholder="jenaye:yolo" [(ngModel)]="mission.credentials" autocomplete="off"></textarea>
+    </mat-form-field><br/>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Type of Mission</mat-label>
+        <mat-select (selectionChange)="getTypeValue($event.value)">
+            <mat-option *ngFor="let type of types" [value]="type['@id']" name="type">
+                {{type.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br/>
+
+
+    <mat-form-field appearance="fill">
+        <mat-label>Select users</mat-label>
+        <mat-select [(value)]="selected" multiple #selectUsers (selectionChange)="toto($event.value)">
+            <mat-option *ngFor="let user of allUsers" [value]="user['@id']">{{user.username}}</mat-option>
+        </mat-select>
+
+    </mat-form-field>
+    <div class="example-button-row">
+        <br/><br/><br/><br/>
+        <button mat-button mat-raised-button color="primary">Edit</button>
+    </div>
+</form>

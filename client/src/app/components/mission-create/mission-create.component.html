@@ -1,0 +1,61 @@
+<h1 xmlns="http://www.w3.org/1999/html">Create Mission</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Start date</mat-label>
+        <input matInput [matDatepicker]="picker" ngModel name="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>End date</mat-label>
+        <input matInput [matDatepicker]="picker2" ngModel name="EndDate">
+        <mat-datepicker-toggle matSuffix [for]="picker2">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <br/>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Client Name</mat-label>
+        <input matInput type = "text" name="name" ngModel  autocomplete="off">
+    </mat-form-field><br/>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>credentials : </mat-label>
+        <textarea matInput type="text" name="credentials" placeholder="jenaye:yolo" ngModel autocomplete="off"></textarea>
+    </mat-form-field><br/>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Type of Mission</mat-label>
+        <mat-select (selectionChange)="getTypeValue($event.value)">
+            <mat-option *ngFor="let type of types" [value]="type['@id']" name="type">
+                {{type.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+<br/>
+
+<mat-form-field class="example-full-width">
+    <mat-label>pathToCodi : </mat-label>
+        <input matInput type="text" name="pathToCodi" placeholder = "https://localhost:3000/1I3dN9kOQkCK" ngModel  autocomplete="off">
+</mat-form-field><br/>
+
+
+<mat-form-field appearance="fill">
+    <mat-label>Select users</mat-label>
+    <mat-select (selectionChange)="toto($event.value)" multiple>
+        <mat-option *ngFor="let user of AllUsers" [value]="user['@id']">{{user.username}}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+    <div class="example-button-row">
+        <br/><br/><br/><br/>
+        <button mat-button mat-raised-button color="primary">Create</button>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+<h1>Create Vuln</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type = "text" name="name" placeholder = "name" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>Description : </mat-label>
+        <textarea matInput type="text" name="description" ngModel autocomplete="off"></textarea>
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>Remediation : </mat-label>
+        <textarea matInput type="text" name="remediation"  ngModel autocomplete="off"></textarea>
+    </mat-form-field><br/>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Select impact</mat-label>
+        <mat-select [(value)]="selected_type" (selectionChange)="changeClient($event.value)" placeholder="Type" #impactValue>
+            <mat-option *ngFor="let impact of impacts"  [value]="impact['@id']" name="type">
+                {{impact.name}}
+            </mat-option>
+        </mat-select>
+
+    </mat-form-field>
+    <div class="example-button-row">
+        <button mat-button type="submit" mat-raised-button color="primary">Create</button>
+    </div>
+</form>

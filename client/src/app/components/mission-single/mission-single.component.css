@@ -1,0 +1,12 @@
+.example-card {
+    max-width: 900px;
+}
+
+.example-header-image {
+    background-image: url('http://localhost:4200/assets/logo.png');
+    background-size: cover;
+}
+
+.yoyo {
+    display: flex;
+}

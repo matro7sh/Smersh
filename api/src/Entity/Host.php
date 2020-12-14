@@ -1,0 +1,206 @@
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\HostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use App\Controller\UploadHostController;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"Host:output"}},
+ *     itemOperations={
+ *     "get",
+ *     "delete",
+ *     "patch",
+ *     "put",
+ *     "post_upload"={
+ *         "method"="POST",
+ *         "path"="/upload/host",
+ *         "controller"=UploadHostController::class,
+ *         "denormalization_context"={"groups"={"Host:upload:input"}}
+ *     }
+ * })
+ * @ORM\Entity(repositoryClass=HostRepository::class)
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="This name is already in use"
+ * )
+ */
+class Host
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     * @Groups({"Host:output"})
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Groups({"MissionSingleOutput", "Host:output"})
+     * @Assert\Url(
+     *    protocols = {"http", "https", "ftp"}
+     * )
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Nmap::class, mappedBy="host")
+     */
+    private $nmaps;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=false)
+     * @Groups({"MissionSingleOutput"})
+     */
+    private $checked;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"MissionSingleOutput", "Host:output"})
+     */
+    private $technology;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Mission::class, inversedBy="hosts")
+     * @JoinColumn(name="mission_id", referencedColumnName="id")
+     * @Groups({"Host:output"})
+     */
+    private $mission;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Vuln::class, inversedBy="hosts")
+     * @Groups({"MissionSingleOutput", "Impact"})
+     */
+    private $vulns;
+
+    public function __construct()
+    {
+        $this->nmaps = new ArrayCollection();
+        $this->checked = false;
+        $this->vulns = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Nmap[]
+     */
+    public function getNmaps(): Collection
+    {
+        return $this->nmaps;
+    }
+
+    public function addNmap(Nmap $nmap): self
+    {
+        if (!$this->nmaps->contains($nmap)) {
+            $this->nmaps[] = $nmap;
+            $nmap->addHost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNmap(Nmap $nmap): self
+    {
+        if ($this->nmaps->removeElement($nmap)) {
+            $nmap->removeHost($this);
+        }
+
+        return $this;
+    }
+
+    public function getMission(): ?Mission
+    {
+        return $this->mission;
+    }
+
+    public function setMission(?Mission $mission): self
+    {
+        $this->mission = $mission;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChecked()
+    {
+        return $this->checked;
+    }
+
+    /**
+     * @param mixed $checked
+     */
+    public function setChecked($checked): void
+    {
+        $this->checked = $checked;
+    }
+
+    /**
+     * @return Collection|Vuln[]
+     */
+    public function getVulns(): Collection
+    {
+        return $this->vulns;
+    }
+
+    public function addVuln(Vuln $vuln): self
+    {
+        if (!$this->vulns->contains($vuln)) {
+            $this->vulns[] = $vuln;
+        }
+
+        return $this;
+    }
+
+    public function removeVuln(Vuln $vuln): self
+    {
+        $this->vulns->removeElement($vuln);
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTechnology()
+    {
+        return $this->technology;
+    }
+
+    /**
+     * @param mixed $technology
+     */
+    public function setTechnology($technology): void
+    {
+        $this->technology = $technology;
+    }
+}

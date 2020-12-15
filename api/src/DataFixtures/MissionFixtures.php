@@ -38,7 +38,6 @@ class MissionFixtures extends Fixture
         $mission = new Mission();
         $mission->setNessus(0);
         $mission->setName("FAKE-MISSION-EXTERNE");
-        $mission->setCodeSX("YOLO-2020-TIE");
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission->setNmap(1);
@@ -53,7 +52,6 @@ class MissionFixtures extends Fixture
         $mission2 = new Mission();
         $mission2->setNessus(0);
         $mission2->setName("FAKE-MISSION-INTERNE");
-        $mission2->setCodeSX("YOLO-2020-TI");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission2->setNmap(0);

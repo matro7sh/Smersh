@@ -28,7 +28,9 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 # How to install server
 
 
->If you are using windows, please switch to linux
+>If you are using windows, please switch to linux </troll>
+
+in `api` folder copy `.env-dist` to `.env` 
 
 Run `docker-compose up -d` then use theses command
 

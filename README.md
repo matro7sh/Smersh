@@ -76,8 +76,7 @@ docker-compose exec php sh -c '
 > requirements : node & npm 
 
 ```
-npm i
-ng serve
+cd client && npm i && npm start
 ```
 
 ## Todo

@@ -214,7 +214,7 @@ export class MissionSingleComponent implements OnInit {
                 CLIENT_NAME: this.missionName,
                 creds: this.mission.credentials ? this.mission.credentials : 'No Account used',
                 classification: "C3",
-                phone: "0661271423",
+                phone: "00-00-00-00",
                 version: "1.0",
                 yolo: "yloswag1234",
                 from: "jenaye@protonmail.com",

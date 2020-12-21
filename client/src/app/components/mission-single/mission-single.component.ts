@@ -12,6 +12,14 @@ import {FileInformation} from '../../file-information';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import axios from 'axios';
 import {environment} from "../../../environments/environment";
+import Docxtemplater from "docxtemplater";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import { saveAs } from "file-saver";
+
+function loadFile(url, callback) {
+    PizZipUtils.getBinaryContent(url, callback);
+}
 
 @Component({
   selector: 'app-mission',
@@ -109,6 +117,8 @@ export class MissionSingleComponent implements OnInit {
         this.users = response['users'];
         this.creds  = response['credentials'];
 
+        console.log(this.users);
+
         this.initForm();
         this.id = response.id;
 
@@ -187,6 +197,74 @@ export class MissionSingleComponent implements OnInit {
       console.log(this.id);
      // this.router.navigateByUrl('/missions/add-vuln');
         this.router.navigateByUrl(`/missions/${this.id}/add-vuln`);
+    }
+
+    generate() {
+      console.log("users =>", this.users['hydra:member']);
+        loadFile(`/assets/template.docx`, (
+            error,
+            content
+        ) => {
+            if (error) {
+                throw error;
+            }
+            var zip = new PizZip(content);
+            var doc = new Docxtemplater().loadZip(zip);
+            doc.setData({
+                CLIENT_NAME: this.missionName,
+                creds: this.mission.credentials ? this.mission.credentials : 'No Account used',
+                classification: "C3",
+                phone: "0661271423",
+                version: "1.0",
+                yolo: "yloswag1234",
+                from: "jenaye@protonmail.com",
+                to: "myclient@localhost.com",
+                authors: this.users,
+                scope: this.hosts
+            });
+            try {
+                // render the document (replace all occurences of key by your data)
+                doc.render();
+            } catch (error) {
+                // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+                function replaceErrors(key, value) {
+                    if (value instanceof Error) {
+                        return Object.getOwnPropertyNames(value).reduce(function(
+                            error,
+                            key
+                            ) {
+                                error[key] = value[key];
+                                return error;
+                            },
+                            {});
+                    }
+                    return value;
+                }
+                console.log(JSON.stringify({ error: error }, replaceErrors));
+
+                if (error.properties && error.properties.errors instanceof Array) {
+                    const errorMessages = error.properties.errors
+                        .map(function(error) {
+                            return error.properties.explanation;
+                        })
+                        .join("\n");
+                    console.log("errorMessages", errorMessages);
+                    // errorMessages is a humanly readable message looking like this :
+                    // 'The tag beginning with "foobar" is unopened'
+                }
+                throw error;
+            }
+            var out = doc.getZip().generate({
+                type: "blob",
+                mimeType:
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            }); //Output the document using Data-URI
+            saveAs(out, "rapport.docx");
+        });
+    }
+
+    share() {
+        window.alert("The product has been shared!");
     }
 
 

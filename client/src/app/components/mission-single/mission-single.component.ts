@@ -203,7 +203,7 @@ export class MissionSingleComponent implements OnInit {
 
     generate() {
       console.log("users =>", this.users['hydra:member']);
-        loadFile(`/assets/template.docx`, (
+        loadFile(`/assets/Smersh.docx`, (
             error,
             content
         ) => {

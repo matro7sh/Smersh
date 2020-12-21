@@ -23,7 +23,10 @@
     "@angular/router": "~10.2.0",
     "@material/top-app-bar": "^8.0.0",
     "axios": "^0.21.0",
+    "docxtemplater": "^3.19.7",
+    "file-saver": "^2.0.5",
     "moment": "^2.29.1",
+    "pizzip": "^3.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

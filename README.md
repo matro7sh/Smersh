@@ -24,6 +24,10 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 | CodiMD | 3000 | 3000 |
 | db-codiMD | 5432 | / |
 
+# Preview Report
+
+<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png">
+<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png">
 
 # How to install server
 

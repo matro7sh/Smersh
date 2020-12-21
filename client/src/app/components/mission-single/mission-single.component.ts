@@ -118,6 +118,8 @@ export class MissionSingleComponent implements OnInit {
         this.creds  = response['credentials'];
 
         console.log(this.users);
+        console.log(this.mission);
+        console.log(this.hosts.vulns);
 
         this.initForm();
         this.id = response.id;
@@ -211,16 +213,18 @@ export class MissionSingleComponent implements OnInit {
             var zip = new PizZip(content);
             var doc = new Docxtemplater().loadZip(zip);
             doc.setData({
+                startDate: this.mission.startDate,
                 CLIENT_NAME: this.missionName,
                 creds: this.mission.credentials ? this.mission.credentials : 'No Account used',
-                classification: "C3",
+                classification: "Confidentiel client - C3 ",
                 phone: "00-00-00-00",
                 version: "1.0",
-                yolo: "yloswag1234",
-                from: "jenaye@protonmail.com",
+                by: "jenaye@protonmail.com",
                 to: "myclient@localhost.com",
                 authors: this.users,
-                scope: this.hosts
+                state: "draft",
+                scope: this.hosts,
+                vulns: this.hosts.vulns ? this.hosts.vulns : 'no vulns on this host'
             });
             try {
                 // render the document (replace all occurences of key by your data)

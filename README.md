@@ -1,7 +1,7 @@
 # SMERSH
 <img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png">
 
-Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions.
+Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions and generate rapport.
 
 # Preview front (Angular):
 <img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png">
@@ -80,7 +80,7 @@ cd client && npm i && npm start
 ```
 
 ## Todo
-- Generate report
+- add conclusion generator
 - Add field for language ?
 - Progress bar on mission ?
 - Externe : host/vuln - interne : account pwned, privilieges ? perimeter

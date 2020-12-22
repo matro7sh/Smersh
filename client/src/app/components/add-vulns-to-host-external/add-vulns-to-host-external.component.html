@@ -1,14 +1,6 @@
 <h1 xmlns="http://www.w3.org/1999/html">Add vuln to host</h1>
-<span class="material-icons" style="cursor: pointer" (click)="createVuln()">add new vuln</span>
+<span class="material-icons" style="cursor: pointer" (click)="createVuln()">add new vuln</span><br/><br/>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-
-    <mat-form-field appearance="fill">
-        <mat-label>Select hosts</mat-label>
-        <mat-select [(value)]="selected_hosts" multiple #selectHosts (selectionChange)="Hosts($event.value)">
-            <mat-option *ngFor="let host of hosts" [value]="host['@id']">{{host.name}}</mat-option>
-        </mat-select>
-
-    </mat-form-field>
 
     <mat-form-field appearance="fill">
         <mat-label>Select Vulns</mat-label>

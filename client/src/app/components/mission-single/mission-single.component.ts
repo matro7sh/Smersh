@@ -195,10 +195,9 @@ export class MissionSingleComponent implements OnInit {
       this.fileInput.nativeElement.click();
     }
 
-    goToAddVulns(id): void {
-      console.log(this.id);
-     // this.router.navigateByUrl('/missions/add-vuln');
-        this.router.navigateByUrl(`/missions/${this.id}/add-vuln`);
+    goToAddVulns(uri, mission_id): void {
+        const id = uri.split('/').pop();
+        this.router.navigateByUrl(`/missions/${id}/add-vuln/${mission_id}`);
     }
 
     generate() {

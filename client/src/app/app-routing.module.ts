@@ -56,7 +56,7 @@ const routes: Routes = [
         component: MissionEditComponent
       },
       {
-        path: ':id/add-vuln',
+        path: ':id/add-vuln/:missionid',
         component: AddVulnsToHostExternalComponent
       },
 

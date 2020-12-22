@@ -36,9 +36,11 @@
                                 <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
                                 <ng-template #thenBlock>verified</ng-template>
                                 <ng-template #elseBlock>hourglass_empty</ng-template>
-                            </mat-icon>
+                            </mat-icon> -
+                            <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
                             <div mat-line>
                                 <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer'>{{host.name}}</a>
+
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
                                     <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.name}} - {{vuln.impact.name}}</mat-chip>
@@ -80,7 +82,6 @@
 
         </mat-card-content>
         <mat-card-actions><br/><br/>
-            <button  mat-raised-button color="primary" (click)="goToAddVulns(id)">ADD NEW VULN</button><br/><br/>
             <mat-divider></mat-divider>
 
             <form class="example-form"  #myform = "ngForm" (ngSubmit)="addHost(myform)">

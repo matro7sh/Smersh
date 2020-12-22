@@ -19,32 +19,35 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public selectedVulns = [];
   public idFromUrl: any;
   public missionId: any;
+  public host_id: any;
   selected_vulns: any[];
   selected_hosts: any[];
 
   constructor(private vulnsService: VulnsService ,private activatedRoute: ActivatedRoute, private hostsService: HostsService, private missionServices: MissionsService, private router: Router) { }
 
   ngOnInit(): void {
-
     let idFromUrl = this.activatedRoute.snapshot.params.id;
-    this.missionId = idFromUrl;
-    this.getHostsFromMission(idFromUrl);
+    this.host_id = idFromUrl;
+    var url = this.router.url;
+    const mission_id = url.split('/').pop();
+    console.log("ID de la mission => ", mission_id);
+    this.getHostsFromMission(mission_id);
     this.loadVulns();
   }
 
   // get all vulns
   loadVulns(): void {
     this.vulnsService.getData().subscribe(el => {
-  //    console.log('VULNS', el['hydra:member']);
       this.vulns = el['hydra:member'];
-
     });
   }
 
   // get all hosts from mission id
-  getHostsFromMission(id): void {
-    this.missionServices.getDataById(id).subscribe( el => {
+  getHostsFromMission(mission_id): void {
+
+    this.missionServices.getDataById(mission_id).subscribe( el => {
     this.hosts = el['hosts'];
+    console.log(this.hosts)
 
     let id_vulns = [];
     for (let i in this.hosts[0]["vulns"]){
@@ -61,18 +64,17 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    for (const uri of this.selected_hosts) {
-      var id = uri.split('/').pop();
+    console.log(this.host_id);
       console.log("selectedVulns => ", this.selectedVulns);
       Object.assign(form.value, {vulns: this.selectedVulns});
-      this.hostsService.update(id, form.value).subscribe( el => {
+      this.hostsService.update(this.host_id, form.value).subscribe( el => {
         console.log("response from vuln service =>",el);
+        const id = el.mission;
+        const missionId = id.split('/').pop();
+        this.missionId = missionId;
+        this.ngOnInit();
+        this.router.navigateByUrl(`/missions/details/${this.missionId}`);
       });
-
-    }
-    this.ngOnInit();
-    this.router.navigateByUrl(`/missions/details/${this.missionId}`);
-
   }
 
   Hosts(value){
@@ -81,6 +83,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   Vulns(value){
     this.selectedVulns = value;
+    console.log("selected vulns", value);
   }
   createVuln(){
     this.router.navigateByUrl('/vulnerabilities/create');

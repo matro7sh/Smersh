@@ -200,6 +200,12 @@ export class MissionSingleComponent implements OnInit {
         this.router.navigateByUrl(`/missions/${id}/add-vuln/${mission_id}`);
     }
 
+    applyFilter(filterValue: string) {
+        filterValue = filterValue.trim();
+        filterValue = filterValue.toLowerCase();
+        console.log(filterValue);
+    }
+
     generate() {
       console.log("users =>", this.users['hydra:member']);
         loadFile(`/assets/Smersh.docx`, (

@@ -93,10 +93,10 @@ class MissionFixtures extends Fixture
 
         $sqli = new Vuln();
         $sqli->setName("sqli");
-        $sqli->setDescription("injection sql");
+        $sqli->setDescription("Sql injection");
         $sqli->setVulnType($type);
         $sqli->setImpact($impact3);
-        $sqli->setRemediation("u should use parameter query");
+        $sqli->setRemediation("Use of Prepared Statements (with Parameterized Queries, you can also use of Stored Procedures and escaping All User Supplied Input");
         $manager->persist($sqli);
 
         $xss = new Vuln();
@@ -104,31 +104,31 @@ class MissionFixtures extends Fixture
         $xss->setDescription("exemple : execute /js");
         $xss->setVulnType($type);
         $xss->setImpact($impact2);
-        $xss->setRemediation("add header and never trust user");
+        $xss->setRemediation("HTML Encode Before Inserting Untrusted Data into HTML Element Content and add some headers");
         $manager->persist($xss);
 
         $ssl = new Vuln();
         $ssl->setVulnType($type);
-        $ssl->setDescription("weak ssl");
+        $ssl->setDescription("Weak ciphers");
         $ssl->setName("ssl");
         $ssl->setImpact($impact);
-        $ssl->setRemediation("change conf");
+        $ssl->setRemediation("use Elliptic Curve Diffie–Hellman (ECDH) with (ECDSA) or RSA like AES256-GCM");
         $manager->persist($ssl);
 
         $lfi = new Vuln();
         $lfi->setName("lfi");
         $lfi->setImpact($impact3);
-        $lfi->setDescription("");
+        $lfi->setDescription("This issue generally occurs when an application is trying to get some information from a particular server where the inputs for getting a particular file location are not treated as a trusted source");
         $lfi->setVulnType($type);
-        $lfi->setRemediation("dont include");
+        $lfi->setRemediation("If you definitely need dynamic path concatenation, ensure you only accept required characters such as 'a-Z0-9' and do not allow '..' or '/' or '%00' (null byte) or any other similar unexpected characters.");
         $manager->persist($lfi);
 
         $lsa = new Vuln();
         $lsa->setVulnType($type2);
         $lsa->setName("lsa");
         $lsa->setImpact($impact3);
-        $lsa->setDescription("lsa cache miss config");
-        $lsa->setRemediation("cache to false");
+        $lsa->setDescription("The reason an attacker is able to dump so many hashes from a compromised system is due to credential caching");
+        $lsa->setRemediation("HKEY_LOCAL_MACHINE\Software\Microsoft\WindowsNT\Current Version\Winlogon\ as CachedLogonsCount. The value is typically set to 25 by default, but should be changed to either 0 or 1 (since caching zero logins can cause cluster nodes to fail)");
         $manager->persist($lsa);
 
 

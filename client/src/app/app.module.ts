@@ -63,6 +63,7 @@ import { HostEditComponent } from './components/host-edit/host-edit.component';
 import { ImpactComponent } from './components/impact/impact.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
+import { ConclusionComponent } from './components/conclusion/conclusion.component';
 
 
 
@@ -91,6 +92,7 @@ import { ImpactCreateComponent } from './components/impact-create/impact-create.
     ImpactComponent,
     ImpactEditComponent,
     ImpactCreateComponent,
+    ConclusionComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,7 @@ import {HostEditComponent} from "./components/host-edit/host-edit.component";
 import {ImpactComponent} from "./components/impact/impact.component";
 import {ImpactEditComponent} from "./components/impact-edit/impact-edit.component";
 import {ImpactCreateComponent} from "./components/impact-create/impact-create.component";
+import {ConclusionComponent} from "./components/conclusion/conclusion.component";
 
 
 
@@ -127,6 +128,16 @@ const routes: Routes = [
       {
         path: 'create',
         component: ImpactCreateComponent
+      },
+    ],
+  },
+  {
+    path: 'conclusion', component: SideBarComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'generate',
+        component: ConclusionComponent
       },
     ],
   },

@@ -589,9 +589,6 @@
             "config/packages/vich_uploader.yaml"
         ]
     },
-    "webimpress/safe-writer": {
-        "version": "2.0.1"
-    },
     "webmozart/assert": {
         "version": "1.8.0"
     },

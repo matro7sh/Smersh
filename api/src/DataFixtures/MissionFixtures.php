@@ -100,7 +100,7 @@ class MissionFixtures extends Fixture
             ->setDescription('Injection sql')
             ->setName('sqli');
         $sqliFR->setLocale('fr');
-        $sqliFR->setRemediation("YOLO, you can also use of Stored Procedures and escaping All User Supplied Input");
+        $sqliFR->setRemediation("fait des requetes parametrer pelo");
         $sqliEN
             ->setDescription('Sql injection')
             ->setName('sqli');
@@ -122,6 +122,7 @@ class MissionFixtures extends Fixture
         $xssFR
             ->setDescription('exemple : execute /js')
             ->setName('XSS')
+            ->setRemediation(" tu devrais mettre des headers et verifier les champs")
             ->setLocale('fr');
         $xssEN
             ->setDescription('example : execute /js')

@@ -13,6 +13,7 @@ export class VulnsEditComponent implements OnInit {
   public name: any;
   public description: any;
   public remediation: any;
+  public  currentLocal = localStorage.getItem("local");
 
 
   constructor(private vulnsService: VulnsService, private router: Router) { }
@@ -26,9 +27,16 @@ export class VulnsEditComponent implements OnInit {
 
   loadVuln(id): void {
     this.vulnsService.getDataById(this.id).subscribe(vuln => {
-      this.name = vuln.name;
-      this.description = vuln.description;
-      this.remediation = vuln.remediation;
+      console.log(vuln)
+      if (this.currentLocal === "fr"){
+        this.name = vuln['translations']['fr'].name
+        this.description = vuln['translations']['fr'].description
+        this.remediation = vuln['translations']['fr'].remediation
+      }else {
+        this.name = vuln['translations']['en'].name;
+        this.description = vuln['translations']['en'].description
+        this.remediation = vuln['translations']['en'].remediation
+      }
 
     });
   }

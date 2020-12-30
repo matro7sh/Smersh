@@ -9,7 +9,7 @@ trait NameTrait
 {
     /**
      * @ORM\Column
-     * @Groups({"Vulns"})
+     * @Groups({"Vulns", "MissionSingleOutput"})
      */
     private $name;
 

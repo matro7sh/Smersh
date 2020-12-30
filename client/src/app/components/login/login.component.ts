@@ -37,9 +37,12 @@ export class LoginComponent implements OnInit {
 
     this.http.post(`${environment.HOST}/authentication_token`, json, this._options).subscribe(response => {
       if (response['token']!=="") {
-        var token = response['token'];
+        const token = response['token'];
         localStorage.setItem('token', token);
-        console.log(token)
+        console.log(token);
+        const userLang = navigator.language;
+        const currentLocal = userLang.slice(0,2);
+        localStorage.setItem('local', currentLocal);
         this.router.navigateByUrl('/missions');
       }
     });

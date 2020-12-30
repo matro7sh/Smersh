@@ -14,13 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class VulnTranslation extends AbstractTranslation
 {
-    use DescriptionTrait;
 
     /**
      * @Groups("")
      */
     use NameTrait;
     use RemediationTrait;
+    use DescriptionTrait;
 
     /**
      * @ORM\ManyToOne(targetEntity=Vuln::class, inversedBy="translations")

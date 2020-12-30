@@ -12,6 +12,7 @@ export class VulnsComponent implements OnInit {
   public vulns = [];
   public displayedColumns = ['id', 'name', 'remediation', 'description', 'action'];
   public dataSource: MatTableDataSource<any>;
+  public  currentLocal = localStorage.getItem("local");
 
   constructor(private vulnsServices: VulnsService, private router: Router) { this.dataSource = new MatTableDataSource(); }
 
@@ -23,9 +24,12 @@ export class VulnsComponent implements OnInit {
     this.vulns = [];
     this.vulnsServices.getData()
         .subscribe(events => {
-          console.log(events);
           events['hydra:member'].forEach(el => {
-            this.vulns.push({ id: el['id'], name: el['name'], remediation:el['remediation'] , description: el['description'] });
+            if (this.currentLocal === "fr"){
+              this.vulns.push({ id: el['id'], name: el['translations']['fr'].name, description: el['translations']['fr'].description, remediation: el['translations']['fr'].remediation });
+            } else {
+              this.vulns.push({ id: el['id'], name: el['translations']['en'].name, description: el['translations']['en'].description, remediation: el['translations']['en'].remediation });
+            }
           });
           this.dataSource.data = this.vulns;
         });

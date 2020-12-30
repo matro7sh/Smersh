@@ -42,6 +42,7 @@ export class MissionSingleComponent implements OnInit {
     creds:any;
     file: any;
     id:any;
+    public  currentLocal = localStorage.getItem("local");
 
     uploadForm: FormGroup;
 
@@ -108,7 +109,6 @@ export class MissionSingleComponent implements OnInit {
     this.missionsService.getDataById(id).subscribe(response => {
         this.mission = response;
         this.missionName = response.name;
-
         this.hosts = response['hosts'].map(host => ({
             ...host,
             name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${host.name}`
@@ -117,9 +117,7 @@ export class MissionSingleComponent implements OnInit {
         this.users = response['users'];
         this.creds  = response['credentials'];
 
-        console.log(this.users);
-        console.log(this.mission);
-        console.log(this.hosts.vulns);
+
 
         this.initForm();
         this.id = response.id;

@@ -71,10 +71,10 @@ class Vuln extends AbstractTranslatable
 
     public function __construct()
     {
-        parent::__construct();
         $this->translations = new ArrayCollection();
         $this->missions = new ArrayCollection();
         $this->hosts = new ArrayCollection();
+        parent::__construct();
     }
 
     public function getId(): ?int

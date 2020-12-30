@@ -10,6 +10,7 @@ trait IdTrait
      * @var int
      * @ORM\Id
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
     protected $id;
 

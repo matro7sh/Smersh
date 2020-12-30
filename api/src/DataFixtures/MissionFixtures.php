@@ -92,6 +92,8 @@ class MissionFixtures extends Fixture
         /* Create Vulns and persist */
 
         $sqli = new Vuln();
+        $sqli->setCurrentLocale("en");
+        $sqli->setFallbackLocale("fr");
         $sqli->setName("sqli");
         $sqli->setDescription("Sql injection");
         $sqli->setVulnType($type);
@@ -100,6 +102,8 @@ class MissionFixtures extends Fixture
         $manager->persist($sqli);
 
         $xss = new Vuln();
+        $xss->setCurrentLocale("en");
+        $xss->setFallbackLocale("fr");
         $xss->setName("XSS");
         $xss->setDescription("exemple : execute /js");
         $xss->setVulnType($type);
@@ -108,6 +112,8 @@ class MissionFixtures extends Fixture
         $manager->persist($xss);
 
         $ssl = new Vuln();
+        $ssl->setCurrentLocale("en");
+        $ssl->setFallbackLocale("fr");
         $ssl->setVulnType($type);
         $ssl->setDescription("Weak ciphers");
         $ssl->setName("ssl");
@@ -116,6 +122,8 @@ class MissionFixtures extends Fixture
         $manager->persist($ssl);
 
         $lfi = new Vuln();
+        $lfi->setFallbackLocale("fr");
+        $lfi->setCurrentLocale("en");
         $lfi->setName("lfi");
         $lfi->setImpact($impact3);
         $lfi->setDescription("This issue generally occurs when an application is trying to get some information from a particular server where the inputs for getting a particular file location are not treated as a trusted source");
@@ -124,12 +132,26 @@ class MissionFixtures extends Fixture
         $manager->persist($lfi);
 
         $lsa = new Vuln();
+        $lsa->setFallbackLocale("fr");
+        $lsa->setCurrentLocale("en");
         $lsa->setVulnType($type2);
         $lsa->setName("lsa");
         $lsa->setImpact($impact3);
         $lsa->setDescription("The reason an attacker is able to dump so many hashes from a compromised system is due to credential caching");
         $lsa->setRemediation("HKEY_LOCAL_MACHINE\Software\Microsoft\WindowsNT\Current Version\Winlogon\ as CachedLogonsCount. The value is typically set to 25 by default, but should be changed to either 0 or 1 (since caching zero logins can cause cluster nodes to fail)");
         $manager->persist($lsa);
+
+
+        $lsa2 = new Vuln();
+        $lsa2->setFallbackLocale("en");
+        $lsa2->setCurrentLocale("fr");
+        $lsa2->setVulnType($type2);
+        $lsa2->setName("LSA - FRENCH");
+        $lsa2->setImpact($impact3);
+        $lsa2->setDescription("on peut dump des hashs et password en clair pelo");
+        $lsa2->setRemediation("change ça HKEY_LOCAL_MACHINE\Software\Microsoft\WindowsNT\Current Version\Winlogon\ a 0 ou 1");
+        $manager->persist($lsa2);
+
 
 
         $host2 = new Host();

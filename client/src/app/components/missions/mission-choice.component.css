@@ -17,3 +17,20 @@ mat-card img{
 .marginAction {
     margin-left: 1rem; margin-right: 1rem;
 }
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.cursor {
+    cursor: pointer;
+}

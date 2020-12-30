@@ -35,10 +35,6 @@ h1.example-app-name {
     padding-right: 10px;
 }
 
-router-outlet{
-    padding: 10vw;
-}
-
 
 .example-spacer {
     flex: 1 1 auto;

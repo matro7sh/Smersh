@@ -37,3 +37,32 @@ services:
         arguments: [ '@request_stack' ]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
+    App\Listener\LocaleListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 120 }
+
+    App\Serializer\TranslationContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@App\Serializer\TranslationContextBuilder.inner' ]
+        autoconfigure: false
+
+    App\Serializer\TranslationNormalizer:
+        tags:
+            - { name: 'serializer.normalizer', priority: 64 }
+
+    locastic_api_platform_translation.translation.translator:
+        class: Locastic\ApiPlatformTranslationBundle\Translation\Translator
+        arguments:
+            - '@translator'
+            - '@request_stack'
+            - '%kernel.default_locale%'
+
+    locastic_api_platform_translation.listener.assign_locale:
+        class: Locastic\ApiPlatformTranslationBundle\EventListener\AssignLocaleListener
+        arguments:
+            - '@locastic_api_platform_translation.translation.translator'
+            - '%kernel.default_locale%'
+        tags:
+            - { name: doctrine.event_listener, event: postLoad }
+            - { name: doctrine.event_listener, event: prePersist }

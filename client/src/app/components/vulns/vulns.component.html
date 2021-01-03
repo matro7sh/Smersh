@@ -8,7 +8,6 @@
 <div *ngIf="dataSource" class="mat-elevation-z8">
 
     <mat-table [dataSource]="dataSource" matSort>
-
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
@@ -30,7 +29,7 @@
         <ng-container matColumnDef="action">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Details</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-raised-button (click)="editVuln(row.id)" class="marginAction">Edit</button>
+                <button mat-raised-button (click)="editVuln(row.id, currentLocal)" class="marginAction">Edit</button>
                 <button mat-raised-button color="warn" (click)="deleteVuln(row.id, row.name)" class="marginAction">Delete</button>
             </mat-cell>
         </ng-container>

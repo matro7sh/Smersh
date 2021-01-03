@@ -11,6 +11,7 @@ trait IdTrait
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
+     * @Groups({"Vulns"})
      */
     protected $id;
 

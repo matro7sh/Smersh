@@ -19,7 +19,6 @@ export class VulnsEditComponent implements OnInit {
 
   constructor(private vulnsService: VulnsService, private router: Router, private route: ActivatedRoute) {
     this.id = this.route.snapshot.params.id;
-    this.local = this.route.snapshot.params.local;
   }
 
   ngOnInit(): void {
@@ -44,7 +43,7 @@ export class VulnsEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
 
-    Object.assign(form.value, {currentLocale: this.local });
+    Object.assign(form.value, {currentLocale: this.currentLocal });
     Object.assign(form.value, {translations: ['fr'] });
     console.log(form.value);
     this.vulnsService.update(this.id, form.value).subscribe(() => {

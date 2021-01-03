@@ -94,7 +94,7 @@ const routes: Routes = [
         component: VulnsCreateComponent
       },
       {
-        path: 'edit/:id/:local',
+        path: 'edit/:id',
         component: VulnsEditComponent
       },
     ],

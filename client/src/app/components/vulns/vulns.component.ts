@@ -26,9 +26,9 @@ export class VulnsComponent implements OnInit {
         .subscribe(events => {
           events['hydra:member'].forEach(el => {
             if (this.currentLocal === "fr"){
-              this.vulns.push({ id: el['@id'], name: el['translations']['fr'].name, description: el['translations']['fr'].description, remediation: el['translations']['fr'].remediation });
+              this.vulns.push({ id: el['id'], name: el['translations']['fr'].name, description: el['translations']['fr'].description, remediation: el['translations']['fr'].remediation });
             } else {
-              this.vulns.push({ id: el['@id'], name: el['translations']['en'].name, description: el['translations']['en'].description, remediation: el['translations']['en'].remediation });
+              this.vulns.push({ id: el['id'], name: el['translations']['en'].name, description: el['translations']['en'].description, remediation: el['translations']['en'].remediation });
             }
           });
           this.dataSource.data = this.vulns;

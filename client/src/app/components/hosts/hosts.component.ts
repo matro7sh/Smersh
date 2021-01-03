@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HostsService} from "../../services/hosts.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
+import {MatTableDataSource} from '@angular/material/table';
+import {Router} from '@angular/router';
+import { HostsService } from 'src/app/services/hosts.service';
 
 @Component({
   selector: 'app-hosts',
@@ -10,10 +10,12 @@ import {Router} from "@angular/router";
 })
 export class HostsComponent implements OnInit {
   public hosts = [];
-  public displayedColumns = ['id', 'name','technology',  'edit', 'delete'];
+  public displayedColumns = ['id', 'name', 'technology',  'edit', 'delete'];
   public dataSource: MatTableDataSource<any>;
 
-  constructor(private hostService: HostsService, private router: Router) {  this.dataSource = new MatTableDataSource();}
+  constructor(private hostService: HostsService, private router: Router) {
+    this.dataSource = new MatTableDataSource();
+  }
 
   ngOnInit(): void {
     this.loadHosts();
@@ -26,18 +28,18 @@ export class HostsComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
+  applyFilter(filterValue: string): void {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
 
-  editHost(id){
+  editHost(id): void {
     this.router.navigate(['/hosts/edit/', id]);
   }
 
-  deleteHost(id){
-    if(confirm("Are you sure to delete ")) {
+  deleteHost(id): void {
+    if (confirm('Are you sure to delete ')) {
       this.hostService.delete(id).subscribe( () => { this.ngOnInit()});
     }
   }

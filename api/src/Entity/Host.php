@@ -16,19 +16,25 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *     normalizationContext={"groups"={"Host:output"}},
- *     itemOperations={
- *     "get",
- *     "delete",
- *     "patch",
- *     "put",
- *     "post_upload"={
- *         "method"="POST",
- *         "path"="/upload/host",
- *         "controller"=UploadHostController::class,
- *         "denormalization_context"={"groups"={"Host:upload:input"}}
- *     }
- * })
+ *  normalizationContext={"groups"={"Host:output"}},
+ *  security="is_granted('IS_AUTHENTICATED_FULLY')",
+ *  collectionOperations={
+ *      "get",
+ *      "post"
+ *  },
+ *  itemOperations={
+ *      "get",
+ *      "delete",
+ *      "patch",
+ *      "put",
+ *      "post_upload"={
+ *          "method"="POST",
+ *          "path"="/upload/host",
+ *          "controller"=UploadHostController::class,
+ *          "denormalization_context"={"groups"={"Host:upload:input"}}
+ *      }
+ *  }
+ * )
  * @ORM\Entity(repositoryClass=HostRepository::class)
  * @UniqueEntity(
  *     fields={"name"},

@@ -25,6 +25,8 @@
     "axios": "^0.21.0",
     "docxtemplater": "^3.19.7",
     "file-saver": "^2.0.5",
+    "jose": "^3.5.0",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "pizzip": "^3.0.6",
     "rxjs": "~6.6.0",

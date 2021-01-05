@@ -16,8 +16,8 @@ export class ConnectionService extends AbstractService {
     super(http);
   }
 
-  getUrl(): string {
-    return `${environment.HOST}/${this.endpoint}`;
+  getjwt(data) {
+    return this.http.post(`${environment.HOST}/authentication_token`, data);
   }
 
   login(data): Observable<Object> {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VulnsService } from 'src/app/services/vulns.service';
+import {VulnsTranslationService} from "../../services/vulns-translation.service";
 
 @Component({
   selector: 'app-vulns-edit',
@@ -17,7 +18,7 @@ export class VulnsEditComponent implements OnInit {
   public local;
 
   constructor(
-    private vulnsService: VulnsService,
+    private vulnsService: VulnsTranslationService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -30,15 +31,10 @@ export class VulnsEditComponent implements OnInit {
 
   loadVuln(id): void {
     this.vulnsService.getDataById(this.id).subscribe((vuln) => {
-      if (this.currentLocal === 'fr') {
-        this.name = vuln['translations']['fr'].name;
-        this.description = vuln['translations']['fr'].description;
-        this.remediation = vuln['translations']['fr'].remediation;
-      } else {
-        this.name = vuln['translations']['en'].name;
-        this.description = vuln['translations']['fr'].description;
-        this.remediation = vuln['translations']['en'].remediation;
-      }
+      console.log(vuln);
+        this.name = vuln.name;
+        this.description = vuln.description;
+        this.remediation = vuln.remediation;
     });
   }
 

@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ConnectionService } from '../../services/connection.service';
+import {Locale} from "../../storage/Locale";
 
 @Component({
   selector: 'app-side-bar',
@@ -65,6 +66,15 @@ export class SideBarComponent implements OnInit {
     const decode = atob(token.split('.')[1]);
     this.username = JSON.parse(decode).username;
   }
+
+  switchToFR(): void {
+    new Locale().set("fr");
+  }
+
+  switchToEN(): void {
+    new Locale().set("en");
+  }
+
 
   logout() {
     this.connection.logout();

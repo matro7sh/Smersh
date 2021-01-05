@@ -31,11 +31,11 @@ export class HostEditComponent implements OnInit {
 
   loadUser(id) {
     this.hostService.getDataById(id).subscribe((response) => {
+      console.log(response);
       this.host = response;
       this.name = response.name;
       this.technology = response.technology;
       this.id = response.id;
-      console.log(this.host);
     });
   }
 

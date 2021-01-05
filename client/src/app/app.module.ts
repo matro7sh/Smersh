@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { MissionSingleComponent } from './components/mission-single/mission-single.component';
@@ -92,6 +93,7 @@ import { ConclusionComponent } from './components/conclusion/conclusion.componen
     MatChipsModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatRadioModule,
     ReactiveFormsModule,
     MatIconModule,
     FormsModule,

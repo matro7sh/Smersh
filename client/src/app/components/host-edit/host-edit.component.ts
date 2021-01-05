@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {HostsService} from "../../services/hosts.service";
-import {NgForm} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { Router } from '@angular/router';
+import { HostsService } from '../../services/hosts.service';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-host-edit',
   templateUrl: './host-edit.component.html',
-  styleUrls: ['./host-edit.component.css']
+  styleUrls: ['./host-edit.component.css'],
 })
 export class HostEditComponent implements OnInit {
   public id: any;
@@ -16,17 +16,21 @@ export class HostEditComponent implements OnInit {
   durationInSeconds = 4;
   public name: any;
 
-  constructor( private router: Router, private hostService: HostsService, private _snackBar: MatSnackBar) { }
+  constructor(
+    private router: Router,
+    private hostService: HostsService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    var url = this.router.url;
-    var id = url.split('/').pop();
+    const url = this.router.url;
+    const id = url.split('/').pop();
     this.id = id;
     this.loadUser(id);
   }
 
-  loadUser(id){
-    this.hostService.getDataById(id).subscribe(response => {
+  loadUser(id) {
+    this.hostService.getDataById(id).subscribe((response) => {
       this.host = response;
       this.name = response.name;
       this.technology = response.technology;
@@ -38,15 +42,14 @@ export class HostEditComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log(form.value);
     this.hostService.update(this.id, form.value).subscribe(() => {
-      this.openSnackBar(" Host updated");
+      this.openSnackBar(' Host updated');
       this.router.navigateByUrl('/hosts/all');
     });
-
   }
 
   openSnackBar(message) {
-    this._snackBar.open(message,'', { duration: this.durationInSeconds * 1000});
+    this._snackBar.open(message, '', {
+      duration: this.durationInSeconds * 1000,
+    });
   }
-
-
 }

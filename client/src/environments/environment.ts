@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  'API': 'http://localhost:8000/api',
-  'HOST': 'http://localhost:8000',
-  'MAPS_KEY': '',
-  'version': '1.0.6'
+  API: 'http://localhost:8000/api',
+  HOST: 'http://localhost:8000',
+  MAPS_KEY: '',
+  version: '1.0.6',
 };
 /*
  * For easier debugging in development mode, you can import the following file

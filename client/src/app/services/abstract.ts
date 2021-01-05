@@ -4,52 +4,54 @@ import { environment } from 'src/environments/environment';
 import { Token } from 'src/app/storage/Token';
 
 export class AbstractService {
-    protected endpoint = '';
-    protected options;
-    protected http;
+  protected endpoint = '';
+  protected headers: HttpHeaders;
+  protected http;
 
-    public constructor(http: HttpClient) {
-        this.http = http;
-        this.options = {};
-        this.options.headers = new HttpHeaders({
-            Authorization: `Bearer ${new Token().get()}`,
-            'Content-Type': 'application/json; charset=utf-8',
-        });
-    }
+  public constructor(http: HttpClient) {
+    this.http = http;
+    this.headers = new HttpHeaders({
+      Authorization: `Bearer ${new Token().get()}`,
+      'Content-Type': 'application/json; charset=utf-8',
+    });
+  }
 
-    getUrl(): string {
-        return `${environment.API}/${this.endpoint}`;
-    }
+  getUrl(): string {
+    return `${environment.API}/${this.endpoint}`;
+  }
 
-    getData(): Observable<any> {
-        return this.http.get(`${this.getUrl()}`, this.options);
-    }
+  getOptions(): { headers: HttpHeaders } {
+    return {
+      headers: this.headers,
+    };
+  }
 
-    getDataById(id: string): Observable<any>  {
-        return this.http.get(`${this.getUrl()}/${id}`, this.options);
-    }
+  getData(): Observable<any> {
+    return this.http.get(`${this.getUrl()}`, this.getOptions());
+  }
 
-    insert(data: any): Observable<any> {
-        return this.http.post(
-            `${this.getUrl()}`,
-            data,
-            this.options
-        );
-    }
+  getDataById(id: string): Observable<any> {
+    return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
+  }
 
-    delete(id: string): Observable<any> {
-        return this.http.delete(`${this.endpoint}/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
-    }
+  insert(data: any): Observable<any> {
+    return this.http.post(`${this.getUrl()}`, data, this.getOptions());
+  }
 
-    update(id: string, data: any): Observable<any>{
-        this.updateHeaders(new HttpHeaders({'Content-type': 'application/merge-patch+json'}));
-        return this.http.patch(`${this.getUrl()}/${id}`, data, this.options);
-    }
+  delete(id: string): Observable<any> {
+    return this.http.delete(`${this.getUrl()}/${id}`, this.getOptions());
+  }
 
-    updateHeaders(headers: HttpHeaders): void {
-        this.options.headers = {
-            ...this.options.headers,
-            ...headers,
-        };
-    }
+  update(id: string, data: any): Observable<any> {
+    this.updateHeaders({
+      'Content-Type': 'application/merge-patch+json; charset=utf-8',
+    });
+    return this.http.patch(`${this.getUrl()}/${id}`, data, this.getOptions());
+  }
+
+  updateHeaders(headers: Record<string, string>): void {
+    Object.entries(headers).forEach(([k, v]) => {
+      this.headers = this.headers.set(k.toLowerCase(), v);
+    });
+  }
 }

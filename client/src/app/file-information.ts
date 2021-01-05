@@ -1,8 +1,5 @@
-
 export interface FileInformation {
+  filename: string;
 
-    filename: string;
-  
-    size: number;
-  
-  }
+  size: number;
+}

@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import {Router} from '@angular/router';
-import {MatTableDataSource} from "@angular/material/table";
+import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
   public users = [];
-  public displayedColumns = ['id', 'username', 'roles', 'enabled', 'edit', 'delete'];
+  public displayedColumns = [
+    'id',
+    'username',
+    'roles',
+    'enabled',
+    'edit',
+    'delete',
+  ];
   public dataSource: MatTableDataSource<any>;
 
   constructor(private usersService: UsersService, private router: Router) {
@@ -22,11 +29,10 @@ export class UsersComponent implements OnInit {
   }
 
   loadTable(): void {
-    this.users= [];
-    this.usersService.getData()
-        .subscribe(events => {
-          this.dataSource.data = events['hydra:member'].map(el => el);
-        });
+    this.users = [];
+    this.usersService.getData().subscribe((events) => {
+      this.dataSource.data = events['hydra:member'].map((el) => el);
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -35,18 +41,19 @@ export class UsersComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  createUser(){
+  createUser() {
     this.router.navigateByUrl('/users/create');
   }
 
-  deleteUser(id){
-    if(confirm("Are you sure to delete "+name)) {
-    this.usersService.delete(id).subscribe( () => { this.ngOnInit()});
+  deleteUser(id) {
+    if (confirm('Are you sure to delete ' + name)) {
+      this.usersService.delete(id).subscribe(() => {
+        this.ngOnInit();
+      });
     }
   }
 
-  editUser(id){
+  editUser(id) {
     this.router.navigate(['/users/edit/', id]);
   }
-
 }

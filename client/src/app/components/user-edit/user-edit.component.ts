@@ -1,31 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import {UsersService} from "../../services/users.service";
-import {NgForm} from "@angular/forms";
-import {Router} from "@angular/router";
+import { UsersService } from '../../services/users.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  styleUrls: ['./user-edit.component.css'],
 })
 export class UserEditComponent implements OnInit {
-
   public user = [];
   public id: any;
   public username: any;
 
-  constructor(private usersService: UsersService, private router: Router) { }
+  constructor(private usersService: UsersService, private router: Router) {}
 
   ngOnInit(): void {
-    var url = this.router.url;
-    var id = url.split('/').pop();
+    const url = this.router.url;
+    const id = url.split('/').pop();
     this.id = id;
     this.loadUser(id);
   }
 
-
-  loadUser(id){
-    this.usersService.getDataById(id).subscribe(response => {
+  loadUser(id) {
+    this.usersService.getDataById(id).subscribe((response) => {
       console.log(response);
       this.user = response;
       this.username = response.username;
@@ -37,9 +35,5 @@ export class UserEditComponent implements OnInit {
     this.usersService.update(this.id, form.value).subscribe(() => {
       this.router.navigateByUrl('/users');
     });
-
   }
-
-
-
 }

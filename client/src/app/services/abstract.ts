@@ -16,8 +16,8 @@ export class AbstractService {
     });
   }
 
-  getUrl(): string {
-    return `${environment.API}/${this.endpoint}`;
+  getUrl(params: Record<string, string> = {}): string {
+    return `${environment.API}/${this.endpoint}?${new URLSearchParams(params)}`;
   }
 
   getOptions(): { headers: HttpHeaders } {

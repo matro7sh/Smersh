@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import {impactsService} from "../../services/impacts.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
+import { impactsService } from '../../services/impacts.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-impact',
   templateUrl: './impact.component.html',
-  styleUrls: ['./impact.component.css']
+  styleUrls: ['./impact.component.css'],
 })
 export class ImpactComponent implements OnInit {
   public impacts = [];
   public displayedColumns = ['id', 'name', 'action'];
   public dataSource: MatTableDataSource<any>;
 
-  constructor(private impactService: impactsService, private router: Router) { this.dataSource = new MatTableDataSource(); }
+  constructor(private impactService: impactsService, private router: Router) {
+    this.dataSource = new MatTableDataSource();
+  }
 
   ngOnInit(): void {
     this.loadImpacts();
   }
 
   loadImpacts(): void {
-    this.impactService.getData().subscribe( el => {
-      this.dataSource.data = el['hydra:member'].map(impact => impact);
+    this.impactService.getData().subscribe((el) => {
+      this.dataSource.data = el['hydra:member'].map((impact) => impact);
       console.log(this.dataSource.data);
     });
   }
@@ -33,12 +34,11 @@ export class ImpactComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  editImpact(id){
+  editImpact(id) {
     this.router.navigate(['/impacts/edit/', id]);
   }
 
-  createImpact(){
-    this.router.navigateByUrl("/impacts/create");
+  createImpact() {
+    this.router.navigateByUrl('/impacts/create');
   }
-
 }

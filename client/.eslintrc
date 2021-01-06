@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jest": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:security/recommended"
+
+  ],
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["angular", "@typescript-eslint", "prettier", "import", "security"],
+  "rules": {
+    "import/first": "error",
+    "no-console": "warn",
+    "no-eval": "error",
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "react/prop-types": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
+}
+

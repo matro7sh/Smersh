@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {VulnsService} from "../../services/vulns.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
+import {VulnsTranslationService} from "../../services/vulns-translation.service";
 
 @Component({
   selector: 'app-vulns',
@@ -12,8 +13,9 @@ export class VulnsComponent implements OnInit {
   public vulns = [];
   public displayedColumns = ['id', 'name', 'remediation', 'description', 'action'];
   public dataSource: MatTableDataSource<any>;
+  public currentLocal = localStorage.getItem("local");
 
-  constructor(private vulnsServices: VulnsService, private router: Router) { this.dataSource = new MatTableDataSource(); }
+  constructor(private vulnsServices: VulnsTranslationService, private router: Router) { this.dataSource = new MatTableDataSource(); }
 
   ngOnInit(): void {
     this.loadVulns();
@@ -25,6 +27,7 @@ export class VulnsComponent implements OnInit {
         .subscribe(events => {
           console.log(events);
           events['hydra:member'].forEach(el => {
+            console.log("ELEMENT => ", el);
             this.vulns.push({ id: el['id'], name: el['name'], remediation:el['remediation'] , description: el['description'] });
           });
           this.dataSource.data = this.vulns;

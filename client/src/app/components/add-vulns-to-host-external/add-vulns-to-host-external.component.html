@@ -5,7 +5,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Select Vulns</mat-label>
         <mat-select [(value)]="selected_vulns" multiple #selectVulns (selectionChange)="Vulns($event.value)">
-            <mat-option *ngFor="let vuln of vulns" [value]="vuln['@id']">{{vuln.name}}</mat-option>
+            <mat-option *ngFor="let vuln of vulns" [value]="vuln.value">{{vuln.name}}</mat-option>
         </mat-select>
 
     </mat-form-field>

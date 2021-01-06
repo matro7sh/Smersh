@@ -43,6 +43,9 @@ reset-db: init-db load-data
 up: ## Start containers
 	$(DC_UP)
 
+update-db-schema: ## Update database schema
+	$(BIN_CONSOLE) do:sc:up --force
+
 update: ## Update containers composer packages then re-up containers
 	$(DC) pull
 	$(MAKE) composer-update

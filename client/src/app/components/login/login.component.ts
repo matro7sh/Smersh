@@ -1,48 +1,33 @@
-import { Component,OnInit } from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {Router} from '@angular/router';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Token } from 'src/app/storage/Token';
+import { Locale } from 'src/app/storage/Locale';
+import { ConnectionService } from 'src/app/services/connection.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  public username:string;
-  public password:string;
+  public username: string;
+  public password: string;
   public hide = true;
-  private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private connectionService: ConnectionService, private router: Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submit() {
-    let formData: FormData = new FormData();
-    formData.append('username', this.username);
-    formData.append('password', this.password);
-
-    var object = {};
-    formData.forEach(function(value, key){
-      object[key] = value;
-    });
-
-    var json = JSON.stringify(object);
-
-    let header= new Headers({'Content-Type': 'application/json'});
-
-    this.http.post(`${environment.HOST}/authentication_token`, json, this._options).subscribe(response => {
-      if (response['token']!=="") {
-        var token = response['token'];
-        localStorage.setItem('token', token);
-        console.log(token)
-        this.router.navigateByUrl('/missions');
-      }
-    });
+    this.connectionService
+        .login({ username: this.username, password: this.password })
+        .subscribe(({ token }: { token?: string }) => {
+        if (token) {
+          new Token().set(token);
+          const userLang = navigator.language;
+          new Locale().set(userLang.slice(0, 2));
+          this.router.navigateByUrl('/missions');
+        }
+      });
   }
-
 }

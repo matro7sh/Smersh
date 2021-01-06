@@ -85,12 +85,10 @@ cd client && npm i && npm start
 
 ## Todo
 - add conclusion generator
-- Add field for language ?
 - Progress bar on mission ?
 - Externe : host/vuln - interne : account pwned, privilieges ? perimeter
 - Better display of credentials info mission view
 - Maybe use chips to create new vulns into host ?
-- Select by default current vuln by host cuz at add vuln override ( i tried to use 'Content-type': 'application/merge-patch+json' with patch method but isn't working )
 - Add color by impact into mission-single-view
 - Add possibility to select impact when u're editing vuln
 - Fix select vuln by host (add-vulns-to-host-external)

@@ -19,7 +19,7 @@ security:
       pattern: ^/_(profiler|wdt)
       security: false
     api:
-      pattern: ^/api/
+      pattern: ^/api
       stateless: true
       anonymous: true
       provider: app_user_provider
@@ -43,4 +43,4 @@ security:
   access_control:
     - { path: ^/api/docs, roles: IS_AUTHENTICATED_ANONYMOUSLY } # Allows accessing the Swagger UI
     - { path: ^/authentication_token, roles: IS_AUTHENTICATED_ANONYMOUSLY } # IS_AUTHENTICATED_FULLY
-    - { path: ^/api/, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }

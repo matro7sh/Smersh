@@ -1,51 +1,57 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import { Component, OnInit, Output, EventEmitter, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import {Router} from "@angular/router";
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import {ConnectionService} from "../../services/connection.service";
+import { ConnectionService } from '../../services/connection.service';
+import {Locale} from "../../storage/Locale";
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css']
+  styleUrls: ['./side-bar.component.css'],
 })
 export class SideBarComponent implements OnInit {
   @Input() opened: boolean; // opened or not by default
   mobileQuery: MediaQueryList;
-  title = "Smersh"
+  title = 'Smersh';
   fillerNav = {
-    "Missions": {
+    Missions: {
       base: '/missions',
       path: 'all',
     },
-    "Vulns": {
+    Vulns: {
       base: '/vulnerabilities',
       path: 'all',
     },
-    "Hosts": {
+    Hosts: {
       base: '/hosts',
       path: 'all',
     },
-    "User": {
+    User: {
       base: '',
       path: 'users',
     },
-    "Impacts": {
+    Impacts: {
       base: '/impacts',
       path: 'all',
     },
-    "Conclusion": {
+    Conclusion: {
       base: '/conclusion',
       path: 'generate',
     },
-   // "Type":"types",
+    // "Type":"types",
   };
-  public username: "";
+  public username: '';
   public version = `${environment.version}`;
 
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private connection: ConnectionService, private router: Router, ) {
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private connection: ConnectionService,
+    private router: Router
+  ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -56,12 +62,21 @@ export class SideBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var token = localStorage.getItem("token");
-    var  decode =  atob(token.split('.')[1]);
+    const token = localStorage.getItem('token');
+    const decode = atob(token.split('.')[1]);
     this.username = JSON.parse(decode).username;
   }
 
-  logout(){
+  switchToFR(): void {
+    new Locale().set("fr");
+  }
+
+  switchToEN(): void {
+    new Locale().set("en");
+  }
+
+
+  logout() {
     this.connection.logout();
   }
 }

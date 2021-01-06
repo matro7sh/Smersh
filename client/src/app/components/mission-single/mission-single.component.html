@@ -46,7 +46,7 @@
 
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.name}} - {{vuln.impact.name}}</mat-chip>
+                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translations.fr.name}} - {{vuln.impact.name}}</mat-chip>
                                 </mat-chip-list>
                                 </div>
                         </mat-list-item>

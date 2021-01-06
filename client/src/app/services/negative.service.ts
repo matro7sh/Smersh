@@ -1,32 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
+import { AbstractService } from 'src/app/services/abstract';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class NegativePointsService {
+export class NegativePointsService extends AbstractService {
+  protected endpoint = 'negative_points';
 
-  constructor(private http: HttpClient) { }
-
-  getData(): Observable<any> {
-    return this.http.get(`${environment.API}/negative_points`,  {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
-  }
-
-  getDataById(id: string): Observable<any>  {
-    return this.http.get(`${environment.API}/negative_points/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
-  }
-
-  insert(data :any) : Observable<any> {
-    return this.http.post(`${environment.API}/negative_points`, data,  {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
-
-  }
-  delete(id : string) : Observable<any> {
-    return this.http.delete(`${environment.API}/negative_points/${id}`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
-  }
-
-  update(id:string, data:any) : Observable<any>{
-    return this.http.put(`${environment.API}/negative_points/${id}`, data, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
+  constructor(protected http: HttpClient) {
+    super(http);
   }
 }

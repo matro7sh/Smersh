@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Translation\VulnTranslation;
 use App\Repository\VulnRepository;
+use App\Traits\Translatable\TranslatableDescriptionTrait;
+use App\Traits\Translatable\TranslatableNameTrait;
+use App\Traits\Translatable\TranslatableRemediationTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Locastic\ApiPlatformTranslationBundle\Model\AbstractTranslatable;
+use Locastic\ApiPlatformTranslationBundle\Model\TranslatableTrait;
+use Locastic\ApiPlatformTranslationBundle\Model\TranslationInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -19,8 +25,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     message="This name is already in use"
  * )
  */
-class Vuln
+class Vuln extends AbstractTranslatable
 {
+    use TranslatableDescriptionTrait;
+    use TranslatableNameTrait;
+    use TranslatableRemediationTrait;
+    use TranslatableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -30,33 +41,15 @@ class Vuln
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Groups({"Vulns", "Host:output", "MissionSingleOutput"})
-     */
-    private $name;
-
-    /**
      * @ORM\ManyToOne(targetEntity=VulnType::class, inversedBy="vulns")
      * @Groups({"Vulns"})
      */
     private $vulnType;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"Vulns"})
-     */
-    private $description;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Mission::class, mappedBy="vulns")
      */
     private $missions;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"Vulns"})
-     */
-    private $remediation;
 
     /**
      * @ORM\ManyToMany(targetEntity=Host::class, mappedBy="vulns")
@@ -70,28 +63,23 @@ class Vuln
      */
     private $impact;
 
+    /**
+     * @Groups({"article_list", "article_item", "translations"})
+     * @ORM\OneToMany(targetEntity=VulnTranslation::class, mappedBy="translatable", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $translations;
 
     public function __construct()
     {
+        $this->translations = new ArrayCollection();
         $this->missions = new ArrayCollection();
         $this->hosts = new ArrayCollection();
+        parent::__construct();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getVulnType(): ?VulnType
@@ -102,18 +90,6 @@ class Vuln
     public function setVulnType(?VulnType $vulnType): self
     {
         $this->vulnType = $vulnType;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }
@@ -141,18 +117,6 @@ class Vuln
         if ($this->missions->removeElement($mission)) {
             $mission->removeVuln($this);
         }
-
-        return $this;
-    }
-
-    public function getRemediation(): ?string
-    {
-        return $this->remediation;
-    }
-
-    public function setRemediation(?string $remediation): self
-    {
-        $this->remediation = $remediation;
 
         return $this;
     }
@@ -194,5 +158,10 @@ class Vuln
         $this->impact = $impact;
 
         return $this;
+    }
+
+    protected function createTranslation(): TranslationInterface
+    {
+        return new VulnTranslation();
     }
 }

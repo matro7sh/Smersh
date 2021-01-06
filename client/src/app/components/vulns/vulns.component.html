@@ -8,7 +8,6 @@
 <div *ngIf="dataSource" class="mat-elevation-z8">
 
     <mat-table [dataSource]="dataSource" matSort>
-
         <ng-container matColumnDef="id">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.id}}</mat-cell>
@@ -16,7 +15,7 @@
 
         <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.name }} </mat-cell>
         </ng-container>
         <ng-container matColumnDef="description">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>

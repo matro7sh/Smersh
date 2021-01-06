@@ -4,7 +4,7 @@ import { HostsService } from '../../services/hosts.service';
 import { MissionsService } from '../../services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {VulnsTranslationService} from "../../services/vulns-translation.service";
+import {Locale} from "../../storage/Locale";
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -24,7 +24,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   selected_hosts: any[];
 
   constructor(
-    private vulnsService: VulnsTranslationService,
+    private vulnsService: VulnsService,
     private activatedRoute: ActivatedRoute,
     private hostsService: HostsService,
     private missionServices: MissionsService,
@@ -44,7 +44,14 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   // get all vulns
   loadVulns(): void {
     this.vulnsService.getData().subscribe((el) => {
-      this.vulns = el['hydra:member'];
+     const locale =  new Locale().get();
+     this.vulns = el['hydra:member'].map(e => {
+       const elt = e.translations[locale];
+       return {
+         name:  elt.name,
+         value:  e['@id']
+       }
+     });
     });
   }
 

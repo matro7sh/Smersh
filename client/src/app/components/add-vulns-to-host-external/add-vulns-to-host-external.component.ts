@@ -4,6 +4,7 @@ import { HostsService } from '../../services/hosts.service';
 import { MissionsService } from '../../services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import {VulnsTranslationService} from "../../services/vulns-translation.service";
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -23,7 +24,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   selected_hosts: any[];
 
   constructor(
-    private vulnsService: VulnsService,
+    private vulnsService: VulnsTranslationService,
     private activatedRoute: ActivatedRoute,
     private hostsService: HostsService,
     private missionServices: MissionsService,

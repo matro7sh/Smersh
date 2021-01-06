@@ -16,8 +16,8 @@ export class AbstractService {
     });
   }
 
-  getUrl(params: Record<string, string> = {}): string {
-    return `${environment.API}/${this.endpoint}?${new URLSearchParams(params)}`;
+  getUrl(): string {
+    return `${environment.API}/${this.endpoint}`;
   }
 
   getOptions(): { headers: HttpHeaders } {
@@ -26,11 +26,10 @@ export class AbstractService {
     };
   }
 
-  getData(): Observable<any> {
-    return this.http.get(`${this.getUrl()}`, this.getOptions());
+  getData(params: Record<string, string> = {}): Observable<any> {
+    return this.http.get(`${this.getUrl()}?${new URLSearchParams(params)}`, this.getOptions());
   }
 
-  // have to be fixed, return all data instead of single data // edit : its because http request look like this : GET /api/users?/4, parameters should be at the end
   getDataById(id: string): Observable<any> {
     return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
   }

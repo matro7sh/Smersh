@@ -1,15 +1,15 @@
 # SMERSH
-<img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png">
+<img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png" style="text-align:center">
 
 Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions and generate rapport.
 
 # Preview front (Angular):
-<img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png">
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/homepage.png">
+<img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png" style="text-align:center">
+<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/homepage.png" style="text-align:center">
 
 
 # preview API (Symfony + Api Platform) :
-<img width="1280" alt="swagger" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/api.png">
+<img width="1280" alt="swagger" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/api.png" style="text-align:center">
 
 
 # Ports mapping
@@ -26,8 +26,8 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 # Preview Report
 
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png">
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png">
+<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png" style="text-align:center">
+<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png" style="text-align:center">
 
 # How to install server
 

@@ -49,7 +49,7 @@ export class MissionChoiceComponent implements OnInit {
       this.missionsService.delete(id).subscribe((res) => {
         this.ngOnInit();
       });
-      this.router.navigateByUrl('/missions/dashboard');
+      this.router.navigateByUrl('/missions');
     }
   }
 

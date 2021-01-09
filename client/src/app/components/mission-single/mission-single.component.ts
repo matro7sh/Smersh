@@ -207,8 +207,17 @@ export class MissionSingleComponent implements OnInit {
       if (error) {
         throw error;
       }
+
       const zip = new PizZip(content);
       const doc = new Docxtemplater().loadZip(zip);
+      const locale = new Locale().get();
+      const hosts = this.hosts.map(host => ({
+        ...host,
+        vulns: host.vulns.map(vuln => ({
+          ...vuln.translations[locale],
+          vulnName: vuln.translations[locale].name
+        }))
+      }));
       doc.setData({
         startDate: this.mission.startDate,
         CLIENT_NAME: this.missionName,
@@ -222,9 +231,11 @@ export class MissionSingleComponent implements OnInit {
         to: 'myclient@localhost.com',
         authors: this.users,
         state: 'draft',
-        scope: this.hosts,
-        vulns: this.hosts.vulns ? this.hosts.vulns : 'no vulns on this host',
+        scope: hosts,
       });
+
+      console.log(this.mission);
+
       try {
         // render the document (replace all occurences of key by your data)
         doc.render();

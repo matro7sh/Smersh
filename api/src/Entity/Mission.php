@@ -59,6 +59,12 @@ class Mission
     private $pathToCodi;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"Mission", "MissionSingleOutput"})
+     */
+    private $contact;
+
+    /**
      * @ORM\Column(type="datetime")
      * @Groups({"Mission", "MissionSingleOutput"})
      */
@@ -131,6 +137,7 @@ class Mission
         return $this->id;
     }
 
+
     public function getName(): ?string
     {
         return $this->name;
@@ -141,6 +148,22 @@ class Mission
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContact()
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param mixed $contact
+     */
+    public function setContact($contact): void
+    {
+        $this->contact = $contact;
     }
 
     public function getstartDate(): ?\DateTimeInterface
@@ -338,5 +361,4 @@ class Mission
     {
         $this->credentials = $credentials;
     }
-
 }

@@ -38,6 +38,7 @@ class MissionFixtures extends Fixture
 
         $mission = new Mission();
         $mission->setNessus(0);
+        $mission->setContact("Boulanjay");
         $mission->setName("FAKE-MISSION-EXTERNE");
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
@@ -49,9 +50,9 @@ class MissionFixtures extends Fixture
         $mission->setNmapFiler(0);
         $mission->setMissionType($typeExterne);
 
-
         $mission2 = new Mission();
         $mission2->setNessus(0);
+        $mission2->setContact("Intermarchay");
         $mission2->setName("FAKE-MISSION-INTERNE");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));

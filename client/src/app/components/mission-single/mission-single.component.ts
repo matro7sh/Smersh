@@ -35,6 +35,7 @@ export class MissionSingleComponent implements OnInit {
   missionName: any;
   users: any;
   creds: any;
+  clients: any;
   file: any;
   id: any;
   public currentLocal = new Locale().get();
@@ -103,6 +104,7 @@ export class MissionSingleComponent implements OnInit {
 
   loadData(id) {
     this.missionsService.getDataById(id).subscribe((response) => {
+      console.log(response);
       this.mission = response;
       this.missionName = response.name;
       this.hosts = response['hosts'].map((host) => ({
@@ -114,6 +116,7 @@ export class MissionSingleComponent implements OnInit {
 
       this.users = response['users'];
       this.creds = response['credentials'];
+      this.clients = response['clients'];
 
       this.initForm();
       this.id = response.id;

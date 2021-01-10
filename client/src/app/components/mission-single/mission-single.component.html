@@ -63,6 +63,19 @@
                         <mat-divider></mat-divider>
                     </mat-list>
                 </mat-tab>
+
+                <mat-tab label="Clients" *ngIf="clients">
+                    <mat-list>
+                        <mat-list-item *ngFor="let client of clients">
+                            <mat-icon mat-list-icon>account_circle</mat-icon>
+                            <div mat-line>{{client.firstName}}</div>
+                            <div mat-line>{{client.lastName}}</div>
+                            <div mat-line>{{client.phone}}</div>
+                            <div mat-line>{{client.mail}}</div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </mat-tab>
                 <mat-tab label="Credentials" *ngIf="mission?.credentials">
                     <mat-list>
                         <mat-list-item>

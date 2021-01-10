@@ -41,10 +41,18 @@ export class HostEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.hostService.update(this.id, form.value).subscribe(() => {
-      this.openSnackBar(' Host updated');
-      this.router.navigateByUrl('/hosts/all');
-    });
+    this.hostService.update(this.id, form.value).subscribe(
+        (el) => {
+          this.openSnackBar(' Host updated');
+          this.router.navigateByUrl('/hosts/all');
+          this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    )
   }
 
   openSnackBar(message) {

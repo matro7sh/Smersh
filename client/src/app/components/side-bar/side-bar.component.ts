@@ -39,6 +39,10 @@ export class SideBarComponent implements OnInit {
       base: '/conclusion',
       path: 'generate',
     },
+    Clients: {
+      base: '/clients',
+      path: 'all',
+    },
     // "Type":"types",
   };
   public username: '';

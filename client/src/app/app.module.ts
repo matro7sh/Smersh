@@ -57,6 +57,8 @@ import { ImpactEditComponent } from './components/impact-edit/impact-edit.compon
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
 import {ClientsService} from "./services/clients.service";
+import { ClientsComponent } from './components/clients/clients.component';
+import { ClientEditComponent } from './components/client-edit/client-edit.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import {ClientsService} from "./services/clients.service";
     ImpactEditComponent,
     ImpactCreateComponent,
     ConclusionComponent,
+    ClientsComponent,
+    ClientEditComponent,
   ],
   imports: [
     BrowserModule,

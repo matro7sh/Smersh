@@ -23,6 +23,8 @@ import { ImpactComponent } from './components/impact/impact.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
+import {ClientsComponent} from "./components/clients/clients.component";
+import {ClientEditComponent} from "./components/client-edit/client-edit.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -138,6 +140,21 @@ const routes: Routes = [
       {
         path: 'generate',
         component: ConclusionComponent,
+      },
+    ],
+  },
+  {
+    path: 'clients',
+    component: SideBarComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'all',
+        component: ClientsComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ClientEditComponent,
       },
     ],
   },

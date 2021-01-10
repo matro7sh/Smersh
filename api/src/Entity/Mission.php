@@ -124,12 +124,19 @@ class Mission
      */
     private $credentials;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Client::class, mappedBy="missions", cascade={"persist"})
+     * @Groups({"Mission", "MissionSingleOutput"})
+     */
+    private $clients;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->hosts = new ArrayCollection();
         $this->vulns = new ArrayCollection();
+        $this->clients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -360,5 +367,32 @@ class Mission
     public function setCredentials($credentials): void
     {
         $this->credentials = $credentials;
+    }
+
+    /**
+     * @return Collection|Client[]
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients[] = $client;
+            $client->addMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->removeElement($client)) {
+            $client->removeMission($this);
+        }
+
+        return $this;
     }
 }

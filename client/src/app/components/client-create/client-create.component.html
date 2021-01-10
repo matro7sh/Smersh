@@ -1,0 +1,26 @@
+<h1>Create Client</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type = "text" name="name" placeholder = "Ex : Name" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>mail</mat-label>
+        <input matInput type = "text" name="mail" placeholder = "Ex : yelaa@localhost.com" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>firstname</mat-label>
+        <input matInput type = "text" name="firstName" placeholder = "Ex : Robert" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>lastName</mat-label>
+        <input matInput type = "text" name="lastName" placeholder = "Ex : cooper" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <mat-form-field class="example-full-width">
+        <mat-label>phone</mat-label>
+        <input matInput type = "text" name="phone" placeholder = "Ex : 06 XX XX XX XX" ngModel autocomplete="off">
+    </mat-form-field><br/>
+    <div class="example-button-row">
+        <button mat-button type="submit" mat-raised-button color="primary">Create</button>
+    </div>
+</form>

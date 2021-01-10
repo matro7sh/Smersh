@@ -30,9 +30,6 @@
         <mat-card-content>
             <mat-tab-group>
                 <mat-tab label="Scope" *ngIf="hosts">
-                    <mat-form-field>
-                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by host ( not working yet ) ">
-                    </mat-form-field>
                     <mat-list>
                         <mat-list-item *ngFor="let host of hosts">
                             <mat-icon mat-list-icon style="cursor: pointer" (click)="done(host)">
@@ -59,6 +56,19 @@
                         <mat-list-item *ngFor="let user of users">
                             <mat-icon mat-list-icon>account_circle</mat-icon>
                             <div mat-line>{{user.username}}</div>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                    </mat-list>
+                </mat-tab>
+
+                <mat-tab label="Clients" *ngIf="clients">
+                    <mat-list>
+                        <mat-list-item *ngFor="let client of clients">
+                            <mat-icon mat-list-icon>account_circle</mat-icon>
+                            <div mat-line>{{client.firstName}}</div>
+                            <div mat-line>{{client.lastName}}</div>
+                            <div mat-line>{{client.phone}}</div>
+                            <div mat-line>{{client.mail}}</div>
                         </mat-list-item>
                         <mat-divider></mat-divider>
                     </mat-list>

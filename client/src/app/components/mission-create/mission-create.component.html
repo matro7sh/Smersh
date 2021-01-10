@@ -27,11 +27,6 @@
     </mat-form-field><br/>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Contact </mat-label>
-        <input matInput type = "text" name="contact" ngModel  autocomplete="off">
-    </mat-form-field><br/>
-
-    <mat-form-field class="example-full-width">
         <mat-label>credentials : </mat-label>
         <textarea matInput type="text" name="credentials" placeholder="jenaye:yolo" ngModel autocomplete="off"></textarea>
     </mat-form-field><br/>
@@ -45,6 +40,15 @@
         </mat-select>
     </mat-form-field>
 <br/>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Client</mat-label>
+        <mat-select (selectionChange)="myClient($event.value)">
+            <mat-option *ngFor="let client of clients" [value]="client['@id']" name="clients">
+                {{client.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field><br/>
 
 <mat-form-field class="example-full-width">
     <mat-label>pathToCodi : </mat-label>

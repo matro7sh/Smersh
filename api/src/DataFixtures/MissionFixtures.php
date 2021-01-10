@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 
+use App\Entity\Client;
 use App\Entity\Host;
 use App\Entity\Impact;
 use App\Entity\MissionType;
@@ -35,10 +36,27 @@ class MissionFixtures extends Fixture
         $typeInterne->setName("externe");
         $manager->persist($typeInterne);
 
+        $client = new Client();
+        $client->setName("boulanjay");
+        $client->setFirstName("Jean charles");
+        $client->setLastName("faitduski");
+        $client->setMail("yolo@localhost.com");
+        $client->setPhone("06 XX XX XX XX");
+        $manager->persist($client);
+
+
+        $client2 = new Client();
+        $client2->setName("intermachay");
+        $client2->setFirstName("Eugène");
+        $client2->setLastName("alamontagne");
+        $client2->setMail("yelaaa@localhost.com");
+        $client2->setPhone("06 XX XX XX XX");
+        $manager->persist($client2);
+
 
         $mission = new Mission();
         $mission->setNessus(0);
-        $mission->setContact("Boulanjay");
+        $mission->addClient($client);
         $mission->setName("FAKE-MISSION-EXTERNE");
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
@@ -52,7 +70,7 @@ class MissionFixtures extends Fixture
 
         $mission2 = new Mission();
         $mission2->setNessus(0);
-        $mission2->setContact("Intermarchay");
+        $mission->addClient($client);
         $mission2->setName("FAKE-MISSION-INTERNE");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));

@@ -56,6 +56,7 @@ import { ImpactComponent } from './components/impact/impact.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
+import {ClientsService} from "./services/clients.service";
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { ConclusionComponent } from './components/conclusion/conclusion.componen
     UsersService,
     UploadsService,
     HostsService,
+      ClientsService,
     MatDatepickerModule,
     TypesService,
   ],

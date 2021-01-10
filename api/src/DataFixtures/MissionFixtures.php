@@ -70,7 +70,7 @@ class MissionFixtures extends Fixture
 
         $mission2 = new Mission();
         $mission2->setNessus(0);
-        $mission->addClient($client);
+        $mission->addClient($client2);
         $mission2->setName("FAKE-MISSION-INTERNE");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));

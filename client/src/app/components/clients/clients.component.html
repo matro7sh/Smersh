@@ -1,6 +1,16 @@
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by name">
-</mat-form-field>
+<div class="flex">
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter by name">
+    </mat-form-field>
+    <div (click)="createClient()" class="cursor flex ml-auto">
+        <span class="my-auto">
+            Add new Client
+        </span>
+        <span class="my-auto material-icons">
+            add
+        </span>
+    </div>
+</div>
 
 <div *ngIf="dataSource" class="mat-elevation-z8">
 

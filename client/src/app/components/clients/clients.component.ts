@@ -38,6 +38,10 @@ export class ClientsComponent implements OnInit {
     this.router.navigate(['/clients/edit/', id]);
   }
 
+  createClient(){
+      this.router.navigateByUrl('/clients/create');
+  }
+
   deleteClient(id): void {
     if (confirm('Are you sure to delete ')) {
       this.clientService.delete(id).subscribe(() => {

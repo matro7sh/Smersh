@@ -59,7 +59,7 @@ import { ConclusionComponent } from './components/conclusion/conclusion.componen
 import {ClientsService} from "./services/clients.service";
 import { ClientsComponent } from './components/clients/clients.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
-import { ClientAddComponent } from './components/client-add/client-add.component';
+import { ClientCreateComponent } from './components/client-create/client-create.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +89,7 @@ import { ClientAddComponent } from './components/client-add/client-add.component
     ConclusionComponent,
     ClientsComponent,
     ClientEditComponent,
-    ClientAddComponent,
+    ClientCreateComponent,
   ],
   imports: [
     BrowserModule,

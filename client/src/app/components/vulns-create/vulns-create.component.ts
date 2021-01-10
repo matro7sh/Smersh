@@ -4,6 +4,8 @@ import { VulnsService } from '../../services/vulns.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { impactsService } from '../../services/impacts.service';
+import {VulnsTranslationService} from "../../services/vulns-translation.service";
+import {Locale} from "../../storage/Locale";
 
 @Component({
   selector: 'app-vulns-create',
@@ -17,7 +19,7 @@ export class VulnsCreateComponent implements OnInit {
   selected_type = [];
 
   constructor(
-    private vulnsServices: VulnsService,
+    private vulnsServices: VulnsTranslationService,
     private _snackBar: MatSnackBar,
     private router: Router,
     private impactService: impactsService
@@ -40,6 +42,8 @@ export class VulnsCreateComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    // objectintry
+    Object.assign(form.value, { locale: new Locale().get() });
     this.vulnsServices.insert(form.value).subscribe(
       () => {
         this.openSnackBar('Vuln added');

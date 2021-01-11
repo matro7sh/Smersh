@@ -36,10 +36,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  }
  * )
  * @ORM\Entity(repositoryClass=HostRepository::class)
- * @UniqueEntity(
- *     fields={"name"},
- *     message="This name is already in use"
- * )
  */
 class Host
 {
@@ -52,7 +48,7 @@ class Host
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      * @Groups({"MissionSingleOutput", "Host:output"})
      * @Assert\Url(
      *    protocols = {"http", "https", "ftp"}

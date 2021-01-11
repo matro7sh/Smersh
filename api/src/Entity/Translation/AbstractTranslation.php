@@ -18,4 +18,14 @@ abstract class AbstractTranslation extends LocasticAbstractTranslation
      * @Groups({"translations"})
      */
     protected $locale;
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): void
+    {
+        $this->locale = $locale;
+    }
 }

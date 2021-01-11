@@ -15,9 +15,19 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Select impact</mat-label>
-        <mat-select [(value)]="selected_type" (selectionChange)="changeClient($event.value)" placeholder="Type" #impactValue>
-            <mat-option *ngFor="let impact of impacts"  [value]="impact['@id']" name="type">
+        <mat-select [(value)]="selectedImpact" (selectionChange)="changeClient2($event.value)" placeholder="Type" #impactValue>
+            <mat-option *ngFor="let impact of impacts"  [value]="impact['@id']" name="impact">
                 {{impact.name}}
+            </mat-option>
+        </mat-select>
+
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Select type</mat-label>
+        <mat-select [(value)]="selectedType" (selectionChange)="changeClient($event.value)" placeholder="Type" #impactValue>
+            <mat-option *ngFor="let type of types"  [value]="type['@id']" name="type">
+                {{type.name}}
             </mat-option>
         </mat-select>
 

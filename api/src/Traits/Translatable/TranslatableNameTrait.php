@@ -2,16 +2,17 @@
 
 namespace App\Traits\Translatable;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait TranslatableNameTrait
 {
     /**
-     * @Assert\NotBlank
+     * @Groups("Vulns")
      */
     private $name;
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->getTranslation()->getName();
     }

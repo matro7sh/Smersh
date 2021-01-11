@@ -21,16 +21,16 @@ function loadFile(url, callback) {
 @Component({
   selector: 'app-mission',
   templateUrl: './mission-single.component.html',
-  styleUrls: ['./mission-single.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./mission-single.component.css']
 })
 export class MissionSingleComponent implements OnInit {
   @ViewChild('fileInput')
   fileInput: ElementRef;
-  public missionForm: FormGroup;
   color: ThemePalette = 'primary';
   durationInSeconds = 4;
   public mission: any;
+  public nmap: boolean;
+  public nessus: boolean;
   hosts: any;
   missionName: any;
   users: any;
@@ -38,6 +38,7 @@ export class MissionSingleComponent implements OnInit {
   clients: any;
   file: any;
   id: any;
+  public missionId: string;
   public currentLocal = new Locale().get();
 
   uploadForm: FormGroup;
@@ -52,12 +53,9 @@ export class MissionSingleComponent implements OnInit {
     private missionsService: MissionsService,
     private uploadServices: UploadsService,
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
   ) {
-    this.missionForm = new FormGroup({
-      nmap: new FormControl(false, Validators.required),
-      nessus: new FormControl(false, Validators.required),
-    });
+    this.missionId =  this.router.url.split('/').pop();
+
   }
 
   done(host) {
@@ -77,6 +75,14 @@ export class MissionSingleComponent implements OnInit {
     }
   }
 
+  nmapUpdate(isChecked){
+    this.missionsService.update(this.missionId, { nmap : isChecked}).subscribe();
+  }
+
+  nessusUpdate(isChecked){
+    this.missionsService.update(this.missionId, { nessus : isChecked}).subscribe();
+  }
+
   openSnackBar(message) {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
@@ -84,17 +90,7 @@ export class MissionSingleComponent implements OnInit {
   }
 
   ngOnInit() {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.loadData(id);
-
-    this.missionForm.valueChanges
-      .pipe(
-        switchMap((value) => {
-          return this.missionsService.update(id, value);
-        })
-      )
-      .subscribe();
+    this.loadData(this.missionId);
 
     this.uploadForm = this.fb.group({
       filename: '',
@@ -117,24 +113,13 @@ export class MissionSingleComponent implements OnInit {
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];
+      this.nmap = response.nmap;
+      this.nessus = response.nessus;
 
-      this.initForm();
       this.id = response.id;
 
       // let toto =  Object.entries(response).map(([k, v]) => this[k] = v);
     });
-  }
-
-  initForm() {
-    this.missionForm.patchValue({ nmap: this.mission.nmap });
-    this.missionForm.get('nmap').setValue(this.mission.nmap);
-    this.missionForm.get('nessus').setValue(this.mission.nessus);
-    this.cdr.detectChanges();
-    //    console.log(this.missionForm.getRawValue());
-  }
-
-  update() {
-    this.missionsService.insert(this.missionForm.value).subscribe();
   }
 
   addCodiMd(form: NgForm) {

@@ -10,6 +10,7 @@ use App\Traits\NameTrait;
 use App\Traits\RemediationTrait;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource()
@@ -21,7 +22,7 @@ class VulnTranslation extends AbstractTranslation
 {
 
     /**
-     * @Groups("")
+     * @Groups("Vulns")
      */
     use NameTrait;
     use RemediationTrait;

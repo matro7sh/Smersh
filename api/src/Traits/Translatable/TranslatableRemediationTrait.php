@@ -2,16 +2,17 @@
 
 namespace App\Traits\Translatable;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait TranslatableRemediationTrait
 {
     /**
-     * @Assert\NotBlank
+     * @Groups("Vulns")
      */
     private $remediation;
 
-    public function getRemediation(): string
+    public function getRemediation(): ?string
     {
         return $this->getTranslation()->getRemediation();
     }

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { impactsService } from '../../services/impacts.service';
 import {VulnsTranslationService} from "../../services/vulns-translation.service";
 import {Locale} from "../../storage/Locale";
+import {TypesService} from "../../services/types.service";
+import {VulnTypesService} from "../../services/vuln-types.service";
 
 @Component({
   selector: 'app-vulns-create',
@@ -15,18 +17,22 @@ import {Locale} from "../../storage/Locale";
 export class VulnsCreateComponent implements OnInit {
   durationInSeconds = 4;
   public impacts = [];
-  selectedType = [];
-  selected_type = [];
+  selectedType = "";
+  selectedImpact = "";
+  selected_type = "";
+  public types = [];
 
   constructor(
-    private vulnsServices: VulnsTranslationService,
+    private vulnsServices: VulnsService,
     private _snackBar: MatSnackBar,
+    private typesService: VulnTypesService,
     private router: Router,
     private impactService: impactsService
   ) {}
 
   ngOnInit(): void {
     this.loadImpact();
+    this.loadTypes();
   }
 
   openSnackBar(message) {
@@ -41,10 +47,21 @@ export class VulnsCreateComponent implements OnInit {
     });
   }
 
+  loadTypes() {
+    this.typesService.getData().subscribe((types) => {
+      this.types = types['hydra:member'];
+      console.log(this.types);
+    });
+  }
+
   onSubmit(form: NgForm) {
     // objectintry
-    Object.assign(form.value, { locale: new Locale().get() });
-    this.vulnsServices.insert(form.value).subscribe(
+
+    this.vulnsServices.insert({
+      translations: [{...form.value, locale: new Locale().get()}],
+      vulnType: this.selectedType,
+      impact: this.selectedImpact
+    }).subscribe(
       () => {
         this.openSnackBar('Vuln added');
         this.router.navigateByUrl('/vulnerabilities/all');
@@ -59,6 +76,11 @@ export class VulnsCreateComponent implements OnInit {
   }
   changeClient(value) {
     this.selectedType = value;
+    console.log('you just selected : ', value);
+  }
+
+  changeClient2(value) {
+    this.selectedImpact = value;
     console.log('you just selected : ', value);
   }
 }

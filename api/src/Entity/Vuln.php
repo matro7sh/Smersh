@@ -18,12 +18,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Vulns"}}})
+ * @ApiResource(attributes={"normalization_context"={"groups"={"Vulns"}},"denormalization_context"={"groups"={"Vulns"}}})
  * @ORM\Entity(repositoryClass=VulnRepository::class)
- * @UniqueEntity(
- *     fields={"name"},
- *     message="This name is already in use"
- * )
  */
 class Vuln extends AbstractTranslatable
 {
@@ -59,12 +55,12 @@ class Vuln extends AbstractTranslatable
 
     /**
      * @ORM\ManyToOne(targetEntity=Impact::class, inversedBy="vunls")
-     * @Groups({"MissionSingleOutput"})
+     * @Groups({"MissionSingleOutput", "Vulns"})
      */
     private $impact;
 
     /**
-     * @Groups({"article_list", "article_item", "translations"})
+     * @Groups({"Vulns", "translations"})
      * @ORM\OneToMany(targetEntity=VulnTranslation::class, mappedBy="translatable", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $translations;

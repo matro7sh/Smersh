@@ -4,18 +4,17 @@
             <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
             <mat-list-item role="listitem">End at : {{mission?.EndDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
             <mat-list-item role="listitem">
-                <form [formGroup]="missionForm">
-
                     <mat-slide-toggle class="example-margin"
                                       [color]="color"
-                                      formControlName="nmap"
+                                      (change)="nmapUpdate($event.checked)"
+                                      [(ngModel)]="nmap"
                     >Nmap</mat-slide-toggle><br/>
 
                     <mat-slide-toggle class="example-margin"
+                                      (change)="nessusUpdate($event.checked)"
                                       [color]="color"
-                                      formControlName="nessus"
+                                      [(ngModel)]="nessus"
                     >Nessus</mat-slide-toggle><br/>
-                </form>
             </mat-list-item>
         </mat-list>
     </mat-drawer>
@@ -43,7 +42,7 @@
 
                                 <mat-chip-list aria-label="Fish selection">
                                     <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translations.fr.name}} - {{vuln.impact.name}}</mat-chip>
+                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translations.fr.name }} - {{vuln.impact.name}} </mat-chip>
                                 </mat-chip-list>
                                 </div>
                         </mat-list-item>

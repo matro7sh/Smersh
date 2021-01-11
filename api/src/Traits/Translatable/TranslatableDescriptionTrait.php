@@ -3,16 +3,17 @@
 namespace App\Traits\Translatable;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 trait TranslatableDescriptionTrait
 {
     /**
-     * @Assert\NotBlank
+     * @Groups("Vulns")
      */
     private $description;
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->getTranslation()->getDescription();
     }

@@ -43,9 +43,9 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   // get all vulns
   loadVulns(): void {
-    this.vulnsService.getData().subscribe((el) => {
+    this.vulnsService.getData().subscribe((vulns) => {
      const locale =  new Locale().get();
-     this.vulns = el['hydra:member'].map(e => {
+     this.vulns = vulns['hydra:member'].map(e => {
        const elt = e.translations[locale];
        return {
          name:  elt.name,

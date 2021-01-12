@@ -5,6 +5,7 @@ import { UsersService } from '../../services/users.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { TypesService } from '../../services/types.service';
 import {ClientsService} from "../../services/clients.service";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'app-mission-create',
@@ -24,14 +25,20 @@ export class MissionCreateComponent implements OnInit {
   selectedClients: [];
   startDate: any;
   EndDate: any;
+  private _adapter: DateAdapter<any>
 
   constructor(
     private missionService: MissionsService,
     private clientServices: ClientsService,
     private router: Router,
     private usersService: UsersService,
-    private typesServices: TypesService
-  ) {}
+    private typesServices: TypesService,
+    private _adapter: DateAdapter<any>
+  ) {
+    this._adapter.setLocale('fr');
+    this._adapter.getFirstDayOfWeek = () => {return 1};
+  }
+
 
   ngOnInit(): void {
     this.loadUsers();

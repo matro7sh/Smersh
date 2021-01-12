@@ -25,7 +25,6 @@ export class MissionCreateComponent implements OnInit {
   selectedClients: [];
   startDate: any;
   EndDate: any;
-  private _adapter: DateAdapter<any>
 
   constructor(
     private missionService: MissionsService,

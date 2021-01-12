@@ -100,16 +100,18 @@ export class MissionSingleComponent implements OnInit {
 
   loadData(id) {
     this.missionsService.getDataById(id).subscribe((response) => {
-      console.log(response);
+
       this.mission = response;
       this.missionName = response.name;
       this.hosts = response['hosts'].map((host) => ({
         ...host,
+        vulns: host.vulns.map(vuln => ({ ...vuln, translate: vuln.translations[this.currentLocal] ?? {} })),
         name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
           host.name
         }`,
+       // vulns: host.vulns.map(vuln => ({ ...vuln, translate: vuln.translation[this.currentLocal] })),
       }));
-
+      console.log(this.hosts);
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];

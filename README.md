@@ -46,7 +46,7 @@ make init-db
 make load-data # to have exemple data
 ```
 
-Finaly go to  `http://localhost:8000/api` and use "jenaye:jenaye" to log in.
+Finaly go to  `http://localhost:4200` and use "jenaye:jenaye" to log in.
 
 
 ## You can also do it manualy like this :  
@@ -77,7 +77,7 @@ docker-compose exec php sh -c '
 ```
 
 
-# How to install front
+# How to install front manually
 
 > requirements : node & npm 
 

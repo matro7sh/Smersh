@@ -128,8 +128,27 @@ services:
       - upload-data:/home/hackmd/app/public/uploads
     restart: always
 
+  client:
+    build:
+      context: ./client
+      target: client_angular
+    image: node:latest
+    environment:
+      - PATH=/app/node_modules/.bin:$PATH
+    ports:
+      - target: 4200
+        published: 4200
+        protocol: tcp
+    volumes:
+      - client:/app
+    depends_on:
+      - api
+      - dev-tls
+
+
 volumes:
   db-data: {}
   db-codimd-data: {}
   dev-certs: {}
   upload-data: {}
+  client: {}

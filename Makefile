@@ -1,8 +1,8 @@
-.PHONY: cache composer-install composer-update create-network help install jwt up update
+.PHONY: cache composer-install composer-update create-network help install jwt up update upAll
 
 CONFIG_DIR=api/config
 DC=docker-compose
-DC_UP=$(DC) up -d
+DC_UP=$(DC) up
 DC_EXEC=$(DC) exec php
 BIN_CONSOLE=$(DC_EXEC) bin/console
 
@@ -50,3 +50,6 @@ update: ## Update containers composer packages then re-up containers
 	$(DC) pull
 	$(MAKE) composer-update
 	$(MAKE) up
+
+
+upAll: up install init-db load-data

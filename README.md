@@ -38,20 +38,15 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 in `api` folder copy `.env-dist` to `.env` 
 
-Run `docker-compose up -d` then use theses command
-
-```
-make install  
-make init-db
-make load-data # to have exemple data
-```
-
-Finaly go to  `http://localhost:4200` and use "jenaye:jenaye" to log in.
+Run `make up` then go to `http://localhost:4200` and use "jenaye:jenaye" to log in.
 
 
+
+# How to install server manualy
 ## You can also do it manualy like this :  
 
 ```
+docker-compose up  # when build is done do the next command
 docker-compose exec php bin/console do:da:cr  # create database
 docker-compose exec php bin/console do:sc:up --force # generation of tables
 docker-compose exec php bin/console make:entity --overwrite # 

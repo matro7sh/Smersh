@@ -33,6 +33,9 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 # How to install server
 
+>requirements 
+* Docker && docker-compose
+
 
 >If you are using windows, please switch to linux </troll>
 

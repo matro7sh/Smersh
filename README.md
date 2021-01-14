@@ -87,7 +87,7 @@ cd client && npm i && npm start
 # Variable into report
 
 ```
-        startDate: 
+        startDate: # timestamp
         CLIENT_NAME: # String
         creds: # String
         classification: # String
@@ -100,9 +100,11 @@ cd client && npm i && npm start
         scope # Array
 ``` 
 ## How to use it ? 
-just edit function `doc.setData() into `mission-single` component and define your element, after this update your template to use it like this 
 
-`{#MyArray}{MyUsername}{/MyArray}` if u need to loop
+just edit function `doc.setData()` into `mission-single` component and define your element, after this update your template to use it like this 
+`{VariableName}` and `{#MyArray}{MyUsername}{/MyArray}` if u need to loop on array
+
+>The template are stored in `client/src/assets/Smersh.docx` you can also replace it by your template and use Smersh variable
 
 ## Todo
 - add conclusion generator

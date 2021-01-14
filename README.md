@@ -106,6 +106,18 @@ just edit function `doc.setData()` into `mission-single` component and define yo
 
 >The template are stored in `client/src/assets/Smersh.docx` you can also replace it by your template and use Smersh variable
 
+# How to contribute ? 
+
+Just fork repository then create branch, work and push your content + create PR
+
+``` 
+git checkout -b MyBranch
+git add -p 
+git commit -m "xx"
+git push origin MyBranch
+``` 
+
+
 ## Todo
 - add conclusion generator
 - Progress bar on mission ?
@@ -118,5 +130,5 @@ just edit function `doc.setData()` into `mission-single` component and define yo
 
 ## Contributors 
 - Darkweak - https://github.com/orgs/CMEPW/people/Darkweak
-- michmich1000 - https://github.com/orgs/CMEPW/people/michmich1000
+- michmich1000 - https://michmich.eu
 - SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr

@@ -83,6 +83,27 @@ docker-compose exec php sh -c '
 cd client && npm i && npm start
 ```
 
+
+# Variable into report
+
+```
+        startDate: 
+        CLIENT_NAME: # String
+        creds: # String
+        classification: # String
+        phone: # String
+        version: # String
+        by: # String
+        to: # String
+        authors: # Array
+        state: # String
+        scope # Array
+``` 
+## How to use it ? 
+just edit function `doc.setData() into `mission-single` component and define your element, after this update your template to use it like this 
+
+`{#MyArray}{MyUsername}{/MyArray}` if u need to loop
+
 ## Todo
 - add conclusion generator
 - Progress bar on mission ?

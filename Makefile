@@ -2,7 +2,7 @@
 
 CONFIG_DIR=api/config
 DC=docker-compose
-DC_UP=$(DC) up
+DC_UP=$(DC) up -d
 DC_EXEC=$(DC) exec php
 BIN_CONSOLE=$(DC_EXEC) bin/console
 

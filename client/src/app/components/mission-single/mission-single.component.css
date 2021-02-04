@@ -1,5 +1,6 @@
-.example-card {
-    max-width: 900px;
+.example-container {
+    height: 100%;
+    width: 100%;
 }
 
 .example-header-image {
@@ -7,6 +8,55 @@
     background-size: cover;
 }
 
-.yoyo {
+
+#action_check {
+    height: 95%;
+    padding: 1em;
+    -webkit-box-shadow: 1px 1px 5px 1px #ccc;
+    -moz-box-shadow:    1px 1px 5px 1px #ccc; 
+    box-shadow:         1px 1px 5px 1px #ccc;
+    border-radius: 0.3em;
+}
+
+
+#dashboard {
+    padding: 0 1em 1em 1em;
+    -webkit-box-shadow: 1px 1px 5px 1px #ccc;
+    -moz-box-shadow:    1px 1px 5px 1px #ccc; 
+    box-shadow:         1px 1px 5px 1px #ccc;
+}
+#host_list {
+    max-height: 35em;
+    overflow: auto;
+}
+
+#wrapper_generate {
     display: flex;
+    justify-content: right;
+}
+#generate {
+    margin: 1em 0 1em 1em;
+}
+
+#codi_content {
+    display: flex;
+    flex-direction: row;
+}
+#update_codi_button {
+    display: flex;
+    flex-direction: row;
+}
+
+#host_add {
+    display: flex;
+}
+#host_add_manual{
+    width: 55%;
+    display: flex;
+    justify-content: left;
+}
+#host_add_file {
+    width: 45%;
+    display: flex;
+    justify-content: right;
 }

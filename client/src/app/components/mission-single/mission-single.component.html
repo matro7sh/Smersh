@@ -31,21 +31,23 @@
             <mat-tab-group>
                 <mat-tab label="Scope" *ngIf="hosts">
                     <mat-list id="host_list">
-                        <mat-list-item *ngFor="let host of hosts">
-                            <mat-icon mat-list-icon style="cursor: pointer" (click)="done(host)">
-                                <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
-                                <ng-template #thenBlock>verified</ng-template>
-                                <ng-template #elseBlock>hourglass_empty</ng-template>
-                            </mat-icon>
-                            <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
-                            <div mat-line style="padding: 14px;">
-                                <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer'>{{host.name}}</a>
+                        <mat-list-item style="height:auto" *ngFor="let host of hosts">
+                            <div id="single_host">
+                                <mat-icon mat-list-icon style="cursor: pointer; align-self: center; width: 3%;" (click)="done(host)">
+                                    <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
+                                    <ng-template #thenBlock>verified</ng-template>
+                                    <ng-template #elseBlock>hourglass_empty</ng-template>
+                                </mat-icon>
+                                <div mat-line style="padding: 14px;" id="host_vulnList">
+                                    <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer'>{{host.name}}</a>
 
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
-                                </mat-chip-list>
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
+                                        <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
+                                    </mat-chip-list>
                                 </div>
+                                <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)" id="add_vulnToHost">Add vuln</button>
+                            </div>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>

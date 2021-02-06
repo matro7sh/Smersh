@@ -29,6 +29,22 @@
     max-height: 35em;
     overflow: auto;
 }
+#single_host{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: max-content;
+}
+#host_vulnList {
+    width: 90%;
+}
+#add_vulnToHost {
+    width: 7%;
+    height: fit-content;
+    align-self: center;
+    padding: 0 1em 0 1em;
+}
 
 #wrapper_generate {
     display: flex;

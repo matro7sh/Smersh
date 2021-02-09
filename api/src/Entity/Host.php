@@ -82,16 +82,16 @@ class Host
     private $mission;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Vuln::class, inversedBy="hosts")
-     * @Groups({"MissionSingleOutput", "Impact"})
+     * @ORM\OneToMany(targetEntity=HostVuln::class, mappedBy="host", orphanRemoval=true)
+     * @Groups({"MissionSingleOutput", "Host:output"})
      */
-    private $vulns;
+    private $hostVulns;
 
     public function __construct()
     {
         $this->nmaps = new ArrayCollection();
         $this->checked = false;
-        $this->vulns = new ArrayCollection();
+        $this->hostVulns = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -167,30 +167,6 @@ class Host
     }
 
     /**
-     * @return Collection|Vuln[]
-     */
-    public function getVulns(): Collection
-    {
-        return $this->vulns;
-    }
-
-    public function addVuln(Vuln $vuln): self
-    {
-        if (!$this->vulns->contains($vuln)) {
-            $this->vulns[] = $vuln;
-        }
-
-        return $this;
-    }
-
-    public function removeVuln(Vuln $vuln): self
-    {
-        $this->vulns->removeElement($vuln);
-
-        return $this;
-    }
-
-    /**
      * @return mixed
      */
     public function getTechnology()
@@ -204,5 +180,13 @@ class Host
     public function setTechnology($technology): void
     {
         $this->technology = $technology;
+    }
+
+    /**
+     * @return Collection|HostVuln[]
+     */
+    public function getHostVulns(): Collection
+    {
+        return $this->hostVulns;
     }
 }

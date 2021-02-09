@@ -18,7 +18,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Vulns"}},"denormalization_context"={"groups"={"Vulns"}}})
+ * @ApiResource(
+ *      attributes={
+ *          "normalization_context"={
+ *              "groups"={"Vulns"}
+ *          },
+ *          "denormalization_context"={
+ *              "groups"={"Vulns"}
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=VulnRepository::class)
  */
 class Vuln extends AbstractTranslatable
@@ -32,7 +41,7 @@ class Vuln extends AbstractTranslatable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Vulns"})
+     * @Groups({"Vulns", "HostVuln:output"})
      */
     private $id;
 
@@ -43,34 +52,29 @@ class Vuln extends AbstractTranslatable
     private $vulnType;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Mission::class, mappedBy="vulns")
-     */
-    private $missions;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Host::class, mappedBy="vulns")
-     * @Groups({"Vulns"})
-     */
-    private $hosts;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Impact::class, inversedBy="vunls")
-     * @Groups({"MissionSingleOutput", "Vulns"})
+     * @Groups({"Vulns"})
      */
     private $impact;
 
     /**
-     * @Groups({"Vulns", "translations"})
+     * @Groups({"Vulns", "translations", "HostVuln:output"})
      * @ORM\OneToMany(targetEntity=VulnTranslation::class, mappedBy="translatable", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $translations;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity=HostVuln::class, mappedBy="vuln", orphanRemoval=true)
+     * @Groups({"Vulns"})
+     */
+    private $hostVulns;
+
     public function __construct()
     {
         $this->translations = new ArrayCollection();
-        $this->missions = new ArrayCollection();
-        $this->hosts = new ArrayCollection();
         parent::__construct();
+        $this->hostVulns = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,60 +94,6 @@ class Vuln extends AbstractTranslatable
         return $this;
     }
 
-    /**
-     * @return Collection|Mission[]
-     */
-    public function getMissions(): Collection
-    {
-        return $this->missions;
-    }
-
-    public function addMission(Mission $mission): self
-    {
-        if (!$this->missions->contains($mission)) {
-            $this->missions[] = $mission;
-            $mission->addVuln($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMission(Mission $mission): self
-    {
-        if ($this->missions->removeElement($mission)) {
-            $mission->removeVuln($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Host[]
-     */
-    public function getHosts(): Collection
-    {
-        return $this->hosts;
-    }
-
-    public function addHost(Host $host): self
-    {
-        if (!$this->hosts->contains($host)) {
-            $this->hosts[] = $host;
-            $host->addVuln($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHost(Host $host): self
-    {
-        if ($this->hosts->removeElement($host)) {
-            $host->removeVuln($this);
-        }
-
-        return $this;
-    }
-
     public function getImpact(): ?Impact
     {
         return $this->impact;
@@ -159,5 +109,35 @@ class Vuln extends AbstractTranslatable
     protected function createTranslation(): TranslationInterface
     {
         return new VulnTranslation();
+    }
+
+    /**
+     * @return Collection|HostVuln[]
+     */
+    public function getHostVulns(): Collection
+    {
+        return $this->hostVulns;
+    }
+
+    public function addHostVuln(HostVuln $hostVuln): self
+    {
+        if (!$this->hostVulns->contains($hostVuln)) {
+            $this->hostVulns[] = $hostVuln;
+            $hostVuln->setVuln($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHostVuln(HostVuln $hostVuln): self
+    {
+        if ($this->hostVulns->removeElement($hostVuln)) {
+            // set the owning side to null (unless already changed)
+            if ($hostVuln->getVuln() === $this) {
+                $hostVuln->setVuln(null);
+            }
+        }
+
+        return $this;
     }
 }

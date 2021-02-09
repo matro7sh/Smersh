@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Host;
+use App\Entity\HostVuln;
 use App\Entity\Impact;
 use App\Entity\MissionType;
 use App\Entity\Translation\VulnTranslation;
@@ -109,6 +110,10 @@ class MissionFixtures extends Fixture
         $impact3->setName("High");
         $manager->persist($impact3);
 
+        $impact4 = new Impact();
+        $impact4->setName("Critical");
+        $manager->persist($impact4);
+
         /* Create Vulns and persist */
 
         $sqli = new Vuln();
@@ -133,6 +138,7 @@ class MissionFixtures extends Fixture
         $sqli->setVulnType($type);
         $sqli->setImpact($impact3);
         $manager->persist($sqli);
+
 
         $xss = new Vuln();
 
@@ -164,17 +170,29 @@ class MissionFixtures extends Fixture
         $host = new Host();
         $host->setName("https://jenaye.fr");
         $host->setTechnology("ReactJS");
-        $host->addVuln($sqli);
         $host->setMission($mission);
         $host->setChecked(1);
         $manager->persist($host);
 
         $host3 = new Host();
         $host3->setName("https://github.com/Darkweak/Souin");
-        $host3->addVuln($xss);
         $host3->setMission($mission);
         $host3->setChecked(0);
         $manager->persist($host3);
+
+        $sqliOnJenaye = new HostVuln();
+        $sqliOnJenaye->setCurrentState("we just found Sqli on jenaye.fr");
+        $sqliOnJenaye->setHost($host);
+        $sqliOnJenaye->setImpact($impact);
+        $sqliOnJenaye->setVuln($sqli);
+        $manager->persist($sqliOnJenaye);
+
+        $xssOnSouin = new HostVuln();
+        $xssOnSouin->setCurrentState("we just found XSS on souin");
+        $xssOnSouin->setHost($host3);
+        $xssOnSouin->setImpact($impact2);
+        $xssOnSouin->setVuln($xss);
+        $manager->persist($xssOnSouin);
 
 
         $manager->flush();

@@ -61,6 +61,7 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { ClientCreateComponent } from './components/client-create/client-create.component';
 import {VulnTypesService} from "./services/vuln-types.service";
+import {HostsVulnsService} from "./services/hosts-vulns.service";
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import {VulnTypesService} from "./services/vuln-types.service";
   ],
   providers: [
     MissionsService,
+    HostsVulnsService,
     VulnTypesService,
     UsersService,
     UploadsService,

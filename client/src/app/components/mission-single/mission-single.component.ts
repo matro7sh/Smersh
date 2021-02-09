@@ -105,7 +105,9 @@ export class MissionSingleComponent implements OnInit {
       this.missionName = response.name;
       this.hosts = response['hosts'].map((host) => ({
         ...host,
-        vulns: host.vulns.map(vuln => ({ ...vuln, translate: vuln.translations[this.currentLocal] ?? {} })),
+        vulns: host.hostVulns.map(hostVuln => ({ ...hostVuln.vuln,
+          impact: hostVuln.impact,
+          translate: hostVuln.vuln.translations[this.currentLocal] ?? {} })),
         name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
           host.name
         }`,
@@ -268,5 +270,9 @@ export class MissionSingleComponent implements OnInit {
 
   share() {
     window.alert('The product has been shared!');
+  }
+
+  editThisVuln(id){
+    console.log(id)
   }
 }

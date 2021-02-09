@@ -17,16 +17,16 @@ import { VulnsComponent } from './components/vulns/vulns.component';
 import { VulnsCreateComponent } from './components/vulns-create/vulns-create.component';
 import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
 import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
-import { EditVulnWithStateComponent } from "./components/edit-vuln-with-state/edit-vuln-with-state.component";
+import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
 import { HostsComponent } from './components/hosts/hosts.component';
 import { HostEditComponent } from './components/host-edit/host-edit.component';
 import { ImpactComponent } from './components/impact/impact.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
-import {ClientsComponent} from "./components/clients/clients.component";
-import {ClientEditComponent} from "./components/client-edit/client-edit.component";
-import {ClientCreateComponent} from "./components/client-create/client-create.component";
+import { ClientsComponent } from './components/clients/clients.component';
+import { ClientEditComponent } from './components/client-edit/client-edit.component';
+import { ClientCreateComponent } from './components/client-create/client-create.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

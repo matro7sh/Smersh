@@ -69,10 +69,12 @@ import {
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import { StepsService } from './services/steps.service';
+import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GenericListComponent,
     LoginComponent,
     MissionChoiceComponent,
     ErrorsComponent,

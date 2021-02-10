@@ -62,4 +62,24 @@ export class EditVulnWithStateComponent implements OnInit {
     });
   }
 
+  delete(){
+    if (confirm('Are you sure you want to save this thing into the database?')) {
+      this.hostvulnService.delete(this.id).subscribe(
+          (el) => {
+            this.openSnackBar(' this vulnerability has been deleted');
+            this.router.navigateByUrl('/');
+            this.ngOnInit();
+          },
+          (err) => {
+            if (err.status == '400') {
+              this.openSnackBar('Error : ' + err.error['hydra:description']);
+            }
+          }
+      )
+    } else {
+      // Do nothing!
+      alert("OK NOT DELETED");
+    }
+  }
+
 }

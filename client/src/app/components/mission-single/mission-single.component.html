@@ -36,6 +36,7 @@
                                 <ng-template #thenBlock>verified</ng-template>
                                 <ng-template #elseBlock>hourglass_empty</ng-template>
                             </mat-icon>
+                            <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
                             <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer' style="display: block">{{host.name}}</a>
                             <mat-chip-list aria-label="Fish selection">
                                 <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>

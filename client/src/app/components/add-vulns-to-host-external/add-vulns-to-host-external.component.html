@@ -4,7 +4,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Select Vulns</mat-label>
-        <mat-select [(value)]="selected_vulns" #selectVulns (selectionChange)="Vulns($event.value)">
+        <mat-select [value]="selected_vulns" #selectVulns (selectionChange)="Vulns($event.value)">
             <mat-option *ngFor="let vuln of vulns" [value]="vuln.value">{{vuln.name}}</mat-option>
         </mat-select>
 
@@ -12,7 +12,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Select Impact</mat-label>
-        <mat-select [(value)]="selected_impacts" #selectImpacts (selectionChange)="Impacts($event.value)">
+        <mat-select [value]="selected_impacts" #selectImpacts (selectionChange)="Impacts($event.value)">
             <mat-option *ngFor="let impact of impacts" [value]="impact.value">{{impact.name}}</mat-option>
         </mat-select>
 
@@ -20,7 +20,7 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Etat constaté : </mat-label>
-        <textarea rows="10" cols="50" name="currentState" matInput></textarea>
+        <textarea rows="10" cols="50" [(ngModel)]="currentStateUser" name="currentState" matInput></textarea>
     </mat-form-field>
 
     <div class="example-button-row">

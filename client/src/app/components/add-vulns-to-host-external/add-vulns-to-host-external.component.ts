@@ -21,6 +21,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public selectedHosts = [];
   public selectedVulns = [];
   public selectedImpact = [];
+  public currentStateUser = "";
   public idFromUrl: any;
   public missionId: any;
   public host_id: any;
@@ -64,7 +65,13 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   loadImpact(): void {
     this.impactService.getData().subscribe((impacts) => {
-      this.impacts = impacts['hydra:member'];
+      console.log(impacts);
+      this.impacts = impacts['hydra:member'].map(e => {
+        return {
+          name:  e.name,
+          value:  e['@id']
+        }
+      });
     });
   }
 
@@ -91,14 +98,13 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(this.host_id);
     console.log('selectedVulns => ', this.selectedVulns);
     console.log("selectedImpact => ", this.selectedImpact);
     Object.assign(form.value, { vuln: this.selectedVulns });
     Object.assign(form.value, { host: "/api/hosts/" + this.host_id });
-    Object.assign(form.value, { impact: "/api/impacts/1" });
-    Object.assign(form.value, { currentState: "ceci est un test lol" });
-    console.log(form.value);
+    Object.assign(form.value, { impact: this.selectedImpact });
+    Object.assign(form.value, { currentState: this.currentStateUser });
+
     this.hostsService.insert(form.value).subscribe((el) => {
       console.log('response from vuln service =>', el);
       const id = el.mission;
@@ -107,6 +113,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       this.ngOnInit();
       this.router.navigateByUrl(`/missions/details/${this.missionId}`);
     });
+
   }
 
   Hosts(value) {
@@ -119,6 +126,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   Impacts(value) {
+    console.log(value);
     this.selectedImpact = value;
     console.log('selected impact', value);
   }

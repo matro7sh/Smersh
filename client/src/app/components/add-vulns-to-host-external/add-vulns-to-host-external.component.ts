@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import {Locale} from "../../storage/Locale";
 import {impactsService} from "../../services/impacts.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -28,15 +29,23 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   selected_vulns: any[];
   selected_hosts: any[];
   selected_impacts: any[];
+  public durationInSeconds = 4;
 
   constructor(
     private vulnsService: VulnsService,
     private activatedRoute: ActivatedRoute,
     private hostsService: HostsVulnsService,
     private impactService: impactsService,
+    private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
     private router: Router
   ) {}
+
+  openSnackBar(message) {
+    this._snackBar.open(message, '', {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
   ngOnInit(): void {
     const idFromUrl = this.activatedRoute.snapshot.params.id;
@@ -105,14 +114,15 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     Object.assign(form.value, { impact: this.selectedImpact });
     Object.assign(form.value, { currentState: this.currentStateUser });
 
-    this.hostsService.insert(form.value).subscribe((el) => {
-      console.log('response from vuln service =>', el);
-      const id = el.mission;
-      const missionId = id.split('/').pop();
-      this.missionId = missionId;
-      this.ngOnInit();
-      this.router.navigateByUrl(`/missions/details/${this.missionId}`);
-    });
+    this.hostsService.insert(form.value).subscribe(
+        (res) => {
+          this.openSnackBar('vulnerabilitie added');
+          this.router.navigateByUrl('/missions');
+        },
+        (err) => {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
+        }
+    )
 
   }
 

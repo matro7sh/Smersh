@@ -33,7 +33,7 @@ export class ClientCreateComponent implements OnInit {
     this.clientsService.insert(form.value).subscribe(
         (res) => {
           console.log(res);
-          this.openSnackBar('Client creaated');
+          this.openSnackBar('Client created');
           this.router.navigateByUrl('/clients/all');
         },
         (err) => {

@@ -44,7 +44,7 @@ class HostVuln
 
     /**
      * @ORM\ManyToOne(targetEntity=Impact::class, inversedBy="vulns")
-     * @Groups({"HostVuln:output", "MissionSingleOutput", "HostVuln:input" })
+     * @Groups({"HostVuln:output", "MissionSingleOutput", "HostVuln:input" , "Impact:input"})
      */
     private $impact;
 

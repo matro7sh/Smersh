@@ -62,6 +62,7 @@ import { ClientEditComponent } from './components/client-edit/client-edit.compon
 import { ClientCreateComponent } from './components/client-create/client-create.component';
 import {VulnTypesService} from "./services/vuln-types.service";
 import {HostsVulnsService} from "./services/hosts-vulns.service";
+import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {HostsVulnsService} from "./services/hosts-vulns.service";
     ClientsComponent,
     ClientEditComponent,
     ClientCreateComponent,
+    EditVulnWithStateComponent,
   ],
   imports: [
     BrowserModule,

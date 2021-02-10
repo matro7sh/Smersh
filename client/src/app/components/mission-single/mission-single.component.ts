@@ -107,13 +107,16 @@ export class MissionSingleComponent implements OnInit {
         ...host,
         vulns: host.hostVulns.map(hostVuln => ({ ...hostVuln.vuln,
           impact: hostVuln.impact,
+          linked: hostVuln.id,
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {} })),
         name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
           host.name
         }`,
        // vulns: host.vulns.map(vuln => ({ ...vuln, translate: vuln.translation[this.currentLocal] })),
       }));
-      console.log(this.hosts);
+
+      console.log(this.hosts)
+
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];
@@ -273,6 +276,6 @@ export class MissionSingleComponent implements OnInit {
   }
 
   editThisVuln(id){
-    console.log(id)
+    this.router.navigateByUrl(`/host_vulns/edit/${id}`);
   }
 }

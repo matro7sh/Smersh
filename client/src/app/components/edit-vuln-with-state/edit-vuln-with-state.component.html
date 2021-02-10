@@ -1,0 +1,11 @@
+<h1 xmlns="http://www.w3.org/1999/html">Edit vuln {{ id }}from {{ host }}</h1>
+<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type = "text" name="currentState" [(ngModel)]="currentState"  autocomplete="off">
+    </mat-form-field><br/>
+    <div class="example-button-row">
+        <br/><br/>
+        <button mat-button mat-raised-button color="primary">Edit</button>
+    </div>
+</form>

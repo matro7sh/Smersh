@@ -11,7 +11,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Impact"}}})
+ * @ApiResource(
+ *      attributes={
+ *          "normalization_context"={
+ *              "groups"={"Impact"}
+ *          },
+ *          "denormalization_context"={
+ *              "groups"={"Impact:input"}
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=ImpactRepository::class)
  * @UniqueEntity(
  *     fields={"name"},

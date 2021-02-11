@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {impactsService} from "../../services/impacts.service";
-import {Router} from "@angular/router";
-import {ClientsService} from "../../services/clients.service";
-import {NgForm} from "@angular/forms";
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {impactsService} from '../../services/impacts.service';
+import {Router} from '@angular/router';
+import {ClientsService} from '../../services/clients.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-client-create',
@@ -32,7 +32,6 @@ export class ClientCreateComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.clientsService.insert(form.value).subscribe(
         (res) => {
-          console.log(res);
           this.openSnackBar('Client created');
           this.router.navigateByUrl('/clients/all');
         },

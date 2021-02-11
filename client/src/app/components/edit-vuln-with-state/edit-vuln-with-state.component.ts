@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {HostsVulnsService} from "../../services/hosts-vulns.service";
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {NgForm} from "@angular/forms";
+import {HostsVulnsService} from '../../services/hosts-vulns.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -41,7 +41,7 @@ export class EditVulnWithStateComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.hostvulnService.update(this.id, form.value).subscribe(
         (el) => {
-          this.openSnackBar(' Host updated');
+          this.openSnackBar('Host updated');
           this.router.navigateByUrl('/');
           this.ngOnInit();
         },

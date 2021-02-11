@@ -1,5 +1,5 @@
-<mat-drawer-container class="example-container" style="width:100%">
-    <mat-drawer mode="side" opened>
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened id="action_check"> 
         <mat-list role="list">
             <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
             <mat-list-item role="listitem">End at : {{mission?.EndDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
@@ -18,25 +18,25 @@
             </mat-list-item>
         </mat-list>
     </mat-drawer>
-    <mat-drawer-content style="width:100%;">
-        <mat-card class="example-card" style="margin-left: 140px;">
+    <mat-drawer-content id="dashboard">
+        <mat-card class="example-card">
         <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title> {{mission?.name}} - <a  [routerLink]="['/missions/edit', mission?.id]">
                 Edit
             </a></mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content id="dashboard_main">
             <mat-tab-group>
                 <mat-tab label="Scope" *ngIf="hosts">
                     <mat-list>
                         <mat-list-item *ngFor="let host of hosts">
-                            <mat-icon mat-list-icon style="cursor: pointer" (click)="done(host)">
+                            <mat-icon mat-list-icon style="cursor: pointer; align-self: center; width: 3%;" (click)="done(host)">
                                 <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
                                 <ng-template #thenBlock>verified</ng-template>
                                 <ng-template #elseBlock>hourglass_empty</ng-template>
                             </mat-icon>
-                            <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
+                            <div mat-line style="padding: 14px;" id="host_vulnList">
                             <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer' style="display: block">{{host.name}}</a>
                             <mat-chip-list aria-label="Fish selection">
                                 <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
@@ -44,6 +44,8 @@
                                     <mat-chip color=[vuln.color] (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
                                 </div>
                             </mat-chip-list>
+                            </div>
+                                <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
                         </mat-list-item>
                         <br/>
                         <mat-divider></mat-divider>

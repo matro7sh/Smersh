@@ -1,9 +1,9 @@
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, Input, OnInit, } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ConnectionService } from '../../services/connection.service';
-import {Locale} from "../../storage/Locale";
+import { Locale } from '../../storage/Locale';
 
 @Component({
   selector: 'app-side-bar',
@@ -72,13 +72,12 @@ export class SideBarComponent implements OnInit {
   }
 
   switchToFR(): void {
-    new Locale().set("fr");
+    new Locale().set('fr');
   }
 
   switchToEN(): void {
-    new Locale().set("en");
+    new Locale().set('en');
   }
-
 
   logout() {
     this.connection.logout();

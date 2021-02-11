@@ -29,7 +29,6 @@ export class ImpactCreateComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.impactService.insert(form.value).subscribe(
       (res) => {
-        console.log(res);
         this.openSnackBar('Impact creaated');
         this.router.navigateByUrl('/impacts/all');
       },

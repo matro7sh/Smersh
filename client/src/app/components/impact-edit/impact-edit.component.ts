@@ -33,12 +33,10 @@ export class ImpactEditComponent implements OnInit {
       this.impact = response;
       this.name = response.name;
       this.id = response.id;
-      console.log(this.impact);
     });
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.impactService.update(this.id, form.value).subscribe(() => {
       this.openSnackBar(' Impact updated');
       this.router.navigateByUrl('/impacts/all');

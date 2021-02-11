@@ -53,24 +53,18 @@ export class MissionEditComponent implements OnInit {
     this.allUsers = [];
     this.usersService.getData().subscribe((res) => {
       this.allUsers = res['hydra:member'];
-      //    console.log("Get all users",this.allUsers);
     });
   }
 
   loadMissions(id): void {
     this.mission = [];
     this.missionService.getDataById(id).subscribe((events) => {
-      console.log(events);
       this.mission = events;
-      //   console.log(events);
       this.users = events['users'];
       this.hosts = events['hosts'];
       this.selected_type = events.missionType;
-      //   console.log(this.selected_type);
       this.nmapChecked = events.nmap;
-
       this.selected_type = this.mission.missionType['@id'];
-      console.log('CURRENT MISSON TYPE => ', this.mission.missionType['@id']);
 
       const id_users = [];
       for (const i in this.users) {
@@ -79,7 +73,6 @@ export class MissionEditComponent implements OnInit {
         }
       }
       this.selected = id_users;
-      console.log(this.selected);
     });
   }
 
@@ -90,26 +83,25 @@ export class MissionEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    Object.assign(form.value, { missionType: this.selectedType });
-    Object.assign(form.value, { users: this.selectedUsers });
-    Object.assign(form.value, { nmap: this.nmapChecked });
-    Object.assign(form.value, { nessus: this.nessusChecked });
-    console.log('FORM CONTENT =>', form.value);
-
-    this.missionService.update(this.mission.id, form.value).subscribe(() => {
-      this.router.navigateByUrl(`/missions/details/${this.mission.id}`);
-    });
+    this.missionService
+      .update(this.mission.id, {
+        ...form.value,
+        missionType: this.selectedType,
+        users: this.selectedUsers,
+        nmap: this.nmapChecked,
+        nessus: this.nessusChecked,
+      })
+      .subscribe(() => {
+        this.router.navigateByUrl(`/missions/details/${this.mission.id}`);
+      });
   }
 
   toto(value) {
     this.selectedUsers = value;
-    console.log('users => ', this.users);
-    console.log('u selected theses users : ', value);
   }
 
   getTypeValue(value) {
     this.selectedType = value;
-    console.log('you just selected this type =>  ', value);
   }
 
   public onSaveUsernameChanged(value: boolean) {

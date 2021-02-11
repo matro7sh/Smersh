@@ -1,7 +1,20 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MissionsService } from '../../services/missions.service';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators, } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { switchMap } from 'rxjs/operators';
 import { UploadsService } from '../../services/uploads.service';
@@ -21,7 +34,7 @@ function loadFile(url, callback) {
 @Component({
   selector: 'app-mission',
   templateUrl: './mission-single.component.html',
-  styleUrls: ['./mission-single.component.css']
+  styleUrls: ['./mission-single.component.css'],
 })
 export class MissionSingleComponent implements OnInit {
   @ViewChild('fileInput')
@@ -52,10 +65,9 @@ export class MissionSingleComponent implements OnInit {
     private router: Router,
     private missionsService: MissionsService,
     private uploadServices: UploadsService,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {
-    this.missionId =  this.router.url.split('/').pop();
-
+    this.missionId = this.router.url.split('/').pop();
   }
 
   done(host) {
@@ -75,12 +87,16 @@ export class MissionSingleComponent implements OnInit {
     }
   }
 
-  nmapUpdate(isChecked){
-    this.missionsService.update(this.missionId, { nmap : isChecked}).subscribe();
+  nmapUpdate(isChecked) {
+    this.missionsService
+      .update(this.missionId, { nmap: isChecked })
+      .subscribe();
   }
 
-  nessusUpdate(isChecked){
-    this.missionsService.update(this.missionId, { nessus : isChecked}).subscribe();
+  nessusUpdate(isChecked) {
+    this.missionsService
+      .update(this.missionId, { nessus: isChecked })
+      .subscribe();
   }
 
   openSnackBar(message) {
@@ -91,7 +107,6 @@ export class MissionSingleComponent implements OnInit {
 
   ngOnInit() {
     this.loadData(this.missionId);
-
     this.uploadForm = this.fb.group({
       filename: '',
       userFile: null,
@@ -104,11 +119,13 @@ export class MissionSingleComponent implements OnInit {
       this.missionName = response.name;
       this.hosts = response['hosts'].map((host) => ({
         ...host,
-        vulns: host.hostVulns.map(hostVuln => ({ ...hostVuln.vuln,
+        vulns: host.hostVulns.map((hostVuln) => ({
+          ...hostVuln.vuln,
           impact: hostVuln.impact,
           linked: hostVuln.id,
-          translate: hostVuln.vuln.translations[this.currentLocal] ?? {} })),
-          name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
+          translate: hostVuln.vuln.translations[this.currentLocal] ?? {},
+        })),
+        name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
           host.name
         }`,
       }));
@@ -119,7 +136,6 @@ export class MissionSingleComponent implements OnInit {
       this.nmap = response.nmap;
       this.nessus = response.nessus;
       this.id = response.id;
-
     });
   }
 
@@ -138,18 +154,22 @@ export class MissionSingleComponent implements OnInit {
   }
 
   addHost(form: NgForm) {
-    Object.assign(form.value, { checked: false });
-    Object.assign(form.value, { mission: this.mission['@id'] });
-    this.hostsService.insert(form.value).subscribe(
-      (el) => {
-        this.ngOnInit();
-      },
-      (err) => {
-        if (err.status == '400') {
-          this.openSnackBar('Error : ' + err.error['hydra:description']);
+    this.hostsService
+      .insert({
+        ...form.value,
+        checked: false,
+        mission: this.mission['@id'],
+      })
+      .subscribe(
+        (el) => {
+          this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
         }
-      }
-    );
+      );
   }
 
   editMission(): void {
@@ -196,12 +216,12 @@ export class MissionSingleComponent implements OnInit {
       const zip = new PizZip(content);
       const doc = new Docxtemplater().loadZip(zip);
       const locale = new Locale().get();
-      const hosts = this.hosts.map(host => ({
+      const hosts = this.hosts.map((host) => ({
         ...host,
-        vulns: host.vulns.map(vuln => ({
+        vulns: host.vulns.map((vuln) => ({
           ...vuln.translations[locale],
-          vulnName: vuln.translations[locale].name
-        }))
+          vulnName: vuln.translations[locale].name,
+        })),
       }));
       doc.setData({
         startDate: this.mission.startDate,
@@ -218,6 +238,7 @@ export class MissionSingleComponent implements OnInit {
         state: 'draft',
         scope: hosts,
       });
+      // think to update report with new hostVuln ( 1 box by vulnerability with current state )
 
       try {
         // render the document (replace all occurences of key by your data)
@@ -255,7 +276,7 @@ export class MissionSingleComponent implements OnInit {
         mimeType:
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       });
-      saveAs(out, 'rapport.docx');
+      saveAs(out, 'report.docx');
     });
   }
 
@@ -263,7 +284,7 @@ export class MissionSingleComponent implements OnInit {
     window.alert('The product has been shared!');
   }
 
-  editThisVuln(id){
+  editThisVuln(id) {
     this.router.navigateByUrl(`/host_vulns/edit/${id}`);
   }
 }

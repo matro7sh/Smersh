@@ -25,9 +25,9 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public idFromUrl: any;
   public missionId: any;
   public host_id: any;
-  selected_vulns: any[];
-  selected_hosts: any[];
-  selected_impacts: any[];
+  public selected_vulns: any[];
+  public selected_hosts: any[];
+  public selected_impacts: any[];
   public durationInSeconds = 4;
 
   constructor(

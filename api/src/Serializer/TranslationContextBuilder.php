@@ -25,7 +25,6 @@ final class TranslationContextBuilder implements SerializerContextBuilderInterfa
 
         if (false === $normalization && isset($context['groups'])) {
             $context['groups'][] = 'admin_write';
-            $context['groups'][] = 'translations';
         }
 
         if (true === $normalization && isset($context['groups'])) {

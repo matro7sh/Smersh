@@ -37,14 +37,13 @@
                                 <ng-template #elseBlock>hourglass_empty</ng-template>
                             </mat-icon>
                             <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)">Add vuln</button>
-                            <div mat-line style="padding: 14px;">
-                                <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer'>{{host.name}}</a>
-
-                                <mat-chip-list aria-label="Fish selection">
-                                    <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                    <mat-chip color=[vuln.color] *ngFor="let vuln of host.vulns">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
-                                </mat-chip-list>
+                            <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer' style="display: block">{{host.name}}</a>
+                            <mat-chip-list aria-label="Fish selection">
+                                <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
+                                <div *ngFor="let vuln of host.vulns">
+                                    <mat-chip color=[vuln.color] (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
                                 </div>
+                            </mat-chip-list>
                         </mat-list-item>
                         <br/>
                         <mat-divider></mat-divider>

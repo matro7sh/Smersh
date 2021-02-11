@@ -24,7 +24,6 @@ export class UserEditComponent implements OnInit {
 
   loadUser(id) {
     this.usersService.getDataById(id).subscribe((response) => {
-      console.log(response);
       this.user = response;
       this.username = response.username;
       this.id = response.id;

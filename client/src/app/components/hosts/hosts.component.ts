@@ -24,13 +24,12 @@ export class HostsComponent implements OnInit {
   loadHosts(): void {
     this.hostService.getData().subscribe((el) => {
       this.dataSource.data = el['hydra:member'].map((host) => host);
-      console.log(this.dataSource.data);
     });
   }
 
   applyFilter(filterValue: string): void {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

@@ -14,14 +14,17 @@ export class LoginComponent implements OnInit {
   public password: string;
   public hide = true;
 
-  constructor(private connectionService: ConnectionService, private router: Router) {}
+  constructor(
+    private connectionService: ConnectionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   submit() {
     this.connectionService
-        .login({ username: this.username, password: this.password })
-        .subscribe(({ token }: { token?: string }) => {
+      .login({ username: this.username, password: this.password })
+      .subscribe(({ token }: { token?: string }) => {
         if (token) {
           new Token().set(token);
           const userLang = navigator.language;

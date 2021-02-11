@@ -107,12 +107,6 @@ class Mission
     private $nessusFiler;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Vuln::class, inversedBy="missions")
-     * @Groups({"Mission", "MissionSingleOutput"})
-     */
-    private $vulns;
-
-    /**
      * @ORM\ManyToOne(targetEntity=MissionType::class, inversedBy="missions")
      * @Groups({"Mission", "MissionSingleOutput"})
      */
@@ -135,7 +129,6 @@ class Mission
     {
         $this->users = new ArrayCollection();
         $this->hosts = new ArrayCollection();
-        $this->vulns = new ArrayCollection();
         $this->clients = new ArrayCollection();
     }
 
@@ -297,30 +290,6 @@ class Mission
     public function setNessusFiler(bool $nessusFiler): self
     {
         $this->nessusFiler = $nessusFiler;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Vuln[]
-     */
-    public function getVulns(): Collection
-    {
-        return $this->vulns;
-    }
-
-    public function addVuln(Vuln $vuln): self
-    {
-        if (!$this->vulns->contains($vuln)) {
-            $this->vulns[] = $vuln;
-        }
-
-        return $this;
-    }
-
-    public function removeVuln(Vuln $vuln): self
-    {
-        $this->vulns->removeElement($vuln);
 
         return $this;
     }

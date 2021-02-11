@@ -5,9 +5,9 @@ import { HostsVulnsService } from '../../services/hosts-vulns.service';
 import { MissionsService } from '../../services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {Locale} from "../../storage/Locale";
-import {impactsService} from "../../services/impacts.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {Locale} from '../../storage/Locale';
+import {impactsService} from '../../services/impacts.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -52,7 +52,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     this.host_id = idFromUrl;
     const url = this.router.url;
     const mission_id = url.split('/').pop();
-    console.log('ID de la mission => ', mission_id);
     this.getHostsFromMission(mission_id);
     this.loadVulns();
     this.loadImpact();
@@ -74,7 +73,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   loadImpact(): void {
     this.impactService.getData().subscribe((impacts) => {
-      console.log(impacts);
       this.impacts = impacts['hydra:member'].map(e => {
         return {
           name:  e.name,
@@ -88,32 +86,14 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   getHostsFromMission(mission_id): void {
     this.missionServices.getDataById(mission_id).subscribe((el) => {
       this.hosts = el['hosts'];
-      console.log(this.hosts);
-
-    /*   const id_vulns = [];
-      for (const i in this.hosts[0]['vulns']) {
-        id_vulns.push(this.hosts[0]['vulns'][i]['@id']);
-      }
-
-      const id_hosts = [];
-      id_hosts.push(this.hosts[0]['@id']);
-
-     */
-
-     //  this.selected_hosts = id_hosts;
-    //  this.selected_vulns = id_vulns;
-    //   this.selected_impacts = this.selectedImpact;
     });
   }
 
   onSubmit(form: NgForm) {
-    console.log('selectedVulns => ', this.selectedVulns);
-    console.log("selectedImpact => ", this.selectedImpact);
     Object.assign(form.value, { vuln: this.selectedVulns });
     Object.assign(form.value, { host: "/api/hosts/" + this.host_id });
     Object.assign(form.value, { impact: this.selectedImpact });
     Object.assign(form.value, { currentState: this.currentStateUser });
-
     this.hostsService.insert(form.value).subscribe(
         (res) => {
           this.openSnackBar('vulnerabilitie added');
@@ -123,7 +103,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
     )
-
   }
 
   Hosts(value) {
@@ -132,13 +111,10 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   Vulns(value) {
     this.selectedVulns = value;
-    console.log('selected vuln', value);
   }
 
   Impacts(value) {
-    console.log(value);
     this.selectedImpact = value;
-    console.log('selected impact', value);
   }
   createVuln() {
     this.router.navigateByUrl('/vulnerabilities/create');

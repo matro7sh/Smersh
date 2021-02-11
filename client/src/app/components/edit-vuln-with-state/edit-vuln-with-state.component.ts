@@ -31,7 +31,6 @@ export class EditVulnWithStateComponent implements OnInit {
 
   loadVuln(){
     this.hostvulnService.getDataById(this.id).subscribe( vuln => {
-      console.log(vuln);
       this.host = vuln.host;
       this.currentState = vuln.currentState;
     });
@@ -40,8 +39,6 @@ export class EditVulnWithStateComponent implements OnInit {
 
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
-    console.log(this.id);
     this.hostvulnService.update(this.id, form.value).subscribe(
         (el) => {
           this.openSnackBar(' Host updated');
@@ -66,7 +63,7 @@ export class EditVulnWithStateComponent implements OnInit {
     if (confirm('Are you sure you want to save this thing into the database?')) {
       this.hostvulnService.delete(this.id).subscribe(
           (el) => {
-            this.openSnackBar(' this vulnerability has been deleted');
+            this.openSnackBar('this vulnerability has been deleted');
             this.router.navigateByUrl('/');
             this.ngOnInit();
           },
@@ -77,7 +74,6 @@ export class EditVulnWithStateComponent implements OnInit {
           }
       )
     } else {
-      // Do nothing!
       alert("OK NOT DELETED");
     }
   }

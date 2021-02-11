@@ -28,7 +28,6 @@ class MissionFixtures extends Fixture
         $user->setEnabled(true);
         $manager->persist($user);
 
-
         $typeExterne = new MissionType();
         $typeExterne->setName("interne");
         $manager->persist($typeExterne);
@@ -45,7 +44,6 @@ class MissionFixtures extends Fixture
         $client->setPhone("06 XX XX XX XX");
         $manager->persist($client);
 
-
         $client2 = new Client();
         $client2->setName("intermachay");
         $client2->setFirstName("Eugène");
@@ -53,7 +51,6 @@ class MissionFixtures extends Fixture
         $client2->setMail("yelaaa@localhost.com");
         $client2->setPhone("06 XX XX XX XX");
         $manager->persist($client2);
-
 
         $mission = new Mission();
         $mission->setNessus(0);
@@ -93,7 +90,6 @@ class MissionFixtures extends Fixture
         $type2->setName("interne");
         $manager->persist($type2);
         $manager->persist($type);
-
 
         /* Create Impact and persist */
 
@@ -138,7 +134,6 @@ class MissionFixtures extends Fixture
         $sqli->setVulnType($type);
         $sqli->setImpact($impact3);
         $manager->persist($sqli);
-
 
         $xss = new Vuln();
 
@@ -193,7 +188,6 @@ class MissionFixtures extends Fixture
         $xssOnSouin->setImpact($impact2);
         $xssOnSouin->setVuln($xss);
         $manager->persist($xssOnSouin);
-
 
         $manager->flush();
 

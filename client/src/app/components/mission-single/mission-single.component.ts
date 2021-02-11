@@ -100,7 +100,6 @@ export class MissionSingleComponent implements OnInit {
 
   loadData(id) {
     this.missionsService.getDataById(id).subscribe((response) => {
-
       this.mission = response;
       this.missionName = response.name;
       this.hosts = response['hosts'].map((host) => ({
@@ -109,31 +108,24 @@ export class MissionSingleComponent implements OnInit {
           impact: hostVuln.impact,
           linked: hostVuln.id,
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {} })),
-        name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
+          name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
           host.name
         }`,
-       // vulns: host.vulns.map(vuln => ({ ...vuln, translate: vuln.translation[this.currentLocal] })),
       }));
-
-      console.log(this.hosts)
 
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];
       this.nmap = response.nmap;
       this.nessus = response.nessus;
-
       this.id = response.id;
 
-      // let toto =  Object.entries(response).map(([k, v]) => this[k] = v);
     });
   }
 
   addCodiMd(form: NgForm) {
-    console.log('CODIMD FORM', form.value);
     this.missionsService.update(this.id, form.value).subscribe(
       (el) => {
-        console.log('RETOUR UPDATED', el);
         this.openSnackBar('codiMD updated');
         this.ngOnInit();
       },
@@ -161,14 +153,12 @@ export class MissionSingleComponent implements OnInit {
   }
 
   editMission(): void {
-    // console.log("on passe ici", this.id);
     this.router.navigateByUrl(`/missions/details/${this.id}`);
   }
 
   sendFile() {
     const fd = new FormData();
     fd.append('filename', this.file);
-    console.log(this.file);
     fd.append('missionName', this.mission.name);
     this.uploadServices.uploadHosts(fd).then(
       () => this.router.navigateByUrl(`/missions/details/${this.id}`),
@@ -229,8 +219,6 @@ export class MissionSingleComponent implements OnInit {
         scope: hosts,
       });
 
-      console.log(this.mission);
-
       try {
         // render the document (replace all occurences of key by your data)
         doc.render();
@@ -266,7 +254,7 @@ export class MissionSingleComponent implements OnInit {
         type: 'blob',
         mimeType:
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      }); //Output the document using Data-URI
+      });
       saveAs(out, 'rapport.docx');
     });
   }

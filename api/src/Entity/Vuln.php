@@ -63,7 +63,6 @@ class Vuln extends AbstractTranslatable
      */
     protected $translations;
 
-
     /**
      * @ORM\OneToMany(targetEntity=HostVuln::class, mappedBy="vuln", orphanRemoval=true)
      * @Groups({"Vulns"})

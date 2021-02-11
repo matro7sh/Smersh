@@ -21,7 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { MissionSingleComponent } from './components/mission-single/mission-single.component';
@@ -56,12 +56,12 @@ import { ImpactComponent } from './components/impact/impact.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
-import {ClientsService} from './services/clients.service';
+import { ClientsService } from './services/clients.service';
 import { ClientsComponent } from './components/clients/clients.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { ClientCreateComponent } from './components/client-create/client-create.component';
-import {VulnTypesService} from './services/vuln-types.service';
-import {HostsVulnsService} from './services/hosts-vulns.service';
+import { VulnTypesService } from './services/vuln-types.service';
+import { HostsVulnsService } from './services/hosts-vulns.service';
 import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
 
 @NgModule({

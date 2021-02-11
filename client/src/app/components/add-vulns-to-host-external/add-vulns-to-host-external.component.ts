@@ -5,9 +5,9 @@ import { HostsVulnsService } from '../../services/hosts-vulns.service';
 import { MissionsService } from '../../services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import {Locale} from '../../storage/Locale';
-import {impactsService} from '../../services/impacts.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Locale } from '../../storage/Locale';
+import { impactsService } from '../../services/impacts.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',

@@ -111,7 +111,6 @@ class MissionFixtures extends Fixture
         $manager->persist($impact4);
 
         /* Create Vulns and persist */
-
         $sqli = new Vuln();
 
         $sqliFR = new VulnTranslation();

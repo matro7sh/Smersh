@@ -17,6 +17,7 @@ import { VulnsComponent } from './components/vulns/vulns.component';
 import { VulnsCreateComponent } from './components/vulns-create/vulns-create.component';
 import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
 import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
+import { EditVulnWithStateComponent } from "./components/edit-vuln-with-state/edit-vuln-with-state.component";
 import { HostsComponent } from './components/hosts/hosts.component';
 import { HostEditComponent } from './components/host-edit/host-edit.component';
 import { ImpactComponent } from './components/impact/impact.component';
@@ -141,6 +142,17 @@ const routes: Routes = [
       {
         path: 'generate',
         component: ConclusionComponent,
+      },
+    ],
+  },
+  {
+    path: 'host_vulns',
+    component: SideBarComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'edit/:id',
+        component: EditVulnWithStateComponent,
       },
     ],
   },

@@ -1,16 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
-import {ClientsService} from "../../services/clients.service";
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { ClientsService } from '../../services/clients.service';
 
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.css']
+  styleUrls: ['./clients.component.css'],
 })
 export class ClientsComponent implements OnInit {
   public clients = [];
-  public displayedColumns = ['id', 'name', 'firstName', 'lastName', 'phone', 'email', 'edit', 'delete'];
+  public displayedColumns = [
+    'id',
+    'name',
+    'firstName',
+    'lastName',
+    'phone',
+    'email',
+    'edit',
+    'delete',
+  ];
   public dataSource: MatTableDataSource<any>;
 
   constructor(private clientService: ClientsService, private router: Router) {
@@ -38,8 +47,8 @@ export class ClientsComponent implements OnInit {
     this.router.navigate(['/clients/edit/', id]);
   }
 
-  createClient(){
-      this.router.navigateByUrl('/clients/create');
+  createClient() {
+    this.router.navigateByUrl('/clients/create');
   }
 
   deleteClient(id): void {
@@ -49,5 +58,4 @@ export class ClientsComponent implements OnInit {
       });
     }
   }
-
 }

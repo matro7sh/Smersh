@@ -31,7 +31,6 @@ export class HostEditComponent implements OnInit {
 
   loadUser(id) {
     this.hostService.getDataById(id).subscribe((response) => {
-      console.log(response);
       this.host = response;
       this.name = response.name;
       this.technology = response.technology;
@@ -40,19 +39,18 @@ export class HostEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.hostService.update(this.id, form.value).subscribe(
-        (el) => {
-          this.openSnackBar(' Host updated');
-          this.router.navigateByUrl('/hosts/all');
-          this.ngOnInit();
-        },
-        (err) => {
-          if (err.status == '400') {
-            this.openSnackBar('Error : ' + err.error['hydra:description']);
-          }
+      (el) => {
+        this.openSnackBar(' Host updated');
+        this.router.navigateByUrl('/hosts/all');
+        this.ngOnInit();
+      },
+      (err) => {
+        if (err.status == '400') {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
-    )
+      }
+    );
   }
 
   openSnackBar(message) {

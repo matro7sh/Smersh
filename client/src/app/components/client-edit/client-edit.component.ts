@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {HostsService} from "../../services/hosts.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {ClientsService} from "../../services/clients.service";
-import {NgForm} from "@angular/forms";
+import { Router } from '@angular/router';
+import { HostsService } from '../../services/hosts.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ClientsService } from '../../services/clients.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-client-edit',
   templateUrl: './client-edit.component.html',
-  styleUrls: ['./client-edit.component.css']
+  styleUrls: ['./client-edit.component.css'],
 })
 export class ClientEditComponent implements OnInit {
   public id: any;
@@ -18,11 +18,13 @@ export class ClientEditComponent implements OnInit {
   public firstName: any;
   public lastName: any;
   public mail: any;
-  public phone : any;
+  public phone: any;
 
-  constructor(private router: Router,
-              private clientService: ClientsService,
-              private _snackBar: MatSnackBar) { }
+  constructor(
+    private router: Router,
+    private clientService: ClientsService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     const url = this.router.url;
@@ -44,21 +46,20 @@ export class ClientEditComponent implements OnInit {
     });
   }
 
-
   onSubmit(form: NgForm) {
     console.log(form.value);
     this.clientService.update(this.id, form.value).subscribe(
-        (el) => {
-          this.openSnackBar(' Client updated');
-          this.router.navigateByUrl('/clients/all');
-          this.ngOnInit();
-        },
-        (err) => {
-          if (err.status == '400') {
-            this.openSnackBar('Error : ' + err.error['hydra:description']);
-          }
+      (el) => {
+        this.openSnackBar(' Client updated');
+        this.router.navigateByUrl('/clients/all');
+        this.ngOnInit();
+      },
+      (err) => {
+        if (err.status == '400') {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
-    )
+      }
+    );
   }
 
   openSnackBar(message) {
@@ -66,5 +67,4 @@ export class ClientEditComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
     });
   }
-
 }

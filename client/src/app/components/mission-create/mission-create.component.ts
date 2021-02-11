@@ -4,8 +4,12 @@ import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { FormControl, NgForm } from '@angular/forms';
 import { TypesService } from '../../services/types.service';
-import {ClientsService} from "../../services/clients.service";
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { ClientsService } from '../../services/clients.service';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 
 @Component({
   selector: 'app-mission-create',
@@ -35,9 +39,10 @@ export class MissionCreateComponent implements OnInit {
     private _adapter: DateAdapter<any>
   ) {
     this._adapter.setLocale('fr');
-    this._adapter.getFirstDayOfWeek = () => {return 1};
+    this._adapter.getFirstDayOfWeek = () => {
+      return 1;
+    };
   }
-
 
   ngOnInit(): void {
     this.loadUsers();
@@ -49,7 +54,6 @@ export class MissionCreateComponent implements OnInit {
     this.users = [];
     this.usersService.getData().subscribe((events) => {
       this.AllUsers = events['hydra:member'].map((el) => el);
-      console.log('ALL USERS =>', this.AllUsers);
     });
   }
 
@@ -57,7 +61,6 @@ export class MissionCreateComponent implements OnInit {
     this.types = [];
     this.typesServices.getData().subscribe((events) => {
       this.types = events['hydra:member'].map((el) => el);
-      console.log('ALL TYPES =>', this.types);
     });
   }
 
@@ -65,36 +68,36 @@ export class MissionCreateComponent implements OnInit {
     this.clients = [];
     this.clientServices.getData().subscribe((events) => {
       this.clients = events['hydra:member'].map((el) => el);
-      console.log('ALL CLIENTS =>', this.clients);
     });
   }
 
   onSubmit(form: NgForm) {
-    Object.assign(form.value, { nmap: false });
-    Object.assign(form.value, { missionType: this.selectedType });
-    Object.assign(form.value, { users: this.selectedUsers });
-    Object.assign(form.value, { clients: this.selectedClients });
-    Object.assign(form.value, { nessus: false });
-    Object.assign(form.value, { nmapFiler: false });
-    Object.assign(form.value, { nessusFiler: false });
-    this.missionService.insert(form.value).subscribe(() => {
-      this.router.navigateByUrl('/missions');
-    });
+    this.missionService
+      .insert({
+        ...form.value,
+        nmap: false,
+        missionType: this.selectedType,
+        users: this.selectedUsers,
+        clients: this.selectedClients,
+        nessus: false,
+        nmapFiler: false,
+        nessusFiler: false,
+      })
+      .subscribe(() => {
+        this.router.navigateByUrl('/missions');
+      });
   }
 
   getTypeValue(value): void {
-    console.log(value);
     this.selectedType = value;
-    console.log('you just selected : ', value);
   }
 
   toto(value): void {
     this.selectedUsers = value;
-    console.log('u selected theses users : ', value);
   }
 
   myClient(value): void {
-    let toto = this.selectedClients = value;
+    const toto = (this.selectedClients = value);
     const strCopy = toto.split();
     this.selectedClients = strCopy;
     console.log('u selected this client : ', strCopy);

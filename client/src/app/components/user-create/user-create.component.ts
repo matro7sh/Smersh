@@ -27,10 +27,11 @@ export class UserCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(form: NgForm) {
-    Object.assign(form.value, { checked: 'true' });
-    this.usersService.insert(form.value).subscribe(() => {
-      this.openSnackBar();
-      this.router.navigateByUrl('/users');
-    });
+    this.usersService
+      .insert({ ...form.value, checked: 'true' })
+      .subscribe(() => {
+        this.openSnackBar();
+        this.router.navigateByUrl('/users');
+      });
   }
 }

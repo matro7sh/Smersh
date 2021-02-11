@@ -24,13 +24,12 @@ export class ImpactComponent implements OnInit {
   loadImpacts(): void {
     this.impactService.getData().subscribe((el) => {
       this.dataSource.data = el['hydra:member'].map((impact) => impact);
-      console.log(this.dataSource.data);
     });
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

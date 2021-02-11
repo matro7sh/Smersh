@@ -11,7 +11,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Impact"}}})
+ * @ApiResource(
+ *      attributes={
+ *          "normalization_context"={
+ *              "groups"={"Impact"}
+ *          },
+ *          "denormalization_context"={
+ *              "groups"={"Impact:input"}
+ *          }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=ImpactRepository::class)
  * @UniqueEntity(
  *     fields={"name"},
@@ -38,11 +47,11 @@ class Impact
     /**
      * @ORM\OneToMany(targetEntity=Vuln::class, mappedBy="impact")
      */
-    private $vunls;
+    private $vulns;
 
     public function __construct()
     {
-        $this->vunls = new ArrayCollection();
+        $this->vulns = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,27 +62,27 @@ class Impact
     /**
      * @return Collection|Vuln[]
      */
-    public function getVunls(): Collection
+    public function getVulns(): Collection
     {
-        return $this->vunls;
+        return $this->vulns;
     }
 
-    public function addVunl(Vuln $vunl): self
+    public function addVuln(Vuln $vuln): self
     {
-        if (!$this->vunls->contains($vunl)) {
-            $this->vunls[] = $vunl;
-            $vunl->setImpact($this);
+        if (!$this->vulns->contains($vuln)) {
+            $this->vulns[] = $vuln;
+            $vuln->setImpact($this);
         }
 
         return $this;
     }
 
-    public function removeVunl(Vuln $vunl): self
+    public function removeVuln(Vuln $vuln): self
     {
-        if ($this->vunls->removeElement($vunl)) {
+        if ($this->vulns->removeElement($vuln)) {
             // set the owning side to null (unless already changed)
-            if ($vunl->getImpact() === $this) {
-                $vunl->setImpact(null);
+            if ($vuln->getImpact() === $this) {
+                $vuln->setImpact(null);
             }
         }
 

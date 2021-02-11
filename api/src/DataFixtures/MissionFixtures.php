@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\Host;
+use App\Entity\HostVuln;
 use App\Entity\Impact;
 use App\Entity\MissionType;
 use App\Entity\Translation\VulnTranslation;
@@ -27,7 +28,6 @@ class MissionFixtures extends Fixture
         $user->setEnabled(true);
         $manager->persist($user);
 
-
         $typeExterne = new MissionType();
         $typeExterne->setName("interne");
         $manager->persist($typeExterne);
@@ -44,7 +44,6 @@ class MissionFixtures extends Fixture
         $client->setPhone("06 XX XX XX XX");
         $manager->persist($client);
 
-
         $client2 = new Client();
         $client2->setName("intermachay");
         $client2->setFirstName("Eugène");
@@ -52,7 +51,6 @@ class MissionFixtures extends Fixture
         $client2->setMail("yelaaa@localhost.com");
         $client2->setPhone("06 XX XX XX XX");
         $manager->persist($client2);
-
 
         $mission = new Mission();
         $mission->setNessus(0);
@@ -93,7 +91,6 @@ class MissionFixtures extends Fixture
         $manager->persist($type2);
         $manager->persist($type);
 
-
         /* Create Impact and persist */
 
         $impact = new Impact();
@@ -109,8 +106,11 @@ class MissionFixtures extends Fixture
         $impact3->setName("High");
         $manager->persist($impact3);
 
-        /* Create Vulns and persist */
+        $impact4 = new Impact();
+        $impact4->setName("Critical");
+        $manager->persist($impact4);
 
+        /* Create Vulns and persist */
         $sqli = new Vuln();
 
         $sqliFR = new VulnTranslation();
@@ -164,18 +164,29 @@ class MissionFixtures extends Fixture
         $host = new Host();
         $host->setName("https://jenaye.fr");
         $host->setTechnology("ReactJS");
-        $host->addVuln($sqli);
         $host->setMission($mission);
         $host->setChecked(1);
         $manager->persist($host);
 
         $host3 = new Host();
         $host3->setName("https://github.com/Darkweak/Souin");
-        $host3->addVuln($xss);
         $host3->setMission($mission);
         $host3->setChecked(0);
         $manager->persist($host3);
 
+        $sqliOnJenaye = new HostVuln();
+        $sqliOnJenaye->setCurrentState("we just found Sqli on jenaye.fr");
+        $sqliOnJenaye->setHost($host);
+        $sqliOnJenaye->setImpact($impact);
+        $sqliOnJenaye->setVuln($sqli);
+        $manager->persist($sqliOnJenaye);
+
+        $xssOnSouin = new HostVuln();
+        $xssOnSouin->setCurrentState("we just found XSS on souin");
+        $xssOnSouin->setHost($host3);
+        $xssOnSouin->setImpact($impact2);
+        $xssOnSouin->setVuln($xss);
+        $manager->persist($xssOnSouin);
 
         $manager->flush();
 

@@ -16,7 +16,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { switchMap } from 'rxjs/operators';
 import { UploadsService } from '../../services/uploads.service';
 import { HostsService } from '../../services/hosts.service';
 import { FileInformation } from '../../file-information';
@@ -73,7 +72,7 @@ export class MissionSingleComponent implements OnInit {
     this.missionId = this.router.url.split('/').pop();
   }
 
-  done(host) {
+  done(host): void {
     const idHost = host['@id'].split('/').pop();
     if (host.checked === false) {
       this.hostsService.update(idHost, { checked: true }).subscribe(() => {
@@ -90,7 +89,7 @@ export class MissionSingleComponent implements OnInit {
     }
   }
 
-  nmapUpdate(isChecked) {
+  nmapUpdate(isChecked): void {
     this.missionsService
       .update(this.missionId, { nmap: isChecked })
       .subscribe();
@@ -102,13 +101,13 @@ export class MissionSingleComponent implements OnInit {
       .subscribe();
   }
 
-  openSnackBar(message) {
+  openSnackBar(message): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadData(this.missionId);
     this.uploadForm = this.fb.group({
       filename: '',
@@ -116,7 +115,7 @@ export class MissionSingleComponent implements OnInit {
     });
   }
 
-  loadData(id) {
+  loadData(id: string): void {
     this.missionsService.getDataById(id).subscribe((response) => {
       this.mission = response;
       this.missionName = response.name;
@@ -143,7 +142,7 @@ export class MissionSingleComponent implements OnInit {
     });
   }
 
-  addCodiMd(form: NgForm) {
+  addCodiMd(form: NgForm): void {
     this.missionsService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar('codiMD updated');
@@ -215,7 +214,7 @@ export class MissionSingleComponent implements OnInit {
     this.router.navigateByUrl(`/missions/details/${this.id}`);
   }
 
-  sendFile() {
+  sendFile(): void {
     const fd = new FormData();
     fd.append('filename', this.file);
     fd.append('missionName', this.mission.name);
@@ -228,7 +227,7 @@ export class MissionSingleComponent implements OnInit {
     );
   }
 
-  onSelectFile(event) {
+  onSelectFile(event): void {
     this.file = event.target.files[0];
   }
 
@@ -246,7 +245,7 @@ export class MissionSingleComponent implements OnInit {
     filterValue = filterValue.toLowerCase();
   }
 
-  generate() {
+  generate(): void {
     loadFile(`/assets/Smersh.docx`, (error, content) => {
       if (error) {
         throw error;
@@ -282,30 +281,13 @@ export class MissionSingleComponent implements OnInit {
         // render the document (replace all occurences of key by your data)
         doc.render();
       } catch (error) {
-        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-        function replaceErrors(key, value) {
-          if (value instanceof Error) {
-            return Object.getOwnPropertyNames(value).reduce(function (
-              error,
-              key
-            ) {
-              error[key] = value[key];
-              return error;
-            },
-            {});
-          }
-          return value;
-        }
-
         if (error.properties && error.properties.errors instanceof Array) {
-          const errorMessages = error.properties.errors
-            .map(function (error) {
-              return error.properties.explanation;
-            })
-            .join('\n');
-          console.log('errorMessages', errorMessages);
-          // errorMessages is a humanly readable message looking like this :
-          // 'The tag beginning with "foobar" is unopened'
+          console.log(
+            'errorMessages',
+            error.properties.errors
+              .map((e) => e.properties.explanation)
+              .join('\n')
+          );
         }
         throw error;
       }
@@ -313,12 +295,12 @@ export class MissionSingleComponent implements OnInit {
         type: 'blob',
         mimeType:
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      });
-      saveAs(out, 'report.docx');
+      }); // Output the document using Data-URI
+      saveAs(out, 'rapport.docx');
     });
   }
 
-  share() {
+  share(): void {
     window.alert('The product has been shared!');
   }
 

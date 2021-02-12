@@ -6,6 +6,7 @@ import { AbstractService } from 'src/app/services/abstract';
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
 const SHOW_ACTION = 'show';
+const CREATE_ACTION = 'create';
 
 export const DELETE = {
   color: 'warn',
@@ -16,6 +17,11 @@ export const EDIT = {
   color: '',
   label: 'Edit',
   name: EDIT_ACTION,
+};
+export const CREATE = {
+  color: '',
+  label: 'Create a new ',
+  name: CREATE_ACTION,
 };
 export const SHOW = {
   color: 'primary',
@@ -29,9 +35,11 @@ export const SHOW = {
   styleUrls: [],
 })
 export class GenericListComponent implements OnInit {
-  public actions = [SHOW, EDIT, DELETE];
+  public actions = [SHOW, EDIT, DELETE, CREATE];
+  public routerHelper = null;
   public dataSource: MatTableDataSource<any>;
   public resource = '';
+  public singularResource = '';
   public actionMatcher = null;
   public fields = [];
   public filters = [];
@@ -47,7 +55,9 @@ export class GenericListComponent implements OnInit {
 
   getPermissions(): Record<string, string> {
     const permissions = {};
-    this.actions.forEach((action) => (permissions[action.name] = action.color));
+    [SHOW, EDIT, DELETE].forEach(
+      (action) => (permissions[action.name] = action.color)
+    );
     return permissions;
   }
 
@@ -100,6 +110,10 @@ export class GenericListComponent implements OnInit {
         this.ngOnInit();
       });
     }
+  }
+
+  isEnabledCreation(): boolean {
+    return this.actions.some((e) => e.name === CREATE_ACTION);
   }
 
   applyActionOnResource(action: string, id: string): void {

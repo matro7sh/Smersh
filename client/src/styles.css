@@ -40,3 +40,7 @@ body {
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
     background-color: #3f51b5;
 }
+
+.ml-auto {
+    margin-left: auto;
+}

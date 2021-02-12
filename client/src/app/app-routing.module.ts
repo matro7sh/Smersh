@@ -3,20 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { ErrorsComponent } from './components/errors/errors.component';
-import { MissionChoiceComponent } from './components/missions/mission-choice.component';
-import { MissionSingleComponent } from './components/mission-single/mission-single.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
-import { UsersComponent } from './components/users/users.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { UserCreateComponent } from './components/user-create/user-create.component';
-import { MissionCreateComponent } from './components/mission-create/mission-create.component';
-import { MissionEditComponent } from './components/mission-edit/mission-edit.component';
-import { MissionMyComponent } from './components/mission-my/mission-my.component';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { VulnsComponent } from './components/vulns/vulns.component';
 import { VulnsCreateComponent } from './components/vulns-create/vulns-create.component';
 import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
-import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
 import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
 import { HostsComponent } from './components/hosts/hosts.component';
 import { HostEditComponent } from './components/host-edit/host-edit.component';
@@ -27,60 +18,13 @@ import { ConclusionComponent } from './components/conclusion/conclusion.componen
 import { ClientsComponent } from './components/clients/clients.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { ClientCreateComponent } from './components/client-create/client-create.component';
+import { MissionResource } from 'src/app/resources/MissionResource';
+import { UserResource } from 'src/app/resources/UserResource';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {
-    path: 'missions',
-    component: SideBarComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '', // by default angular add /
-        component: MissionMyComponent,
-      },
-      {
-        path: 'all',
-        component: MissionChoiceComponent,
-      },
-      {
-        path: 'my',
-        component: MissionMyComponent,
-      },
-      {
-        path: 'create',
-        component: MissionCreateComponent,
-      },
-      { path: 'details/:id', component: MissionSingleComponent },
-      {
-        path: 'edit/:id',
-        component: MissionEditComponent,
-      },
-      {
-        path: ':id/add-vuln/:missionid',
-        component: AddVulnsToHostExternalComponent,
-      },
-    ],
-  },
-  {
-    path: 'users',
-    component: SideBarComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        component: UsersComponent,
-      },
-      {
-        path: 'create',
-        component: UserCreateComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: UserEditComponent,
-      },
-    ],
-  },
+  new MissionResource().generateResource(),
+  new UserResource().generateResource(),
   {
     path: 'vulnerabilities',
     component: SideBarComponent,

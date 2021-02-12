@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Locale } from '../../storage/Locale';
 import { impactsService } from '../../services/impacts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MissionRouter } from 'src/app/router/MissionRouter';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -23,7 +24,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public selectedImpact = [];
   public currentStateUser = '';
   public idFromUrl: any;
-  public missionId: any;
   public host_id: any;
   public selected_vulns: any[];
   public selected_hosts: any[];
@@ -62,7 +62,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       const locale = new Locale().get();
       this.vulns = vulns['hydra:member'].map((e) => {
         const elt = e.translations[locale];
-        console.log(e, elt.name);
         return {
           name: elt.name,
           value: e['@id'],

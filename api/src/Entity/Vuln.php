@@ -24,7 +24,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "groups"={"Vulns"}
  *          },
  *          "denormalization_context"={
- *              "groups"={"Vulns"}
+ *              "groups"={"Vulns", "translations"}
  *          }
  *      }
  * )

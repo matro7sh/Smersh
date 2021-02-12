@@ -39,7 +39,7 @@ class Impact
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
-     * @Groups({"Vuln", "MissionSingleOutput", "Impact"})
+     * @Groups({"Vuln", "MissionSingleOutput", "Impact", "Impact:input"})
      */
     private $name;
 

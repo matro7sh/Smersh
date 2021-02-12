@@ -20,10 +20,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class VulnTranslation extends AbstractTranslation
 {
-
-    /**
-     * @Groups("Vulns")
-     */
     use NameTrait;
     use RemediationTrait;
     use DescriptionTrait;

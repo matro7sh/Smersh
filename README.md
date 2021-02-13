@@ -115,7 +115,25 @@ git checkout -b MyBranch
 git add -p 
 git commit -m "xx"
 git push origin MyBranch
+```
+
+## How to use app localy while she's running on VPS
+
+create file called `config` into `.ssh/` of your current user
+
+then past the following content:
+
+```
+Host smersh
+  Hostname <your-ip>
+  Port <ssh-port>
+  User <your-user>
+  LocalForward 127.0.0.1:8000 127.0.0.1:8000
+  LocalForward 127.0.0.1:4200 127.0.0.1:4200
+  LocalForward 127.0.0.1:3000 127.0.0.1:3000
+
 ``` 
+then you can run `ssh smersh` and go to `http://localhost:4200`
 
 
 ## Todo
@@ -126,7 +144,11 @@ git push origin MyBranch
 - Maybe use chips to create new vulns into host ?
 - Add color by impact into mission-single-view
 - Add possibility to select impact when u're editing vuln
-- Fix select vuln by host (add-vulns-to-host-external)
+- add real fixture instead of dummy data
+- parser gnmap
+- different view for internal test and external
+- add possibility to delete impact
+- Merge GenerateList component and fixe route, ex : `/missions/show/1` instead of `/missions/details/1`
 
 ## Contributors 
 - Darkweak - https://github.com/orgs/CMEPW/people/Darkweak

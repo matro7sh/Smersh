@@ -285,17 +285,21 @@ export class MissionSingleComponent implements OnInit {
       if (error) {
         throw error;
       }
-
+      console.log(this.hosts);
       const zip = new PizZip(content);
       const doc = new Docxtemplater().loadZip(zip);
-      const locale = new Locale().get();
       const hosts = this.hosts.map((host) => ({
         ...host,
-        vulns: host.vulns.map((vuln) => ({
-          ...vuln.translations[locale],
-          vulnName: vuln.translations[locale].name,
+        hostVulns: host.hostVulns.map((hostVuln) => ({
+          ...hostVuln,
+          vulnName: hostVuln.vuln.translations[this.currentLocal].name,
+          vulnDescription:
+            hostVuln.vuln.translations[this.currentLocal].description,
         })),
       }));
+
+      console.log(hosts);
+
       doc.setData({
         startDate: this.mission.startDate,
         CLIENT_NAME: this.missionName,
@@ -309,7 +313,7 @@ export class MissionSingleComponent implements OnInit {
         to: 'myclient@localhost.com',
         authors: this.users,
         state: 'draft',
-        scope: hosts,
+        scope: this.hosts,
       });
       // think to update report with new hostVuln ( 1 box by vulnerability with current state )
       try {

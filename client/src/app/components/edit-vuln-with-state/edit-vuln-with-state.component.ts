@@ -14,6 +14,7 @@ export class EditVulnWithStateComponent implements OnInit {
   public currentState: any;
   public durationInSeconds = 4;
   public host: any;
+  public missionId: any;
 
   constructor(
     private hostvulnService: HostsVulnsService,
@@ -32,6 +33,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.getDataById(this.id).subscribe((vuln) => {
       this.host = vuln.host;
       this.currentState = vuln.currentState;
+      this.missionId = vuln.host.mission.split('/').pop();
     });
   }
 
@@ -39,7 +41,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar('Host updated');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl(`/missions/details/${this.missionId}`);
         this.ngOnInit();
       },
       (err) => {

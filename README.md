@@ -41,7 +41,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 in `api` folder copy `.env-dist` to `.env` 
 
-Run `make up` then go to `http://localhost:4200` and use "jenaye:jenaye" to log in.
+Run `make upAll` then go to `http://localhost:4200` and use "jenaye:jenaye" to log in.
 
 
 

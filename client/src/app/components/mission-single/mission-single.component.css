@@ -3,9 +3,21 @@
     width: 100%;
 }
 
+.vertical-center {
+    align-self: center;
+}
+
 .example-header-image {
+    transform: scale(1.5);
     background-image: url('http://localhost:4200/assets/logo.png');
-    background-size: cover;
+    background-position: center;
+    background-size: 78%;
+}
+
+.horizontal-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 
@@ -34,7 +46,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-content: center;
     min-height: max-content;
+    overflow: hidden;
 }
 #host_vulnList {
     width: 90%;
@@ -44,6 +58,11 @@
     height: fit-content;
     align-self: center;
     padding: 0 1em 0 1em;
+}
+.clickableIcon {
+    cursor: pointer;
+    align-self: center;
+    width: 3%;
 }
 
 #wrapper_generate {

@@ -172,6 +172,23 @@ export class MissionSingleComponent implements OnInit {
       );
   }
 
+  deleteHost(host) {
+    this.hostsService.delete(host["@id"].split("/")[3])
+    .subscribe(
+      (el) => {
+        this.openSnackBar(
+          'host has been successfully deleted'
+        ),
+        this.ngOnInit();
+      },
+      (err) => {
+        if (err.status == '400') {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
+        }
+      }
+    )
+  }
+
   editMission(): void {
     this.router.navigateByUrl(`/missions/details/${this.id}`);
   }

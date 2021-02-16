@@ -42,8 +42,8 @@
     </mat-form-field><br/>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Contact</mat-label>
-        <input matInput type = "text" name="contact" [(ngModel)]="mission.contact"   autocomplete="off">
+        <mat-label>path_to_codi</mat-label>
+        <input matInput type = "text" name="pathToCodi" [(ngModel)]="mission.pathToCodi"   autocomplete="off">
     </mat-form-field><br/>
 
     <mat-form-field class="example-full-width">
@@ -51,6 +51,7 @@
         <textarea matInput type="text" name="credentials" placeholder="jenaye:yolo" [(ngModel)]="mission.credentials" autocomplete="off"></textarea>
     </mat-form-field><br/>
 
+    <!--
     <mat-form-field appearance="fill">
         <mat-label>Type of Mission</mat-label>
         <mat-select (selectionChange)="getTypeValue($event.value)">
@@ -60,6 +61,7 @@
         </mat-select>
     </mat-form-field>
     <br/>
+    -->
 
 
     <mat-form-field appearance="fill">

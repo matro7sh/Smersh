@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened id="action_check"> 
+    <mat-drawer mode="side" opened id="action_check">
         <mat-list role="list">
             <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
             <mat-list-item role="listitem">End at : {{mission?.EndDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
@@ -23,7 +23,7 @@
         <mat-card-header>
             <mat-card-title style="display:flex; flex-direction: row;">
                 <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
-                <span class="vertical-center">{{mission?.name}}</span> 
+                <span class="vertical-center">{{mission?.name}}</span>
                 <button mat-raised-button color="primary" style="margin-left: 0.7em;" [routerLink]="['/missions/edit', mission?.id]">Edit</button>
             </mat-card-title>
         </mat-card-header>
@@ -87,17 +87,7 @@
                             <mat-icon mat-list-icon>link</mat-icon>
                             <div mat-line><a class="violet" href="{{mission?.pathToCodi}}" target='_blank' rel='noopener noreferrer' id="update_codi_button">{{mission?.pathToCodi}}</a></div>
                         </mat-list-item>
-                        <mat-list-item>
-                            <form class="horizontal-form"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
-                                <mat-form-field class="example-full-width">
-                            
-                                    <input matInput type="text" class="vertical-center" name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
-                                </mat-form-field>
-                                <div class="example-button-row vertical-center">
-                                    <button mat-button mat-raised-button color="primary">Add /update codiMD link</button>
-                                </div>
-                            </form>
-                        </mat-list-item>
+
                     </mat-list>
                 </mat-tab>
             </mat-tab-group>
@@ -132,6 +122,15 @@
     </mat-card>
     <div id="wrapper_generate">
         <button  mat-button mat-raised-button color="primary" (click)="generate()" id="generate">Generate document</button>
+            <form class="paddingcodi"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
+                <mat-form-field class="example-full-width">
+
+                    <input matInput type="text" class="vertical-center" name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
+                </mat-form-field>
+                <div class="example-button-row vertical-center">
+                    <button mat-button mat-raised-button color="primary">Add /update codiMD link</button>
+                </div>
+            </form>
     </div>
 </mat-drawer-content>
 </mat-drawer-container>

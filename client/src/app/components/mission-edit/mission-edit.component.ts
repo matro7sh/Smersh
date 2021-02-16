@@ -18,6 +18,7 @@ export class MissionEditComponent implements OnInit {
   selected = [];
   selected_type = [];
   selectedType: any;
+  public path_to_codi: any;
   selectedUsers: any;
   startDate: any;
   EndDate: any;

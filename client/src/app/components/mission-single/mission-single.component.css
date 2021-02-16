@@ -25,7 +25,7 @@
     height: 95%;
     padding: 1em;
     -webkit-box-shadow: 1px 1px 5px 1px #ccc;
-    -moz-box-shadow:    1px 1px 5px 1px #ccc; 
+    -moz-box-shadow:    1px 1px 5px 1px #ccc;
     box-shadow:         1px 1px 5px 1px #ccc;
     border-radius: 0.3em;
 }
@@ -34,7 +34,7 @@
 #dashboard {
     padding: 0 1em 1em 1em;
     -webkit-box-shadow: 1px 1px 5px 1px #ccc;
-    -moz-box-shadow:    1px 1px 5px 1px #ccc; 
+    -moz-box-shadow:    1px 1px 5px 1px #ccc;
     box-shadow:         1px 1px 5px 1px #ccc;
 }
 #host_list {
@@ -71,6 +71,10 @@
 }
 #generate {
     margin: 1em 0 1em 1em;
+}
+
+.paddingcodi {
+    padding-left: 30px;
 }
 
 #codi_content {

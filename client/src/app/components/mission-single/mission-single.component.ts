@@ -49,6 +49,7 @@ export class MissionSingleComponent implements OnInit {
   users: any;
   creds: any;
   clients: any;
+  steps: any;
   file: any;
   id: any;
   public missionId: string;
@@ -133,6 +134,7 @@ export class MissionSingleComponent implements OnInit {
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];
+      this.steps = response['steps'];
       this.nmap = response.nmap;
       this.nessus = response.nessus;
       this.id = response.id;
@@ -173,20 +175,17 @@ export class MissionSingleComponent implements OnInit {
   }
 
   deleteHost(host) {
-    this.hostsService.delete(host["@id"].split("/")[3])
-    .subscribe(
+    this.hostsService.delete(host['@id'].split('/')[3]).subscribe(
       (el) => {
-        this.openSnackBar(
-          'host has been successfully deleted'
-        ),
-        this.ngOnInit();
+        this.openSnackBar('host has been successfully deleted'),
+          this.ngOnInit();
       },
       (err) => {
         if (err.status == '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
-    )
+    );
   }
 
   editMission(): void {

@@ -8,6 +8,7 @@ use App\Entity\Host;
 use App\Entity\HostVuln;
 use App\Entity\Impact;
 use App\Entity\MissionType;
+use App\Entity\Step;
 use App\Entity\Translation\VulnTranslation;
 use App\Entity\User;
 use App\Entity\Vuln;
@@ -82,6 +83,15 @@ class MissionFixtures extends Fixture
 
         $manager->persist($mission);
         $manager->persist($mission2);
+
+
+        $step = new Step();
+        $step->setDescription("get meterpreter session");
+        $step->setHour(10);
+        $step->setMinute(30);
+        $step->setMissionId($mission);
+        $step->setStepdate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
+        $manager->persist($step);
 
         /* Create VulnType and persist */
         $type = new VulnType();

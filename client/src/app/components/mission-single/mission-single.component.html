@@ -90,6 +90,17 @@
 
                     </mat-list>
                 </mat-tab>
+                <mat-tab label="Hacktivity" *ngIf="mission?.steps">
+                    <mat-list>
+                        <mat-list-item *ngFor="let step of steps">
+                            <mat-icon mat-list-icon>schedule</mat-icon>
+                            <div mat-line>Action : {{step.description}}</div>
+                            <div mat-line>time : {{step.hour}} - {{step.minute}} </div>
+                            <div mat-line>time : {{step.stepdate | date }} </div>
+
+                        </mat-list-item>
+                    </mat-list>
+                </mat-tab>
             </mat-tab-group>
 
         </mat-card-content>

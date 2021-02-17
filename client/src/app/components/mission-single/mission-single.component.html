@@ -91,13 +91,31 @@
                     </mat-list>
                 </mat-tab>
                 <mat-tab label="Hacktivity" *ngIf="mission?.steps">
+                    <form class="example-form"  #myform = "ngForm" (ngSubmit)="addStep(myform)">
+                    <mat-form-field>
+                        <input matInput ngModel  name="findAt" [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
+                               [min]="minDate" [max]="maxDate" [disabled]="disabled">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
+                                                 [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
+                                                 [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
+                            <!-- Custom icon or text of Apply icon -->
+                            <ng-template>
+                                <!-- <mat-icon>star</mat-icon> -->
+                                <span>OK</span>
+                            </ng-template>
+                        </ngx-mat-datetime-picker>
+                    </mat-form-field>
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" name="description" placeholder="get ntlm hash" ngModel autocomplete="off">
+                        </mat-form-field> -
+                        <button mat-raised-button color="primary">ADD MY STEP</button>
+                    </form>
                     <mat-list>
                         <mat-list-item *ngFor="let step of steps">
                             <mat-icon mat-list-icon>schedule</mat-icon>
                             <div mat-line>Action : {{step.description}}</div>
-                            <div mat-line>time : {{step.hour}} - {{step.minute}} </div>
-                            <div mat-line>time : {{step.stepdate | date }} </div>
-
+                            <div mat-line>Date : {{step.findAt | date }} </div>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>

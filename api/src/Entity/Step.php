@@ -33,23 +33,6 @@ class Step
      */
     private $description;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"Step", "MissionSingleOutput"})
-     */
-    private $hour;
-
-    /**
-     * @ORM\Column(type="integer")
-     * @Groups({"Step", "MissionSingleOutput"})
-     */
-    private $minute;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @Groups({"Step", "MissionSingleOutput"})
-     */
-    private $stepdate;
 
     /**
      * @ORM\ManyToOne(targetEntity=Mission::class, inversedBy="steps")
@@ -57,6 +40,18 @@ class Step
      * @Groups({"Step"})
      */
     private $missionId;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"Step", "MissionSingleOutput"})
+     */
+    private $findAt;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"Step", "MissionSingleOutput"})
+     */
+    private $createdAt;
 
     public function getId(): ?int
     {
@@ -75,42 +70,6 @@ class Step
         return $this;
     }
 
-    public function getHour(): ?int
-    {
-        return $this->hour;
-    }
-
-    public function setHour(int $hour): self
-    {
-        $this->hour = $hour;
-
-        return $this;
-    }
-
-    public function getMinute(): ?int
-    {
-        return $this->minute;
-    }
-
-    public function setMinute(int $minute): self
-    {
-        $this->minute = $minute;
-
-        return $this;
-    }
-
-    public function getStepdate(): ?\DateTimeInterface
-    {
-        return $this->stepdate;
-    }
-
-    public function setStepdate(\DateTimeInterface $stepdate): self
-    {
-        $this->stepdate = $stepdate;
-
-        return $this;
-    }
-
     public function getMissionId(): ?Mission
     {
         return $this->missionId;
@@ -119,6 +78,30 @@ class Step
     public function setMissionId(?Mission $missionId): self
     {
         $this->missionId = $missionId;
+
+        return $this;
+    }
+
+    public function getFindAt(): ?\DateTimeInterface
+    {
+        return $this->findAt;
+    }
+
+    public function setFindAt(\DateTimeInterface $findAt): self
+    {
+        $this->findAt = $findAt;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

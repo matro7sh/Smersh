@@ -87,10 +87,9 @@ class MissionFixtures extends Fixture
 
         $step = new Step();
         $step->setDescription("get meterpreter session");
-        $step->setHour(10);
-        $step->setMinute(30);
         $step->setMissionId($mission);
-        $step->setStepdate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
+        $step->setCreatedAt(new \DateTime());
+        $step->setFindAt(new \DateTime());
         $manager->persist($step);
 
         /* Create VulnType and persist */

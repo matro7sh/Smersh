@@ -26,6 +26,7 @@ import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
+import { StepsService } from '../../services/steps.service';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -63,6 +64,7 @@ export class MissionSingleComponent implements OnInit {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private hostsService: HostsService,
+    private stepsService: StepsService,
     private router: Router,
     private missionsService: MissionsService,
     private uploadServices: UploadsService,
@@ -161,6 +163,26 @@ export class MissionSingleComponent implements OnInit {
         ...form.value,
         checked: false,
         mission: this.mission['@id'],
+      })
+      .subscribe(
+        (el) => {
+          this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+      );
+  }
+
+  addStep(form: NgForm) {
+    console.log(form.value);
+    console.log(this.mission['@id']);
+    this.stepsService
+      .insert({
+        ...form.value,
+        mission_id_id: this.id,
       })
       .subscribe(
         (el) => {

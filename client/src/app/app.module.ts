@@ -63,6 +63,12 @@ import { ClientCreateComponent } from './components/client-create/client-create.
 import { VulnTypesService } from './services/vuln-types.service';
 import { HostsVulnsService } from './services/hosts-vulns.service';
 import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
+import { StepsService } from './services/steps.service';
 
 @NgModule({
   declarations: [
@@ -98,6 +104,9 @@ import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/ed
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
     MatDatepickerModule,
     MatTabsModule,
     HttpClientModule,
@@ -128,10 +137,11 @@ import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/ed
     MissionsService,
     HostsVulnsService,
     VulnTypesService,
+    StepsService,
     UsersService,
     UploadsService,
     HostsService,
-      ClientsService,
+    ClientsService,
     MatDatepickerModule,
     TypesService,
   ],

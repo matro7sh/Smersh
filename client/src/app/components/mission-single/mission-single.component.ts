@@ -177,12 +177,13 @@ export class MissionSingleComponent implements OnInit {
   }
 
   addStep(form: NgForm) {
-    console.log(form.value);
-    console.log(this.mission['@id']);
+    const date = new Date(Date.now());
+
     this.stepsService
       .insert({
         ...form.value,
-        mission_id_id: this.id,
+        missionId: this.mission['@id'],
+        createdAt: date,
       })
       .subscribe(
         (el) => {
@@ -277,7 +278,6 @@ export class MissionSingleComponent implements OnInit {
         scope: hosts,
       });
       // think to update report with new hostVuln ( 1 box by vulnerability with current state )
-
       try {
         // render the document (replace all occurences of key by your data)
         doc.render();

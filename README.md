@@ -149,6 +149,7 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 - different view for internal test and external
 - add possibility to delete impact
 - Merge GenerateList component and fixe route, ex : `/missions/show/1` instead of `/missions/details/1`
+- add register page
 
 ## Contributors 
 - Darkweak - https://github.com/orgs/CMEPW/people/Darkweak

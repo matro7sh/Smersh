@@ -8,6 +8,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 # Preview front (Angular):
 <img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png" style="text-align:center">
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/homepage.png" style="text-align:center">
+<img width="1280" alt="hacktivity" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/hacktivity.png" style="text-align:center">
 
 
 # preview API (Symfony + Api Platform) :
@@ -31,7 +32,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png" style="text-align:center">
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png" style="text-align:center">
 
-# How to install server
+# How to install using docker
 
 >requirements 
 * Docker && docker-compose

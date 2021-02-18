@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { impactsService } from '../../services/impacts.service';
-import { Router } from '@angular/router';
+import { ImpactsService } from '../../services/impacts.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImpactRouter } from 'src/app/router/ImpactRouter';
 
 @Component({
   selector: 'app-impact-edit',
@@ -16,20 +17,21 @@ export class ImpactEditComponent implements OnInit {
   public name: any;
 
   constructor(
-    private impactService: impactsService,
+    private impactService: ImpactsService,
+    private route: ActivatedRoute,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadImpact(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadImpact(id);
+    });
   }
 
   loadImpact(id) {
-    this.impactService.getDataById(id).subscribe((response) => {
+    this.impactService.getDataById(this.id).subscribe((response) => {
       this.impact = response;
       this.name = response.name;
       this.id = response.id;
@@ -39,7 +41,7 @@ export class ImpactEditComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.impactService.update(this.id, form.value).subscribe(() => {
       this.openSnackBar(' Impact updated');
-      this.router.navigateByUrl('/impacts/all');
+      this.router.navigateByUrl(ImpactRouter.redirectToList());
     });
   }
 

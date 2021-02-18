@@ -5,7 +5,7 @@ import { MissionsService } from '../../services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Locale } from '../../storage/Locale';
-import { impactsService } from '../../services/impacts.service';
+import { ImpactsService } from '../../services/impacts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -23,7 +23,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public selectedImpact = [];
   public currentStateUser = '';
   public idFromUrl: any;
-  public missionId: any;
   public host_id: any;
   public selected_vulns: any[];
   public selected_hosts: any[];
@@ -34,13 +33,13 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private vulnsService: VulnsService,
     private activatedRoute: ActivatedRoute,
     private hostsService: HostsVulnsService,
-    private impactService: impactsService,
+    private impactService: ImpactsService,
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
     private router: Router
   ) {}
 
-  openSnackBar(message) {
+  openSnackBar(message): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
@@ -62,7 +61,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       const locale = new Locale().get();
       this.vulns = vulns['hydra:member'].map((e) => {
         const elt = e.translations[locale];
-        console.log(e, elt.name);
         return {
           name: elt.name,
           value: e['@id'],
@@ -83,13 +81,13 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   // get all hosts from mission id
-  getHostsFromMission(mission_id): void {
-    this.missionServices.getDataById(mission_id).subscribe((el) => {
-      this.hosts = el['hosts'];
+  getHostsFromMission(mission_id: string): void {
+    this.missionServices.getDataById(mission_id).subscribe(({ hosts }) => {
+      this.hosts = hosts;
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.hostsService
       .insert({
         ...form.value,
@@ -109,18 +107,18 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       );
   }
 
-  Hosts(value) {
+  Hosts(value): void {
     this.selectedHosts = value;
   }
 
-  Vulns(value) {
+  Vulns(value): void {
     this.selectedVulns = value;
   }
 
-  Impacts(value) {
+  Impacts(value): void {
     this.selectedImpact = value;
   }
-  createVuln() {
+  createVuln(): void {
     this.router.navigateByUrl('/vulnerabilities/create');
   }
 }

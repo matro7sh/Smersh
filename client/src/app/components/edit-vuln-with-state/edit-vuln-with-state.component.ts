@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HostsVulnsService } from '../../services/hosts-vulns.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 
@@ -19,14 +19,15 @@ export class EditVulnWithStateComponent implements OnInit {
   constructor(
     private hostvulnService: HostsVulnsService,
     private router: Router,
+    private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadVuln();
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadVuln();
+    });
   }
 
   loadVuln() {
@@ -41,7 +42,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar('Host updated');
-        this.router.navigateByUrl(`/missions/details/${this.missionId}`);
+        this.router.navigateByUrl(`/missions/${this.missionId}`);
         this.ngOnInit();
       },
       (err) => {

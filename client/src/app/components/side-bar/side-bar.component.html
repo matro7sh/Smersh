@@ -12,7 +12,7 @@
         <mat-sidenav opened="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
                      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
             <mat-nav-list>
-                <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value.base, item.value.path]">
+                <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
                     <b>{{item?.key}}</b>
                 </a>
             </mat-nav-list>

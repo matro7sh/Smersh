@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import { MissionChoiceComponent } from './components/missions/mission-choice.component';
+import { MissionsListComponent } from 'src/app/components/missions/missionsList.component';
 import { ErrorsComponent } from './components/errors/errors.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -31,7 +31,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
-import { UsersComponent } from './components/users/users.component';
+import { UsersListComponent } from 'src/app/components/users/usersList.component';
 import { UserSingleComponent } from './components/user-single/user-single.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { MissionCreateComponent } from './components/mission-create/mission-create.component';
@@ -46,18 +46,18 @@ import { HostsService } from './services/hosts.service';
 import { MissionEditComponent } from './components/mission-edit/mission-edit.component';
 import { MissionMyComponent } from './components/mission-my/mission-my.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { VulnsComponent } from './components/vulns/vulns.component';
+import { VulnsListComponent } from 'src/app/components/vulns/vulnsList.component';
 import { VulnsCreateComponent } from './components/vulns-create/vulns-create.component';
 import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
 import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
-import { HostsComponent } from './components/hosts/hosts.component';
+import { HostsListComponent } from 'src/app/components/hosts/hostsList.component';
 import { HostEditComponent } from './components/host-edit/host-edit.component';
-import { ImpactComponent } from './components/impact/impact.component';
+import { ImpactsListComponent } from 'src/app/components/impact/impactsList.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
 import { ImpactCreateComponent } from './components/impact-create/impact-create.component';
 import { ConclusionComponent } from './components/conclusion/conclusion.component';
 import { ClientsService } from './services/clients.service';
-import { ClientsComponent } from './components/clients/clients.component';
+import { ClientsListComponent } from 'src/app/components/clients/clientsList.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { ClientCreateComponent } from './components/client-create/client-create.component';
 import { VulnTypesService } from './services/vuln-types.service';
@@ -69,16 +69,18 @@ import {
   NgxMatTimepickerModule,
 } from '@angular-material-components/datetime-picker';
 import { StepsService } from './services/steps.service';
+import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GenericListComponent,
     LoginComponent,
-    MissionChoiceComponent,
+    MissionsListComponent,
     ErrorsComponent,
     MissionSingleComponent,
     SideBarComponent,
-    UsersComponent,
+    UsersListComponent,
     UserSingleComponent,
     HomepageComponent,
     UserCreateComponent,
@@ -86,17 +88,17 @@ import { StepsService } from './services/steps.service';
     MissionEditComponent,
     MissionMyComponent,
     UserEditComponent,
-    VulnsComponent,
+    VulnsListComponent,
     VulnsCreateComponent,
     VulnsEditComponent,
     AddVulnsToHostExternalComponent,
-    HostsComponent,
+    HostsListComponent,
     HostEditComponent,
-    ImpactComponent,
+    ImpactsListComponent,
     ImpactEditComponent,
     ImpactCreateComponent,
     ConclusionComponent,
-    ClientsComponent,
+    ClientsListComponent,
     ClientEditComponent,
     ClientCreateComponent,
     EditVulnWithStateComponent,

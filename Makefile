@@ -32,6 +32,8 @@ init-db:
 
 install: create-network up jwt composer-install cache ## Install and setup project
 
+initialize: install reset-db ## Initialize and setup the project
+
 jwt: ## Generate jwt
 	cd api && sh ./generateJWT.sh
 
@@ -50,6 +52,5 @@ update: ## Update containers composer packages then re-up containers
 	$(DC) pull
 	$(MAKE) composer-update
 	$(MAKE) up
-
 
 upAll: up install init-db load-data

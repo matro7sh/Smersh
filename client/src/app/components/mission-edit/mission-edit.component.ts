@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MissionsService } from '../../services/missions.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { TypesService } from '../../services/types.service';
 
@@ -25,6 +25,7 @@ export class MissionEditComponent implements OnInit {
   public mission: any;
   public hosts: any;
   public missionForm: FormGroup;
+  public id: any;
 
   nmapChecked: any;
   nessusChecked: any;
@@ -32,6 +33,7 @@ export class MissionEditComponent implements OnInit {
   constructor(
     private missionService: MissionsService,
     private router: Router,
+    private route: ActivatedRoute,
     private usersService: UsersService,
     private typesServices: TypesService
   ) {
@@ -43,11 +45,12 @@ export class MissionEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.loadUsers();
-    this.loadMissions(id);
-    this.loadTypes();
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadUsers();
+      this.loadMissions(id);
+      this.loadTypes();
+    });
   }
 
   loadUsers(): void {
@@ -59,7 +62,7 @@ export class MissionEditComponent implements OnInit {
 
   loadMissions(id): void {
     this.mission = [];
-    this.missionService.getDataById(id).subscribe((events) => {
+    this.missionService.getDataById(this.id).subscribe((events) => {
       this.mission = events;
       this.users = events['users'];
       this.hosts = events['hosts'];

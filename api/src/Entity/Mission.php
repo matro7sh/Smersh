@@ -384,7 +384,7 @@ class Mission
     {
         if (!$this->steps->contains($step)) {
             $this->steps[] = $step;
-            $step->setMissionId($this);
+            $step->setMission($this);
         }
 
         return $this;
@@ -395,7 +395,7 @@ class Mission
         if ($this->steps->removeElement($step)) {
             // set the owning side to null (unless already changed)
             if ($step->getMission() === $this) {
-                $step->setMissionId(null);
+                $step->setMission(null);
             }
         }
 

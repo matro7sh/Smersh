@@ -75,7 +75,7 @@ class Step
         return $this->mission;
     }
 
-    public function setMissionId(?Mission $mission): self
+    public function setMission(?Mission $mission): self
     {
         $this->mission = $mission;
 

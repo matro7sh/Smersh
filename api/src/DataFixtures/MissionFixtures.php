@@ -87,7 +87,7 @@ class MissionFixtures extends Fixture
 
         $step = new Step();
         $step->setDescription("get meterpreter session");
-        $step->setMissionId($mission);
+        $step->setMission($mission);
         $step->setCreatedAt(new \DateTime());
         $step->setFindAt(new \DateTime());
         $manager->persist($step);

@@ -1,4 +1,7 @@
-import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
+import {
+  GenericListComponent,
+  SHOW,
+} from 'src/app/components/generic/list/generic-list.component';
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';
@@ -14,6 +17,7 @@ export class UsersListComponent extends GenericListComponent {
   resource = 'users';
   singularResource = 'User';
   routerHelper = UserRouter;
+  protected excludedFields = ['@id', '@type', SHOW.name];
 
   constructor(protected service: UsersService, protected router: Router) {
     super(service, router);

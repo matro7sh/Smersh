@@ -13,9 +13,10 @@ export class UserEditComponent implements OnInit {
   public id: any;
   public username: any;
 
-  constructor(private usersService: UsersService,
-  private router: Router,
-  private route: ActivatedRoute) {}
+  constructor(
+      private usersService: UsersService,
+      private router: Router,
+      private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(({ id }) => {

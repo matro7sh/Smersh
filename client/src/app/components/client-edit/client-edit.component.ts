@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HostsService } from '../../services/hosts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientsService } from '../../services/clients.service';
@@ -23,18 +23,19 @@ export class ClientEditComponent implements OnInit {
   constructor(
     private router: Router,
     private clientService: ClientsService,
+    private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadClient(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadClient(id);
+    });
   }
 
   loadClient(id) {
-    this.clientService.getDataById(id).subscribe((response) => {
+    this.clientService.getDataById(this.id).subscribe((response) => {
       console.log(response);
       this.client = response;
       this.name = response.name;
@@ -51,7 +52,7 @@ export class ClientEditComponent implements OnInit {
     this.clientService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar(' Client updated');
-        this.router.navigateByUrl('/clients/all');
+        this.router.navigateByUrl('/clients');
         this.ngOnInit();
       },
       (err) => {

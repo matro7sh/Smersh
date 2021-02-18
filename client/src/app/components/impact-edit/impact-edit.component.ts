@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ImpactsService } from '../../services/impacts.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,19 +17,20 @@ export class ImpactEditComponent implements OnInit {
 
   constructor(
     private impactService: ImpactsService,
+    private route: ActivatedRoute,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadImpact(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadImpact(id);
+    });
   }
 
   loadImpact(id) {
-    this.impactService.getDataById(id).subscribe((response) => {
+    this.impactService.getDataById(this.id).subscribe((response) => {
       this.impact = response;
       this.name = response.name;
       this.id = response.id;

@@ -14,9 +14,10 @@ export class UserEditComponent implements OnInit {
   public username: any;
 
   constructor(
-      private usersService: UsersService,
-      private router: Router,
-      private route: ActivatedRoute) {}
+    private usersService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(({ id }) => {
@@ -25,7 +26,7 @@ export class UserEditComponent implements OnInit {
     });
   }
 
-  loadUser() {
+  loadUser(): void {
     this.usersService.getDataById(this.id).subscribe((response) => {
       this.user = response;
       this.username = response.username;
@@ -33,7 +34,7 @@ export class UserEditComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.usersService.update(this.id, form.value).subscribe(() => {
       this.router.navigateByUrl('/users');
     });

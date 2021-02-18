@@ -5,7 +5,7 @@ import { AbstractService } from 'src/app/services/abstract';
 @Injectable({
   providedIn: 'root',
 })
-export class impactsService extends AbstractService {
+export class ImpactsService extends AbstractService {
   protected endpoint = 'impacts';
 
   constructor(protected http: HttpClient) {

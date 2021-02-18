@@ -4,6 +4,12 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ConnectionService } from '../../services/connection.service';
 import { Locale } from '../../storage/Locale';
+import { MissionRouter } from 'src/app/router/MissionRouter';
+import { VulnRouter } from 'src/app/router/VulnRouter';
+import { HostRouter } from 'src/app/router/HostRouter';
+import { UserRouter } from 'src/app/router/UserRouter';
+import { ImpactRouter } from 'src/app/router/ImpactRouter';
+import { ClientRouter } from 'src/app/router/ClientRouter';
 
 @Component({
   selector: 'app-side-bar',
@@ -15,34 +21,13 @@ export class SideBarComponent implements OnInit {
   mobileQuery: MediaQueryList;
   title = 'Smersh';
   fillerNav = {
-    Missions: {
-      base: '/missions',
-      path: 'all',
-    },
-    Vulns: {
-      base: '/vulnerabilities',
-      path: 'all',
-    },
-    Hosts: {
-      base: '/hosts',
-      path: 'all',
-    },
-    User: {
-      base: '',
-      path: 'users',
-    },
-    Impacts: {
-      base: '/impacts',
-      path: 'all',
-    },
-    Conclusion: {
-      base: '/conclusion',
-      path: 'generate',
-    },
-    Clients: {
-      base: '/clients',
-      path: 'all',
-    },
+    Missions: MissionRouter.redirectToList(),
+    Vulns: VulnRouter.redirectToList(),
+    Hosts: HostRouter.redirectToList(),
+    User: UserRouter.redirectToList(),
+    Impacts: ImpactRouter.redirectToList(),
+    Conclusion: '/conclusion/generate',
+    Clients: ClientRouter.redirectToList(),
     // "Type":"types",
   };
   public username: '';

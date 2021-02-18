@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { UserRouter } from 'src/app/router/UserRouter';
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'app-users-list',
   templateUrl: '../generic/list/generic-list.component.html',
-  styleUrls: ['./users.component.css'],
+  styleUrls: [],
 })
-export class UsersComponent extends GenericListComponent {
+export class UsersListComponent extends GenericListComponent {
   filters = ['username'];
   resource = 'users';
   singularResource = 'User';

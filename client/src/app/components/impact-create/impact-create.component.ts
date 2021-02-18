@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { impactsService } from '../../services/impacts.service';
+import { ImpactsService } from '../../services/impacts.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -14,7 +14,7 @@ export class ImpactCreateComponent implements OnInit {
 
   constructor(
     private _snackBar: MatSnackBar,
-    private impactService: impactsService,
+    private impactService: ImpactsService,
     private router: Router
   ) {}
 
@@ -29,7 +29,8 @@ export class ImpactCreateComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.impactService.insert(form.value).subscribe(
       (res) => {
-        this.openSnackBar('Impact creaated');
+        console.log(res);
+        this.openSnackBar('Impact created');
         this.router.navigateByUrl('/impacts/all');
       },
       (err) => {

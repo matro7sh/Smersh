@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { VulnsService } from '../../services/vulns.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { impactsService } from '../../services/impacts.service';
+import { ImpactsService } from '../../services/impacts.service';
 import { Locale } from '../../storage/Locale';
 import { VulnTypesService } from '../../services/vuln-types.service';
 
@@ -25,7 +25,7 @@ export class VulnsCreateComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private typesService: VulnTypesService,
     private router: Router,
-    private impactService: impactsService
+    private impactService: ImpactsService
   ) {}
 
   ngOnInit(): void {

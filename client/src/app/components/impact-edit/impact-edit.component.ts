@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { impactsService } from '../../services/impacts.service';
+import { ImpactsService } from '../../services/impacts.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -16,7 +16,7 @@ export class ImpactEditComponent implements OnInit {
   public name: any;
 
   constructor(
-    private impactService: impactsService,
+    private impactService: ImpactsService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}

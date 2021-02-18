@@ -11,11 +11,11 @@ export abstract class AbstractRouter {
   }
 
   public static redirectTo(params: string): string {
-    return `/${this.resource}/${params}`;
+    return `/${this.resource}${params}`;
   }
 
   public static redirectToEdit(id: string): string {
-    return this.redirectTo(EDIT_ROUTE.replace(':id', id));
+    return this.redirectTo(`/${EDIT_ROUTE.replace(':id', id)}`);
   }
 
   public static redirectToEditFromIRI(id: string): string {
@@ -23,11 +23,11 @@ export abstract class AbstractRouter {
   }
 
   public static redirectToCreate(): string {
-    return this.redirectTo(CREATE_ROUTE);
+    return this.redirectTo(`/${CREATE_ROUTE}`);
   }
 
   public static redirectToShow(id: string): string {
-    return this.redirectTo(SHOW_ROUTE.replace(':id', id));
+    return this.redirectTo(`/${SHOW_ROUTE.replace(':id', id)}`);
   }
 
   public static redirectToShowFromIRI(id: string): string {

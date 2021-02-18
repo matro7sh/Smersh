@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
+import { AbstractRouter } from 'src/app/router/router';
 
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
@@ -36,7 +37,7 @@ export const SHOW = {
 })
 export class GenericListComponent implements OnInit {
   public actions = [SHOW, EDIT, DELETE, CREATE];
-  public routerHelper = null;
+  public routerHelper = AbstractRouter;
   public dataSource: MatTableDataSource<any>;
   public resource = '';
   public singularResource = '';
@@ -95,16 +96,16 @@ export class GenericListComponent implements OnInit {
     let path = '';
     switch (action) {
       case EDIT_ACTION:
-        path = EDIT_ACTION;
+        path = this.routerHelper.redirectToEdit(params);
         break;
       case SHOW_ACTION:
-        path = SHOW_ACTION;
+        path = this.routerHelper.redirectToShow(params);
         break;
     }
-    this.router.navigate([`/${this.resource}/${path}/`, params]);
+    this.router.navigate([path]);
   }
 
-  deleteAction(id): void {
+  deleteAction(id: string): void {
     if (confirm('Are you sure to delete ')) {
       this.service.delete(id).subscribe(() => {
         this.ngOnInit();

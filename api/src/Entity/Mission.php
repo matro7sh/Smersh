@@ -124,12 +124,19 @@ class Mission
      */
     private $clients;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="mission", orphanRemoval=true)
+     * @Groups({"Mission", "MissionSingleOutput"})
+     */
+    private $steps;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->hosts = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -360,6 +367,36 @@ class Mission
     {
         if ($this->clients->removeElement($client)) {
             $client->removeMission($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Step[]
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getMission() === $this) {
+                $step->setMission(null);
+            }
         }
 
         return $this;

@@ -8,6 +8,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 # Preview front (Angular):
 <img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png" style="text-align:center">
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/homepage.png" style="text-align:center">
+<img width="1280" alt="hacktivity" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/hacktivity.png" style="text-align:center">
 
 
 # preview API (Symfony + Api Platform) :
@@ -31,7 +32,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png" style="text-align:center">
 <img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png" style="text-align:center">
 
-# How to install server
+# How to install using docker
 
 >requirements 
 * Docker && docker-compose
@@ -149,6 +150,7 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 - different view for internal test and external
 - add possibility to delete impact
 - Merge GenerateList component and fixe route, ex : `/missions/show/1` instead of `/missions/details/1`
+- add register page
 
 ## Contributors 
 - Darkweak - https://github.com/orgs/CMEPW/people/Darkweak

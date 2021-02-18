@@ -26,6 +26,7 @@ import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
+import { StepsService } from 'src/app/services/steps.service';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -49,6 +50,7 @@ export class MissionSingleComponent implements OnInit {
   users: any;
   creds: any;
   clients: any;
+  steps: any;
   file: any;
   id: any;
   public missionId: string;
@@ -62,6 +64,7 @@ export class MissionSingleComponent implements OnInit {
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private hostsService: HostsService,
+    private stepsService: StepsService,
     private router: Router,
     private missionsService: MissionsService,
     private uploadServices: UploadsService,
@@ -133,6 +136,7 @@ export class MissionSingleComponent implements OnInit {
       this.users = response['users'];
       this.creds = response['credentials'];
       this.clients = response['clients'];
+      this.steps = response['steps'];
       this.nmap = response.nmap;
       this.nessus = response.nessus;
       this.id = response.id;
@@ -172,21 +176,39 @@ export class MissionSingleComponent implements OnInit {
       );
   }
 
+  addStep(form: NgForm) {
+    const date = new Date(Date.now());
+
+    this.stepsService
+      .insert({
+        ...form.value,
+        mission: this.mission['@id'],
+        createdAt: date,
+      })
+      .subscribe(
+        (el) => {
+          this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+      );
+  }
+
   deleteHost(host) {
-    this.hostsService.delete(host["@id"].split("/")[3])
-    .subscribe(
+    this.hostsService.delete(host['@id'].split('/')[3]).subscribe(
       (el) => {
-        this.openSnackBar(
-          'host has been successfully deleted'
-        ),
-        this.ngOnInit();
+        this.openSnackBar('host has been successfully deleted'),
+          this.ngOnInit();
       },
       (err) => {
         if (err.status == '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
-    )
+    );
   }
 
   editMission(): void {
@@ -256,7 +278,6 @@ export class MissionSingleComponent implements OnInit {
         scope: hosts,
       });
       // think to update report with new hostVuln ( 1 box by vulnerability with current state )
-
       try {
         // render the document (replace all occurences of key by your data)
         doc.render();

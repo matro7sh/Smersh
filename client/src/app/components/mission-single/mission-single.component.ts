@@ -26,6 +26,7 @@ import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
 import { StepsService } from 'src/app/services/steps.service';
+import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -305,6 +306,6 @@ export class MissionSingleComponent implements OnInit {
   }
 
   editThisVuln(id) {
-    this.router.navigateByUrl(`/host_vulns/edit/${id}`);
+    this.router.navigateByUrl(HostVulnRouter.redirectToEdit(id));
   }
 }

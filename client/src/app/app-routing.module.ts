@@ -24,6 +24,7 @@ import { VulnResource } from 'src/app/resources/VulnResource';
 import { HostResource } from 'src/app/resources/HostResource';
 import { ImpactResource } from 'src/app/resources/ImpactResource';
 import { ClientResource } from 'src/app/resources/ClientResource';
+import { HostVulnResource } from 'src/app/resources/HostVulnResource';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
     ],
   },
   new ClientResource().generateResource(),
+  new HostVulnResource().generateResource(),
 
   // otherwise redirect to home
   { path: '404', component: ErrorsComponent },

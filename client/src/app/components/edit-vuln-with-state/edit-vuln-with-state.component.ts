@@ -42,7 +42,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar('Host updated');
-        this.router.navigateByUrl(`/missions/details/${this.missionId}`);
+        this.router.navigateByUrl(`/missions/${this.missionId}`);
         this.ngOnInit();
       },
       (err) => {

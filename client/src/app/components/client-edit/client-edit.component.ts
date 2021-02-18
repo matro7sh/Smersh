@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HostsService } from '../../services/hosts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientsService } from '../../services/clients.service';
 import { NgForm } from '@angular/forms';
+import { ClientRouter } from 'src/app/router/ClientRouter';
 
 @Component({
   selector: 'app-client-edit',
@@ -47,11 +47,10 @@ export class ClientEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value);
     this.clientService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar(' Client updated');
-        this.router.navigateByUrl('/clients/all');
+        this.router.navigateByUrl(ClientRouter.redirectToList());
         this.ngOnInit();
       },
       (err) => {

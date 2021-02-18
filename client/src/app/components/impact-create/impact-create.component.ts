@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ImpactsService } from '../../services/impacts.service';
 import { NgForm } from '@angular/forms';
+import { ImpactRouter } from 'src/app/router/ImpactRouter';
 
 @Component({
   selector: 'app-impact-create',
@@ -30,7 +31,7 @@ export class ImpactCreateComponent implements OnInit {
     this.impactService.insert(form.value).subscribe(
       (res) => {
         this.openSnackBar('Impact created');
-        this.router.navigateByUrl('/impacts/all');
+        this.router.navigateByUrl(ImpactRouter.redirectToList());
       },
       (err) => {
         this.openSnackBar('Error : ' + err.error['hydra:description']);

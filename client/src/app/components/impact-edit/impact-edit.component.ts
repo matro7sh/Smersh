@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ImpactsService } from '../../services/impacts.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImpactRouter } from 'src/app/router/ImpactRouter';
 
 @Component({
   selector: 'app-impact-edit',
@@ -39,7 +40,7 @@ export class ImpactEditComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.impactService.update(this.id, form.value).subscribe(() => {
       this.openSnackBar(' Impact updated');
-      this.router.navigateByUrl('/impacts/all');
+      this.router.navigateByUrl(ImpactRouter.redirectToList());
     });
   }
 

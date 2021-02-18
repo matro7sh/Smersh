@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ImpactsService } from '../../services/impacts.service';
 import { Locale } from '../../storage/Locale';
 import { VulnTypesService } from '../../services/vuln-types.service';
+import { VulnRouter } from 'src/app/router/VulnRouter';
 
 @Component({
   selector: 'app-vulns-create',
@@ -62,7 +63,7 @@ export class VulnsCreateComponent implements OnInit {
       .subscribe(
         () => {
           this.openSnackBar('Vuln added');
-          this.router.navigateByUrl('/vulnerabilities/all');
+          this.router.navigateByUrl(VulnRouter.redirectToList());
         },
         (err) => {
           if (err.status === 400) {

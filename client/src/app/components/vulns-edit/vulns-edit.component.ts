@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VulnsTranslationService } from '../../services/vulns-translation.service';
+import { VulnRouter } from 'src/app/router/VulnRouter';
 
 @Component({
   selector: 'app-vulns-edit',
@@ -44,7 +45,7 @@ export class VulnsEditComponent implements OnInit {
         translations: ['fr'],
       })
       .subscribe(() => {
-        this.router.navigateByUrl('/vulnerabilities/all');
+        this.router.navigateByUrl(VulnRouter.redirectToList());
       });
   }
 }

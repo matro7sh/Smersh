@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HostsService } from '../../services/hosts.service';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HostRouter } from 'src/app/router/HostRouter';
 
 @Component({
   selector: 'app-host-edit',
@@ -42,7 +43,7 @@ export class HostEditComponent implements OnInit {
     this.hostService.update(this.id, form.value).subscribe(
       (el) => {
         this.openSnackBar(' Host updated');
-        this.router.navigateByUrl('/hosts/all');
+        this.router.navigateByUrl(HostRouter.redirectToList());
         this.ngOnInit();
       },
       (err) => {

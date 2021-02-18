@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientsService } from '../../services/clients.service';
 import { NgForm } from '@angular/forms';
@@ -23,19 +23,19 @@ export class ClientEditComponent implements OnInit {
   constructor(
     private router: Router,
     private clientService: ClientsService,
+    private route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadClient(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadClient();
+    });
   }
 
-  loadClient(id) {
-    this.clientService.getDataById(id).subscribe((response) => {
-      console.log(response);
+  loadClient(): void {
+    this.clientService.getDataById(this.id).subscribe((response) => {
       this.client = response;
       this.name = response.name;
       this.firstName = response.firstName;
@@ -46,22 +46,22 @@ export class ClientEditComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.clientService.update(this.id, form.value).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar(' Client updated');
         this.router.navigateByUrl(ClientRouter.redirectToList());
         this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  openSnackBar(message) {
+  openSnackBar(message: string): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });

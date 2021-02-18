@@ -13,6 +13,7 @@ export class MissionsListComponent extends GenericListComponent {
   resource = 'missions';
   singularResource = 'Mission';
   routerHelper = MissionRouter;
+  protected excludedFields = ['@id', '@type', 'nessus', 'nmap', 'nessusFiler', 'nmapFiler', 'credentials'];
 
   constructor(protected service: MissionsService, protected router: Router) {
     super(service, router);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-edit',
@@ -13,17 +13,20 @@ export class UserEditComponent implements OnInit {
   public id: any;
   public username: any;
 
-  constructor(private usersService: UsersService, private router: Router) {}
+  constructor(
+      private usersService: UsersService,
+      private router: Router,
+      private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadUser(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadUser();
+    });
   }
 
-  loadUser(id) {
-    this.usersService.getDataById(id).subscribe((response) => {
+  loadUser() {
+    this.usersService.getDataById(this.id).subscribe((response) => {
       this.user = response;
       this.username = response.username;
       this.id = response.id;

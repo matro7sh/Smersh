@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { HostsService } from '../../services/hosts.service';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,19 +19,21 @@ export class HostEditComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private hostService: HostsService,
     private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.id = id;
-    this.loadUser(id);
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadHost(id);
+    });
+
   }
 
-  loadUser(id) {
-    this.hostService.getDataById(id).subscribe((response) => {
+  loadHost(id) {
+    this.hostService.getDataById(this.id).subscribe((response) => {
       this.host = response;
       this.name = response.name;
       this.technology = response.technology;

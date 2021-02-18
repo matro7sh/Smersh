@@ -1,6 +1,4 @@
 import {
-  DELETE,
-  EDIT,
   GenericListComponent,
   SHOW,
 } from 'src/app/components/generic/list/generic-list.component';
@@ -19,6 +17,7 @@ export class UsersListComponent extends GenericListComponent {
   resource = 'users';
   singularResource = 'User';
   routerHelper = UserRouter;
+  protected excludedFields = ['@id', '@type', SHOW.name];
 
   constructor(protected service: UsersService, protected router: Router) {
     super(service, router);

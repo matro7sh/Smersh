@@ -1,4 +1,9 @@
-import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
+import {
+  DELETE,
+  EDIT,
+  GenericListComponent,
+  SHOW,
+} from 'src/app/components/generic/list/generic-list.component';
 import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
 import { Router } from '@angular/router';

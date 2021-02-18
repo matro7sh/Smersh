@@ -36,7 +36,8 @@ export const SHOW = {
   styleUrls: [],
 })
 export class GenericListComponent implements OnInit {
-  public actions = [SHOW, EDIT, DELETE, CREATE];
+  public buttonActions = [SHOW, EDIT, DELETE];
+  public actions = [...this.buttonActions, CREATE];
   public routerHelper = AbstractRouter;
   public dataSource: MatTableDataSource<any>;
   public resource = '';
@@ -56,7 +57,7 @@ export class GenericListComponent implements OnInit {
 
   getPermissions(): Record<string, string> {
     const permissions = {};
-    [SHOW, EDIT, DELETE].forEach(
+    this.buttonActions.forEach(
       (action) => (permissions[action.name] = action.color)
     );
     return permissions;

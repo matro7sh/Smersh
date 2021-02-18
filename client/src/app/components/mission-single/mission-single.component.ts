@@ -26,7 +26,7 @@ import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
-import { StepsService } from '../../services/steps.service';
+import { StepsService } from 'src/app/services/steps.service';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -182,7 +182,7 @@ export class MissionSingleComponent implements OnInit {
     this.stepsService
       .insert({
         ...form.value,
-        missionId: this.mission['@id'],
+        mission: this.mission['@id'],
         createdAt: date,
       })
       .subscribe(

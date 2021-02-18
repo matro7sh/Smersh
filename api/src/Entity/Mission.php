@@ -125,7 +125,7 @@ class Mission
     private $clients;
 
     /**
-     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="missionId", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="mission", orphanRemoval=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $steps;
@@ -394,7 +394,7 @@ class Mission
     {
         if ($this->steps->removeElement($step)) {
             // set the owning side to null (unless already changed)
-            if ($step->getMissionId() === $this) {
+            if ($step->getMission() === $this) {
                 $step->setMissionId(null);
             }
         }

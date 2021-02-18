@@ -39,7 +39,7 @@ class Step
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"Step"})
      */
-    private $missionId;
+    private $mission;
 
     /**
      * @ORM\Column(type="datetime")
@@ -70,14 +70,14 @@ class Step
         return $this;
     }
 
-    public function getMissionId(): ?Mission
+    public function getMission(): ?Mission
     {
-        return $this->missionId;
+        return $this->mission;
     }
 
-    public function setMissionId(?Mission $missionId): self
+    public function setMissionId(?Mission $mission): self
     {
-        $this->missionId = $missionId;
+        $this->mission = $mission;
 
         return $this;
     }

@@ -59,6 +59,8 @@ class MissionFixtures extends Fixture implements DependentFixtureInterface
         $mission->setMissionType($missionTypes->get('interne'));
         $manager->persist($mission);
         $this->setReference('MISSION_2', $mission);
+
+        $manager->flush();
     }
 
     public function getDependencies()

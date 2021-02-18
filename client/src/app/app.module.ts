@@ -50,7 +50,7 @@ import { VulnsListComponent } from 'src/app/components/vulns/vulnsList.component
 import { VulnsCreateComponent } from './components/vulns-create/vulns-create.component';
 import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
 import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
-import { HostsComponent } from './components/hosts/hosts.component';
+import { HostsListComponent } from 'src/app/components/hosts/hostsList.component';
 import { HostEditComponent } from './components/host-edit/host-edit.component';
 import { ImpactsListComponent } from 'src/app/components/impact/impactsList.component';
 import { ImpactEditComponent } from './components/impact-edit/impact-edit.component';
@@ -92,7 +92,7 @@ import { GenericListComponent } from 'src/app/components/generic/list/generic-li
     VulnsCreateComponent,
     VulnsEditComponent,
     AddVulnsToHostExternalComponent,
-    HostsComponent,
+    HostsListComponent,
     HostEditComponent,
     ImpactsListComponent,
     ImpactEditComponent,

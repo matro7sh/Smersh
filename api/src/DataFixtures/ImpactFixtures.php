@@ -15,20 +15,20 @@ class ImpactFixtures extends Fixture
         $manager->persist($impact);
         $this->setReference('IMPACT_LOW', $impact);
 
-        $impact2 = new Impact();
+        $impact = new Impact();
         $impact->setName("Medium");
-        $manager->persist($impact2);
-        $this->setReference('IMPACT_MEDIUM', $impact2);
+        $manager->persist($impact);
+        $this->setReference('IMPACT_MEDIUM', $impact);
 
-        $impact3 = new Impact();
-        $impact3->setName("High");
-        $manager->persist($impact3);
-        $this->setReference('IMPACT_HIGH', $impact3);
+        $impact = new Impact();
+        $impact->setName("High");
+        $manager->persist($impact);
+        $this->setReference('IMPACT_HIGH', $impact);
 
-        $impact4 = new Impact();
-        $impact4->setName("Critical");
-        $manager->persist($impact4);
-        $this->setReference('IMPACT_CRITICAL', $impact4);
+        $impact = new Impact();
+        $impact->setName("Critical");
+        $manager->persist($impact);
+        $this->setReference('IMPACT_CRITICAL', $impact);
 
         $manager->flush();
     }

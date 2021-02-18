@@ -60,7 +60,6 @@ class MissionFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($mission);
         $this->setReference('MISSION_2', $mission);
 
-<<<<<<< HEAD
         $step = new Step();
         $step->setDescription("get meterpreter session");
         $step->setMission($mission);
@@ -68,8 +67,6 @@ class MissionFixtures extends Fixture implements DependentFixtureInterface
         $step->setFindAt(new \DateTime());
         $manager->persist($step);
 
-=======
->>>>>>> Add forgotten flush
         $manager->flush();
     }
 

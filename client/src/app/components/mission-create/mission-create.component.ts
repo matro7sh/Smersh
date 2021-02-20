@@ -10,6 +10,8 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
+import {MissionRouter} from "src/app/router/MissionRouter";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-mission-create',
@@ -18,6 +20,7 @@ import {
 })
 export class MissionCreateComponent implements OnInit {
   public users = [];
+  durationInSeconds = 4;
   public AllUsers: any;
   userForm = new FormControl();
   public types = [];
@@ -34,6 +37,7 @@ export class MissionCreateComponent implements OnInit {
     private missionService: MissionsService,
     private clientServices: ClientsService,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private usersService: UsersService,
     private typesServices: TypesService,
     private _adapter: DateAdapter<any>
@@ -43,6 +47,13 @@ export class MissionCreateComponent implements OnInit {
       return 1;
     };
   }
+
+  openSnackBar(message) {
+    this._snackBar.open(message, '', {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
 
   ngOnInit(): void {
     this.loadUsers();
@@ -82,10 +93,17 @@ export class MissionCreateComponent implements OnInit {
         nessus: false,
         nmapFiler: false,
         nessusFiler: false,
-      })
-      .subscribe(() => {
-        this.router.navigateByUrl('/missions');
-      });
+      }).subscribe(
+            () => {
+              this.openSnackBar('Vuln added');
+              this.router.navigateByUrl(MissionRouter.redirectToList());
+            },
+            (err) => {
+              if (err.status === 400) {
+                this.openSnackBar('Error : ' + err.error['hydra:description']);
+              }
+            }
+        );;
   }
 
   getTypeValue(value): void {
@@ -100,6 +118,5 @@ export class MissionCreateComponent implements OnInit {
     const toto = (this.selectedClients = value);
     const strCopy = toto.split();
     this.selectedClients = strCopy;
-    console.log('u selected this client : ', strCopy);
   }
 }

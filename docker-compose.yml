@@ -145,6 +145,15 @@ services:
       - api
       - dev-tls
 
+  bitwarden:
+    image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
+    ports:
+      - target: 80
+        published: 8888
+        protocol: tcp
+    volumes:
+      - ./data/bitwarden:/data
+    restart: on-failure
 
 volumes:
   db-data: {}

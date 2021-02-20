@@ -4,8 +4,8 @@ import { MissionsService } from '../../services/missions.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { TypesService } from '../../services/types.service';
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MissionRouter} from "src/app/router/MissionRouter";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MissionRouter } from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-mission-edit',

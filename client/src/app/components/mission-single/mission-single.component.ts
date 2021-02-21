@@ -104,6 +104,19 @@ export class MissionSingleComponent implements OnInit {
     );
   }
 
+  editStep(id, form: NgForm){
+    this.stepsService.update(id, form.value).subscribe(
+        (el) => {
+          this.openSnackBar('step has been successfully updated'),
+              this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    );
+  }
 
   nmapUpdate(isChecked): void {
     this.missionsService

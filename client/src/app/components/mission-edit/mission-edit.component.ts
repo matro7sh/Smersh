@@ -4,6 +4,8 @@ import { MissionsService } from '../../services/missions.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { TypesService } from '../../services/types.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MissionRouter } from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-mission-edit',
@@ -13,6 +15,7 @@ import { TypesService } from '../../services/types.service';
 export class MissionEditComponent implements OnInit {
   public users = [];
   public allUsers: any;
+  durationInSeconds = 4;
   userForm = new FormControl();
   public types = [];
   selected = [];
@@ -33,6 +36,7 @@ export class MissionEditComponent implements OnInit {
   constructor(
     private missionService: MissionsService,
     private router: Router,
+    private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private usersService: UsersService,
     private typesServices: TypesService
@@ -41,6 +45,12 @@ export class MissionEditComponent implements OnInit {
       nmap: new FormControl(false, Validators.required),
       type: new FormControl(false, Validators.required),
       nessus: new FormControl(false, Validators.required),
+    });
+  }
+
+  openSnackBar(message) {
+    this._snackBar.open(message, '', {
+      duration: this.durationInSeconds * 1000,
     });
   }
 
@@ -94,10 +104,17 @@ export class MissionEditComponent implements OnInit {
         users: this.selectedUsers,
         nmap: this.nmapChecked,
         nessus: this.nessusChecked,
-      })
-      .subscribe(() => {
-        this.router.navigateByUrl(`/missions/details/${this.mission.id}`);
-      });
+      }).subscribe(
+        () => {
+          this.openSnackBar('Mission edited');
+          this.router.navigateByUrl(MissionRouter.redirectToShow(this.mission.id));
+        },
+        (err) => {
+          if (err.status === 400) {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    );
   }
 
   toto(value) {

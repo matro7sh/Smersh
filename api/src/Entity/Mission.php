@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -53,6 +54,10 @@ class Mission
 
 
     /**
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     *    protocols = {"http", "https"}
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
@@ -113,6 +118,10 @@ class Mission
     private $missionType;
 
     /**
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     *    protocols = {"http", "https"}
+     * )
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */

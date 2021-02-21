@@ -39,6 +39,7 @@ export class VulnsCreateComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
     });
   }
+
   loadImpact() {
     this.impactService.getData().subscribe((impacts) => {
       this.impacts = impacts['hydra:member'];

@@ -20,6 +20,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 | ------ | ----------- | ---- |
 | Vulcain | 443 | 8443 |
 | Api | 80 | 8000 |
+| Bitwarden | 80 | 8888 |
 | Db | 5432 | 5432 |
 | Mercure | 443, 80, 2019 | 1337 |
 | dev-tls | 80 | 80 |

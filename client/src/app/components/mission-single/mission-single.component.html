@@ -114,8 +114,14 @@
                     <mat-list>
                         <mat-list-item *ngFor="let step of steps">
                             <mat-icon mat-list-icon>schedule</mat-icon>
+                            <form class="example-form"  #myform = "ngForm" (ngSubmit)="editStep(step.id, myform)">
+                                <input matInput type="text" name="description" placeholder="Your description " ngModel autocomplete="off">
+                                <button mat-raised-button color="danger">Update</button>
+                            </form>
                             <div mat-line>Action : {{step.description}}</div>
                             <div mat-line>Date : {{step.findAt | date }} </div>
+
+                            <button (click)="deleteStep(step.id)" mat-raised-button color="warn">delete</button>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>

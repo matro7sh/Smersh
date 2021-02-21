@@ -90,6 +90,34 @@ export class MissionSingleComponent implements OnInit {
     }
   }
 
+  deleteStep(id){
+    this.stepsService.delete(id).subscribe(
+        (el) => {
+          this.openSnackBar('step has been successfully deleted'),
+              this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    );
+  }
+
+  editStep(id, form: NgForm){
+    this.stepsService.update(id, form.value).subscribe(
+        (el) => {
+          this.openSnackBar('step has been successfully updated'),
+              this.ngOnInit();
+        },
+        (err) => {
+          if (err.status == '400') {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    );
+  }
+
   nmapUpdate(isChecked): void {
     this.missionsService
       .update(this.missionId, { nmap: isChecked })

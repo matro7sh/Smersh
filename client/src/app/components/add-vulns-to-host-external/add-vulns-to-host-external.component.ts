@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Locale } from '../../storage/Locale';
 import { ImpactsService } from '../../services/impacts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MissionRouter} from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -28,6 +29,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public selected_hosts: any[];
   public selected_impacts: any[];
   public durationInSeconds = 4;
+  public missionId: any;
 
   constructor(
     private vulnsService: VulnsService,
@@ -50,6 +52,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     this.host_id = idFromUrl;
     const url = this.router.url;
     const mission_id = url.split('/').pop();
+    this.missionId = mission_id;
     this.getHostsFromMission(mission_id);
     this.loadVulns();
     this.loadImpact();
@@ -99,7 +102,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       .subscribe(
         (res) => {
           this.openSnackBar('vulnerabilitie added');
-          this.router.navigateByUrl('/missions');
+          this.router.navigateByUrl(MissionRouter.redirectToShow(this.missionId));
         },
         (err) => {
           this.openSnackBar('Error : ' + err.error['hydra:description']);

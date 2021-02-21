@@ -6,14 +6,18 @@
 Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions and generate rapport.
 
 # Preview front (Angular):
-<img width="1280" alt="showmission" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/showMission.png" style="text-align:center">
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/homepage.png" style="text-align:center">
-<img width="1280" alt="hacktivity" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/hacktivity.png" style="text-align:center">
+
+![demo](img/demo.gif)
+
+
+## View of single mission
+![showMission](img/showMission.png)
+
+![hacktivity](img/hacktivity.png)
 
 
 # preview API (Symfony + Api Platform) :
-<img width="1280" alt="swagger" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/api.png" style="text-align:center">
-
+![api](img/api.png)
 
 # Ports mapping
 | Container | Internal port | External port |
@@ -30,8 +34,8 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 # Preview Report
 
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview.png" style="text-align:center">
-<img width="1280" alt="homepage" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/rapport-preview2.png" style="text-align:center">
+![reporthomepage](img/rapport-preview.png)
+![template](img/rapport-preview2.png)
 
 # How to install using docker
 
@@ -101,7 +105,7 @@ cd client && npm i && npm start
         state: # String
         scope # Array
 ``` 
-## How to use it ? 
+### How to use it ? 
 
 just edit function `doc.setData()` into `mission-single` component and define your element, after this update your template to use it like this 
 `{VariableName}` and `{#MyArray}{MyUsername}{/MyArray}` if u need to loop on array
@@ -110,7 +114,7 @@ just edit function `doc.setData()` into `mission-single` component and define yo
 
 # How to contribute ? 
 
-Just fork repository then create branch, work and push your content + create PR
+Just *fork* repository then create branch, work and push your content + create PR
 
 ``` 
 git checkout -b MyBranch
@@ -133,6 +137,7 @@ Host smersh
   LocalForward 127.0.0.1:8000 127.0.0.1:8000
   LocalForward 127.0.0.1:4200 127.0.0.1:4200
   LocalForward 127.0.0.1:3000 127.0.0.1:3000
+  LocalForward 127.0.0.1:8888 127.0.0.1:8888
 
 ``` 
 then you can run `ssh smersh` and go to `http://localhost:4200`
@@ -142,15 +147,12 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 - add conclusion generator
 - Progress bar on mission ?
 - Externe : host/vuln - interne : account pwned, privilieges ? perimeter
-- Better display of credentials info mission view
 - Maybe use chips to create new vulns into host ?
 - Add color by impact into mission-single-view
 - Add possibility to select impact when u're editing vuln
 - add real fixture instead of dummy data
 - parser gnmap
 - different view for internal test and external
-- add possibility to delete impact
-- Merge GenerateList component and fixe route, ex : `/missions/show/1` instead of `/missions/details/1`
 - add register page
 
 ## Contributors 

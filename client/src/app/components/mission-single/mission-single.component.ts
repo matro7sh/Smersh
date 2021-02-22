@@ -27,6 +27,7 @@ import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
 import { StepsService } from 'src/app/services/steps.service';
 import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
+import {HostRouter} from "src/app/router/HostRouter";
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -237,6 +238,10 @@ export class MissionSingleComponent implements OnInit {
         }
       }
     );
+  }
+
+  updateHost(host){
+    this.router.navigateByUrl(HostRouter.redirectToEditFromIRI(host['@id']));
   }
 
   editMission(): void {

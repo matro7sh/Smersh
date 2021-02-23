@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -53,6 +54,10 @@ class Mission
 
 
     /**
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     *    protocols = {"http", "https"}
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
@@ -113,6 +118,10 @@ class Mission
     private $missionType;
 
     /**
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     *    protocols = {"http", "https"}
+     * )
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
@@ -124,12 +133,19 @@ class Mission
      */
     private $clients;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Step::class, mappedBy="mission", orphanRemoval=true)
+     * @Groups({"Mission", "MissionSingleOutput"})
+     */
+    private $steps;
+
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->hosts = new ArrayCollection();
         $this->clients = new ArrayCollection();
+        $this->steps = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -360,6 +376,36 @@ class Mission
     {
         if ($this->clients->removeElement($client)) {
             $client->removeMission($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Step[]
+     */
+    public function getSteps(): Collection
+    {
+        return $this->steps;
+    }
+
+    public function addStep(Step $step): self
+    {
+        if (!$this->steps->contains($step)) {
+            $this->steps[] = $step;
+            $step->setMission($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStep(Step $step): self
+    {
+        if ($this->steps->removeElement($step)) {
+            // set the owning side to null (unless already changed)
+            if ($step->getMission() === $this) {
+                $step->setMission(null);
+            }
         }
 
         return $this;

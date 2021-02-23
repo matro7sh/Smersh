@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { impactsService } from '../../services/impacts.service';
 import { Router } from '@angular/router';
-import { ClientsService } from '../../services/clients.service';
 import { NgForm } from '@angular/forms';
+import { ClientsService } from '../../services/clients.service';
+import { ClientRouter } from 'src/app/router/ClientRouter';
 
 @Component({
   selector: 'app-client-create',
@@ -31,7 +31,7 @@ export class ClientCreateComponent implements OnInit {
     this.clientsService.insert(form.value).subscribe(
       (res) => {
         this.openSnackBar('Client created');
-        this.router.navigateByUrl('/clients/all');
+        this.router.navigateByUrl(ClientRouter.redirectToList());
       },
       (err) => {
         this.openSnackBar('Error : ' + err.error['hydra:description']);

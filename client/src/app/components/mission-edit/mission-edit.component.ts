@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MissionsService } from '../../services/missions.service';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { TypesService } from '../../services/types.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MissionRouter } from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-mission-edit',
@@ -13,17 +15,20 @@ import { TypesService } from '../../services/types.service';
 export class MissionEditComponent implements OnInit {
   public users = [];
   public allUsers: any;
+  durationInSeconds = 4;
   userForm = new FormControl();
   public types = [];
   selected = [];
   selected_type = [];
   selectedType: any;
+  public path_to_codi: any;
   selectedUsers: any;
   startDate: any;
   EndDate: any;
   public mission: any;
   public hosts: any;
   public missionForm: FormGroup;
+  public id: any;
 
   nmapChecked: any;
   nessusChecked: any;
@@ -31,6 +36,8 @@ export class MissionEditComponent implements OnInit {
   constructor(
     private missionService: MissionsService,
     private router: Router,
+    private _snackBar: MatSnackBar,
+    private route: ActivatedRoute,
     private usersService: UsersService,
     private typesServices: TypesService
   ) {
@@ -41,12 +48,19 @@ export class MissionEditComponent implements OnInit {
     });
   }
 
+  openSnackBar(message) {
+    this._snackBar.open(message, '', {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+
   ngOnInit(): void {
-    const url = this.router.url;
-    const id = url.split('/').pop();
-    this.loadUsers();
-    this.loadMissions(id);
-    this.loadTypes();
+    this.route.params.subscribe(({ id }) => {
+      this.id = id;
+      this.loadUsers();
+      this.loadMissions(id);
+      this.loadTypes();
+    });
   }
 
   loadUsers(): void {
@@ -58,7 +72,7 @@ export class MissionEditComponent implements OnInit {
 
   loadMissions(id): void {
     this.mission = [];
-    this.missionService.getDataById(id).subscribe((events) => {
+    this.missionService.getDataById(this.id).subscribe((events) => {
       this.mission = events;
       this.users = events['users'];
       this.hosts = events['hosts'];
@@ -90,10 +104,17 @@ export class MissionEditComponent implements OnInit {
         users: this.selectedUsers,
         nmap: this.nmapChecked,
         nessus: this.nessusChecked,
-      })
-      .subscribe(() => {
-        this.router.navigateByUrl(`/missions/details/${this.mission.id}`);
-      });
+      }).subscribe(
+        () => {
+          this.openSnackBar('Mission edited');
+          this.router.navigateByUrl(MissionRouter.redirectToShow(this.mission.id));
+        },
+        (err) => {
+          if (err.status === 400) {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+    );
   }
 
   toto(value) {

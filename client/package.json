@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^5.0.3",
     "@angular/animations": "~10.2.0",
     "@angular/cdk": "^10.2.7",
     "@angular/common": "~10.2.0",
@@ -29,6 +30,7 @@
     "jose": "^3.5.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
+    "ng-material-datetimepicker": "^1.19.7",
     "pizzip": "^3.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

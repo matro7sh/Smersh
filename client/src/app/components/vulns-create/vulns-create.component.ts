@@ -3,9 +3,10 @@ import { NgForm } from '@angular/forms';
 import { VulnsService } from '../../services/vulns.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { impactsService } from '../../services/impacts.service';
+import { ImpactsService } from '../../services/impacts.service';
 import { Locale } from '../../storage/Locale';
 import { VulnTypesService } from '../../services/vuln-types.service';
+import { VulnRouter } from 'src/app/router/VulnRouter';
 
 @Component({
   selector: 'app-vulns-create',
@@ -25,7 +26,7 @@ export class VulnsCreateComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private typesService: VulnTypesService,
     private router: Router,
-    private impactService: impactsService
+    private impactService: ImpactsService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +39,7 @@ export class VulnsCreateComponent implements OnInit {
       duration: this.durationInSeconds * 1000,
     });
   }
+
   loadImpact() {
     this.impactService.getData().subscribe((impacts) => {
       this.impacts = impacts['hydra:member'];
@@ -62,7 +64,7 @@ export class VulnsCreateComponent implements OnInit {
       .subscribe(
         () => {
           this.openSnackBar('Vuln added');
-          this.router.navigateByUrl('/vulnerabilities/all');
+          this.router.navigateByUrl(VulnRouter.redirectToList());
         },
         (err) => {
           if (err.status === 400) {

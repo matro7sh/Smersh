@@ -136,6 +136,11 @@ Host smersh
 then you can run `ssh smersh` and go to `http://localhost:4200`
 
 
+## How to Make Backup of database
+
+`docker-compose exec db pg_dump -U <User> <db> > smersh.sql`
+
+
 ## Todo
 - add conclusion generator
 - Progress bar on mission ?

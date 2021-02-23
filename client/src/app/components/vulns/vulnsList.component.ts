@@ -16,7 +16,7 @@ export class VulnsListComponent extends GenericListComponent {
   resource = 'vulns';
   singularResource = 'Vulnerability';
   routerHelper = VulnRouter;
-  protected excludedFields = ['@id', '@type', SHOW.name,'vulnType', 'impact'];
+  protected excludedFields = ['@id', '@type', SHOW.name, 'vulnType', 'impact'];
 
   constructor(protected service: VulnsService, protected router: Router) {
     super(service, router);

@@ -75,13 +75,13 @@ export class GenericListComponent implements OnInit {
   }
 
   retrieveData(): void {
-    this.service?.getData().subscribe((e) => {
-      const members = e['hydra:member'].map((e) => ({
+    this.service?.getData().then((data) => {
+      const items = data.map((e) => ({
         ...e,
         ...this.getPermissions(),
       }));
-      this.dataSource.data = members;
-      this.notifyReceipt(members);
+      this.dataSource.data = items;
+      this.notifyReceipt(items);
     });
   }
 

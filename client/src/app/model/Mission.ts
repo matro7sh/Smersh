@@ -26,7 +26,7 @@ export class MissionSerializerApplication extends AbstractSerializerApplication 
   protected model = MissionModelApplication;
 }
 
-class MissionModelApplication extends AbstractModelApplication {
+export class MissionModelApplication extends AbstractModelApplication {
   name: string;
   period: {
     start: Date;

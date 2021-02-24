@@ -7,7 +7,9 @@ import { NgForm } from '@angular/forms';
 import { Locale } from '../../storage/Locale';
 import { ImpactsService } from '../../services/impacts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MissionRouter} from "src/app/router/MissionRouter";
+import { MissionRouter } from 'src/app/router/MissionRouter';
+import { ImpactModelApplication } from 'src/app/model/Impact';
+import { VulnModelApplication } from 'src/app/model/Vuln';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -60,7 +62,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   // get all vulns
   loadVulns(): void {
-    this.vulnsService.getData().subscribe((vulns) => {
+    this.vulnsService.getData().then((vulns: VulnModelApplication[]) => {
       const locale = new Locale().get();
       this.vulns = vulns['hydra:member'].map((e) => {
         const elt = e.translations[locale];
@@ -73,8 +75,8 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   loadImpact(): void {
-    this.impactService.getData().subscribe((impacts) => {
-      this.impacts = impacts['hydra:member'].map((e) => {
+    this.impactService.getData().then((impacts: ImpactModelApplication[]) => {
+      this.impacts = impacts.map((e) => {
         return {
           name: e.name,
           value: e['@id'],
@@ -84,8 +86,8 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   // get all hosts from mission id
-  getHostsFromMission(mission_id: string): void {
-    this.missionServices.getDataById(mission_id).subscribe(({ hosts }) => {
+  getHostsFromMission(id: string): void {
+    this.missionServices.getDataById(id).subscribe(({ hosts }) => {
       this.hosts = hosts;
     });
   }
@@ -102,7 +104,9 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       .subscribe(
         (res) => {
           this.openSnackBar('vulnerabilitie added');
-          this.router.navigateByUrl(MissionRouter.redirectToShow(this.missionId));
+          this.router.navigateByUrl(
+            MissionRouter.redirectToShow(this.missionId)
+          );
         },
         (err) => {
           this.openSnackBar('Error : ' + err.error['hydra:description']);

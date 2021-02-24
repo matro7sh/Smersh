@@ -16,7 +16,7 @@ export class HostSerializerApplication extends AbstractSerializerApplication {
   protected model = HostModelApplication;
 }
 
-class HostModelApplication extends AbstractModelApplication {
+export class HostModelApplication extends AbstractModelApplication {
   name: string;
   hostVulns: string[];
   mission: string;

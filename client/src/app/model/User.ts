@@ -14,7 +14,7 @@ export class UserSerializerApplication extends AbstractSerializerApplication {
   protected model = UserModelApplication;
 }
 
-class UserModelApplication extends AbstractModelApplication {
+export class UserModelApplication extends AbstractModelApplication {
   username: string;
   enabled: boolean;
 

@@ -10,8 +10,11 @@ import {
   MAT_DATE_FORMATS,
   MAT_DATE_LOCALE,
 } from '@angular/material/core';
-import { MissionRouter } from "src/app/router/MissionRouter";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MissionRouter } from 'src/app/router/MissionRouter';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserModelApplication } from 'src/app/model/User';
+import { ClientModelApplication } from 'src/app/model/Client';
+import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 
 @Component({
   selector: 'app-mission-create',
@@ -48,12 +51,11 @@ export class MissionCreateComponent implements OnInit {
     };
   }
 
-  openSnackBar(message) {
+  openSnackBar(message): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
   }
-
 
   ngOnInit(): void {
     this.loadUsers();
@@ -63,26 +65,28 @@ export class MissionCreateComponent implements OnInit {
 
   loadUsers(): void {
     this.users = [];
-    this.usersService.getData().subscribe((events) => {
-      this.AllUsers = events['hydra:member'].map((el) => el);
+    this.usersService.getData().then((users: UserModelApplication[]) => {
+      this.AllUsers = users;
     });
   }
 
   loadTypes(): void {
     this.types = [];
-    this.typesServices.getData().subscribe((events) => {
-      this.types = events['hydra:member'].map((el) => el);
-    });
+    this.typesServices
+      .getData()
+      .then((types: AbstractTypeModelApplication[]) => {
+        this.types = types;
+      });
   }
 
   loadClients(): void {
     this.clients = [];
-    this.clientServices.getData().subscribe((events) => {
-      this.clients = events['hydra:member'].map((el) => el);
+    this.clientServices.getData().then((clients: ClientModelApplication[]) => {
+      this.clients = clients;
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.missionService
       .insert({
         ...form.value,
@@ -93,17 +97,18 @@ export class MissionCreateComponent implements OnInit {
         nessus: false,
         nmapFiler: false,
         nessusFiler: false,
-      }).subscribe(
-            () => {
-              this.openSnackBar('Vuln added');
-              this.router.navigateByUrl(MissionRouter.redirectToList());
-            },
-            (err) => {
-              if (err.status === 400) {
-                this.openSnackBar('Error : ' + err.error['hydra:description']);
-              }
-            }
-        );;
+      })
+      .subscribe(
+        () => {
+          this.openSnackBar('Vuln added');
+          this.router.navigateByUrl(MissionRouter.redirectToList());
+        },
+        (err) => {
+          if (err.status === 400) {
+            this.openSnackBar('Error : ' + err.error['hydra:description']);
+          }
+        }
+      );
   }
 
   getTypeValue(value): void {

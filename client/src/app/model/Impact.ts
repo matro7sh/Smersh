@@ -13,7 +13,7 @@ export class ImpactSerializerApplication extends AbstractSerializerApplication {
   protected model = ImpactModelApplication;
 }
 
-class ImpactModelApplication extends AbstractModelApplication {
+export class ImpactModelApplication extends AbstractModelApplication {
   name: string;
 
   constructor(props: ImpactFromAPIInterface) {

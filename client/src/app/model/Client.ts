@@ -17,7 +17,7 @@ export class ClientSerializerApplication extends AbstractSerializerApplication {
   protected model = ClientModelApplication;
 }
 
-class ClientModelApplication extends AbstractModelApplication {
+export class ClientModelApplication extends AbstractModelApplication {
   name: string;
   phone: string;
   firstname: string;

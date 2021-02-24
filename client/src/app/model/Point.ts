@@ -14,7 +14,7 @@ export class PointSerializerApplication extends AbstractSerializerApplication {
   protected model = PointModelApplication;
 }
 
-class PointModelApplication extends AbstractModelApplication {
+export class PointModelApplication extends AbstractModelApplication {
   name: string;
   description: string;
 

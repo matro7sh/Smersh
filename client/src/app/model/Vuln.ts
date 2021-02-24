@@ -26,7 +26,7 @@ export class VulnSerializerApplication extends AbstractSerializerApplication {
   protected model = VulnModelApplication;
 }
 
-class VulnModelApplication extends AbstractModelApplication {
+export class VulnModelApplication extends AbstractModelApplication {
   type: string;
   impact: string;
   translations: {

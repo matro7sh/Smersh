@@ -27,7 +27,8 @@ import { saveAs } from 'file-saver';
 import { Locale } from 'src/app/storage/Locale';
 import { StepsService } from 'src/app/services/steps.service';
 import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
-import {HostRouter} from "src/app/router/HostRouter";
+import { HostRouter } from 'src/app/router/HostRouter';
+import { MissionRouter } from 'src/app/router/MissionRouter';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -91,31 +92,31 @@ export class MissionSingleComponent implements OnInit {
     }
   }
 
-  deleteStep(id){
+  deleteStep(id) {
     this.stepsService.delete(id).subscribe(
-        (el) => {
-          this.openSnackBar('step has been successfully deleted'),
-              this.ngOnInit();
-        },
-        (err) => {
-          if (err.status == '400') {
-            this.openSnackBar('Error : ' + err.error['hydra:description']);
-          }
+      (el) => {
+        this.openSnackBar('step has been successfully deleted'),
+          this.ngOnInit();
+      },
+      (err) => {
+        if (err.status == '400') {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
+      }
     );
   }
 
-  editStep(id, form: NgForm){
+  editStep(id, form: NgForm) {
     this.stepsService.update(id, form.value).subscribe(
-        (el) => {
-          this.openSnackBar('step has been successfully updated'),
-              this.ngOnInit();
-        },
-        (err) => {
-          if (err.status == '400') {
-            this.openSnackBar('Error : ' + err.error['hydra:description']);
-          }
+      (el) => {
+        this.openSnackBar('step has been successfully updated'),
+          this.ngOnInit();
+      },
+      (err) => {
+        if (err.status == '400') {
+          this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
+      }
     );
   }
 
@@ -240,7 +241,7 @@ export class MissionSingleComponent implements OnInit {
     );
   }
 
-  updateHost(host){
+  updateHost(host) {
     this.router.navigateByUrl(HostRouter.redirectToEditFromIRI(host['@id']));
   }
 
@@ -253,7 +254,7 @@ export class MissionSingleComponent implements OnInit {
     fd.append('filename', this.file);
     fd.append('missionName', this.mission.name);
     this.uploadServices.uploadHosts(fd).then(
-      () => this.router.navigateByUrl(`/missions/details/${this.id}`),
+      () => this.router.navigateByUrl(MissionRouter.redirectToShow(this.id)),
       () =>
         this.openSnackBar(
           'one or many host in ure file already exist in database and probably used by other mission'

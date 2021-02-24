@@ -293,8 +293,8 @@ export class MissionSingleComponent implements OnInit {
         hostVulns: host.hostVulns.map((hostVuln) => ({
           ...hostVuln,
           vulnName: hostVuln.vuln.translations[this.currentLocal].name,
-          vulnDescription:
-            hostVuln.vuln.translations[this.currentLocal].description,
+          vulnDescription: hostVuln.vuln.translations[this.currentLocal].description,
+          vulnRemediation: hostVuln.vuln.translations[this.currentLocal].remediation,
         })),
       }));
 
@@ -313,7 +313,7 @@ export class MissionSingleComponent implements OnInit {
         to: 'myclient@localhost.com',
         authors: this.users,
         state: 'draft',
-        scope: this.hosts,
+        scope: hosts,
       });
       // think to update report with new hostVuln ( 1 box by vulnerability with current state )
       try {

@@ -1,14 +1,14 @@
 <div class="mat-form-field-flex flex">
   <mat-form-field *ngFor="let filter of filters">
-    <input matInput (keyup)="applyFilter(filter, $event.target.value)" placeholder="Filter by {{ filter }}">
+    <input matInput (keyup)="applyFilter(filter, $event.target)" placeholder="Filter by {{ filter }}">
   </mat-form-field>
   <a *ngIf="isEnabledCreation()" class="ml-auto flex no-decoration add-resource" routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">
-        <span class="my-auto">
-            Add new {{ singularResource }}
-        </span>
+    <span class="my-auto">
+      Add new {{ singularResource }}
+    </span>
     <span class="my-auto material-icons">
-            add
-        </span>
+      add
+    </span>
   </a>
 </div>
 

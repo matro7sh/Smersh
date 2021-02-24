@@ -156,6 +156,7 @@ export class MissionSingleComponent implements OnInit {
           ...hostVuln.vuln,
           impact: hostVuln.impact,
           linked: hostVuln.id,
+          ...(hostVuln.vuln.translations[this.currentLocal] ?? {}),
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {},
         })),
         name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
@@ -292,9 +293,7 @@ export class MissionSingleComponent implements OnInit {
         ...host,
         hostVulns: host.hostVulns.map((hostVuln) => ({
           ...hostVuln,
-          vulnName: hostVuln.vuln.translations[this.currentLocal].name,
-          vulnDescription: hostVuln.vuln.translations[this.currentLocal].description,
-          vulnRemediation: hostVuln.vuln.translations[this.currentLocal].remediation,
+          ...hostVuln.vuln.translations[this.currentLocal],
         })),
       }));
 

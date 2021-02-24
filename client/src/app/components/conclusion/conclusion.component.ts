@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NegativePointsService } from '../../services/negative.service';
-import { PositivePointsService } from '../../services/positive.service';
+import { NegativePointsService } from 'src/app/services/negative.service';
+import { PositivePointsService } from 'src/app/services/positive.service';
 
 @Component({
   selector: 'app-conclusion',
@@ -17,21 +17,13 @@ export class ConclusionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadPositive();
-    this.loadNegative();
-  }
-
-  loadPositive(): void {
-    this.positivePointsServices.getData().subscribe((el) => {
-      this.positivePoints = el['hydra:member'];
-      console.log(this.positivePoints);
-    });
-  }
-
-  loadNegative(): void {
-    this.negativePointsService.getData().subscribe((el) => {
-      this.negativePoints = el['hydra:member'];
-      console.log(this.negativePoints);
+    Promise.all(
+      [this.positivePointsServices, this.negativePointsService].map((action) =>
+        action.getData()
+      )
+    ).then(([positive, negative]) => {
+      this.positivePoints = positive;
+      this.negativePoints = negative;
     });
   }
 }

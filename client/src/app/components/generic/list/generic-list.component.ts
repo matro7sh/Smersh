@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
 import { AbstractRouter } from 'src/app/router/router';
+import { AbstractModelApplication } from 'src/app/model/abstract';
 
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
@@ -39,7 +40,7 @@ export class GenericListComponent implements OnInit {
   public buttonActions = [SHOW, EDIT, DELETE];
   public actions = [...this.buttonActions, CREATE];
   public routerHelper = AbstractRouter;
-  public dataSource: MatTableDataSource<any>;
+  public dataSource: MatTableDataSource<AbstractModelApplication>;
   public resource = '';
   public singularResource = '';
   public actionMatcher = null;
@@ -75,13 +76,13 @@ export class GenericListComponent implements OnInit {
   }
 
   retrieveData(): void {
-    this.service?.getData().subscribe((e) => {
-      const members = e['hydra:member'].map((e) => ({
+    this.service?.getData().then((data) => {
+      const items = data.map((e) => ({
         ...e,
         ...this.getPermissions(),
       }));
-      this.dataSource.data = members;
-      this.notifyReceipt(members);
+      this.dataSource.data = items;
+      this.notifyReceipt(items);
     });
   }
 
@@ -89,8 +90,8 @@ export class GenericListComponent implements OnInit {
     this.retrieveData();
   }
 
-  applyFilter(filterValue: string): void {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(filterValue: string, { value }: HTMLInputElement): void {
+    this.dataSource.filter = value;
   }
 
   redirectAction(action: string, params: string): void {

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MissionsService } from '../../services/missions.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { TypesService } from '../../services/types.service';
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MissionRouter } from "src/app/router/MissionRouter";
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MissionRouter } from 'src/app/router/MissionRouter';
+import { UserModelApplication } from 'src/app/model/User';
+import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 
 @Component({
   selector: 'app-mission-edit',
@@ -65,8 +67,8 @@ export class MissionEditComponent implements OnInit {
 
   loadUsers(): void {
     this.allUsers = [];
-    this.usersService.getData().subscribe((res) => {
-      this.allUsers = res['hydra:member'];
+    this.usersService.getData().then((users: UserModelApplication[]) => {
+      this.allUsers = users;
     });
   }
 
@@ -90,13 +92,15 @@ export class MissionEditComponent implements OnInit {
     });
   }
 
-  loadTypes() {
-    this.typesServices.getData().subscribe((el) => {
-      this.types = el['hydra:member'];
-    });
+  loadTypes(): void {
+    this.typesServices
+      .getData()
+      .then((types: AbstractTypeModelApplication[]) => {
+        this.types = types;
+      });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.missionService
       .update(this.mission.id, {
         ...form.value,
@@ -104,32 +108,35 @@ export class MissionEditComponent implements OnInit {
         users: this.selectedUsers,
         nmap: this.nmapChecked,
         nessus: this.nessusChecked,
-      }).subscribe(
+      })
+      .subscribe(
         () => {
           this.openSnackBar('Mission edited');
-          this.router.navigateByUrl(MissionRouter.redirectToShow(this.mission.id));
+          this.router.navigateByUrl(
+            MissionRouter.redirectToShow(this.mission.id)
+          );
         },
         (err) => {
           if (err.status === 400) {
             this.openSnackBar('Error : ' + err.error['hydra:description']);
           }
         }
-    );
+      );
   }
 
-  toto(value) {
+  toto(value): void {
     this.selectedUsers = value;
   }
 
-  getTypeValue(value) {
+  getTypeValue(value): void {
     this.selectedType = value;
   }
 
-  public onSaveUsernameChanged(value: boolean) {
+  public onSaveUsernameChanged(value: boolean): void {
     this.nmapChecked = value;
   }
 
-  public onSaveChanged(value: boolean) {
+  public onSaveChanged(value: boolean): void {
     this.nessusChecked = value;
   }
 }

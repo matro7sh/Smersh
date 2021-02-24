@@ -1,12 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Token } from 'src/app/storage/Token';
+import {
+  AbstractModelApplication,
+  AbstractSerializerApplication,
+} from 'src/app/model/abstract';
 
 export class AbstractService {
   protected endpoint = '';
   protected headers: HttpHeaders;
-  protected http;
+  protected http: HttpClient;
+  public serializer = new AbstractSerializerApplication();
 
   public constructor(http: HttpClient) {
     this.http = http;
@@ -26,8 +31,15 @@ export class AbstractService {
     };
   }
 
-  getData(params: Record<string, string> = {}): Observable<any> {
-    return this.http.get(`${this.getUrl()}?${new URLSearchParams(params)}`, this.getOptions());
+  getData(
+    params: Record<string, string> = {}
+  ): Promise<AbstractModelApplication[]> {
+    return this.http
+      .get(`${this.getUrl()}?${new URLSearchParams(params)}`, this.getOptions())
+      .toPromise()
+      .then((result) =>
+        this.serializer.serializeMany(result['hydra:member'] ?? [])
+      );
   }
 
   getDataById(id: string): Observable<any> {

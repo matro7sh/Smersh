@@ -7,6 +7,8 @@ import { ImpactsService } from '../../services/impacts.service';
 import { Locale } from '../../storage/Locale';
 import { VulnTypesService } from '../../services/vuln-types.service';
 import { VulnRouter } from 'src/app/router/VulnRouter';
+import { ImpactModelApplication } from 'src/app/model/Impact';
+import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 
 @Component({
   selector: 'app-vulns-create',
@@ -40,19 +42,21 @@ export class VulnsCreateComponent implements OnInit {
     });
   }
 
-  loadImpact() {
-    this.impactService.getData().subscribe((impacts) => {
-      this.impacts = impacts['hydra:member'];
+  loadImpact(): void {
+    this.impactService.getData().then((impacts: ImpactModelApplication[]) => {
+      this.impacts = impacts;
     });
   }
 
-  loadTypes() {
-    this.typesService.getData().subscribe((types) => {
-      this.types = types['hydra:member'];
-    });
+  loadTypes(): void {
+    this.typesService
+      .getData()
+      .then((types: AbstractTypeModelApplication[]) => {
+        this.types = types;
+      });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     // objectintry
 
     this.vulnsServices
@@ -73,11 +77,11 @@ export class VulnsCreateComponent implements OnInit {
         }
       );
   }
-  changeClient(value) {
+  changeClient(value): void {
     this.selectedType = value;
   }
 
-  changeClient2(value) {
+  changeClient2(value): void {
     this.selectedImpact = value;
   }
 }

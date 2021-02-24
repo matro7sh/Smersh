@@ -30,7 +30,7 @@ export class EditVulnWithStateComponent implements OnInit {
     });
   }
 
-  loadVuln() {
+  loadVuln(): void {
     this.hostvulnService.getDataById(this.id).subscribe((vuln) => {
       this.host = vuln.host;
       this.currentState = vuln.currentState;
@@ -38,39 +38,39 @@ export class EditVulnWithStateComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.hostvulnService.update(this.id, form.value).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar('Host updated');
         this.router.navigateByUrl(`/missions/${this.missionId}`);
         this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  openSnackBar(message) {
+  openSnackBar(message): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
   }
 
-  delete() {
+  delete(): void {
     if (
       confirm('Are you sure you want to save this thing into the database?')
     ) {
       this.hostvulnService.delete(this.id).subscribe(
-        (el) => {
+        () => {
           this.openSnackBar('this vulnerability has been deleted');
           this.router.navigateByUrl('/');
           this.ngOnInit();
         },
         (err) => {
-          if (err.status == '400') {
+          if (err.status === '400') {
             this.openSnackBar('Error : ' + err.error['hydra:description']);
           }
         }

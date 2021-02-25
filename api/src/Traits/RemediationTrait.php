@@ -2,13 +2,14 @@
 
 namespace App\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 trait RemediationTrait
 {
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"Vulns"})
+     * @Groups({"Vulns", "MissionSingleOutput"})
      */
     private $remediation;
 

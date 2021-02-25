@@ -20,7 +20,7 @@ import { UploadsService } from '../../services/uploads.service';
 import { HostsService } from '../../services/hosts.service';
 import { FileInformation } from '../../file-information';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import Docxtemplater from 'docxtemplater';
+import Docxtemplater, {DXT} from 'docxtemplater';
 import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
@@ -29,6 +29,7 @@ import { StepsService } from 'src/app/services/steps.service';
 import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
+import integer = DXT.integer;
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -79,60 +80,58 @@ export class MissionSingleComponent implements OnInit {
     const idHost = host['@id'].split('/').pop();
     if (host.checked === false) {
       this.hostsService.update(idHost, { checked: true }).subscribe(() => {
-        //     console.log("Host checked updated ");
         this.openSnackBar(host.name + ' updated To True ');
         this.ngOnInit();
       });
     } else {
       this.hostsService.update(idHost, { checked: false }).subscribe(() => {
-        //        console.log("Host checked updated ");
         this.openSnackBar(host.name + ' updated To False ');
         this.ngOnInit();
       });
     }
   }
 
-  deleteStep(id) {
+  deleteStep(id: string): void {
     this.stepsService.delete(id).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar('step has been successfully deleted'),
           this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  editStep(id, form: NgForm) {
+  editStep(id: string, form: NgForm): void {
     this.stepsService.update(id, form.value).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar('step has been successfully updated'),
           this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  nmapUpdate(isChecked): void {
+  nmapUpdate(isChecked: boolean): void {
     this.missionsService
       .update(this.missionId, { nmap: isChecked })
       .subscribe();
   }
 
-  nessusUpdate(isChecked) {
+  nessusUpdate(isChecked: boolean): void {
     this.missionsService
       .update(this.missionId, { nessus: isChecked })
       .subscribe();
   }
 
-  openSnackBar(message): void {
+  openSnackBar(message: string): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
@@ -181,14 +180,14 @@ export class MissionSingleComponent implements OnInit {
         this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  addHost(form: NgForm) {
+  addHost(form: NgForm): void {
     this.hostsService
       .insert({
         ...form.value,
@@ -196,18 +195,18 @@ export class MissionSingleComponent implements OnInit {
         mission: this.mission['@id'],
       })
       .subscribe(
-        (el) => {
+        () => {
           this.ngOnInit();
         },
         (err) => {
-          if (err.status == '400') {
+          if (err.status === '400') {
             this.openSnackBar('Error : ' + err.error['hydra:description']);
           }
         }
       );
   }
 
-  addStep(form: NgForm) {
+  addStep(form: NgForm): void {
     const date = new Date(Date.now());
 
     this.stepsService
@@ -217,32 +216,32 @@ export class MissionSingleComponent implements OnInit {
         createdAt: date,
       })
       .subscribe(
-        (el) => {
+        () => {
           this.ngOnInit();
         },
         (err) => {
-          if (err.status == '400') {
+          if (err.status === '400') {
             this.openSnackBar('Error : ' + err.error['hydra:description']);
           }
         }
       );
   }
 
-  deleteHost(host) {
+  deleteHost(host): void {
     this.hostsService.delete(host['@id'].split('/')[3]).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar('host has been successfully deleted'),
           this.ngOnInit();
       },
       (err) => {
-        if (err.status == '400') {
+        if (err.status === '400') {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       }
     );
   }
 
-  updateHost(host) {
+  updateHost(host): void {
     this.router.navigateByUrl(HostRouter.redirectToEditFromIRI(host['@id']));
   }
 
@@ -271,7 +270,7 @@ export class MissionSingleComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  goToAddVulns(uri, mission_id): void {
+  goToAddVulns(uri, mission_id: string): void {
     const id = uri.split('/').pop();
     this.router.navigateByUrl(`/missions/${id}/add-vuln/${mission_id}`);
   }
@@ -286,18 +285,9 @@ export class MissionSingleComponent implements OnInit {
       if (error) {
         throw error;
       }
-      console.log(this.hosts);
+
       const zip = new PizZip(content);
       const doc = new Docxtemplater().loadZip(zip);
-      const hosts = this.hosts.map((host) => ({
-        ...host,
-        hostVulns: host.hostVulns.map((hostVuln) => ({
-          ...hostVuln,
-          ...hostVuln.vuln.translations[this.currentLocal],
-        })),
-      }));
-
-      console.log(hosts);
 
       doc.setData({
         startDate: this.mission.startDate,
@@ -312,7 +302,13 @@ export class MissionSingleComponent implements OnInit {
         to: 'myclient@localhost.com',
         authors: this.users,
         state: 'draft',
-        scope: hosts,
+        scope: this.hosts.map((host) => ({
+          ...host,
+          hostVulns: host.hostVulns.map((hostVuln) => ({
+            ...hostVuln,
+            ...hostVuln.vuln.translations[this.currentLocal],
+          })),
+        })),
       });
       // think to update report with new hostVuln ( 1 box by vulnerability with current state )
       try {
@@ -342,7 +338,7 @@ export class MissionSingleComponent implements OnInit {
     window.alert('The product has been shared!');
   }
 
-  editThisVuln(id) {
+  editThisVuln(id: string): void {
     this.router.navigateByUrl(HostVulnRouter.redirectToEdit(id));
   }
 }

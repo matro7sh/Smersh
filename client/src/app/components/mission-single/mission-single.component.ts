@@ -1,26 +1,22 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MissionsService } from '../../services/missions.service';
+import { MissionsService } from 'src/app/services/missions.service';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   NgForm,
-  Validators,
 } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { UploadsService } from '../../services/uploads.service';
-import { HostsService } from '../../services/hosts.service';
-import { FileInformation } from '../../file-information';
+import { UploadsService } from 'src/app/services/uploads.service';
+import { HostsService } from 'src/app/services/hosts.service';
+import { FileInformation } from 'src/app/file-information';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import Docxtemplater, {DXT} from 'docxtemplater';
+import Docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
@@ -29,7 +25,6 @@ import { StepsService } from 'src/app/services/steps.service';
 import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
-import integer = DXT.integer;
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);

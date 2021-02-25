@@ -25,6 +25,7 @@ import { StepsService } from 'src/app/services/steps.service';
 import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
+import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -140,6 +141,26 @@ export class MissionSingleComponent implements OnInit {
     });
   }
 
+  getImpactColor(name: string): string {
+    switch (name) {
+      case LOW: {
+        return 'lowimpact';
+      }
+      case MEDIUM: {
+        return 'mediumimpact';
+      }
+      case HIGH: {
+        return 'highimpact';
+      }
+      case CRITICAL: {
+        return 'criticalimpact';
+      }
+      default: {
+        return '';
+      }
+    }
+  }
+
   loadData(id: string): void {
     this.missionsService.getDataById(id).subscribe((response) => {
       this.mission = response;
@@ -148,7 +169,10 @@ export class MissionSingleComponent implements OnInit {
         ...host,
         vulns: host.hostVulns.map((hostVuln) => ({
           ...hostVuln.vuln,
-          impact: hostVuln.impact,
+          impact: {
+            ...hostVuln.impact,
+            color: this.getImpactColor(hostVuln.impact.name),
+          },
           linked: hostVuln.id,
           ...(hostVuln.vuln.translations[this.currentLocal] ?? {}),
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {},

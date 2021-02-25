@@ -42,9 +42,7 @@
                                     <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer' style="display: block">{{host.name}}</a>
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                        <div *ngFor="let vuln of host.vulns">
-                                            <mat-chip color=[vuln.color] (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
-                                        </div>
+                                            <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
                                 <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)" id="add_vulnToHost">Add vuln</button>

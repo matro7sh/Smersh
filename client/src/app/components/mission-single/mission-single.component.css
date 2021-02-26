@@ -3,26 +3,6 @@
     width: 100%;
 }
 
-.mat-lowimpact {
-    background-color: #312E81;
-    color: white;
- }
-
-.mat-mediumimpact {
-    background-color: #ffff00;
-    color: black;
-}
-
-.mat-highimpact {
-    background-color: #ffab40;
-    color: white;
-}
-
-.mat-criticalimpact {
-    background-color: #212121;
-    color: white;
-}
-
 .vertical-center {
     align-self: center;
 }

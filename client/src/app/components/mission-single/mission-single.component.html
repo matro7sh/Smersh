@@ -28,15 +28,8 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content id="dashboard_main">
-            <mat-tab-group>mat-list-item
+            <mat-tab-group>
                 <mat-tab label="Scope" *ngIf="hosts">
-                    <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
-                    <ng-template #Host></ng-template>
-                    <ng-template #ThereIsNoHosts>
-                        <mat-list-item style="height:auto">
-                        <mat-card>There is no Host in the current mission.<br/> Add one and happy hacking :) </mat-card>
-                        </mat-list-item>
-                       </ng-template>
                     <mat-list id="host_list">
                         <mat-list-item style="height:auto" *ngFor="let host of hosts">
                             <div id="single_host">
@@ -49,7 +42,9 @@
                                     <a class="violet" href="{{host.name}}" target='_blank' rel='noopener noreferrer' style="display: block">{{host.name}}</a>
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                            <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
+                                        <div *ngFor="let vuln of host.vulns">
+                                            <mat-chip color=[vuln.color] (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}} </mat-chip>
+                                        </div>
                                     </mat-chip-list>
                                 </div>
                                 <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)" id="add_vulnToHost">Add vuln</button>

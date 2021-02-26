@@ -5,11 +5,6 @@ import {
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
 
-export const LOW = 'Low';
-export const MEDIUM = 'Medium';
-export const HIGH = 'High';
-export const CRITICAL = 'Critical';
-
 interface ImpactFromAPIInterface extends ObjectFromAPIInterface {
   name: string;
 }

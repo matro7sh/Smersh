@@ -28,7 +28,7 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content id="dashboard_main">
-            <mat-tab-group>mat-list-item
+            <mat-tab-group>
                 <mat-tab label="Scope" *ngIf="hosts">
                     <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
                     <ng-template #Host></ng-template>

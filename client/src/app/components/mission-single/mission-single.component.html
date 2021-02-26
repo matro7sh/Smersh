@@ -28,12 +28,14 @@
             </mat-card-title>
         </mat-card-header>
         <mat-card-content id="dashboard_main">
-            <mat-tab-group>
+            <mat-tab-group>mat-list-item
                 <mat-tab label="Scope" *ngIf="hosts">
                     <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
                     <ng-template #Host></ng-template>
                     <ng-template #ThereIsNoHosts>
+                        <mat-list-item style="height:auto">
                         <mat-card>There is no Host in the current mission.<br/> Add one and happy hacking :) </mat-card>
+                        </mat-list-item>
                        </ng-template>
                     <mat-list id="host_list">
                         <mat-list-item style="height:auto" *ngFor="let host of hosts">

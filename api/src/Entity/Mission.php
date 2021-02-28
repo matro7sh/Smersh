@@ -194,12 +194,12 @@ class Mission
         return $this;
     }
 
-    public function getendDate(): ?\DateTimeInterface
+    public function getEndDate(): ?\DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setendDate(\DateTimeInterface $endDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 

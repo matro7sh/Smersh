@@ -26,7 +26,7 @@ export class MissionEditComponent implements OnInit {
   public path_to_codi: any;
   selectedUsers: any;
   startDate: any;
-  EndDate: any;
+  endDate: any;
   public mission: any;
   public hosts: any;
   public missionForm: FormGroup;

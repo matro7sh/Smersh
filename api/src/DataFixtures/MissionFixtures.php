@@ -58,9 +58,9 @@ class MissionFixtures extends Fixture
         $mission->addClient($client);
         $mission->setName("FAKE-MISSION-EXTERNE");
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
-        $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
+        $mission->setendDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission->setNmap(1);
-        $mission->setCredentials("admin:MySuperPassword");
+        $mission->setCredentials("http://localhost:8888/YOLO");
         $mission->addUser($user);
         $mission->setPathToCodi("http://localhost:3000/YOLO");
         $mission->setNessusFiler(0);
@@ -72,7 +72,7 @@ class MissionFixtures extends Fixture
         $mission->addClient($client2);
         $mission2->setName("FAKE-MISSION-INTERNE");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
-        $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
+        $mission2->setendDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission2->setNmap(0);
         $mission2->addUser($user);
         $mission2->setPathToCodi(null);

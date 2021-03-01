@@ -8,7 +8,7 @@ import { ClientRouter } from 'src/app/router/ClientRouter';
 @Component({
   selector: 'app-client-create',
   templateUrl: './client-create.component.html',
-  styleUrls: ['./client-create.component.css'],
+  styleUrls: ['./client-create.component.scss'],
 })
 export class ClientCreateComponent implements OnInit {
   durationInSeconds = 4;

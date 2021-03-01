@@ -8,7 +8,7 @@ import { ImpactRouter } from 'src/app/router/ImpactRouter';
 @Component({
   selector: 'app-impact-edit',
   templateUrl: './impact-edit.component.html',
-  styleUrls: ['./impact-edit.component.css'],
+  styleUrls: ['./impact-edit.component.scss'],
 })
 export class ImpactEditComponent implements OnInit {
   public id: any;

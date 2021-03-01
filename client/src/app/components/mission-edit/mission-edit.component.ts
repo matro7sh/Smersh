@@ -12,7 +12,7 @@ import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 @Component({
   selector: 'app-mission-edit',
   templateUrl: './mission-edit.component.html',
-  styleUrls: ['./mission-edit.component.css'],
+  styleUrls: ['./mission-edit.component.scss'],
 })
 export class MissionEditComponent implements OnInit {
   public users = [];

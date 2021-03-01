@@ -5,7 +5,7 @@ import { PositivePointsService } from 'src/app/services/positive.service';
 @Component({
   selector: 'app-conclusion',
   templateUrl: './conclusion.component.html',
-  styleUrls: ['./conclusion.component.css'],
+  styleUrls: ['./conclusion.component.scss'],
 })
 export class ConclusionComponent implements OnInit {
   public positivePoints = [];

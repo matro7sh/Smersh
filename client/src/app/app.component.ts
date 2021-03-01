@@ -6,7 +6,7 @@ import { DecodedToken, Token } from 'src/app/storage/Token';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'Smersh';

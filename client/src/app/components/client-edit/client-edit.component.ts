@@ -8,7 +8,7 @@ import { ClientRouter } from 'src/app/router/ClientRouter';
 @Component({
   selector: 'app-client-edit',
   templateUrl: './client-edit.component.html',
-  styleUrls: ['./client-edit.component.css'],
+  styleUrls: ['./client-edit.component.scss'],
 })
 export class ClientEditComponent implements OnInit {
   public id: any;

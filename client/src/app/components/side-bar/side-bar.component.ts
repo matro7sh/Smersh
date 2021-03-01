@@ -14,7 +14,7 @@ import { ClientRouter } from 'src/app/router/ClientRouter';
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+  styleUrls: ['./side-bar.component.scss'],
 })
 export class SideBarComponent implements OnInit {
   @Input() opened: boolean; // opened or not by default

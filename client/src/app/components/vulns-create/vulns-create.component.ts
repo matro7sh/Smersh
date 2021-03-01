@@ -13,7 +13,7 @@ import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 @Component({
   selector: 'app-vulns-create',
   templateUrl: './vulns-create.component.html',
-  styleUrls: ['./vulns-create.component.css'],
+  styleUrls: ['./vulns-create.component.scss'],
 })
 export class VulnsCreateComponent implements OnInit {
   durationInSeconds = 4;

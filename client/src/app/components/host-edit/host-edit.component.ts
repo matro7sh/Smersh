@@ -8,7 +8,7 @@ import { HostRouter } from 'src/app/router/HostRouter';
 @Component({
   selector: 'app-host-edit',
   templateUrl: './host-edit.component.html',
-  styleUrls: ['./host-edit.component.css'],
+  styleUrls: ['./host-edit.component.scss'],
 })
 export class HostEditComponent implements OnInit {
   public id: any;

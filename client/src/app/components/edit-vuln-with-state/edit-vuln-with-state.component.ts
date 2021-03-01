@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-edit-vuln-with-state',
   templateUrl: './edit-vuln-with-state.component.html',
-  styleUrls: ['./edit-vuln-with-state.component.css'],
+  styleUrls: ['./edit-vuln-with-state.component.scss'],
 })
 export class EditVulnWithStateComponent implements OnInit {
   public id: any;

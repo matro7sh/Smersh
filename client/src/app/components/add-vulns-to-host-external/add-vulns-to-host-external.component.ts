@@ -14,7 +14,7 @@ import { VulnModelApplication } from 'src/app/model/Vuln';
 @Component({
   selector: 'app-add-vulns-to-host-external',
   templateUrl: './add-vulns-to-host-external.component.html',
-  styleUrls: ['./add-vulns-to-host-external.component.css'],
+  styleUrls: ['./add-vulns-to-host-external.component.scss'],
 })
 export class AddVulnsToHostExternalComponent implements OnInit {
   public id: any;

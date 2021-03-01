@@ -4,6 +4,16 @@
         {{title}} - {{version}} <span class="example-spacer"></span>
             <button mat-mini-fab color="primary"  (click)="switchToFR()">FR</button>
             <button mat-mini-fab color="warn"    (click)="switchToEN()">EN</button>
+        <button mat-raised-button  (click)="themeService.toggleTheme()">
+            <span [ngSwitch]="themeService.currentTheme">
+                <span *ngSwitchCase="'dark-theme'">
+                    Light theme
+                </span>
+                <span *ngSwitchDefault>
+                    Dark theme
+                </span>
+            </span>
+        </button>
         <button mat-raised-button  (click)="logout()">Logout - {{ username }}</button>
     </mat-toolbar>
 

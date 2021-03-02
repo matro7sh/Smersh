@@ -34,7 +34,7 @@ function loadFile(url, callback) {
 @Component({
   selector: 'app-mission',
   templateUrl: './mission-single.component.html',
-  styleUrls: ['./mission-single.component.css'],
+  styleUrls: ['./mission-single.component.scss'],
 })
 export class MissionSingleComponent implements OnInit {
   @ViewChild('fileInput')

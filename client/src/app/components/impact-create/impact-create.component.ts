@@ -8,7 +8,7 @@ import { ImpactRouter } from 'src/app/router/ImpactRouter';
 @Component({
   selector: 'app-impact-create',
   templateUrl: './impact-create.component.html',
-  styleUrls: ['./impact-create.component.css'],
+  styleUrls: ['./impact-create.component.scss'],
 })
 export class ImpactCreateComponent implements OnInit {
   durationInSeconds = 4;

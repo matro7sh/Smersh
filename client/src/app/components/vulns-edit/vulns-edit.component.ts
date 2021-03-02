@@ -9,7 +9,7 @@ import {Locale} from "src/app/storage/Locale";
 @Component({
   selector: 'app-vulns-edit',
   templateUrl: './vulns-edit.component.html',
-  styleUrls: ['./vulns-edit.component.css'],
+  styleUrls: ['./vulns-edit.component.scss'],
 })
 export class VulnsEditComponent implements OnInit {
   public id: any;

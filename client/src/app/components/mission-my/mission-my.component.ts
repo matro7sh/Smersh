@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-mission-my',
   templateUrl: './mission-my.component.html',
-  styleUrls: ['./mission-my.component.css'],
+  styleUrls: ['./mission-my.component.scss'],
 })
 export class MissionMyComponent implements OnInit {
   public missions = [];

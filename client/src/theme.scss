@@ -1,0 +1,27 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$angular-primary: mat-palette($mat-indigo);
+$angular-accent: mat-palette($mat-pink);
+// The warn palette is optional (defaults to red).
+$angular-warn: mat-palette($mat-red);
+
+
+$angular-default-theme: mat-light-theme((color: (primary: $angular-primary,
+            accent: $angular-accent,
+            warn: $angular-warn,
+        ),
+    ));
+
+@include angular-material-theme($angular-default-theme);
+
+$angular-dark-theme: mat-dark-theme((color: (primary: $angular-primary,
+            accent: $angular-accent,
+            warn: $angular-warn,
+        ),
+    ));
+
+.dark-theme {
+    @include angular-material-color($angular-dark-theme);
+}

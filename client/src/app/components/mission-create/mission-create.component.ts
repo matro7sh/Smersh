@@ -19,7 +19,7 @@ import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
 @Component({
   selector: 'app-mission-create',
   templateUrl: './mission-create.component.html',
-  styleUrls: ['./mission-create.component.css'],
+  styleUrls: ['./mission-create.component.scss'],
 })
 export class MissionCreateComponent implements OnInit {
   public users = [];

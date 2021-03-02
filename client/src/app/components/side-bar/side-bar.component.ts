@@ -10,11 +10,12 @@ import { HostRouter } from 'src/app/router/HostRouter';
 import { UserRouter } from 'src/app/router/UserRouter';
 import { ImpactRouter } from 'src/app/router/ImpactRouter';
 import { ClientRouter } from 'src/app/router/ClientRouter';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+  styleUrls: ['./side-bar.component.scss'],
 })
 export class SideBarComponent implements OnInit {
   @Input() opened: boolean; // opened or not by default
@@ -39,7 +40,8 @@ export class SideBarComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private connection: ConnectionService,
-    private router: Router
+    private router: Router,
+    public themeService: ThemeService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

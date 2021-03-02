@@ -70,6 +70,7 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
+import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,8 @@ import { GenericListComponent } from 'src/app/components/generic/list/generic-li
     ClientsService,
     MatDatepickerModule,
     TypesService,
+    ThemeService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

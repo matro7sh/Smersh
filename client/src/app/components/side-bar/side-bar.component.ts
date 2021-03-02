@@ -10,7 +10,7 @@ import { HostRouter } from 'src/app/router/HostRouter';
 import { UserRouter } from 'src/app/router/UserRouter';
 import { ImpactRouter } from 'src/app/router/ImpactRouter';
 import { ClientRouter } from 'src/app/router/ClientRouter';
-import { ThemeService } from 'src/app/services/theme.service.ts.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-side-bar',

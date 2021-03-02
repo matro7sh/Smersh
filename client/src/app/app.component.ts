@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DecodedToken, Token } from 'src/app/storage/Token';
 import { MatDialog } from '@angular/material/dialog';
-import { Theme, ThemeService } from './services/theme.service.ts.service';
+import { Theme, ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-root',

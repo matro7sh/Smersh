@@ -60,7 +60,7 @@ class MissionFixtures extends Fixture
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission->setNmap(1);
-        $mission->setCredentials("admin:MySuperPassword");
+        $mission->setCredentials("http://localhost:8888/YOLO");
         $mission->addUser($user);
         $mission->setPathToCodi("http://localhost:3000/YOLO");
         $mission->setNessusFiler(0);

@@ -73,7 +73,7 @@ class Mission
      * @ORM\Column(type="datetime")
      * @Groups({"Mission", "MissionSingleOutput"})
      */
-    private $EndDate;
+    private $endDate;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="missions")
@@ -196,12 +196,12 @@ class Mission
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->EndDate;
+        return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $EndDate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->EndDate = $EndDate;
+        $this->endDate = $endDate;
 
         return $this;
     }

@@ -147,6 +147,10 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 
 `docker-compose exec db pg_dump -U <User> <db> > smersh.sql`
 
+## Tips for front-dev 
+
+Run API using this command `docker-compose up api` then execute `cd client && npm i && npm start` 
+
 
 ## Todo
 - add conclusion generator
@@ -164,3 +168,4 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 - Darkweak - https://github.com/orgs/CMEPW/people/Darkweak
 - michmich1000 - https://michmich.eu
 - SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr
+- sanchis  - https://github.com/sanchis

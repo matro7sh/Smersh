@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 /**
  * @ApiResource(attributes={"normalization_context"={"groups"={"User"}}},
@@ -17,9 +19,11 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *         "get"={"security"="is_granted('ROLE_ADMIN')"},
  *         "post"={"security"="is_granted('IS_AUTHENTICATED_FULLY')"}
  *      }
- *     )
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @ApiFilter(NumericFilter::class, properties={"id"})
+ * @ApiFilter(SearchFilter::class, properties={"username": "ipartial"})
  */
 class User implements UserInterface
 {

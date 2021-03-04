@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
 import { AbstractRouter } from 'src/app/router/router';
 import { AbstractModelApplication } from 'src/app/model/abstract';
+import { FilterService } from 'src/app/services/filter.service';
 
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
@@ -45,11 +46,13 @@ export class GenericListComponent implements OnInit {
   public singularResource = '';
   public actionMatcher = null;
   public fields = [];
-  public filters = [];
+  public filters = ['name'];
   protected excludedFields = ['@id', '@type'];
+  private filterService;
 
   constructor(protected service: AbstractService, protected router: Router) {
     this.dataSource = new MatTableDataSource();
+    this.filterService = new FilterService(service);
     this.actionMatcher = new RegExp(
       `^${this.actions.map((action) => action.name).join('|')}$`,
       'gi'
@@ -75,8 +78,8 @@ export class GenericListComponent implements OnInit {
     }
   }
 
-  retrieveData(): void {
-    this.service?.getData().then((data) => {
+  retrieveData(params: Record<string, string> = {}): void {
+    this.service?.getData(params).then((data) => {
       const items = data.map((e) => ({
         ...e,
         ...this.getPermissions(),
@@ -91,7 +94,11 @@ export class GenericListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string, { value }: HTMLInputElement): void {
-    this.dataSource.filter = value;
+    this.filterService.applyFilter(
+      filterValue,
+      value,
+      (data: Record<string, string>) => this.retrieveData(data)
+    );
   }
 
   redirectAction(action: string, params: string): void {

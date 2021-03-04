@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { DecodedToken, Token } from 'src/app/storage/Token';
@@ -10,14 +10,21 @@ import { Theme, ThemeService } from 'src/app/services/theme.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Smersh';
-  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog, private themeService: ThemeService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private dialog: MatDialog,
+    private themeService: ThemeService
+  ) {}
   @HostBinding('class') className = Theme.LIGHT_THEME;
 
   protected logged: boolean;
-  ngOnInit() {
-    this.themeService.onChangeTheme.subscribe(theme => this.className = theme);
+  ngOnInit(): void {
+    this.themeService.onChangeTheme.subscribe(
+      (theme) => (this.className = theme)
+    );
 
     // check if valid jwt
     if (Date.now() < new DecodedToken().getDecoded().exp * 1000) {

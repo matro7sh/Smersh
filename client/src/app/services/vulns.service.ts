@@ -18,7 +18,7 @@ export class VulnsService extends AbstractService {
 
   getData(
     params: Record<string, string> = {}
-  ): Promise<AbstractModelApplication[]> {
+  ): Promise<{ count: number; data: AbstractModelApplication[] }> {
     return super.getData({ locale: new Locale().get(), ...params });
   }
 }

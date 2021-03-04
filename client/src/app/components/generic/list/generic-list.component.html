@@ -28,4 +28,5 @@
     <mat-header-row *matHeaderRowDef="fields"></mat-header-row>
     <mat-row *matRowDef="let row; columns: fields;"></mat-row>
   </mat-table>
+  <mat-paginator (page)="onUpdatePaginator($event)" [length]="paginator.count" [pageSize]="paginator.itemsPerPage" [pageSizeOptions]="paginator.options"></mat-paginator>
 </div>

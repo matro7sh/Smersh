@@ -9,6 +9,7 @@ import {
 
 export class AbstractService {
   protected endpoint = '';
+
   protected headers: HttpHeaders;
   protected http: HttpClient;
   public serializer = new AbstractSerializerApplication();
@@ -33,13 +34,14 @@ export class AbstractService {
 
   getData(
     params: Record<string, string> = {}
-  ): Promise<AbstractModelApplication[]> {
+  ): Promise<{ count: number; data: AbstractModelApplication[] }> {
     return this.http
       .get(`${this.getUrl()}?${new URLSearchParams(params)}`, this.getOptions())
       .toPromise()
-      .then((result) =>
-        this.serializer.serializeMany(result['hydra:member'] ?? [])
-      );
+      .then((result) => ({
+        count: result['hydra:totalItems'],
+        data: this.serializer.serializeMany(result['hydra:member'] ?? []),
+      }));
   }
 
   getDataById(id: string): Observable<any> {

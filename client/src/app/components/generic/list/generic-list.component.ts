@@ -5,6 +5,7 @@ import { AbstractService } from 'src/app/services/abstract';
 import { AbstractRouter } from 'src/app/router/router';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 import { FilterService } from 'src/app/services/filter.service';
+import { PageEvent } from '@angular/material/paginator';
 
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
@@ -43,6 +44,12 @@ export class GenericListComponent implements OnInit {
   public routerHelper = AbstractRouter;
   public dataSource: MatTableDataSource<AbstractModelApplication>;
   public resource = '';
+  public paginator = {
+    page: 1,
+    itemsPerPage: 10,
+    count: 0,
+    options: [10, 25, 50],
+  };
   public singularResource = '';
   public actionMatcher = null;
   public fields = [];
@@ -79,14 +86,21 @@ export class GenericListComponent implements OnInit {
   }
 
   retrieveData(params: Record<string, string> = {}): void {
-    this.service?.getData(params).then((data) => {
-      const items = data.map((e) => ({
-        ...e,
-        ...this.getPermissions(),
-      }));
-      this.dataSource.data = items;
-      this.notifyReceipt(items);
-    });
+    this.service
+      ?.getData({
+        ...params,
+        page: this.paginator.page.toString(),
+        itemsPerPage: this.paginator.itemsPerPage.toString(),
+      })
+      .then(({ count, data }) => {
+        this.paginator.count = count;
+        const items = data.map((e) => ({
+          ...e,
+          ...this.getPermissions(),
+        }));
+        this.dataSource.data = items;
+        this.notifyReceipt(items);
+      });
   }
 
   ngOnInit(): void {
@@ -95,8 +109,7 @@ export class GenericListComponent implements OnInit {
 
   applyFilter(filterValue: string, { value }: HTMLInputElement): void {
     this.filterService.applyFilter(
-      filterValue,
-      value,
+      { [filterValue]: value },
       (data: Record<string, string>) => this.retrieveData(data)
     );
   }
@@ -120,6 +133,19 @@ export class GenericListComponent implements OnInit {
         this.ngOnInit();
       });
     }
+  }
+
+  onUpdatePaginator(event: PageEvent): void {
+    if (this.paginator.itemsPerPage !== event.pageSize) {
+      this.paginator.itemsPerPage = event.pageSize;
+    }
+    if (this.paginator.page !== event.pageIndex + 1) {
+      this.paginator.page = event.pageIndex + 1;
+    }
+
+    this.filterService.applyFilter({}, (data: Record<string, string>) =>
+      this.retrieveData(data)
+    );
   }
 
   isEnabledCreation(): boolean {

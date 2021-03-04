@@ -67,9 +67,11 @@ export class MissionEditComponent implements OnInit {
 
   loadUsers(): void {
     this.allUsers = [];
-    this.usersService.getData().then((users: UserModelApplication[]) => {
-      this.allUsers = users;
-    });
+    this.usersService
+      .getData()
+      .then(({ data }: { count: number; data: UserModelApplication[] }) => {
+        this.allUsers = data;
+      });
   }
 
   loadMissions(id): void {
@@ -95,9 +97,11 @@ export class MissionEditComponent implements OnInit {
   loadTypes(): void {
     this.typesServices
       .getData()
-      .then((types: AbstractTypeModelApplication[]) => {
-        this.types = types;
-      });
+      .then(
+        ({ data }: { count: number; data: AbstractTypeModelApplication[] }) => {
+          this.types = data;
+        }
+      );
   }
 
   onSubmit(form: NgForm): void {

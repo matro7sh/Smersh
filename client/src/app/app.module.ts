@@ -71,6 +71,7 @@ import {
 import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 import { ThemeService } from './services/theme.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -135,6 +136,7 @@ import { ThemeService } from './services/theme.service';
     BrowserAnimationsModule,
     MatSortModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [
     MissionsService,
@@ -147,8 +149,8 @@ import { ThemeService } from './services/theme.service';
     ClientsService,
     MatDatepickerModule,
     TypesService,
-    ThemeService
+    ThemeService,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

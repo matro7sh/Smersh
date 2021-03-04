@@ -43,17 +43,21 @@ export class VulnsCreateComponent implements OnInit {
   }
 
   loadImpact(): void {
-    this.impactService.getData().then((impacts: ImpactModelApplication[]) => {
-      this.impacts = impacts;
-    });
+    this.impactService
+      .getData()
+      .then(({ data }: { count: number; data: ImpactModelApplication[] }) => {
+        this.impacts = data;
+      });
   }
 
   loadTypes(): void {
     this.typesService
       .getData()
-      .then((types: AbstractTypeModelApplication[]) => {
-        this.types = types;
-      });
+      .then(
+        ({ data }: { count: number; data: AbstractTypeModelApplication[] }) => {
+          this.types = data;
+        }
+      );
   }
 
   onSubmit(form: NgForm): void {

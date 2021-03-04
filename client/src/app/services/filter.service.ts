@@ -7,11 +7,10 @@ export class FilterService {
   constructor(protected service: AbstractService) {}
 
   public applyFilter(
-    filterValue: string,
-    value: string,
+    filters: Record<string, string>,
     callback: (params: Record<string, string>) => void
   ): void {
-    this.filters[filterValue] = value;
+    this.filters = { ...this.filters, ...filters };
     if (this.timeout !== null) {
       clearTimeout(this.timeout);
     }

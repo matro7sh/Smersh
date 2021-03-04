@@ -14,7 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"User"}}},
+ * @ApiResource(
+ *     attributes={"normalization_context"={"groups"={"User"}}},
  *     collectionOperations={
  *         "get"={"security"="is_granted('ROLE_ADMIN')"},
  *         "post"={"security"="is_granted('IS_AUTHENTICATED_FULLY')"}

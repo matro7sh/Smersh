@@ -88,8 +88,8 @@ RUN set -eux; \
 
 # do not use .env files in production
 COPY .env ./
-RUN composer dump-env prod; \
-	rm .env
+#RUN composer dump-env prod; \
+#	rm .env
 
 # copy only specifically what we need
 COPY bin bin/

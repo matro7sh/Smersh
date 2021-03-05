@@ -34,7 +34,7 @@ export class MissionCreateComponent implements OnInit {
   selectedUsers: any;
   selectedClients: [];
   startDate: any;
-  EndDate: any;
+  endDate: any;
 
   constructor(
     private missionService: MissionsService,

@@ -1,14 +1,14 @@
 <h1 xmlns="http://www.w3.org/1999/html">Add vuln to host</h1>
 <span class="material-icons" style="cursor: pointer" (click)="createVuln()">add new vuln</span><br/><br/>
-<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-form-field appearance="fill">
+<form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field appearance="fill" class="addSpace">
         <mat-label>Select Vulns</mat-label>
         <mat-select [value]="selected_vulns" #selectVulns (selectionChange)="Vulns($event.value)">
             <mat-option *ngFor="let vuln of vulns" [value]="vuln.value">
                 {{vuln.name}}
             </mat-option>
         </mat-select>
-    </mat-form-field><br/><br/>
+    </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Select Impact</mat-label>
         <mat-select [value]="selected_impacts" #selectImpacts (selectionChange)="Impacts($event.value)">
@@ -17,13 +17,11 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <br/>
     <mat-form-field class="example-full-width">
         <mat-label>Current State : </mat-label>
         <textarea rows="10" cols="50" [(ngModel)]="currentStateUser" name="currentState" matInput></textarea>
-    </mat-form-field><br/>
+    </mat-form-field>
     <div class="example-button-row">
-        <br/><br/><br/><br/>
         <button mat-button mat-raised-button color="primary">Add</button>
     </div>
 </form>

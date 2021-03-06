@@ -16,7 +16,7 @@ export class ClientsListComponent extends GenericListComponent {
   resource = 'clients';
   singularResource = 'Client';
   routerHelper = ClientRouter;
-  public filters = ['name', 'mail'];
+  public filters = ['name', 'mail', 'phone'];
   protected excludedFields = ['@id', '@type', SHOW.name];
 
   constructor(protected service: ClientsService, protected router: Router) {

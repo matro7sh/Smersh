@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Filter\MissionTypeFilter;
 
 /**
  * @ApiResource(
@@ -29,6 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     )
  * @ORM\Entity(repositoryClass=MissionRepository::class)
  * @ApiFilter(SearchFilter::class, properties={"name": "ipartial"})
+ * @ApiFilter(MissionTypeFilter::class,properties={"missionType.name"} )
  */
 class Mission
 {

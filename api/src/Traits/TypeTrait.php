@@ -17,7 +17,7 @@ trait TypeTrait
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Type", "MissionSingleOutput"})
+     * @Groups({"Type", "MissionSingleOutput", "Mission"})
      */
     protected $name;
 

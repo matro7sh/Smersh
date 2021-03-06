@@ -23,7 +23,8 @@
         <mat-card-header>
             <mat-card-title style="display:flex; flex-direction: row;">
                 <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
-                <span class="vertical-center">{{mission?.name}}</span>
+                <span class="vertical-center">{{mission?.name}} - {{ mission?.missionType.name }}</span>
+
                 <button mat-raised-button color="primary" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">Edit</button>
             </mat-card-title>
         </mat-card-header>

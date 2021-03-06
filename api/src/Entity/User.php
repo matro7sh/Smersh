@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
@@ -25,6 +26,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="`user`")
  * @ApiFilter(NumericFilter::class, properties={"id"})
  * @ApiFilter(SearchFilter::class, properties={"username": "ipartial"})
+ *
  */
 class User implements UserInterface
 {

@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(attributes={"normalization_context"={"groups"={"Clients"}}})
  * @ORM\Entity(repositoryClass=ClientRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "mail": "ipartial"})
+ * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "mail": "ipartial", "phone": "ipartial"})
  */
 class Client
 {

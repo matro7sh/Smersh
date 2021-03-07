@@ -10,7 +10,6 @@ import { MissionRouter } from 'src/app/router/MissionRouter';
   styleUrls: [],
 })
 export class MissionsListComponent extends GenericListComponent {
-  public filters = ['name'];
   resource = 'missions';
   singularResource = 'Mission';
   routerHelper = MissionRouter;

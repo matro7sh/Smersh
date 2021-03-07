@@ -21,17 +21,9 @@ final class MissionTypeFilter extends AbstractContextAwareFilter
             return;
         }
 
-        /* $queryBuilder->andWhere('o.missionType = :name');
-        $queryBuilder->setParameter('name', $value);
-        */
-
-
         $parameterName = $queryNameGenerator->generateParameterName(self::FILTER_NAME);
-
         $queryBuilder->andWhere('SUBSTRING(o.missionType.name, 1, 2)  in (:'.$parameterName.')');
-
-        $queryBuilder
-            ->setParameter($parameterName, $value);
+        $queryBuilder->setParameter($parameterName, $value);
     }
 
 

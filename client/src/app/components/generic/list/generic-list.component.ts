@@ -6,6 +6,13 @@ import { AbstractRouter } from 'src/app/router/router';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 import { FilterService } from 'src/app/services/filter.service';
 import { PageEvent } from '@angular/material/paginator';
+import {
+  API_CREATE_ACTION,
+  API_DELETE_ACTION,
+  API_GET_ITEM_ACTION,
+  API_UPDATE_ACTION,
+  isGranted,
+} from 'src/app/security/isGranted';
 
 const DELETE_ACTION = 'delete';
 const EDIT_ACTION = 'edit';
@@ -68,9 +75,15 @@ export class GenericListComponent implements OnInit {
 
   getPermissions(): Record<string, string> {
     const permissions = {};
-    this.buttonActions.forEach(
-      (action) => (permissions[action.name] = action.color)
-    );
+    this.buttonActions
+      .filter((button) =>
+        isGranted(
+          `ROLE_${this.singularResource.toUpperCase()}_${this.getAPIAction(
+            button.name
+          )}`
+        )
+      )
+      .forEach((action) => (permissions[action.name] = action.color));
     return permissions;
   }
 
@@ -149,7 +162,23 @@ export class GenericListComponent implements OnInit {
   }
 
   isEnabledCreation(): boolean {
-    return this.actions.some((e) => e.name === CREATE_ACTION);
+    return (
+      this.actions.some((e) => e.name === CREATE_ACTION) &&
+      isGranted(`ROLE_${this.singularResource.toUpperCase()}_POST`)
+    );
+  }
+
+  getAPIAction(field: string): string {
+    switch (field) {
+      case SHOW_ACTION:
+        return API_GET_ITEM_ACTION;
+      case CREATE_ACTION:
+        return API_CREATE_ACTION;
+      case EDIT_ACTION:
+        return API_UPDATE_ACTION;
+      case DELETE_ACTION:
+        return API_DELETE_ACTION;
+    }
   }
 
   applyActionOnResource(action: string, id: string): void {

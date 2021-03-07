@@ -66,3 +66,7 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postLoad }
             - { name: doctrine.event_listener, event: prePersist }
+
+    App\Extension\AssignedMissionExtension:
+        tags:
+            - { name: api_platform.doctrine.orm.query_extension.collection }

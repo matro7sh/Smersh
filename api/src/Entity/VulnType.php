@@ -10,7 +10,19 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Type"}}})
+ * @ApiResource(
+ *      attributes={"normalization_context"={"groups"={"Type"}}}),
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_VULN_TYPE_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_VULN_TYPE_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_VULN_TYPE_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_VULN_TYPE_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_VULN_TYPE_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_VULN_TYPE_PUT')"}
+ *      },
+ * )
  * @ORM\Entity
  */
 class VulnType

@@ -13,7 +13,7 @@ import { UserRouter } from 'src/app/router/UserRouter';
   styleUrls: [],
 })
 export class UsersListComponent extends GenericListComponent {
-  filters = ['username'];
+  filters = ['id', 'username'];
   resource = 'users';
   singularResource = 'User';
   routerHelper = UserRouter;

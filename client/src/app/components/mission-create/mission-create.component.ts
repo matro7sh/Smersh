@@ -65,25 +65,30 @@ export class MissionCreateComponent implements OnInit {
 
   loadUsers(): void {
     this.users = [];
-    this.usersService.getData().then((users: UserModelApplication[]) => {
-      this.AllUsers = users;
-    });
+    this.usersService
+      .getData()
+      .then(({ data }: { count: number; data: UserModelApplication[] }) => {
+        this.AllUsers = data;
+      });
   }
 
   loadTypes(): void {
     this.types = [];
     this.typesServices
       .getData()
-      .then((types: AbstractTypeModelApplication[]) => {
-        this.types = types;
-      });
+      .then(
+        ({ data }: { count: number; data: AbstractTypeModelApplication[] }) =>
+          (this.types = data)
+      );
   }
 
   loadClients(): void {
     this.clients = [];
-    this.clientServices.getData().then((clients: ClientModelApplication[]) => {
-      this.clients = clients;
-    });
+    this.clientServices
+      .getData()
+      .then(({ data }: { count: number; data: ClientModelApplication[] }) => {
+        this.clients = data;
+      });
   }
 
   onSubmit(form: NgForm): void {

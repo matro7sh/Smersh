@@ -13,7 +13,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "normalization_context"={
  *              "groups"={"Step"}
  *          }
- *      }
+ *      },
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_STEP_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_STEP_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_STEP_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_STEP_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_STEP_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_STEP_PUT')"}
+ *      },
+ *
  * )
  * @ORM\Entity(repositoryClass=StepRepository::class)
  */

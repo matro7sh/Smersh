@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Controller\UploadHostController;
 use Doctrine\ORM\Mapping\JoinColumn;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,26 +18,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
- *  normalizationContext={"groups"={"Host:output"}},
- *  security="is_granted('IS_AUTHENTICATED_FULLY')",
- *  collectionOperations={
- *      "get",
- *      "post"
- *  },
- *  itemOperations={
- *      "get",
- *      "delete",
- *      "patch",
- *      "put",
- *      "post_upload"={
- *          "method"="POST",
- *          "path"="/upload/host",
- *          "controller"=UploadHostController::class,
- *          "denormalization_context"={"groups"={"Host:upload:input"}}
+ *      normalizationContext={"groups"={"Host:output"}},
+ *      security="is_granted('IS_AUTHENTICATED_FULLY')",
+ *      collectionOperations={
+ *           "get"={"security"="is_granted('ROLE_HOST_GET_LIST')"},
+ *           "post"={"security"="is_granted('ROLE_HOST_POST')"}
+ *      },
+ *      itemOperations={
+ *           "delete"={"security"="is_granted('ROLE_HOST_DELETE')"},
+ *           "get"={"security"="is_granted('ROLE_HOST_GET_ITEM', object)"},
+ *           "patch"={"security"="is_granted('ROLE_HOST_PATCH', object)"},
+ *           "put"={"security"="is_granted('ROLE_HOST_PUT', object)"},
+ *           "post_upload"={
+ *               "security"="is_granted('ROLE_HOST_UPLOAD', object)",
+ *               "method"="POST",
+ *               "path"="/upload/host",
+ *               "controller"=UploadHostController::class,
+ *               "denormalization_context"={"groups"={"Host:upload:input"}}
+ *           }
  *      }
- *  }
  * )
  * @ORM\Entity(repositoryClass=HostRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "technology": "ipartial"})
  */
 class Host
 {

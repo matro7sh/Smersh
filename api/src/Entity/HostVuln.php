@@ -16,7 +16,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "denormalization_context"={
  *              "groups"={"HostVuln:input"}
  *          }
- *      }
+ *      },
+ *      collectionOperations={
+ *           "get"={"security"="is_granted('ROLE_HOST_VULN_GET_LIST')"},
+ *           "post"={"security"="is_granted('ROLE_HOST_VULN_POST')"}
+ *      },
+ *      itemOperations={
+ *           "delete"={"security"="is_granted('ROLE_HOST_VULN_DELETE')"},
+ *           "get"={"security"="is_granted('ROLE_HOST_VULN_GET_ITEM')"},
+ *           "patch"={"security"="is_granted('ROLE_HOST_VULN_PATCH')"},
+ *           "put"={"security"="is_granted('ROLE_HOST_VULN_PUT')"}
+ *      },
  * )
  * @ORM\Entity(repositoryClass=HostVulnRepository::class)
  */

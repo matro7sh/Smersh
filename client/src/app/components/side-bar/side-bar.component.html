@@ -1,32 +1,31 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-toolbar color="primary" class="example-toolbar">
-        <img [routerLink]="['/missions/']" src="/assets/logo.png" class="logo-navbar"/>
-        {{title}} - {{version}} <span class="example-spacer"></span>
-            <button mat-mini-fab color="primary"  (click)="switchToFR()">FR</button>
-            <button mat-mini-fab color="warn"    (click)="switchToEN()">EN</button>
-            <button mat-mini-fab color="warn"    (click)="themeService.toggleTheme()">
-                <mat-icon *ngIf="themeService.currentTheme !== 'dark-theme'">dark_mode</mat-icon>
-                <mat-icon *ngIf="themeService.currentTheme === 'dark-theme'">light_mode</mat-icon>
-            </button>
-            <button mat-raised-button  (click)="logout()">Logout - {{ username }}</button>
-    </mat-toolbar>
+<div class="example-container app-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <img [routerLink]="['/missions/']" src="/assets/logo.png" class="logo-navbar"/>
+    {{title}} - {{version}} <span class="example-spacer"></span>
+    <button mat-mini-fab color="primary" (click)="switchToFR()">FR</button>
+    <button mat-mini-fab color="warn" (click)="switchToEN()">EN</button>
+    <button mat-mini-fab color="warn" (click)="themeService.toggleTheme()">
+      <mat-icon>
+        {{ themeService.currentTheme === 'dark-theme' ? 'light' : 'dark' }}_mode
+      </mat-icon>
+    </button>
+    <button mat-raised-button (click)="logout()">Logout - {{ username }}</button>
+  </mat-toolbar>
 
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav opened="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                     [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-            <mat-nav-list>
-                <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
-                    <b>{{item?.key}}</b>
-                </a>
-            </mat-nav-list>
-        </mat-sidenav>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav opened="true" #snav mode="side" fixedInViewport="true" fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
+          <b>{{item?.key}}</b>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
 
-        <mat-sidenav-content class="yolo">
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
+    <mat-sidenav-content class="p-2">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
 
-    </mat-sidenav-container>
+  </mat-sidenav-container>
 </div>
 
 

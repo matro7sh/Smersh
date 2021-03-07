@@ -7,7 +7,18 @@ use App\Repository\NegativePointRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_NEGATIVE_POINT_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_NEGATIVE_POINT_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_NEGATIVE_POINT_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_NEGATIVE_POINT_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_NEGATIVE_POINT_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_NEGATIVE_POINT_PUT')"}
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=NegativePointRepository::class)
  */
 class NegativePoint

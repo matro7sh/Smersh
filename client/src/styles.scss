@@ -22,11 +22,6 @@ body {
     background-color: black
 }
 
-
-.yolo {
-    padding: 30px;
-}
-
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color: #3f51b5;
 }
@@ -64,6 +59,32 @@ body {
 .my-auto {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+@for $i from 0 through 5 {
+    .p-#{$i} {
+        padding: $i+rem;
+    }
+    .pb-#{$i} {
+        padding-bottom: $i+rem;
+    }
+    .pl-#{$i} {
+        padding-left: $i+rem;
+    }
+    .pr-#{$i} {
+        padding-right: $i+rem;
+    }
+    .pt-#{$i} {
+        padding-top: $i+rem;
+    }
+    .px-#{$i} {
+        padding-left: $i+rem;
+        padding-right: $i+rem;
+    }
+    .py-#{$i} {
+        padding-bottom: $i+rem;
+        padding-top: $i+rem;
+    }
 }
 
 .add-resource {

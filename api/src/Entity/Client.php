@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,8 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Clients"}}})
+ * @ApiResource(
+ *      attributes={"normalization_context"={"groups"={"Clients"}}},
+ *      collectionOperations={
+ *           "get"={"security"="is_granted('ROLE_CLIENT_GET_LIST')"},
+ *           "post"={"security"="is_granted('ROLE_CLIENT_POST')"}
+ *      },
+ *      itemOperations={
+ *           "delete"={"security"="is_granted('ROLE_CLIENT_DELETE')"},
+ *           "get"={"security"="is_granted('ROLE_CLIENT_GET_ITEM')"},
+ *           "patch"={"security"="is_granted('ROLE_CLIENT_PATCH')"},
+ *           "put"={"security"="is_granted('ROLE_CLIENT_PUT')"}
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "mail": "ipartial", "phone": "ipartial"})
  */
 class Client
 {

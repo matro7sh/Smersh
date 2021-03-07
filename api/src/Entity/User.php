@@ -16,11 +16,17 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
- *     attributes={"normalization_context"={"groups"={"User"}}},
- *     collectionOperations={
- *         "get"={"security"="is_granted('ROLE_ADMIN')"},
- *         "post"={"security"="is_granted('IS_AUTHENTICATED_FULLY')"}
- *      }
+ *      attributes={"normalization_context"={"groups"={"User"}}},
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_USER_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_USER_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "get"={"security"="is_granted('ROLE_USER_GET_ITEM', object)"},
+ *          "patch"={"security"="is_granted('ROLE_USER_PATCH', object)"},
+ *          "put"={"security"="is_granted('ROLE_USER_PUT', object)"}
+ *      },
  * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")

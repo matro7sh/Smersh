@@ -25,7 +25,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "denormalization_context"={
  *              "groups"={"Vulns", "translations"}
  *          }
- *      }
+ *      },
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_VULN_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_VULN_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_VULN_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_VULN_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_VULN_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_VULN_PUT')"}
+ *      },
+ *
  * )
  * @ORM\Entity(repositoryClass=VulnRepository::class)
  */
@@ -51,7 +62,7 @@ class Vuln extends AbstractTranslatable
     private $vulnType;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Impact::class, inversedBy="vunls")
+     * @ORM\ManyToOne(targetEntity=Impact::class, inversedBy="vulns")
      * @Groups({"Vulns"})
      */
     private $impact;

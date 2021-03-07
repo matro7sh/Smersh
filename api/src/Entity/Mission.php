@@ -18,16 +18,19 @@ use App\Filter\MissionTypeFilter;
  * @ApiResource(
  *      attributes={"normalization_context"={"groups"={"Mission"}}},
  *      collectionOperations={
- *         "get"={"security"="is_granted('ROLE_ADMIN')"},
- *         "post"={"security"="is_granted('IS_AUTHENTICATED_FULLY')"}
+ *           "get"={"security"="is_granted('ROLE_MISSION_GET_LIST')"},
+ *           "post"={"security"="is_granted('ROLE_MISSION_POST')"}
  *      },
  *      itemOperations={
- *         "get"={"normalization_context"={"groups"={"MissionSingleOutput"}}},
- *         "patch"={"security"="is_granted('ROLE_ADMIN') or user == object.author"},
- *         "put"={"security"="is_granted('ROLE_USER')"},
- *         "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *           "delete"={"security"="is_granted('ROLE_ADMIN')"},
+ *           "get"={
+ *              "normalization_context"={"groups"={"MissionSingleOutput"}},
+ *              "security"="is_granted('ASSOCIATED_USER_ENABLED', object)"
+ *           },
+ *           "patch"={"security"="is_granted('ASSOCIATED_USER_ENABLED')"},
+ *           "put"={"security"="is_granted('ASSOCIATED_USER_ENABLED')"}
  *      }
- *     )
+ * )
  * @ORM\Entity(repositoryClass=MissionRepository::class)
  * @ApiFilter(SearchFilter::class, properties={"name": "ipartial"})
  * @ApiFilter(MissionTypeFilter::class,properties={"missionType.name"} )

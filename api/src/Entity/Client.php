@@ -12,7 +12,19 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(attributes={"normalization_context"={"groups"={"Clients"}}})
+ * @ApiResource(
+ *      attributes={"normalization_context"={"groups"={"Clients"}}},
+ *      collectionOperations={
+ *           "get"={"security"="is_granted('ROLE_CLIENT_GET_LIST')"},
+ *           "post"={"security"="is_granted('ROLE_CLIENT_POST')"}
+ *      },
+ *      itemOperations={
+ *           "delete"={"security"="is_granted('ROLE_CLIENT_DELETE')"},
+ *           "get"={"security"="is_granted('ROLE_CLIENT_GET_ITEM')"},
+ *           "patch"={"security"="is_granted('ROLE_CLIENT_PATCH')"},
+ *           "put"={"security"="is_granted('ROLE_CLIENT_PUT')"}
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=ClientRepository::class)
  * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "mail": "ipartial", "phone": "ipartial"})
  */

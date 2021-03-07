@@ -10,7 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_NMAP_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_NMAP_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_NMAP_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_NMAP_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_NMAP_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_NMAP_PUT')"}
+ *      },
+ * )
  * @ORM\Entity(repositoryClass=NmapRepository::class)
  */
 class Nmap

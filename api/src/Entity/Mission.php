@@ -27,8 +27,8 @@ use App\Filter\MissionTypeFilter;
  *              "normalization_context"={"groups"={"MissionSingleOutput"}},
  *              "security"="is_granted('ASSOCIATED_USER_ENABLED', object)"
  *           },
- *           "patch"={"security"="is_granted('ASSOCIATED_USER_ENABLED')"},
- *           "put"={"security"="is_granted('ASSOCIATED_USER_ENABLED')"}
+ *           "patch"={"security"="is_granted('ASSOCIATED_USER_ENABLED', object)"},
+ *           "put"={"security"="is_granted('ASSOCIATED_USER_ENABLED', object)"}
  *      }
  * )
  * @ORM\Entity(repositoryClass=MissionRepository::class)

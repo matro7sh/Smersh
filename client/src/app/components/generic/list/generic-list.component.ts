@@ -73,14 +73,16 @@ export class GenericListComponent implements OnInit {
     );
   }
 
+  protected getBaseRoleForResource(): string {
+    return `ROLE_${this.resource.slice(0, -1).toUpperCase()}_`;
+  }
+
   getPermissions(): Record<string, string> {
     const permissions = {};
     this.buttonActions
       .filter((button) =>
         isGranted(
-          `ROLE_${this.singularResource.toUpperCase()}_${this.getAPIAction(
-            button.name
-          )}`
+          `${this.getBaseRoleForResource()}${this.getAPIAction(button.name)}`
         )
       )
       .forEach((action) => (permissions[action.name] = action.color));
@@ -164,7 +166,7 @@ export class GenericListComponent implements OnInit {
   isEnabledCreation(): boolean {
     return (
       this.actions.some((e) => e.name === CREATE_ACTION) &&
-      isGranted(`ROLE_${this.singularResource.toUpperCase()}_POST`)
+      isGranted(`${this.getBaseRoleForResource()}POST`)
     );
   }
 

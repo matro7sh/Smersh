@@ -21,7 +21,17 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "denormalization_context"={
  *              "groups"={"Impact:input"}
  *          }
- *      }
+ *      },
+ *      collectionOperations={
+ *          "get"={"security"="is_granted('ROLE_IMPACT_GET_LIST')"},
+ *          "post"={"security"="is_granted('ROLE_IMPACT_POST')"}
+ *      },
+ *      itemOperations={
+ *          "delete"={"security"="is_granted('ROLE_IMPACT_DELETE')"},
+ *          "get"={"security"="is_granted('ROLE_IMPACT_GET_ITEM')"},
+ *          "patch"={"security"="is_granted('ROLE_IMPACT_PATCH')"},
+ *          "put"={"security"="is_granted('ROLE_IMPACT_PUT')"}
+ *      },
  * )
  * @ORM\Entity(repositoryClass=ImpactRepository::class)
  * @UniqueEntity(

@@ -306,7 +306,7 @@ export class MissionSingleComponent implements OnInit {
         type: 'application/json',
       });
       a.href = URL.createObjectURL(file);
-      a.download = 'dump.json';
+      a.download = `dump-mission-${this.id}.json`;
       a.click();
     });
   }

@@ -16,6 +16,7 @@ import { HostsService } from 'src/app/services/hosts.service';
   styleUrls: [],
 })
 export class HostsListComponent extends GenericListComponent {
+  public filters = ['name', 'technology'];
   public buttonActions = [SHOW, EDIT, DELETE];
   public actions = [...this.buttonActions];
   resource = 'hosts';

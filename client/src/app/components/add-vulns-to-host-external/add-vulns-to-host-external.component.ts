@@ -62,24 +62,28 @@ export class AddVulnsToHostExternalComponent implements OnInit {
 
   // get all vulns
   loadVulns(): void {
-    this.vulnsService.getData().then((vulns: VulnModelApplication[]) => {
-      const locale = new Locale().get();
-      this.vulns = vulns.map((e) => ({
-        name: e.translations[locale].name,
-        value: e['@id'],
-      }));
-    });
+    this.vulnsService
+      .getData()
+      .then(({ data }: { count: number; data: VulnModelApplication[] }) => {
+        const locale = new Locale().get();
+        this.vulns = data.map((e) => ({
+          name: e.translations[locale].name,
+          value: e['@id'],
+        }));
+      });
   }
 
   loadImpact(): void {
-    this.impactService.getData().then((impacts: ImpactModelApplication[]) => {
-      this.impacts = impacts.map((e) => {
-        return {
-          name: e.name,
-          value: e['@id'],
-        };
+    this.impactService
+      .getData()
+      .then(({ data }: { count: number; data: ImpactModelApplication[] }) => {
+        this.impacts = data.map((e) => {
+          return {
+            name: e.name,
+            value: e['@id'],
+          };
+        });
       });
-    });
   }
 
   // get all hosts from mission id

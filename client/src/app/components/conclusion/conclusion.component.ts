@@ -21,7 +21,7 @@ export class ConclusionComponent implements OnInit {
       [this.positivePointsServices, this.negativePointsService].map((action) =>
         action.getData()
       )
-    ).then(([positive, negative]) => {
+    ).then(([{ data: positive }, { data: negative }]) => {
       this.positivePoints = positive;
       this.negativePoints = negative;
     });

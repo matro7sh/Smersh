@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container">
+<mat-drawer-container class="smersh-container">
     <mat-drawer mode="side" opened id="action_check">
         <mat-list role="list">
             <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
@@ -22,7 +22,7 @@
         <mat-card>
         <mat-card-header>
             <mat-card-title style="display:flex; flex-direction: row;">
-                <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
+                <mat-icon mat-card-avatar class="smersh-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
                 <span class="vertical-center">{{mission?.name}}</span>
                 <button mat-raised-button color="primary" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">Edit</button>
             </mat-card-title>

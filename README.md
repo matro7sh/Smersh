@@ -10,8 +10,10 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 ![demo](img/demo.gif)
 
 
-## View of single mission
-![showMission](img/showMission.png)
+## Search bar with dark theme
+![showMission](img/searchbar.png)
+
+## Hacktivity tab
 
 ![hacktivity](img/hacktivity.png)
 

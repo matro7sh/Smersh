@@ -299,6 +299,18 @@ export class MissionSingleComponent implements OnInit {
     filterValue = filterValue.toLowerCase();
   }
 
+  exportData(): void {
+    this.missionsService.getDataById(this.id).subscribe((data) => {
+      const a = document.createElement('a');
+      const file = new Blob([JSON.stringify(data)], {
+        type: 'application/json',
+      });
+      a.href = URL.createObjectURL(file);
+      a.download = 'dump.json';
+      a.click();
+    });
+  }
+
   generate(): void {
     loadFile(`/assets/Smersh.docx`, (error, content) => {
       if (error) {

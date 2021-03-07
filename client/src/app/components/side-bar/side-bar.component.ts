@@ -1,7 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { ConnectionService } from '../../services/connection.service';
 import { Locale } from '../../storage/Locale';
 import { MissionRouter } from 'src/app/router/MissionRouter';
@@ -11,6 +10,7 @@ import { UserRouter } from 'src/app/router/UserRouter';
 import { ImpactRouter } from 'src/app/router/ImpactRouter';
 import { ClientRouter } from 'src/app/router/ClientRouter';
 import { ThemeService } from 'src/app/services/theme.service';
+import { isGranted } from 'src/app/security/isGranted';
 
 @Component({
   selector: 'app-side-bar',
@@ -21,16 +21,7 @@ export class SideBarComponent implements OnInit {
   @Input() opened: boolean; // opened or not by default
   mobileQuery: MediaQueryList;
   title = 'Smersh';
-  fillerNav = {
-    Missions: MissionRouter.redirectToList(),
-    Vulns: VulnRouter.redirectToList(),
-    Hosts: HostRouter.redirectToList(),
-    User: UserRouter.redirectToList(),
-    Impacts: ImpactRouter.redirectToList(),
-    Conclusion: '/conclusion/generate',
-    Clients: ClientRouter.redirectToList(),
-    // "Type":"types",
-  };
+  fillerNav: Record<string, string> = {};
   public username: '';
   public version = `${environment.version}`;
 
@@ -40,12 +31,22 @@ export class SideBarComponent implements OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private connection: ConnectionService,
-    private router: Router,
     public themeService: ThemeService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
+    Object.entries({
+      Mission: MissionRouter.redirectToList(),
+      Vuln: VulnRouter.redirectToList(),
+      Host: HostRouter.redirectToList(),
+      User: UserRouter.redirectToList(),
+      Impact: ImpactRouter.redirectToList(),
+      Client: ClientRouter.redirectToList(),
+    })
+      .filter(([k]) => isGranted(`ROLE_${k.toUpperCase()}_GET_LIST`))
+      .map(([k, v]) => (this.fillerNav[`${k}s`] = v));
   }
 
   ngOnDestroy(): void {
@@ -66,7 +67,7 @@ export class SideBarComponent implements OnInit {
     new Locale().set('en');
   }
 
-  logout() {
+  logout(): void {
     this.connection.logout();
   }
 }

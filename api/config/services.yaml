@@ -34,7 +34,8 @@ services:
     # please note that last definitions always *replace* previous ones
     acme_api.event.jwt_created_listener:
         class: App\Subscriber\JWTGenerationSubscriber
-        arguments: [ '@request_stack' ]
+        arguments:
+            $roleHierarchy: '@security.role_hierarchy'
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 

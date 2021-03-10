@@ -3,9 +3,9 @@
     <img [routerLink]="['/missions/']" src="/assets/logo.png" class="logo-navbar"/>
     {{title}} - {{version}} <span class="example-spacer"></span>
     <div class="smersh-button-row">
-    <button mat-mini-fab color="primary" class="test" (click)="switchToFR()">FR</button>
-    <button mat-mini-fab color="warn" class="test" (click)="switchToEN()">EN</button>
-    <button mat-mini-fab color="warn" class="test" (click)="themeService.toggleTheme()">
+    <button mat-mini-fab color="primary" (click)="switchToFR()">FR</button>
+    <button mat-mini-fab color="primary" (click)="switchToEN()">EN</button>
+    <button mat-mini-fab color="warn" (click)="themeService.toggleTheme()">
       <mat-icon>
         {{ themeService.currentTheme === 'dark-theme' ? 'light' : 'dark' }}_mode
       </mat-icon>

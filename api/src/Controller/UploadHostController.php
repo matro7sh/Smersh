@@ -73,10 +73,8 @@ class UploadHostController extends AbstractController
                     } else {
                         \array_push($rejectedDomains, $name);
                     }
-
             }
             $this->entityManager->flush();
-
             fclose($handle);
         } else {}
 

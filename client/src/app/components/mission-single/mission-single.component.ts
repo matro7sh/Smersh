@@ -149,7 +149,6 @@ export class MissionSingleComponent implements OnInit {
       this.hosts.map(host => {
         e['target']['scope']['include'].push({"enabled":true,"prefix":host.name});
       })
-      console.log(e['target']['scope']['include']);
       const a = document.createElement('a');
       const file = new Blob([JSON.stringify(e)], {
         type: 'application/json',

@@ -13,6 +13,3 @@ export class configService {
         return this.http.get('src/assets/burp.json');
     }
 }
-
-
-

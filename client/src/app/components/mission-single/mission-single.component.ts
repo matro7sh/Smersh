@@ -145,7 +145,7 @@ export class MissionSingleComponent implements OnInit {
 
   exportBurp(): void {
     this.loadData(this.missionId);
-    this.burp.getJSON().subscribe(e => {
+    this.burp.getBurpConfiguration().subscribe(e => {
       this.hosts.map(host => {
         e['target']['scope']['include'].push({"enabled":true,"prefix":host.name});
       })

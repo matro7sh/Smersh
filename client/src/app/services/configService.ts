@@ -9,7 +9,7 @@ export class configService {
 
     constructor(private http: HttpClient) { }
 
-    public getJSON(): Observable<any> {
+    public getBurpConfiguration(): Observable<any> {
         return this.http.get('src/assets/burp.json');
     }
 }

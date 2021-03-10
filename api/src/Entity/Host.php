@@ -54,9 +54,6 @@ class Host
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"MissionSingleOutput", "Host:output"})
-     * @Assert\Url(
-     *    protocols = {"http", "https", "ftp"}
-     * )
      */
     private $name;
 

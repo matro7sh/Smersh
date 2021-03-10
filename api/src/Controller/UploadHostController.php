@@ -55,7 +55,6 @@ class UploadHostController extends AbstractController
             while (($line = fgets($handle)) !== false) {
                 $name = str_replace("\n","",$line);
                 $name = strtolower($name);
-                if (preg_match(static::REGEX_URL, $name)) {
                     $currentHost = $this->hostRepository->findOneByName($name);
                     if (!$currentHost instanceof Host) {
                         try {
@@ -74,10 +73,7 @@ class UploadHostController extends AbstractController
                     } else {
                         \array_push($rejectedDomains, $name);
                     }
-                } else {
-                    \array_push($rejectedDomains, $name);
-                    $this->logger->warning($name);
-                }
+
             }
             $this->entityManager->flush();
 

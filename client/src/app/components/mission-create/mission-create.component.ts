@@ -105,7 +105,7 @@ export class MissionCreateComponent implements OnInit {
       })
       .subscribe(
         () => {
-          this.openSnackBar('Vuln added');
+          this.openSnackBar('Mission created');
           this.router.navigateByUrl(MissionRouter.redirectToList());
         },
         (err) => {

@@ -273,6 +273,7 @@ export class MissionSingleComponent implements OnInit {
     fd.append('filename', this.file);
     fd.append('missionName', this.mission.name);
     this.uploadServices.uploadHosts(fd).then(
+      () => this.ngOnInit(),
       () => this.router.navigateByUrl(MissionRouter.redirectToShow(this.id)),
       () =>
         this.openSnackBar(

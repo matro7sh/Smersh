@@ -164,7 +164,7 @@
     <div id="wrapper_generate">
         <button  mat-button mat-raised-button color="primary" (click)="generate()" id="generate">Generate document</button>
         <button  mat-button mat-raised-button color="warn" (click)="exportData()" id="generate">Dump to json file</button>
-        <button  mat-button mat-raised-button color="danger" (click)="exportBurp()" id="generate">Download burp configuration</button>
+        <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">Download burp configuration</button>
             <form class="paddingcodi"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
                 <mat-form-field class="example-full-width">
 

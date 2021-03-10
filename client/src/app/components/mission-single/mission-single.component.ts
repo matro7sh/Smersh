@@ -26,8 +26,7 @@ import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
-import {Observable} from "rxjs";
-import {configService} from "src/app/services/configService";
+import { configService } from 'src/app/services/configService';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);

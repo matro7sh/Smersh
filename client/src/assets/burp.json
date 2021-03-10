@@ -456,19 +456,7 @@
     "scope":{
       "advanced_mode":false,
       "exclude":[],
-      "include":[
-        {
-          "enabled":true,
-          "prefix":"https://toto.com/"
-        },
-        {
-          "enabled":true,
-          "prefix":"https://titi.fr"
-        },{
-          "enabled":true,
-          "prefix":"https://github.com/jenaye"
-        }
-      ]
+      "include":[]
     }
   }
 }

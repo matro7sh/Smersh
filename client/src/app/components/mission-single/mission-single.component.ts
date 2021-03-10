@@ -137,28 +137,27 @@ export class MissionSingleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    var toto = this.burp.getJSON().subscribe();
-
-    let idModified = toto.map(
-        obj => {
-          return {
-            "id" : obj._id,
-            "email":obj.email,
-          }
-        }
-    );
-    console.log(idModified)
-
-     // console.log("AVANT PUSH",e['target']['scope']['include']);
-     // e['target']['scope']['include'].push({"enabled":true,"prefix":"pending"});
-     // console.log("APRES PUSH", e['target']['scope']['include'])
-   // getJson['include'].push({"enabled":true,"prefix":"pending"});
-
-
     this.loadData(this.missionId);
     this.uploadForm = this.fb.group({
       filename: '',
       userFile: null,
+    });
+  }
+
+  exportBurp(): void {
+    this.loadData(this.missionId);
+    this.burp.getJSON().subscribe(e => {
+      this.hosts.map(host => {
+        e['target']['scope']['include'].push({"enabled":true,"prefix":host.name});
+      })
+      console.log(e['target']['scope']['include']);
+      const a = document.createElement('a');
+      const file = new Blob([JSON.stringify(e)], {
+        type: 'application/json',
+      });
+      a.href = URL.createObjectURL(file);
+      a.download = `burpConfig-mission${this.missionName}.json`;
+      a.click();
     });
   }
 

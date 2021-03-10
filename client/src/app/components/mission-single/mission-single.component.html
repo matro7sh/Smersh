@@ -151,12 +151,8 @@
             <mat-divider [vertical]="true"></mat-divider>
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">
-                    <input type="file" id="userFile" (change)="onSelectFile($event)" #fileInput style="display: none">
-                    <mat-form-field >
-                      <input matInput formControlName="filename" placeholder="File" readonly>
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" (click)="selectFile()">Select</button>
-                    <button mat-raised-button color="primary" (click)="sendFile()" >ADD NEW HOSTS FROM</button>
+                    <input type="file" id="file" (change)="onSelectFile($event)" #fileInput>
+                    <button mat-raised-button color="primary" (click)="sendFile()" >Submit import</button>
                 </form>
             </div>
         </mat-card-actions>

@@ -26,6 +26,8 @@ import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
+import {Observable} from "rxjs";
+import {configService} from "src/app/services/configService";
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -61,6 +63,7 @@ export class MissionSingleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private burp: configService,
     private _snackBar: MatSnackBar,
     private hostsService: HostsService,
     private stepsService: StepsService,
@@ -134,6 +137,24 @@ export class MissionSingleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var toto = this.burp.getJSON().subscribe();
+
+    let idModified = toto.map(
+        obj => {
+          return {
+            "id" : obj._id,
+            "email":obj.email,
+          }
+        }
+    );
+    console.log(idModified)
+
+     // console.log("AVANT PUSH",e['target']['scope']['include']);
+     // e['target']['scope']['include'].push({"enabled":true,"prefix":"pending"});
+     // console.log("APRES PUSH", e['target']['scope']['include'])
+   // getJson['include'].push({"enabled":true,"prefix":"pending"});
+
+
     this.loadData(this.missionId);
     this.uploadForm = this.fb.group({
       filename: '',

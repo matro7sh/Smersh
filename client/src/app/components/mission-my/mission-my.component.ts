@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import {MissionRouter} from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-mission-my',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 export class MissionMyComponent implements OnInit {
   public missions = [];
   public roles = [];
+  public count = 0;
 
   constructor(private usersServices: UsersService, private router: Router) {}
 
@@ -24,10 +26,11 @@ export class MissionMyComponent implements OnInit {
     this.roles = JSON.parse(decode).roles;
     this.usersServices.getDataById(id).subscribe((res) => {
       this.missions = res['missions'];
+      this.count = this.missions.length;
     });
   }
 
   editMission(id): void {
-    this.router.navigate(['/missions/edit/', id]);
+    this.router.navigateByUrl(MissionRouter.redirectToEdit(id));
   }
 }

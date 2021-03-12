@@ -17,7 +17,7 @@ import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
-import { configService } from 'src/app/services/configService';
+import { ConfigService } from 'src/app/services/configService';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -53,7 +53,7 @@ export class MissionSingleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private burp: configService,
+    private burp: ConfigService,
     private _snackBar: MatSnackBar,
     private hostsService: HostsService,
     private stepsService: StepsService,
@@ -134,7 +134,7 @@ export class MissionSingleComponent implements OnInit {
     });
   }
 
-  exportDocument(name: string, data: any): void {
+  exportDocument(name: string, data: unknown): void {
     const a = document.createElement('a');
     const file = new Blob([JSON.stringify(data)], {
       type: 'application/json',
@@ -144,24 +144,24 @@ export class MissionSingleComponent implements OnInit {
     a.click();
   }
 
+
   exportBurp(): void {
     this.loadData(this.missionId);
-    this.burp.getBurpConfiguration().subscribe((e) => {
-      const override = {
-        ...e,
-        target: {
-          ...e.target,
-          scope: {
-            ...e.target.scope,
-            include: [
-              ...e.target.scope.include,
-              ...this.hosts.map((h) => ({ enabled: true, prefix: h.name })),
-            ],
-          },
+    const burpConfig = this.burp.getBurpConfiguration();
+    const override = {
+      ...burpConfig,
+      target: {
+        ...burpConfig.target,
+        scope: {
+          ...burpConfig.target.scope,
+          include: [
+            ...burpConfig.target.scope.include,
+            ...this.hosts.map((h) => ({ "enabled": true, "prefix": h.name })),
+          ],
         },
-      };
-      this.exportDocument('burp', override);
-    });
+      },
+    };
+    this.exportDocument('burp', override);
   }
 
   getImpactColor(name: string): string {

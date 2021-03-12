@@ -197,6 +197,7 @@ export class MissionSingleComponent implements OnInit {
       (el) => {
         this.openSnackBar('codiMD updated');
         this.ngOnInit();
+        form.reset();
       },
       (err) => {
         if (err.status === '400') {
@@ -216,6 +217,7 @@ export class MissionSingleComponent implements OnInit {
       .subscribe(
         () => {
           this.ngOnInit();
+          form.reset();
         },
         (err) => {
           if (err.status === '400') {
@@ -237,6 +239,7 @@ export class MissionSingleComponent implements OnInit {
       .subscribe(
         () => {
           this.ngOnInit();
+          form.reset();
         },
         (err) => {
           if (err.status === '400') {

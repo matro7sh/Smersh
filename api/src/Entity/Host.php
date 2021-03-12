@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Constraint as AppConstraint;
 use App\Repository\HostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -55,8 +56,9 @@ class Host
      * @ORM\Column(type="string", length=255)
      * @Groups({"MissionSingleOutput", "Host:output"})
      * @Assert\AtLeastOneOf({
-     *     @Assert\Ip(message="not valid IP"),
-     *     @Assert\Hostname(message="The server name must be a valid hostname.")
+     *     @AppConstraint\Ip(message="The server name must be at least a valid IP."),
+     *     @Assert\Hostname(message="The server name must be at least a valid hostname."),
+     *     @Assert\Url(message="The server name must be at least a valid url.")
      * })
      */
     private $name;

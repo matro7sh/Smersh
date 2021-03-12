@@ -46,7 +46,7 @@
                                     <ng-template #elseBlock>hourglass_empty</ng-template>
                                 </mat-icon>
                                 <div mat-line style="padding: 14px;" id="host_vulnList">
-                                    <a class="violet">{{host.name}}</a>
+                                    <a class="displayBlock">{{host.name}}</a>
                                     <mat-chip-list aria-label="Fish selection">
                                         <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
                                             <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>

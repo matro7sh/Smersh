@@ -1,16 +1,7 @@
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MissionsService } from 'src/app/services/missions.service';
-import {
-  FormBuilder,
-  FormGroup,
-  NgForm,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { UploadsService } from 'src/app/services/uploads.service';
 import { HostsService } from 'src/app/services/hosts.service';
@@ -26,6 +17,7 @@ import { HostVulnRouter } from 'src/app/router/HostVulnRouter';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
+import { ConfigService } from 'src/app/services/configService';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -61,6 +53,7 @@ export class MissionSingleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private burp: ConfigService,
     private _snackBar: MatSnackBar,
     private hostsService: HostsService,
     private stepsService: StepsService,
@@ -139,6 +132,36 @@ export class MissionSingleComponent implements OnInit {
       filename: '',
       userFile: null,
     });
+  }
+
+  exportDocument(name: string, data: unknown): void {
+    const a = document.createElement('a');
+    const file = new Blob([JSON.stringify(data)], {
+      type: 'application/json',
+    });
+    a.href = URL.createObjectURL(file);
+    a.download = `${name}-${this.missionName}.json`;
+    a.click();
+  }
+
+
+  exportBurp(): void {
+    this.loadData(this.missionId);
+    const burpConfig = this.burp.getBurpConfiguration();
+    const override = {
+      ...burpConfig,
+      target: {
+        ...burpConfig.target,
+        scope: {
+          ...burpConfig.target.scope,
+          include: [
+            ...burpConfig.target.scope.include,
+            ...this.hosts.map((h) => ({ "enabled": true, "prefix": h.name })),
+          ],
+        },
+      },
+    };
+    this.exportDocument('burp', override);
   }
 
   getImpactColor(name: string): string {
@@ -304,13 +327,7 @@ export class MissionSingleComponent implements OnInit {
 
   exportData(): void {
     this.missionsService.getDataById(this.id).subscribe((data) => {
-      const a = document.createElement('a');
-      const file = new Blob([JSON.stringify(data)], {
-        type: 'application/json',
-      });
-      a.href = URL.createObjectURL(file);
-      a.download = `dump-mission-${this.id}.json`;
-      a.click();
+      this.exportDocument('mission', data);
     });
   }
 

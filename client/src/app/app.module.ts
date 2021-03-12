@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
@@ -120,6 +121,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatRadioModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatBadgeModule,
     FormsModule,
     MatSnackBarModule,
     MatListModule,

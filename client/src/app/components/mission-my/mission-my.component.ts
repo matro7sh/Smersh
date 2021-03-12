@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import {MissionRouter} from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-mission-my',
@@ -28,6 +29,6 @@ export class MissionMyComponent implements OnInit {
   }
 
   editMission(id): void {
-    this.router.navigate(['/missions/edit/', id]);
+    this.router.navigateByUrl(MissionRouter.redirectToEdit(id));
   }
 }

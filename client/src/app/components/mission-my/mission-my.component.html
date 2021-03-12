@@ -1,4 +1,9 @@
-<h1>Welcome to your dashaboard</h1>
+<h1>Welcome to your dashaboard </h1>
+<div *ngIf="missions">
+    <p>
+    <span matBadge="{{missions.length}}" matBadgeOverlap="false">Assigned Mission</span>
+    </p>
+</div>
 <mat-card-content>
     <mat-tab-group>
         <mat-tab label="My missions" >

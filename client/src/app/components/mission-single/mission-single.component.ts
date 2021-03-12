@@ -199,10 +199,7 @@ export class MissionSingleComponent implements OnInit {
           linked: hostVuln.id,
           ...(hostVuln.vuln.translations[this.currentLocal] ?? {}),
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {},
-        })),
-        name: `${host.name.match(/^((https?|ftp):\/\/)/) ? '' : 'http://'}${
-          host.name
-        }`,
+        }))
       }));
 
       this.users = response['users'];

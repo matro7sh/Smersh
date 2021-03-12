@@ -15,8 +15,8 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav opened="true" #snav mode="side" fixedInViewport="true" fixedTopGap="56">
-      <mat-nav-list>
+    <mat-sidenav class="sizeofNavbar" opened="true" #snav mode="side" fixedInViewport="true" fixedTopGap="56">
+      <mat-nav-list class="centered">
         <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
           <b>{{item?.key}}</b>
         </a>

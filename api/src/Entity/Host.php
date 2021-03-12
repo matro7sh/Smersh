@@ -54,9 +54,10 @@ class Host
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"MissionSingleOutput", "Host:output"})
-     * @Assert\Url(
-     *    protocols = {"http", "https", "ftp"}
-     * )
+     * @Assert\AtLeastOneOf({
+     *     @Assert\Ip(message="not valid IP"),
+     *     @Assert\Hostname(message="The server name must be a valid hostname.")
+     * })
      */
     private $name;
 

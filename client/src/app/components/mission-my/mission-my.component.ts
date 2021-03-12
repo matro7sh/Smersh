@@ -11,7 +11,6 @@ import {MissionRouter} from "src/app/router/MissionRouter";
 export class MissionMyComponent implements OnInit {
   public missions = [];
   public roles = [];
-  public count = 0;
 
   constructor(private usersServices: UsersService, private router: Router) {}
 
@@ -26,7 +25,6 @@ export class MissionMyComponent implements OnInit {
     this.roles = JSON.parse(decode).roles;
     this.usersServices.getDataById(id).subscribe((res) => {
       this.missions = res['missions'];
-      this.count = this.missions.length;
     });
   }
 

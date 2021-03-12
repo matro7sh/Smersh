@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UploadHostController extends AbstractController
 {
-    const REGEX_URL = "/^((https?|ftp):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/";
+    const REGEX_URL_DNS = "((((https?|ftp):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|(([0-9]{1,3}\.){3}[0-9]{1,3}($|/(16|24|8))))";
 
     private $entityManager;
     private $hostRepository;
@@ -47,7 +47,6 @@ class UploadHostController extends AbstractController
         $content = $request->files->get("filename");
         $filename =  $content->getPathname();
         $missionName = $request->request->get("missionName");
-      //  $checked = $request->request->get("checked");
         $mission = $this->missionRepository->findOneByName($missionName);
 
         $handle = fopen($filename, "r");
@@ -55,7 +54,7 @@ class UploadHostController extends AbstractController
             while (($line = fgets($handle)) !== false) {
                 $name = str_replace("\n","",$line);
                 $name = strtolower($name);
-                if (preg_match(static::REGEX_URL, $name)) {
+                if (preg_match(static::REGEX_URL_DNS, $name)) {
                     $currentHost = $this->hostRepository->findOneByName($name);
                     if (!$currentHost instanceof Host) {
                         try {

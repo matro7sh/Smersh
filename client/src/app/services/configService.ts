@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import burpConfig from 'src/assets/burp.json';
+
+interface BurpInterface {
+  [key: string]: unknown;
+  target: {
+    [key: string]: unknown;
+    scope: {
+      [key: string]: unknown;
+      include: { enabled: boolean; prefix: string }[];
+    };
+  };
+}
 
 @Injectable({
   providedIn: 'root',
 })
-export class configService {
-  constructor(private http: HttpClient) {}
-
-  public getBurpConfiguration(): Observable<any> {
-    return this.http.get('/assets/burp.json');
+export class ConfigService {
+  public getBurpConfiguration(): BurpInterface {
+    return burpConfig;
   }
 }

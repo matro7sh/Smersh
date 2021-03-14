@@ -84,7 +84,7 @@ class Host
     /**
      * @ORM\ManyToOne(targetEntity=Mission::class, inversedBy="hosts")
      * @JoinColumn(name="mission_id", referencedColumnName="id")
-     * @Groups({"Host:output", "HostVuln:output"})
+     * @Groups({"Host:output"})
      */
     private $mission;
 

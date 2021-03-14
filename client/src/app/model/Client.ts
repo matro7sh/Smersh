@@ -8,8 +8,8 @@ import {
 interface ClientFromAPIInterface extends ObjectFromAPIInterface {
   name: string;
   phone: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   mail: string;
 }
 
@@ -29,9 +29,9 @@ export class ClientModelApplication extends AbstractModelApplication {
     super(props);
     this.name = props.name;
     this.phone = props.phone;
-    this.firstname = props.firstname;
-    this.lastname = props.lastname;
-    this.fullname = `${props.firstname} ${props.lastname}`;
+    this.firstname = props.firstName;
+    this.lastname = props.lastName;
+    this.fullname = `${props.firstName} ${props.lastname}`;
     this.mail = props.mail;
   }
 }

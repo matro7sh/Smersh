@@ -65,10 +65,4 @@ export class AbstractService {
       },
     });
   }
-
-  updateHeaders(headers: Record<string, string>): void {
-    Object.entries(headers).forEach(([k, v]) => {
-      this.headers = this.headers.set(k.toLowerCase(), v);
-    });
-  }
 }

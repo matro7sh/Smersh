@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AbstractService } from 'src/app/services/abstract';
@@ -16,11 +16,19 @@ export class ConnectionService extends AbstractService {
     super(http);
   }
 
+  getOptions(): { headers: HttpHeaders } {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8',
+      }),
+    };
+  }
+
   getUrl(): string {
     return `${environment.HOST}/${this.endpoint}`;
   }
 
-  login(data): Observable<unknown> {
+  login(data: unknown): Observable<unknown> {
     return this.insert(data);
   }
 

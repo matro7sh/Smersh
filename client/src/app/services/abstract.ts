@@ -59,10 +59,10 @@ export class AbstractService {
   update(id: string, data: unknown): Observable<unknown> {
     return this.http.patch(`${this.getUrl()}/${id}`, data, {
       ...this.getOptions(),
-      headers: {
-        ...this.getOptions().headers,
-        'Content-Type': 'application/merge-patch+json; charset=utf-8',
-      },
+      headers: this.getOptions().headers.set(
+        'Content-Type',
+        'application/merge-patch+json; charset=utf-8'
+      ),
     });
   }
 }

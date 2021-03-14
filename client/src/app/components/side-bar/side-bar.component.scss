@@ -38,21 +38,11 @@ h1.example-app-name {
 
 .example-spacer {
     flex: 1 1 auto;
-}
-
-.smersh-button-row button,
-.smersh-button-row a {
-    margin-right: 8px;
-}
+}.smersh-button-row button,
+ .smersh-button-row a {
+     margin-right: 8px;
+ }
 
 .sizeofNavbar {
-    width: 15em;
-}
-
-.centered {
-    position: absolute;
-    top: 18%;
-    left: 80%;
-    width: 100%;
-    transform: translate(-50%, -50%);
+    width: 15rem;
 }

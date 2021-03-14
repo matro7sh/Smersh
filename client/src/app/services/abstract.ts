@@ -44,23 +44,26 @@ export class AbstractService {
       }));
   }
 
-  getDataById(id: string): Observable<any> {
+  getDataById(id: string): Observable<unknown> {
     return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  insert(data: any): Observable<any> {
+  insert(data: unknown): Observable<unknown> {
     return this.http.post(`${this.getUrl()}`, data, this.getOptions());
   }
 
-  delete(id: string): Observable<any> {
+  delete(id: string): Observable<unknown> {
     return this.http.delete(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  update(id: string, data: any): Observable<any> {
-    this.updateHeaders({
-      'Content-Type': 'application/merge-patch+json; charset=utf-8',
+  update(id: string, data: unknown): Observable<unknown> {
+    return this.http.patch(`${this.getUrl()}/${id}`, data, {
+      ...this.getOptions(),
+      headers: {
+        ...this.getOptions().headers,
+        'Content-Type': 'application/merge-patch+json; charset=utf-8',
+      },
     });
-    return this.http.patch(`${this.getUrl()}/${id}`, data, this.getOptions());
   }
 
   updateHeaders(headers: Record<string, string>): void {

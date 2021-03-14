@@ -20,9 +20,8 @@ export class ConnectionService extends AbstractService {
     return `${environment.HOST}/${this.endpoint}`;
   }
 
-  login(data): Observable<Object> {
-    this.updateHeaders({ 'Content-Type': 'application/json' })
-    return this.insert(data)
+  login(data): Observable<unknown> {
+    return this.insert(data);
   }
 
   logout(): void {

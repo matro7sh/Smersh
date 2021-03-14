@@ -75,6 +75,30 @@ class User implements UserInterface
      */
     private $missions;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"User", "MissionSingleOutput"})
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"User", "MissionSingleOutput"})
+     */
+    private $trigram;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"User", "MissionSingleOutput"})
+     */
+    private $mail;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"User", "MissionSingleOutput"})
+     */
+    private $city;
+
     public function __construct()
     {
         $this->missions = new ArrayCollection();
@@ -191,5 +215,53 @@ class User implements UserInterface
     public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getTrigram(): ?string
+    {
+        return $this->trigram;
+    }
+
+    public function setTrigram(?string $trigram): self
+    {
+        $this->trigram = $trigram;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(?string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(?string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
     }
 }

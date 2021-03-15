@@ -31,7 +31,7 @@ export class ClientModelApplication extends AbstractModelApplication {
     this.phone = props.phone;
     this.firstname = props.firstName;
     this.lastname = props.lastName;
-    this.fullname = `${props.firstName} ${props.lastname}`;
+    this.fullname = `${props.firstName} ${props.lastName}`;
     this.mail = props.mail;
   }
 }

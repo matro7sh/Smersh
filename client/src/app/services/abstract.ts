@@ -48,7 +48,7 @@ export class AbstractService {
     return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  insert(data: any): Observable<any> {
+  insert(data: unknown): Observable<any> {
     return this.http.post(`${this.getUrl()}`, data, this.getOptions());
   }
 
@@ -56,16 +56,13 @@ export class AbstractService {
     return this.http.delete(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  update(id: string, data: any): Observable<any> {
-    this.updateHeaders({
-      'Content-Type': 'application/merge-patch+json; charset=utf-8',
-    });
-    return this.http.patch(`${this.getUrl()}/${id}`, data, this.getOptions());
-  }
-
-  updateHeaders(headers: Record<string, string>): void {
-    Object.entries(headers).forEach(([k, v]) => {
-      this.headers = this.headers.set(k.toLowerCase(), v);
+  update(id: string, data: unknown): Observable<any> {
+    return this.http.patch(`${this.getUrl()}/${id}`, data, {
+      ...this.getOptions(),
+      headers: this.getOptions().headers.set(
+        'Content-Type',
+        'application/merge-patch+json; charset=utf-8'
+      ),
     });
   }
 }

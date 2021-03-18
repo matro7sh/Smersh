@@ -6,6 +6,7 @@ import { AbstractResource } from 'src/app/resources/AbstractResource';
 import { MissionsListComponent } from 'src/app/components/missions/missionsList.component';
 import { MissionCreateComponent } from 'src/app/components/mission-create/mission-create.component';
 import { AddVulnsToHostExternalComponent } from 'src/app/components/add-vulns-to-host-external/add-vulns-to-host-external.component';
+import { ADD_VULN_ROUTE } from 'src/app/router/MissionRouter';
 
 export class MissionResource extends AbstractResource {
   protected basePath = 'missions';
@@ -24,7 +25,7 @@ export class MissionResource extends AbstractResource {
           component: MissionsListComponent,
         },
         {
-          path: ':id/add-vuln/:missionid',
+          path: ADD_VULN_ROUTE,
           component: AddVulnsToHostExternalComponent,
         },
         ...resource.children,

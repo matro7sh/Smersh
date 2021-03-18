@@ -144,7 +144,6 @@ export class MissionSingleComponent implements OnInit {
     a.click();
   }
 
-
   exportBurp(): void {
     this.loadData(this.missionId);
     const burpConfig = this.burp.getBurpConfiguration();
@@ -156,7 +155,7 @@ export class MissionSingleComponent implements OnInit {
           ...burpConfig.target.scope,
           include: [
             ...burpConfig.target.scope.include,
-            ...this.hosts.map((h) => ({ "enabled": true, "prefix": h.name })),
+            ...this.hosts.map((h) => ({ enabled: true, prefix: h.name })),
           ],
         },
       },
@@ -185,10 +184,10 @@ export class MissionSingleComponent implements OnInit {
   }
 
   loadData(id: string): void {
-    this.missionsService.getDataById(id).subscribe((response) => {
-      this.mission = response;
-      this.missionName = response.name;
-      this.hosts = response['hosts'].map((host) => ({
+    this.missionsService.getDataById(id).subscribe((mission) => {
+      this.mission = mission;
+      this.missionName = mission.name;
+      this.hosts = mission.hosts.map((host) => ({
         ...host,
         vulns: host.hostVulns.map((hostVuln) => ({
           ...hostVuln.vuln,
@@ -199,22 +198,22 @@ export class MissionSingleComponent implements OnInit {
           linked: hostVuln.id,
           ...(hostVuln.vuln.translations[this.currentLocal] ?? {}),
           translate: hostVuln.vuln.translations[this.currentLocal] ?? {},
-        }))
+        })),
       }));
 
-      this.users = response['users'];
-      this.creds = response['credentials'];
-      this.clients = response['clients'];
-      this.steps = response['steps'];
-      this.nmap = response.nmap;
-      this.nessus = response.nessus;
-      this.id = response.id;
+      this.users = mission.users;
+      this.creds = mission.credentials;
+      this.clients = mission.clients;
+      this.steps = mission.steps;
+      this.nmap = mission.nmap;
+      this.nessus = mission.nessus;
+      this.id = mission.id;
     });
   }
 
   addCodiMd(form: NgForm): void {
     this.missionsService.update(this.id, form.value).subscribe(
-      (el) => {
+      () => {
         this.openSnackBar('codiMD updated');
         this.ngOnInit();
         form.reset();
@@ -313,9 +312,10 @@ export class MissionSingleComponent implements OnInit {
     this.fileInput.nativeElement.click();
   }
 
-  goToAddVulns(uri, mission_id: string): void {
-    const id = uri.split('/').pop();
-    this.router.navigateByUrl(`/missions/${id}/add-vuln/${mission_id}`);
+  goToAddVulns(targetHostIRI: string): void {
+    this.router.navigateByUrl(
+      MissionRouter.redirectToAddVuln(this.mission.id, targetHostIRI)
+    );
   }
 
   applyFilter(filterValue: string) {

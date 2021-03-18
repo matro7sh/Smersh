@@ -3,20 +3,20 @@
     <img [routerLink]="['/missions/']" src="/assets/logo.png" class="logo-navbar"/>
     {{title}} - {{version}} <span class="example-spacer"></span>
     <div class="smersh-button-row">
-    <button mat-mini-fab color="primary" (click)="switchToFR()">FR</button>
-    <button mat-mini-fab color="primary" (click)="switchToEN()">EN</button>
-    <button mat-mini-fab color="warn" (click)="themeService.toggleTheme()">
-      <mat-icon>
-        {{ themeService.currentTheme === 'dark-theme' ? 'light' : 'dark' }}_mode
-      </mat-icon>
-    </button>
+      <button mat-mini-fab color="primary" (click)="switchToFR()">FR</button>
+      <button mat-mini-fab color="primary" (click)="switchToEN()">EN</button>
+      <button mat-mini-fab color="warn" (click)="themeService.toggleTheme()">
+        <mat-icon>
+          {{ themeService.currentTheme === 'dark-theme' ? 'light' : 'dark' }}_mode
+        </mat-icon>
+      </button>
     </div>
     <button mat-raised-button (click)="logout()">Logout - {{ username }}</button>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav class="sizeofNavbar" opened="true" #snav mode="side" fixedInViewport="true" fixedTopGap="56">
-      <mat-nav-list class="centered">
+      <mat-nav-list>
         <a mat-list-item *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
           <b>{{item?.key}}</b>
         </a>

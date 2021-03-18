@@ -12,6 +12,10 @@ export class UserEditComponent implements OnInit {
   public user = [];
   public id: any;
   public username: any;
+  public city: string;
+  public phone: string;
+  public trigram: string;
+  public mail: string;
 
   constructor(
     private usersService: UsersService,
@@ -30,6 +34,11 @@ export class UserEditComponent implements OnInit {
     this.usersService.getDataById(this.id).subscribe((response) => {
       this.user = response;
       this.username = response.username;
+      this.phone = response.phone;
+      this.city = response.city;
+      this.trigram = response.trigram;
+      this.mail = response.mail;
+
       this.id = response.id;
     });
   }

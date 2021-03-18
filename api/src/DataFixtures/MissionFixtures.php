@@ -25,7 +25,11 @@ class MissionFixtures extends Fixture
         $user = new User();
         $user->setUsername("jenaye");
         $user->setPassword('jenaye');
-        $user->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
+        $user->setPhone("06 XX YY ZZ AA");
+        $user->setMail("jenaye@protonmail.com");
+        $user->setCity("Lille aux pirates");
+        $user->setTrigram("mho");
+        $user->setRoles(["ROLE_USER", "ROLE_ADMIN", "ROLE_MANAGER"]);
         $user->setEnabled(true);
         $manager->persist($user);
 

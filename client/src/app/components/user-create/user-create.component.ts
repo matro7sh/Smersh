@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
+import { UserRouter } from "src/app/router/UserRouter";
 
 @Component({
   selector: 'app-user-create',
@@ -31,7 +32,7 @@ export class UserCreateComponent implements OnInit {
       .insert({ ...form.value, checked: 'true' })
       .subscribe(() => {
         this.openSnackBar();
-        this.router.navigateByUrl('/users');
+        this.router.navigateByUrl(UserRouter.redirectToList());
       });
   }
 }

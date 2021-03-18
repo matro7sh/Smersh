@@ -3,7 +3,23 @@
     <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
         <input matInput type = "text" name="username" [(ngModel)]="username"  autocomplete="off">
-    </mat-form-field><br/>
+    </mat-form-field>
+    <mat-form-field class="smersh-full-width">
+        <mat-label>email : </mat-label>
+        <input matInput type="text" name="mail" [(ngModel)]="mail" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field class="smersh-full-width">
+        <mat-label>Phone : </mat-label>
+        <input matInput type="text" name="phone" [(ngModel)]="phone" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field class="smersh-full-width">
+        <mat-label>City : </mat-label>
+        <input matInput type="text" name="city" [(ngModel)]="city" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field class="smersh-full-width">
+        <mat-label>Trigram : </mat-label>
+        <input matInput type="text" name="trigram" [(ngModel)]="trigram" autocomplete="off">
+    </mat-form-field>
     <div class="example-button-row">
         <br/><br/>
         <button mat-button mat-raised-button color="primary">Edit</button>

@@ -20,7 +20,6 @@ import { VulnRouter } from 'src/app/router/VulnRouter';
   styleUrls: ['./add-vulns-to-host-external.component.scss'],
 })
 export class AddVulnsToHostExternalComponent implements OnInit {
-  public id: any;
   public vulns = [];
   public impacts = [];
   public selectedVuln: string | null = null;

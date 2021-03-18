@@ -54,7 +54,7 @@ class Host
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"MissionSingleOutput", "Host:output"})
+     * @Groups({"MissionSingleOutput", "Host:output", "HostVuln:output"})
      * @Assert\AtLeastOneOf({
      *     @AppConstraint\Ip(message="The server name must be at least a valid IP."),
      *     @Assert\Hostname(message="The server name must be at least a valid hostname."),
@@ -90,7 +90,7 @@ class Host
 
     /**
      * @ORM\OneToMany(targetEntity=HostVuln::class, mappedBy="host", orphanRemoval=true)
-     * @Groups({"MissionSingleOutput", "Host:output"})
+     * @Groups({"MissionSingleOutput", "Host:output", "HostVuln:input"})
      */
     private $hostVulns;
 

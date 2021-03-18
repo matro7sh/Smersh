@@ -3,6 +3,7 @@ import { HostsVulnsService } from '../../services/hosts-vulns.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
+import {MissionRouter} from "src/app/router/MissionRouter";
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -10,11 +11,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-vuln-with-state.component.scss'],
 })
 export class EditVulnWithStateComponent implements OnInit {
+  panelOpenState = false;
   public id: any;
   public currentState: any;
   public durationInSeconds = 4;
   public host: any;
   public missionId: any;
+  public vulnName: string;
 
   constructor(
     private hostvulnService: HostsVulnsService,
@@ -34,6 +37,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.getDataById(this.id).subscribe((vuln) => {
       this.host = vuln.host;
       this.currentState = vuln.currentState;
+      this.vulnName = vuln.vuln.name;
       this.missionId = vuln.host.mission.split('/').pop();
     });
   }
@@ -42,7 +46,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.update(this.id, form.value).subscribe(
       () => {
         this.openSnackBar('Host updated');
-        this.router.navigateByUrl(`/missions/${this.missionId}`);
+        this.router.navigateByUrl(MissionRouter.redirectToList());
         this.ngOnInit();
       },
       (err) => {

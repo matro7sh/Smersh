@@ -52,7 +52,7 @@
                                             <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
-                                <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'], mission.id)" id="add_vulnToHost">Add vuln</button>
+                                <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
                                 <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
                                 <mat-icon mat-list-icon color="primary" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                             </div>

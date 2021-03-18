@@ -44,19 +44,19 @@ export class AbstractService {
       }));
   }
 
-  getDataById(id: string): Observable<unknown> {
+  getDataById(id: string): Observable<any> {
     return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  insert(data: unknown): Observable<unknown> {
+  insert(data: unknown): Observable<any> {
     return this.http.post(`${this.getUrl()}`, data, this.getOptions());
   }
 
-  delete(id: string): Observable<unknown> {
+  delete(id: string): Observable<any> {
     return this.http.delete(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  update(id: string, data: unknown): Observable<unknown> {
+  update(id: string, data: unknown): Observable<any> {
     return this.http.patch(`${this.getUrl()}/${id}`, data, {
       ...this.getOptions(),
       headers: this.getOptions().headers.set(

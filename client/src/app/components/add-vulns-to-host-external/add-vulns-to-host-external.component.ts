@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VulnsService } from '../../services/vulns.service';
-import { HostsVulnsService } from '../../services/hosts-vulns.service';
-import { MissionsService } from '../../services/missions.service';
+import { VulnsService } from 'src/app/services/vulns.service';
+import { HostsVulnsService } from 'src/app/services/hosts-vulns.service';
+import { MissionsService } from 'src/app/services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { Locale } from '../../storage/Locale';
-import { ImpactsService } from '../../services/impacts.service';
+import { Locale } from 'src/app/storage/Locale';
+import { ImpactsService } from 'src/app/services/impacts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { ImpactModelApplication } from 'src/app/model/Impact';
@@ -21,33 +21,27 @@ import { VulnRouter } from 'src/app/router/VulnRouter';
 })
 export class AddVulnsToHostExternalComponent implements OnInit {
   public id: any;
-  public hosts = [];
   public vulns = [];
   public impacts = [];
-  public selectedHosts = [];
-  public selectedVulns = [];
-  public selectedImpact = [];
+  public selectedVuln: string | null = null;
+  public selectedImpact: string | null = null;
   public currentStateUser = '';
-  public idFromUrl: any;
   public host: HostModelApplication;
-  public selected_vulns: any[];
-  public selected_hosts: any[];
-  public selected_impacts: any[];
   public durationInSeconds = 4;
-  public missionId: any;
+  public missionId: string;
 
   constructor(
     private vulnsService: VulnsService,
     private hostsService: HostsService,
+    private hostVulnsService: HostsVulnsService,
     private activatedRoute: ActivatedRoute,
-    private hostsVulnService: HostsVulnsService,
     private impactService: ImpactsService,
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
     private router: Router
   ) {}
 
-  openSnackBar(message): void {
+  openSnackBar(message: string): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });
@@ -88,19 +82,12 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       });
   }
 
-  // get all hosts from mission id
-  getHostsFromMission(id: string): void {
-    this.missionServices.getDataById(id).subscribe(({ hosts }) => {
-      this.hosts = hosts;
-    });
-  }
-
   onSubmit(form: NgForm): void {
-    this.hostsService
+    this.hostVulnsService
       .insert({
         ...form.value,
-        vuln: this.selectedVulns,
-        host: `/api/hosts/${this.host.id}`,
+        vuln: this.selectedVuln,
+        host: this.host['@id'],
         impact: this.selectedImpact,
         currentState: this.currentStateUser,
       })
@@ -117,15 +104,11 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       );
   }
 
-  Hosts(value): void {
-    this.selectedHosts = value;
+  Vulns(value: string): void {
+    this.selectedVuln = value;
   }
 
-  Vulns(value): void {
-    this.selectedVulns = value;
-  }
-
-  Impacts(value): void {
+  Impacts(value: string): void {
     this.selectedImpact = value;
   }
   createVuln(): void {

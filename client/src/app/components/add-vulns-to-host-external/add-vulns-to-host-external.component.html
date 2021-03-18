@@ -10,7 +10,7 @@
 <form class="smersh-form" #myform= "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field appearance="fill" class="addSpace">
         <mat-label>Select Vuln</mat-label>
-        <mat-select [value]="selected_vulns" #selectVulns (selectionChange)="Vulns($event.value)">
+        <mat-select [value]="selectedVuln" (selectionChange)="Vulns($event.value)">
             <mat-option *ngFor="let vuln of vulns" [value]="vuln.value">
                 {{vuln.name}}
             </mat-option>
@@ -18,7 +18,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
         <mat-label>Select Impact</mat-label>
-        <mat-select [value]="selected_impacts" #selectImpacts (selectionChange)="Impacts($event.value)">
+        <mat-select [value]="selectedImpact" (selectionChange)="Impacts($event.value)">
             <mat-option *ngFor="let impact of impacts" [value]="impact.value">
                 {{impact.name}}
             </mat-option>

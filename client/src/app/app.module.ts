@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
 
@@ -121,6 +122,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatRadioModule,
     ReactiveFormsModule,
     MatIconModule,
+    MatExpansionModule,
     MatBadgeModule,
     FormsModule,
     MatSnackBarModule,

@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait TranslatableNameTrait
 {
     /**
-     * @Groups("Vulns")
+     * @Groups("Vulns", "HostVuln:output")
      */
     private $name;
 

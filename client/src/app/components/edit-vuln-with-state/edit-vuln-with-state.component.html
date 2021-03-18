@@ -1,12 +1,36 @@
-<h1 xmlns="http://www.w3.org/1999/html">Edit vuln {{ id }} from {{ host['@id'] }}</h1>
+<h1 xmlns="http://www.w3.org/1999/html">Edit</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-form-field class="example-full-width">
-        <mat-label>Current state</mat-label>
-        <input matInput type = "text" name="currentState" [(ngModel)]="currentState"  autocomplete="off">
-    </mat-form-field><br/>
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span class="bold">Vulnerability :</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ vulnName }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true"
+                             (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                   <span class="bold">Target</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ host.name }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Current State</mat-label>
+        <textarea rows="20" matInput [(ngModel)]="currentState" name="currentState"></textarea>
+    </mat-form-field>
+
     <div class="example-button-row">
         <br/><br/>
-        <button mat-button mat-raised-button color="primary">Edit</button><br/><br/>
+        <button mat-button mat-raised-button color="primary">Submit</button><br/><br/>
         <button mat-button mat-raised-button color="warn" (click)="delete()">Delete this vulnerability</button>
     </div>
 </form>

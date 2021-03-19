@@ -26,8 +26,8 @@ class FeatureContext implements Context
      */
     public function iSendARequestToWithBody($arg1, $arg2, PyStringNode $string)
     {
-        
-        throw new PendingException();
+        var_dump("test");
+        exit;
     }
 
     /**
@@ -52,6 +52,10 @@ class FeatureContext implements Context
     public function theHeaderShouldBeEqualTo($arg1, $arg2)
     {
         throw new PendingException();
+    }
+
+    private function createClientWithCredentials()
+    {
     }
 
 }

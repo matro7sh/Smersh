@@ -182,6 +182,9 @@
     "jms/metadata": {
         "version": "2.3.0"
     },
+    "justinrainbow/json-schema": {
+        "version": "5.2.10"
+    },
     "laminas/laminas-code": {
         "version": "3.4.1"
     },
@@ -437,6 +440,21 @@
     "symfony/orm-pack": {
         "version": "v2.0.0"
     },
+    "symfony/phpunit-bridge": {
+        "version": "5.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "bf16921ef8309a81d9f046e9b6369c46bcbd031f"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.1"
     },
@@ -528,6 +546,9 @@
     },
     "symfony/string": {
         "version": "v5.0.10"
+    },
+    "symfony/test-pack": {
+        "version": "v1.0.7"
     },
     "symfony/translation": {
         "version": "3.3",

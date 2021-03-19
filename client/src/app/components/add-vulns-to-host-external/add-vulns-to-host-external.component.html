@@ -1,5 +1,5 @@
 <div class="flex">
-    <h1>Add vuln to host {{ host.name }}</h1>
+    <h1>Add vulnerability to <b>{{ host.name }}</b></h1>
     <div (click)="createVuln()" class="ml-auto">
         <button mat-raised-button class="h-100" color="primary">
             <span class="my-auto">Create new vuln</span>
@@ -24,9 +24,9 @@
             </mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field class="smersh-full-width">
-        <mat-label>Current State : </mat-label>
-        <textarea rows="10" cols="50" [(ngModel)]="currentStateUser" name="currentState" matInput></textarea>
+    <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Current State</mat-label>
+        <textarea rows="20" matInput [(ngModel)]="currentStateUser" name="currentState"></textarea>
     </mat-form-field>
     <div class="example-button-row">
         <button mat-button mat-raised-button color="primary">Add</button>

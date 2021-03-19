@@ -19,6 +19,15 @@
     "api-platform/schema-generator": {
         "version": "v2.2.2"
     },
+    "behat/behat": {
+        "version": "v3.8.1"
+    },
+    "behat/gherkin": {
+        "version": "v4.8.0"
+    },
+    "behat/mink": {
+        "version": "v1.8.1"
+    },
     "behat/transliterator": {
         "version": "v1.3.0"
     },
@@ -133,6 +142,15 @@
     },
     "fig/link-util": {
         "version": "1.1.1"
+    },
+    "friends-of-behat/mink-browserkit-driver": {
+        "version": "v1.5.0"
+    },
+    "friends-of-behat/mink-extension": {
+        "version": "v2.5.0"
+    },
+    "friends-of-behat/page-object-extension": {
+        "version": "v0.3.2"
     },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
@@ -272,6 +290,9 @@
     "symfony/asset": {
         "version": "v5.0.8"
     },
+    "symfony/browser-kit": {
+        "version": "v5.1.11"
+    },
     "symfony/cache": {
         "version": "v5.0.8"
     },
@@ -294,6 +315,9 @@
             "config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.1.11"
+    },
     "symfony/dependency-injection": {
         "version": "v5.0.8"
     },
@@ -302,6 +326,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.0.8"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.1.11"
     },
     "symfony/dotenv": {
         "version": "v5.0.8"

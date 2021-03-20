@@ -25,7 +25,8 @@
         "api-platform/schema-generator": "^2.1",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/maker-bundle": "^1.23",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+	"symfony/phpunit-bridge": "^5.2"
     },
     "conflict": {
         "symfony/symfony": "*"

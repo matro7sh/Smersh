@@ -1,41 +1,63 @@
 <?php
-
+declare(strict_types=1);
 use Behat\Behat\Context\Context;
+
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Gherkin\Node\TableNode;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext implements Context
 {
-    /**
-     * Initializes context.
-     *
-     * Every scenario gets its own context instance.
-     * You can also pass arbitrary arguments to the
-     * context constructor through behat.yml.
-     */
-    public function __construct()
+
+    private $_response;
+    private $client;
+
+    public function __construct(HttpClientInterface $client)
     {
+        $this->client = $client;
     }
 
+
     /**
-     * @When I send a :arg1 request to :arg2 with body:
+     * @When I send a :method request to :url with body:
+     * @param $method
+     * @param $url
+     * @param PyStringNode $data
+     * @throws \Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
      */
-    public function iSendARequestToWithBody($arg1, $arg2, PyStringNode $string)
+    public function iSendARequestToWithBody($method, $url, PyStringNode $data)
     {
-        var_dump("test");
+        $response = $this->client->request(
+            $method,
+            $url
+        );
+        $content = $response->getContent();
+        $statusCode = $response->getStatusCode();
+        var_dump($content);
+        return $content;
         exit;
+
     }
+
+
 
     /**
      * @Then the response status code should be :arg1
      */
     public function theResponseStatusCodeShouldBe($arg1)
     {
-        throw new PendingException();
+       // var_export('DEBUG!!!');
+
+
+       /* $response = new Response();
+        if ((string)$response->getStatusCode() !== $httpStatus) {
+            throw new \Exception('HTTP code does not match '.$httpStatus.
+                ' (actual: '.$response->getStatusCode().')');
+        }
+       */
     }
 
     /**
@@ -43,7 +65,9 @@ class FeatureContext implements Context
      */
     public function theResponseShouldBeInJson()
     {
-        throw new PendingException();
+        $data = json_decode($this->_response->getBody(true));
+        if (empty($data)) { throw new Exception("Response was not JSON\n" . $this->_response);
+        }
     }
 
     /**

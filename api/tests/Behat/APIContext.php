@@ -60,6 +60,14 @@ class APIContext extends RawMinkContext implements Context
         $this->iSendAJsonLdRequestTo('GET', \sprintf('/api/%s', $resource));
     }
 
+    /**
+     * @When I get the item :iri from :resource
+     */
+    public function iGetSingleItemForResource(string $id, string $resource)
+    {
+        $this->iSendAJsonLdRequestTo('GET', \sprintf('/api/%s/%s', $resource, $id));
+    }
+
     public function iSendAJsonLdRequestTo(string $method, string $uri, $content = null, array $headers = [], bool $insulate = true): void
     {
         $headers = [];
@@ -71,6 +79,10 @@ class APIContext extends RawMinkContext implements Context
         $client = $this->getClient($this->getSession());
         $client->insulate($insulate);
         $client->request($method, $uri, [], [], $headers, (null !== $content) ? \json_encode($content) : null);
+    }
+
+    public function iCreateAResource(string $resource, $data){
+        $this->iSendAJsonRequestTo('POST', $resource, $data);
     }
 
     public function iSendAJsonRequestTo($method, $uri, $content = null, array $headers = [], bool $insulate = true): void

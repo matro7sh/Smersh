@@ -1,0 +1,22 @@
+default:
+    suites:
+        smersh:
+            paths: [ '%paths.base%/features' ]
+            contexts:
+                - App\Tests\Behat\ClientContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\APIContext
+                - App\Tests\Behat\DemoContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\FeatureContext
+                - Behatch\Context\JsonContext
+
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                environment: test
+        Behatch\Extension: ~
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony: ~

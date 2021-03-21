@@ -90,7 +90,7 @@ class Host
 
     /**
      * @ORM\OneToMany(targetEntity=HostVuln::class, mappedBy="host", orphanRemoval=true)
-     * @Groups({"MissionSingleOutput", "Host:output", "HostVuln:input"})
+     * @Groups({"MissionSingleOutput", "Host:output"})
      */
     private $hostVulns;
 

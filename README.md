@@ -153,6 +153,14 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 
 Run API using this command `docker-compose up api` then execute `cd client && npm i && npm start` 
 
+## How to run tests
+
+```
+docker-compose exec php \
+    bin/phpunit
+
+```
+
 
 ## Todo
 - add conclusion generator

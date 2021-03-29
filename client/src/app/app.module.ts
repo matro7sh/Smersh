@@ -24,6 +24,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 
 import { MissionSingleComponent } from './components/mission-single/mission-single.component';
@@ -74,6 +75,7 @@ import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 import { ThemeService } from './services/theme.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PopupComponent } from './components/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MissionSingleComponent,
     SideBarComponent,
     UsersListComponent,
+    PopupComponent,
     UserSingleComponent,
     HomepageComponent,
     UserCreateComponent,
@@ -106,6 +109,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ClientEditComponent,
     ClientCreateComponent,
     EditVulnWithStateComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,6 +135,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatToolbarModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatSidenavModule,
     BrowserModule,
     MatCheckboxModule,

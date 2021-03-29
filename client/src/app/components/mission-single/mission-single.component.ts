@@ -18,8 +18,8 @@ import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
 import { ConfigService } from 'src/app/services/configService';
-import {MatDialog} from "@angular/material/dialog";
-import {PopupComponent} from "src/app/components/popup/popup.component";
+import { MatDialog } from "@angular/material/dialog";
+import { PopupComponent } from "src/app/components/popup/popup.component";
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -68,9 +68,11 @@ export class MissionSingleComponent implements OnInit {
     this.missionId = this.router.url.split('/').pop();
   }
 
-  openDeleteDialog(host) {
+  openDeleteDialog(host): void {
     this.dialog.open(PopupComponent, {
-      width: '30%', disableClose: true, data: host
+      width: '30%',
+      disableClose: true,
+      data: host,
     });
   }
 

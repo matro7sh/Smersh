@@ -53,7 +53,7 @@
                                     </mat-chip-list>
                                 </div>
                                 <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
-                                <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;"><button mat-button (click)="openDeleteDialog(host)">Open dialog</button></mat-icon>
+                                <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="openDeleteDialog(host)">delete_forever</mat-icon>
                                 <mat-icon mat-list-icon color="primary" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                             </div>
                         </mat-list-item>

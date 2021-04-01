@@ -18,7 +18,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ field }} </mat-header-cell>
       <ng-template [ngIf]="field.match(actionMatcher)" [ngIfElse]="elseTemplate">
         <mat-cell *matCellDef="let row">
-          <button data-cy="action-buttons" mat-raised-button color="{{ row[field] }}" (click)="applyActionOnResource(field, row.id)">{{ field }}</button>
+          <button data-cy="action-button-{{ field }}" mat-raised-button color="{{ row[field] }}" (click)="applyActionOnResource(field, row.id)">{{ field }}</button>
         </mat-cell>
       </ng-template>
       <ng-template #elseTemplate>

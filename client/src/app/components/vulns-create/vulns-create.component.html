@@ -1,22 +1,22 @@
-<h1>Create Vuln</h1>
+<h1 data-cy="create-vuln">Create Vuln</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
-        <input matInput type = "text" name="name" placeholder = "name" ngModel autocomplete="off">
+        <input matInput type = "text" name="name" placeholder = "name" ngModel autocomplete="off" data-cy="name">
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
         <mat-label>Description : </mat-label>
-        <textarea matInput type="text" name="description" ngModel autocomplete="off"></textarea>
+        <textarea matInput type="text" name="description" ngModel autocomplete="off" data-cy="description"></textarea>
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
         <mat-label>Remediation : </mat-label>
-        <textarea matInput type="text" name="remediation"  ngModel autocomplete="off"></textarea>
+        <textarea matInput type="text" name="remediation"  ngModel autocomplete="off" data-cy="remediation"></textarea>
     </mat-form-field><br/>
 
     <mat-form-field appearance="fill">
         <mat-label>Select impact</mat-label>
-        <mat-select [(value)]="selectedImpact" (selectionChange)="changeClient2($event.value)" placeholder="Type" #impactValue>
-            <mat-option *ngFor="let impact of impacts"  [value]="impact['@id']" name="impact">
+        <mat-select [(value)]="selectedImpact" (selectionChange)="changeClient2($event.value)" placeholder="Type" #impactValue data-cy="impact-select">
+            <mat-option data-cy="impact-items" *ngFor="let impact of impacts"  [value]="impact['@id']" name="impact">
                 {{impact.name}}
             </mat-option>
         </mat-select>
@@ -25,14 +25,14 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Select type</mat-label>
-        <mat-select [(value)]="selectedType" (selectionChange)="changeClient($event.value)" placeholder="Type" #impactValue>
-            <mat-option *ngFor="let type of types"  [value]="type['@id']" name="type">
+        <mat-select [(value)]="selectedType" (selectionChange)="changeClient($event.value)" placeholder="Type" #impactValue data-cy="type-select">
+            <mat-option data-cy="type-items" *ngFor="let type of types"  [value]="type['@id']" name="type">
                 {{type.name}}
             </mat-option>
         </mat-select>
 
     </mat-form-field>
     <div class="example-button-row">
-        <button mat-button type="submit" mat-raised-button color="primary">Create</button>
+        <button mat-button type="submit" mat-raised-button color="primary" data-cy="create">Create</button>
     </div>
 </form>

@@ -1,0 +1,10 @@
+{
+  "username": "jenaye",
+  "password": "jenaye",
+  "baseUrl": "http://localhost:4200",
+  "backendUrl": "http://localhost:8000",
+  "dashboardRoute": "/dashboard",
+  "loginRoute": "/login",
+  "missionsRoute": "/missions",
+  "vulnerabilitiesRoute": "/vulnerabilities"
+}

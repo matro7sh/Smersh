@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat;
 
+use App\Entity\User;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Session;
 use Behat\MinkExtension\Context\RawMinkContext;
 use PHPUnit\Framework\Assert;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Defines application features from the specific context.
@@ -17,6 +18,15 @@ use Symfony\Component\HttpFoundation\Request;
 class APIContext extends RawMinkContext implements Context
 {
     use ClientTrait;
+    private $manager;
+    private $jwtManager;
+    protected $token;
+    protected $resource = '';
+    protected $tokens;
+
+    private const ADMIN = 'admin';
+    private const MANAGER = 'manager';
+    private const GUEST = 'guest';
 
     /**
      * Initializes context.
@@ -25,8 +35,21 @@ class APIContext extends RawMinkContext implements Context
      * You can also pass arbitrary arguments to the
      * context constructor through behat.yml.
      */
-    public function __construct()
+    public function __construct(KernelInterface $kernel)
     {
+        $this->manager = $kernel->getContainer()->get('doctrine.orm.default_entity_manager');
+        $this->jwtManager = $kernel->getContainer()->get('lexik_jwt_authentication.jwt_manager');
+
+        $userRepository = $this->manager->getRepository(User::class);
+        $admin = $userRepository->findOneByUsername(self::ADMIN);
+        $manager = $userRepository->findOneByUsername(self::MANAGER);
+        $guest = $userRepository->findOneByUsername(self::GUEST);
+
+        $this->tokens = [
+            self::ADMIN => $this->jwtManager->create($admin),
+            self::MANAGER => $this->jwtManager->create($manager),
+            self::GUEST => $this->jwtManager->create($guest),
+        ];
     }
 
     private function getStatusCode(): int
@@ -42,14 +65,7 @@ class APIContext extends RawMinkContext implements Context
      */
     public function iAmAuthenticatedAs(string $role)
     {
-        switch ($role) {
-            case "admin": {
-
-            }
-            default: {
-
-            }
-        }
+        $this->token = $this->tokens[\strtolower($role)] ?? '';
     }
 
     /**
@@ -68,30 +84,41 @@ class APIContext extends RawMinkContext implements Context
         $this->iSendAJsonLdRequestTo('GET', \sprintf('/api/%s/%s', $resource, $id));
     }
 
-    public function iSendAJsonLdRequestTo(string $method, string $uri, $content = null, array $headers = [], bool $insulate = true): void
+    /**
+     * @return array<string, string>
+     */
+    private function getHeaders(bool $isLd, $content): array
     {
         $headers = [];
-        $headers['HTTP_ACCEPT'] = 'application/ld+json';
+        $type = \sprintf('application/%sjson', $isLd ? 'ld+' : '');
+        $headers['HTTP_ACCEPT'] = $type;
         if ($content) {
-            $headers['CONTENT_TYPE'] = 'application/ld+json';
+            $headers['CONTENT_TYPE'] = $type;
         }
+
+        if ($this->token != null) {
+            $headers['HTTP_AUTHORIZATION'] = \sprintf('Bearer %s', $this->token);
+        }
+
+        return $headers;
+    }
+
+    public function iSendAJsonLdRequestTo(string $method, string $uri, $content = null, array $h = [], bool $insulate = true): void
+    {
+        $headers = \array_merge($this->getHeaders(true, $content), $h);
 
         $client = $this->getClient($this->getSession());
         $client->insulate($insulate);
         $client->request($method, $uri, [], [], $headers, (null !== $content) ? \json_encode($content) : null);
     }
 
-    public function iCreateAResource(string $resource, $data){
-        $this->iSendAJsonRequestTo('POST', $resource, $data);
+    public function iCreateAResource($data){
+        $this->iSendAJsonRequestTo('POST', \sprintf('/api/%s', $this->resource), $data);
     }
 
-    public function iSendAJsonRequestTo($method, $uri, $content = null, array $headers = [], bool $insulate = true): void
+    public function iSendAJsonRequestTo($method, $uri, $content = null, array $h = [], bool $insulate = true): void
     {
-        $headers = $this->getHeaders($headers);
-        $headers['HTTP_ACCEPT'] = 'application/json';
-        if ($content) {
-            $headers['CONTENT_TYPE'] = 'application/json';
-        }
+        $headers = \array_merge($this->getHeaders(false, $content), $h);
 
         $client = $this->getClient($this->getSession());
         $client->insulate($insulate);

@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Behat;
 
-use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\MinkExtension\Context\RawMinkContext;
-use GuzzleHttp\Psr7\Response;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 class ImpactContext extends APIContext
 {
+    protected $resource = 'impacts';
+
      /**
-     * @When I try to create an impact with :data
+     * @When I try to create an impact with:
      */
-    public function iTrytoCreateAnImpactWith(PyStringNode $data)
+    public function iTryToCreateAnImpactWith(PyStringNode $data)
     {
-        $this->iCreateAResource('/api/impacts', $data);
+        $this->iCreateAResource($data->getRaw());
     }
 }

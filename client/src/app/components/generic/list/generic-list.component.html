@@ -3,7 +3,7 @@
     <input matInput (keyup)="applyFilter(filter, $event.target)" placeholder="Filter by {{ filter }}">
   </mat-form-field>
   <a *ngIf="isEnabledCreation()" class="ml-auto flex no-decoration add-resource" routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">
-    <span class="my-auto">
+    <span class="my-auto" data-cy="add-item">
       Add new {{ singularResource }}
     </span>
     <span class="my-auto material-icons">
@@ -18,7 +18,7 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ field }} </mat-header-cell>
       <ng-template [ngIf]="field.match(actionMatcher)" [ngIfElse]="elseTemplate">
         <mat-cell *matCellDef="let row">
-          <button mat-raised-button color="{{ row[field] }}" (click)="applyActionOnResource(field, row.id)">{{ field }}</button>
+          <button data-cy="action-button-{{ field }}" mat-raised-button color="{{ row[field] }}" (click)="applyActionOnResource(field, row.id)">{{ field }}</button>
         </mat-cell>
       </ng-template>
       <ng-template #elseTemplate>

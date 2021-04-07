@@ -171,3 +171,4 @@ Run API using this command `docker-compose up api` then execute `cd client && np
 - michmich1000 - https://michmich.eu
 - SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr
 - sanchis  - https://github.com/sanchis
+- RayMoDev  - https://github.com/RayMoDev

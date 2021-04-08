@@ -5,10 +5,11 @@ default:
             contexts:
                 - App\Tests\Behat\ClientContext:
                       kernel: '@kernel'
-                - App\Tests\Behat\APIContext
                 - App\Tests\Behat\DemoContext:
                       kernel: '@kernel'
                 - App\Tests\Behat\FeatureContext
+                - App\Tests\Behat\ImpactContext:
+                      kernel: '@kernel'
                 - Behatch\Context\JsonContext
 
     extensions:

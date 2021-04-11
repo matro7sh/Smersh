@@ -9,8 +9,8 @@ export enum Theme {
 
 @Injectable()
 export class ThemeService {
-  private _currentTheme: Theme = Theme.LIGHT_THEME;
-  public readonly onChangeTheme = new BehaviorSubject<Theme>(Theme.LIGHT_THEME);
+  private _currentTheme: Theme = localStorage.getItem('theme') || Theme.LIGHT_THEME;
+  public readonly onChangeTheme = new BehaviorSubject<Theme>(this._currentTheme);
 
   public get currentTheme(): Theme {
     return this._currentTheme;
@@ -22,5 +22,6 @@ export class ThemeService {
         ? Theme.DARK_THEME
         : Theme.LIGHT_THEME;
     this.onChangeTheme.next(this._currentTheme);
+    localStorage.setItem('theme', this._currentTheme);
   }
 }

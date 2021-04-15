@@ -117,6 +117,11 @@ class APIContext extends RawMinkContext implements Context
 
     }
 
+    public function iUpdateAResource($data, $id){
+        $this->iSendAJsonRequestTo('PUT', \sprintf('/api/%s/%s', $this->resource, $id), $data);
+
+    }
+
     public function iDeleteAResource($id){
         $this->iSendAJsonRequestTo('DELETE', \sprintf('/api/%s/%s', $this->resource, $id));
 

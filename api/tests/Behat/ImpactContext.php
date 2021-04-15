@@ -19,6 +19,14 @@ class ImpactContext extends APIContext
     }
 
     /**
+     * @When I try to update an impact on id::arg1 with:
+     */
+    public function iTryToUpdateAnImpactWith(PyStringNode $data, $id)
+    {
+        $this->iUpdateAResource($data->getRaw(), $id);
+    }
+
+    /**
      *  @When I try to delete an impact with id: :arg1
      */
     public function iTryToDeleteAnImpactWithId($id)

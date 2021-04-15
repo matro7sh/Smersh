@@ -25,8 +25,8 @@ Feature: Impact API testing
   Scenario: Get single impact as manager
     Given I am authenticated as manager
     When I get the item "1" from "impacts"
-    Then the response should be in JSON  
-		
+    Then the response should be in JSON
+
   Scenario: Get single impact as guest
     Given I am authenticated as guest
     When I get the item "1" from "impacts"
@@ -37,6 +37,11 @@ Feature: Impact API testing
     Given I am authenticated as admin
     When I try to create an impact with:
       """
-      {"name": "exemple"}
+      {"name": "exemple1241SpDGG"}
       """
     Then it should be created
+
+  Scenario: Delete new impact
+    Given I am authenticated as admin
+    When I try to delete an impact with id: "1"
+    Then it should be deleted

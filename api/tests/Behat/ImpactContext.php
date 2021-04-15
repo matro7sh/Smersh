@@ -17,4 +17,12 @@ class ImpactContext extends APIContext
     {
         $this->iCreateAResource($data->getRaw());
     }
+
+    /**
+     *  @When I try to delete an impact with id: :arg1
+     */
+    public function iTryToDeleteAnImpactWithId($id)
+    {
+        $this->iDeleteAResource($id);
+    }
 }

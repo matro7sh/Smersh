@@ -109,11 +109,17 @@ class APIContext extends RawMinkContext implements Context
 
         $client = $this->getClient($this->getSession());
         $client->insulate($insulate);
-        $client->request($method, $uri, [], [], $headers, (null !== $content) ? \json_encode($content) : null);
+        $client->request($method, $uri, [], [], $headers, (null !== $content) ? $content : null);
     }
 
     public function iCreateAResource($data){
         $this->iSendAJsonRequestTo('POST', \sprintf('/api/%s', $this->resource), $data);
+
+    }
+
+    public function iDeleteAResource($id){
+        $this->iSendAJsonRequestTo('DELETE', \sprintf('/api/%s/%s', $this->resource, $id));
+
     }
 
     public function iSendAJsonRequestTo($method, $uri, $content = null, array $h = [], bool $insulate = true): void
@@ -122,7 +128,7 @@ class APIContext extends RawMinkContext implements Context
 
         $client = $this->getClient($this->getSession());
         $client->insulate($insulate);
-        $client->request($method, $uri, [], [], $headers, (null !== $content) ? \json_encode($content) : null);
+        $client->request($method, $uri, [], [], $headers, (null !== $content) ? $content : null);
     }
 
     /**

@@ -63,7 +63,9 @@ Feature: Impact API testing
       """
       {"name": "exempleToYelaa"}
       """
-    Then it should be updated
+    Then the request should be successful
+    And I get the item "1" from "impacts"
+    And the response should contain "exempleToYelaa"
 
   Scenario: update impact as manager
     Given I am authenticated as manager

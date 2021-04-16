@@ -3,7 +3,7 @@
     "description": "Smersh API for the Smersh app",
     "license": "MIT",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.4.16",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/api-pack": "^1.1",

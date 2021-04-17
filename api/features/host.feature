@@ -46,7 +46,7 @@ Feature: Host API testing
 
   Scenario: Create new host as admin
     Given I am authenticated as admin
-    When I try to create an host with:
+    When I try to create a host with:
       """
      {
       "name": "192.168.1.6",
@@ -60,7 +60,7 @@ Feature: Host API testing
 
   Scenario: Create new host as manager
     Given I am authenticated as manager
-    When I try to create an host with:
+    When I try to create a host with:
       """
      {
       "name": "10.10.10.2/24",
@@ -73,7 +73,7 @@ Feature: Host API testing
 
   Scenario: Create new host as guest
     Given I am authenticated as guest
-    When I try to create an host with:
+    When I try to create a host with:
       """
      {
       "name": "https://promox.lan:8000",
@@ -85,23 +85,23 @@ Feature: Host API testing
 
   Scenario: Delete host as admin
     Given I am authenticated as admin
-    When I try to delete an host with id: "1"
+    When I try to delete a host with id: "1"
     Then it should be deleted
 
   Scenario: Delete host as manager
     Given I am authenticated as manager
-    When I try to delete an host with id: "2"
+    When I try to delete a host with id: "2"
     Then I should be forbidden
 
   Scenario: Delete host as guest
     Given I am authenticated as guest
-    When I try to delete an host with id: "3"
+    When I try to delete a host with id: "3"
     Then I should be forbidden
 
 
   Scenario: update host as admin
     Given I am authenticated as admin
-    When I try to update an host on id:"2" with:
+    When I try to update a host on id:"2" with:
       """
       {
       "name": "https://yolo.com",
@@ -114,7 +114,7 @@ Feature: Host API testing
 
   Scenario: update host as manager
     Given I am authenticated as manager
-    When I try to update an host on id:"2" with:
+    When I try to update a host on id:"2" with:
       """
       {
       "name": "https://yolo.com",
@@ -127,7 +127,7 @@ Feature: Host API testing
 
   Scenario: update host as guest
     Given I am authenticated as guest
-    When I try to update an host on id:"2" with:
+    When I try to update a host on id:"2" with:
       """
       {
       "name": "https://yolo.com",

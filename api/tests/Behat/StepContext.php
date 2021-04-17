@@ -12,7 +12,7 @@ class StepContext extends APIContext
     protected $resource = 'steps';
 
      /**
-     * @When I try to create an step with:
+     * @When I try to create a step with:
      */
     public function iTryToCreateAnStepWith(PyStringNode $data)
     {
@@ -20,7 +20,7 @@ class StepContext extends APIContext
     }
 
     /**
-     * @When I try to update an step on id::arg1 with:
+     * @When I try to update a step on id::arg1 with:
      */
     public function iTryToUpdateAnStepWith(PyStringNode $data, $id)
     {
@@ -28,7 +28,7 @@ class StepContext extends APIContext
     }
 
     /**
-     *  @When I try to delete an step with id: :arg1
+     *  @When I try to delete a step with id: :arg1
      */
     public function iTryToDeleteAnStepWithId($id)
     {

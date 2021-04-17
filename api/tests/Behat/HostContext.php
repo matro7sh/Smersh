@@ -12,7 +12,7 @@ class HostContext extends APIContext
     protected $resource = 'hosts';
 
      /**
-     * @When I try to create an host with:
+     * @When I try to create a host with:
      */
     public function iTryToCreateAnHostWith(PyStringNode $data)
     {
@@ -20,7 +20,7 @@ class HostContext extends APIContext
     }
 
     /**
-     * @When I try to update an host on id::arg1 with:
+     * @When I try to update a host on id::arg1 with:
      */
     public function iTryToUpdateAnHostWith(PyStringNode $data, $id)
     {
@@ -28,7 +28,7 @@ class HostContext extends APIContext
     }
 
     /**
-     *  @When I try to delete an host with id: :arg1
+     *  @When I try to delete a host with id: :arg1
      */
     public function iTryToDeleteAnHostWithId($id)
     {

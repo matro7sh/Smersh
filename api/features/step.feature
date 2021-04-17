@@ -38,7 +38,7 @@ Feature: Step API testing
 
   Scenario: Create new step as admin
     Given I am authenticated as admin
-    When I try to create an step with:
+    When I try to create a step with:
       """
      {
 	"findAt":"2021-04-13T15:35:26.000Z",
@@ -53,7 +53,7 @@ Feature: Step API testing
 
   Scenario: Create new step as manager
     Given I am authenticated as manager
-    When I try to create an step with:
+    When I try to create a step with:
       """
      {
 	"findAt":"2021-04-13T15:35:26.000Z",
@@ -67,7 +67,7 @@ Feature: Step API testing
 
   Scenario: Create new step as guest
     Given I am authenticated as guest
-    When I try to create an step with:
+    When I try to create a step with:
       """
      {
 	"findAt":"2021-04-13T15:35:26.000Z",
@@ -80,23 +80,23 @@ Feature: Step API testing
 
   Scenario: Delete step as admin
     Given I am authenticated as admin
-    When I try to delete an step with id: "1"
+    When I try to delete a step with id: "1"
     Then it should be deleted
 
   Scenario: Delete step as manager
     Given I am authenticated as manager
-    When I try to delete an step with id: "2"
+    When I try to delete a step with id: "2"
     Then I should be forbidden
 
   Scenario: Delete step as guest
     Given I am authenticated as guest
-    When I try to delete an step with id: "2"
+    When I try to delete a step with id: "2"
     Then I should be forbidden
 
 
   Scenario: update step as admin
     Given I am authenticated as admin
-    When I try to update an step on id:"2" with:
+    When I try to update a step on id:"2" with:
       """
       {
 	"findAt":"2021-04-13T15:35:26.000Z",
@@ -110,7 +110,7 @@ Feature: Step API testing
 
   Scenario: update step as manager
     Given I am authenticated as manager
-    When I try to update an step on id:"2" with:
+    When I try to update a step on id:"2" with:
       """
       {
 	"findAt":"2021-04-13T15:35:26.000Z",
@@ -124,7 +124,7 @@ Feature: Step API testing
 
   Scenario: update step as guest
     Given I am authenticated as guest
-    When I try to update an step on id:"2" with:
+    When I try to update a step on id:"2" with:
       """
       {
 	"findAt":"2021-04-13T15:35:26.000Z",

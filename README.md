@@ -153,6 +153,15 @@ then you can run `ssh smersh` and go to `http://localhost:4200`
 
 Run API using this command `docker-compose up api` then execute `cd client && npm i && npm start` 
 
+## Run behat test 
+```
+make reset-db
+docker-compose exec php sh
+./vendor/bin/behat
+```
+
+>you can specify scenario like this `./vendor/bin/behat --name="Impact API testing"`
+
 
 ## Todo
 - add conclusion generator

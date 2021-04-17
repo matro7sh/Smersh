@@ -104,12 +104,19 @@ class MissionFixtures extends Fixture
         $manager->persist($type2);
         $manager->persist($type);
 
+
+        /* impact for behat */
+
+        $impactBehat = new Impact();
+        $impactBehat->setName("yolo");
+        $manager->persist($impactBehat);
+
+
         /* Create Impact and persist */
 
         $impact = new Impact();
         $impact->setName("Low");
         $manager->persist($impact);
-
 
         $impact2 = new Impact();
         $impact2->setName("Medium");

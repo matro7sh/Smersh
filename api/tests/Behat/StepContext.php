@@ -7,30 +7,30 @@ namespace App\Tests\Behat;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Mink\Exception\ExpectationException;
 
-class HostContext extends APIContext
+class StepContext extends APIContext
 {
-    protected $resource = 'hosts';
+    protected $resource = 'steps';
 
      /**
-     * @When I try to create an host with:
+     * @When I try to create an step with:
      */
-    public function iTryToCreateAnHostWith(PyStringNode $data)
+    public function iTryToCreateAnStepWith(PyStringNode $data)
     {
         $this->iCreateAResource($data->getRaw());
     }
 
     /**
-     * @When I try to update an host on id::arg1 with:
+     * @When I try to update an step on id::arg1 with:
      */
-    public function iTryToUpdateAnHostWith(PyStringNode $data, $id)
+    public function iTryToUpdateAnStepWith(PyStringNode $data, $id)
     {
         $this->iUpdateAResource($data->getRaw(), $id);
     }
 
     /**
-     *  @When I try to delete an host with id: :arg1
+     *  @When I try to delete an step with id: :arg1
      */
-    public function iTryToDeleteAnHostWithId($id)
+    public function iTryToDeleteAnStepWithId($id)
     {
         $this->iDeleteAResource($id);
     }

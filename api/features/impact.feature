@@ -83,17 +83,17 @@ Feature: Impact API testing
       """
     Then I should be forbidden
 
-  Scenario: Delete new impact
+  Scenario: Delete impact as admin
     Given I am authenticated as admin
     When I try to delete an impact with id: "1"
     Then it should be deleted
 
-  Scenario: Delete new impact
+  Scenario: Delete impact as manager
     Given I am authenticated as manager
     When I try to delete an impact with id: "2"
     Then I should be forbidden
 
-  Scenario: Delete new impact
+  Scenario: Delete impact as guest
     Given I am authenticated as guest
     When I try to delete an impact with id: "3"
     Then I should be forbidden

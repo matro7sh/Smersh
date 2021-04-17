@@ -1,7 +1,7 @@
 default:
     suites:
-        smersh:
-            paths: [ '%paths.base%/features' ]
+        impact:
+            paths: [ '%paths.base%/features/impact.feature' ]
             contexts:
                 - App\Tests\Behat\ClientContext:
                       kernel: '@kernel'
@@ -11,6 +11,29 @@ default:
                 - App\Tests\Behat\ImpactContext:
                       kernel: '@kernel'
                 - Behatch\Context\JsonContext
+        host:
+            paths: [ '%paths.base%/features/host.feature' ]
+            contexts:
+                - App\Tests\Behat\ClientContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\DemoContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\FeatureContext
+                - App\Tests\Behat\HostContext:
+                      kernel: '@kernel'
+                - Behatch\Context\JsonContext
+        step:
+            paths: [ '%paths.base%/features/step.feature' ]
+            contexts:
+                - App\Tests\Behat\ClientContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\DemoContext:
+                      kernel: '@kernel'
+                - App\Tests\Behat\FeatureContext
+                - App\Tests\Behat\StepContext:
+                      kernel: '@kernel'
+                - Behatch\Context\JsonContext
+
 
     extensions:
         FriendsOfBehat\SymfonyExtension:

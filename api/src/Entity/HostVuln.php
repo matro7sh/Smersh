@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\HostVulnRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -57,6 +58,17 @@ class HostVuln
      * @Groups({"HostVuln:output", "MissionSingleOutput", "HostVuln:input" , "Impact:input"})
      */
     private $impact;
+
+
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @ApiProperty(iri="http://schema.org/image")
+     */
+    public $image;
+
 
     /**
      * @ORM\Column(type="text")

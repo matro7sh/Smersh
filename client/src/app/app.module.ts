@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatChipsModule } from '@angular/material/chips';
@@ -115,6 +116,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatTabsModule,
+    MatProgressBarModule,
     HttpClientModule,
     MatChipsModule,
     MatNativeDateModule,

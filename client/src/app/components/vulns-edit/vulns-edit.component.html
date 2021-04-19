@@ -1,23 +1,23 @@
 <h1 xmlns="http://www.w3.org/1999/html">Edit vuln {{ id }} - {{currentLocal}}</h1>
-<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-form-field class="example-full-width">
+<form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="smersh-full-width">
         <mat-label>Name</mat-label>
         <input matInput type = "text" name="name" [(ngModel)]="name"  autocomplete="off">
     </mat-form-field><br/><br/>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="smersh-full-width">
         <mat-label>Description</mat-label>
         <input matInput type = "text" name="description" [(ngModel)]="description"  autocomplete="off">
     </mat-form-field>
     <br/>
     <br/>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="smersh-full-width">
         <mat-label>Remediation</mat-label>
         <textarea matInput type="text" name="remediation" placeholder="jenaye:yolo" [(ngModel)]="remediation" autocomplete="off"></textarea>
     </mat-form-field>
 
 
 
-    <div class="example-button-row">
+    <div class="smersh-button-row">
         <br/><br/>
         <button mat-button mat-raised-button color="primary">Edit</button>
     </div>

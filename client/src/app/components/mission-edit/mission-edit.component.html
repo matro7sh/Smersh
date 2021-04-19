@@ -1,4 +1,4 @@
-<h1 xmlns="http://www.w3.org/1999/html">Edit Mission</h1>
+<h1 xmlns="http://www.w3.org/1999/html">Edit: {{ mission.name }}</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
 <span>Nmap check : </span>
     <input #saveUserNameCheckBox
@@ -65,7 +65,7 @@
 
 
     <mat-form-field appearance="fill">
-        <mat-label>Select users</mat-label>
+        <mat-label>Select pentesters</mat-label>
         <mat-select [(value)]="selected" multiple #selectUsers (selectionChange)="toto($event.value)">
             <mat-option *ngFor="let user of allUsers" [value]="user['@id']">{{user.username}}</mat-option>
         </mat-select>
@@ -73,6 +73,6 @@
     </mat-form-field>
     <div class="example-button-row">
         <br/><br/><br/><br/>
-        <button mat-button mat-raised-button color="primary">Edit</button>
+        <button mat-button mat-raised-button color="primary">Submit</button>
     </div>
 </form>

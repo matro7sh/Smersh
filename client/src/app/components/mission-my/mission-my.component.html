@@ -13,8 +13,7 @@
                     <span class="smersh-padding-between">{{mission.name}}</span>
                     <button mat-raised-button color="accent" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">Show</button>
                     <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission" class="smersh-padding-between">Edit</button>
-                    <mat-progress-bar mode="determinate" class="smersh-padding" value={{mission.current}}></mat-progress-bar>
-                    <span class="smersh-padding-between">{{mission.current }} %</span>
+                    <mat-progress-bar mode="determinate" class="smersh-padding" value={{mission.current}}></mat-progress-bar> <span class="smersh-padding-between">{{mission.current }} %</span>
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>

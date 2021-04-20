@@ -1,7 +1,11 @@
 # SMERSH
+
+![License](https://img.shields.io/badge/License-MIT-darkred.svg)
+![GitHub stars](https://img.shields.io/github/stars/CMEPW/Smersh)
 <p align="center">
 <img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/logo.png">
 </p>
+
 
 Smersh is a pentest oriented collaborative tool used to track the progress of your company's missions and generate rapport.
 
@@ -163,12 +167,11 @@ docker-compose exec php sh
 >you can specify scenario like this `./vendor/bin/behat --name="Impact API testing"`
 
 
-## Todo
+## Todo / ideas
 - add conclusion generator
 - Progress bar on mission ?
 - Externe : host/vuln - interne : account pwned, privilieges ? perimeter
 - Maybe use chips to create new vulns into host ?
-- Add color by impact into mission-single-view
 - Add possibility to select impact when u're editing vuln
 - add real fixture instead of dummy data
 - parser gnmap
@@ -181,3 +184,8 @@ docker-compose exec php sh
 - SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr
 - sanchis  - https://github.com/sanchis
 - RayMoDev  - https://github.com/RayMoDev
+
+
+# Official Discord Channel
+
+[![Porchetta Industries](https://discordapp.com/api/guilds/736724457258745996/widget.png?style=banner3)](https://discord.gg/sEkn3aa)

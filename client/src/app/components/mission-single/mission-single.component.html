@@ -126,7 +126,7 @@
                             <mat-icon mat-list-icon>schedule</mat-icon>
                             <form class="example-form"  #myform = "ngForm" (ngSubmit)="editStep(step.id, myform)">
                                 <input matInput type="text" name="description" placeholder="Your description " ngModel autocomplete="off">
-                                <button mat-raised-button color="danger">Update</button>
+                                <button mat-raised-button color="danger">edit</button>
                             </form>
                             <div mat-line>Action : {{step.description}}</div>
                             <div mat-line>Date : {{step.findAt | date }} </div>
@@ -152,6 +152,7 @@
             <button mat-raised-button color="primary">ADD NEW HOST MANUALLY</button>
             </form>
             </div>
+            <h2>import hosts file here </h2>
             <mat-divider [vertical]="true"></mat-divider>
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">

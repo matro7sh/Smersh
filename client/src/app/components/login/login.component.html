@@ -4,14 +4,14 @@
         <div class="bg-purple rounded-top vertical-align center height-100-px width-600-prc relative">
                 <div id="login_title_content" class="title-text">
                     <img src="./assets/logo.png" style="width: 10%; margin-right: 0.9em;">
-                    <p>Smersh authentification</p>  
+                    <p>Smersh authentification</p>
                 </div>
         </div>
         <div class="content vertical-align center size-100-prc">
             <div class="vertical-align center columns width-75-prc height-100-prc">
                 <form (submit)="submit()" class="form">
-                <input class="custom-input margin-bottom-10-px margin-top-40-px height-60-px width-100-prc padding-10-px font-input" type="text" name="login" [(ngModel)]="username" placeholder="Username" data-cy="login">
-                <input class="custom-input margin-bottom-40-px margin-top-40-px height-60-px width-100-prc padding-10-px font-input" placeholder="Password" type="password" name="password" [(ngModel)]="password" data-cy="password">
+                <input autofocus autocomplete="off" class="custom-input margin-bottom-10-px margin-top-40-px height-60-px width-100-prc padding-10-px font-input" type="text" name="login" [(ngModel)]="username" placeholder="Username" data-cy="login">
+                <input autocomplete="off" class="custom-input margin-bottom-40-px margin-top-40-px height-60-px width-100-prc padding-10-px font-input" placeholder="Password" type="password" name="password" [(ngModel)]="password" data-cy="password">
                 <button class="vertical-align center title-text width-100-prc height-80-px rounded-light bg-purple-complement margin-bottom-40-px" data-cy="submit">Connection</button>
                 </form>
             </div>

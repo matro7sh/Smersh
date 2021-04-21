@@ -13,6 +13,8 @@ import { VulnModelApplication } from 'src/app/model/Vuln';
 import { HostsService } from 'src/app/services/hosts.service';
 import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
+import { Observable } from 'rxjs';
+import { MediaObjectsService } from 'src/app/services/media-objects.service';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -28,9 +30,12 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public host: HostModelApplication;
   public durationInSeconds = 4;
   public missionId: string;
+  public fichierAEnvoyer: File = null;
+  public onsaitpascomment = null;
 
   constructor(
     private vulnsService: VulnsService,
+    private mediaObjectsService: MediaObjectsService,
     private hostsService: HostsService,
     private hostVulnsService: HostsVulnsService,
     private activatedRoute: ActivatedRoute,
@@ -82,15 +87,15 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    this.hostVulnsService
-      .insert({
-        ...form.value,
-        vuln: this.selectedVuln,
-        host: this.host['@id'],
-        impact: this.selectedImpact,
-        currentState: this.currentStateUser,
-      })
-      .subscribe(
+    const data = {
+      ...form.value,
+      vuln: this.selectedVuln,
+      host: this.host['@id'],
+      impact: this.selectedImpact,
+      currentState: this.currentStateUser,
+    };
+    const callback = (body) =>
+      this.hostVulnsService.insert(body).subscribe(
         () => {
           this.openSnackBar('vulnerabilitie added');
           this.router.navigateByUrl(
@@ -101,6 +106,17 @@ export class AddVulnsToHostExternalComponent implements OnInit {
           this.openSnackBar('Error : ' + err.error['hydra:description']);
         }
       );
+
+    if (this.onsaitpascomment) {
+      this.mediaObjectsService
+        .insert(this.onsaitpascomment)
+        .subscribe(({ ['@id']: id }) => {
+          data.image = id;
+          callback(data);
+        });
+    } else {
+      callback(data);
+    }
   }
 
   Vulns(value: string): void {
@@ -112,5 +128,11 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   }
   createVuln(): void {
     this.router.navigateByUrl(VulnRouter.redirectToCreate());
+  }
+
+  storeImage(inputElement: HTMLInputElement): void {
+    const formdata = new FormData();
+    formdata.append('file', inputElement.files[0]);
+    this.onsaitpascomment = formdata;
   }
 }

@@ -74,6 +74,7 @@ import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 import { ThemeService } from './services/theme.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MediaObjectsService} from "src/app/services/media-objects.service";
 
 @NgModule({
   declarations: [
@@ -144,6 +145,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   ],
   providers: [
     MissionsService,
+    MediaObjectsService,
     HostsVulnsService,
     VulnTypesService,
     StepsService,

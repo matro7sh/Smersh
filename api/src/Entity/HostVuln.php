@@ -66,6 +66,7 @@ class HostVuln
      * @ORM\ManyToOne(targetEntity=MediaObject::class)
      * @ORM\JoinColumn(nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
+     * @Groups({"HostVuln:output", "HostVuln:input"})
      */
     public $image;
 

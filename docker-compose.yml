@@ -9,7 +9,11 @@ x-cache-from:
 services:
   php:
     build:
-      context: ./api
+      context: .
+      dockerfile: ./api/Dockerfile
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: api_platform_php
       <<: *api-cache-from
     image: ${PHP_IMAGE:-quay.io/api-platform/php}
@@ -30,7 +34,11 @@ services:
 
   api:
     build:
-      context: ./api
+      context: .
+      dockerfile: ./api/Dockerfile
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: api_platform_nginx
       <<: *api-cache-from
     image: ${NGINX_IMAGE:-quay.io/api-platform/nginx}
@@ -130,7 +138,11 @@ services:
 
   client:
     build:
-      context: ./client
+      context: .
+      dockerfile: ./client/Dockerfile
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: client_angular
     image: node:latest
     environment:
@@ -140,11 +152,11 @@ services:
         published: 4200
         protocol: tcp
     volumes:
-      - client:/app
+      - ./client:/app
     depends_on:
       - api
       - dev-tls
-
+  
   bitwarden:
     image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
     ports:
@@ -161,3 +173,4 @@ volumes:
   dev-certs: {}
   upload-data: {}
   client: {}
+

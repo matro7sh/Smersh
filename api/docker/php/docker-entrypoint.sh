@@ -23,7 +23,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
-		composer install --prefer-dist --no-progress --no-suggest --no-interaction
+		http_proxy=$2 https_proxy=$3 composer install --prefer-dist --no-progress --no-suggest --no-interaction
 	fi
 
 	echo "Waiting for db to be ready..."
@@ -36,4 +36,4 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 fi
 
-exec docker-php-entrypoint "$@"
+exec docker-php-entrypoint php-fpm

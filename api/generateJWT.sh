@@ -5,8 +5,6 @@ docker-compose exec php sh -c '
     export HTTPS_PROXY='$3'
     set -e
     apk add openssl
-    pwd
-    ls -al
     mkdir -p config/jwt
     jwt_passphrase='$1'
     ls -al config/jwt 

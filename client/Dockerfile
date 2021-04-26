@@ -22,8 +22,8 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install and cache app dependencies
 COPY client/package.json /app/package.json
 
-RUN if [ -n "$HTTP_PROXY_URL" ] ; then npm config set proxy $HTTP_PROXY_URL : ; fi
-RUN if [ -n "$HTTPS_PROXY_URL" ] ; then npm config set https-proxy $HTTPS_PROXY_URL : ; fi
+RUN if [ -n "$HTTP_PROXY_URL" ] ; then npm config set proxy $HTTP_PROXY_URL ; : ; fi
+RUN if [ -n "$HTTPS_PROXY_URL" ] ; then npm config set https-proxy $HTTPS_PROXY_URL ; : ; fi
 RUN npm install    
 RUN npm install -g @angular/cli@7.3.9
 

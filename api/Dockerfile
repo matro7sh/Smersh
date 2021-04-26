@@ -19,7 +19,7 @@ ENV http_proxy=$HTTP_PROXY_URL
 ENV https_proxy=$HTTPS_PROXY_URL
 
 # Setting proxy conf for pear
-RUN  if [ -n "$HTTP_PROXY_URL" ] ; then pear config-set http_proxy $HTTP_PROXY_URL : ; fi
+RUN  if [ -n "$HTTP_PROXY_URL" ] ; then pear config-set http_proxy $HTTP_PROXY_URL ; : ; fi
 
 RUN sed -i -e 's/https/http/' /etc/apk/repositories;
 

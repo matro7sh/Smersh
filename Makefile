@@ -10,7 +10,6 @@ cache: ## Clear cache
 	docker-compose exec php bin/console cache:clear
 
 composer-install: ## Install composer packages
-	cp .env api/.env
 	docker-compose exec -e http_proxy=$(HTTP_PROXY_URL) -e https_proxy=$(HTTPS_PROXY_URL) php composer install 
 
 composer-update: ## Update composer
@@ -19,6 +18,9 @@ composer-update: ## Update composer
 copy-files-prod: ## Copy prod files to dev
 	cp .env.prod .env
 	cp docker-compose.prod.yml docker-compose.yml
+
+copy-env-file: ## Copy env file from .env to api/.env
+	cp .env api/.env
 
 create-network: ## Create docker network if not exists
 	docker network create smersh || true
@@ -43,6 +45,7 @@ reset-db: init-db load-data
 up: ## Start containers
 	docker-compose up -d
 
+
 up-rebuild: ## Rebuild and launch containers
 	docker-compose up --build --force-recreate --remove-orphans -d
 
@@ -54,6 +57,7 @@ update: ## Update containers composer packages then re-up containers
 	$(MAKE) composer-update
 	$(MAKE) up
 
-upAll: up install init-db load-data
+upAll: copy-env-file up install init-db load-data
 
-upAll-rebuild: up-rebuild install init-db load-data
+upAll-rebuild: copy-env-file up-rebuild install init-db load-data
+

@@ -9,8 +9,7 @@ x-cache-from:
 services:
   php:
     build:
-      context: .
-      dockerfile: ./api/Dockerfile
+      context: ./api
       args:
       - HTTP_PROXY_URL=${HTTP_PROXY_URL}
       - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
@@ -34,8 +33,7 @@ services:
 
   api:
     build:
-      context: .
-      dockerfile: ./api/Dockerfile
+      context: ./api
       args:
       - HTTP_PROXY_URL=${HTTP_PROXY_URL}
       - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
@@ -138,8 +136,7 @@ services:
 
   client:
     build:
-      context: .
-      dockerfile: ./client/Dockerfile
+      context: ./client
       args:
       - HTTP_PROXY_URL=${HTTP_PROXY_URL}
       - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
@@ -152,7 +149,7 @@ services:
         published: 4200
         protocol: tcp
     volumes:
-      - ./client:/app
+      - client:/app
     depends_on:
       - api
       - dev-tls
@@ -173,4 +170,3 @@ volumes:
   dev-certs: {}
   upload-data: {}
   client: {}
-

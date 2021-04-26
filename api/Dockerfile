@@ -70,7 +70,7 @@ RUN set -eux; \
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
-COPY api/docker/php/conf.d/api-platform.prod.ini $PHP_INI_DIR/conf.d/api-platform.ini
+COPY docker/php/conf.d/api-platform.prod.ini $PHP_INI_DIR/conf.d/api-platform.ini
 
 RUN set -eux; \
 	{ \
@@ -92,17 +92,17 @@ ARG APP_ENV=prod
 
 WORKDIR /srv/api
 # prevent the reinstallation of vendors at every changes in the source code
-COPY api/composer.json ./
+COPY composer.json ./
 RUN set -eux; \
 	composer install --prefer-dist --no-dev --no-scripts --no-progress; \
 	composer clear-cache 
 
 # copy only specifically what we need
 COPY .env .
-COPY ./api/bin bin/
-COPY ./api/config config/
-COPY ./api/public public/
-COPY ./api/src src/
+COPY bin bin/
+COPY config config/
+COPY public public/
+COPY src src/
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
@@ -111,12 +111,12 @@ RUN set -eux; \
 	chmod +x bin/console; sync
 VOLUME /srv/api/var
 
-COPY api/docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
+COPY docker/php/docker-healthcheck.sh /usr/local/bin/docker-healthcheck
 RUN chmod +x /usr/local/bin/docker-healthcheck
 
 HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["docker-healthcheck"]
 
-COPY api/docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 # Setting entrypoint giving proxy conf
@@ -128,13 +128,13 @@ CMD ["php-fpm", $HTTP_PROXY_URL, $HTTPS_PROXY_URL]
 # The OpenResty distribution of NGINX is only needed for Kubernetes compatiblity (dynamic upstream resolution)
 FROM openresty/openresty:${OPENRESTY_VERSION}-alpine AS api_platform_nginx
 RUN echo -e "env UPSTREAM;\n$(cat /usr/local/openresty/nginx/conf/nginx.conf)" > /usr/local/openresty/nginx/conf/nginx.conf
-COPY api/docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 WORKDIR /srv/api/public
 COPY --from=api_platform_php /srv/api/public ./
 
 # "varnish" stage
 # does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
 FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
-COPY api/docker/varnish/conf/default.vcl /etc/varnish/default.vcl
+COPY docker/varnish/conf/default.vcl /etc/varnish/default.vcl
 CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]
 

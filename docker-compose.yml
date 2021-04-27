@@ -153,7 +153,6 @@ services:
     depends_on:
       - api
       - dev-tls
-  
   bitwarden:
     image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
     ports:

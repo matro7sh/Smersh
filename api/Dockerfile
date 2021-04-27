@@ -84,7 +84,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
 	composer global require "symfony/flex" --prefer-dist --no-progress  --classmap-authoritative; \
-	composer clear-cache 
+	composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 # build for production
@@ -137,4 +137,3 @@ COPY --from=api_platform_php /srv/api/public ./
 FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
 COPY docker/varnish/conf/default.vcl /etc/varnish/default.vcl
 CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]
-

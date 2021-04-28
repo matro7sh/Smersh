@@ -36,4 +36,13 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 fi
 
-exec docker-php-entrypoint php-fpm
+for arg do
+    shift
+    case "$arg" in
+        http_proxy*  ) :                   ;;
+        https_proxy* ) :                   ;;
+        *            )  set -- "$@" "$arg" ;;
+    esac
+done
+
+exec docker-php-entrypoint "$@"

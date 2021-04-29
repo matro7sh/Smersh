@@ -35,7 +35,7 @@ export const CREATE = {
   name: CREATE_ACTION,
 };
 export const SHOW = {
-  color: 'primary',
+  color: 'accent',
   label: 'Show',
   name: SHOW_ACTION,
 };

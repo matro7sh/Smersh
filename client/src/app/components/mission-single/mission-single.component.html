@@ -24,7 +24,7 @@
             <mat-card-title style="display:flex; flex-direction: row;">
                 <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
                 <span class="vertical-center" data-cy="mission-name-type">{{mission.name}} - {{ mission.missionType.name }}</span>
-                <button mat-raised-button color="primary" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">Edit</button>
+                <button mat-raised-button color="accent" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">Edit</button>
             </mat-card-title>
         </mat-card-header>
         <mat-card-content id="dashboard_main">
@@ -48,13 +48,13 @@
                                 <div mat-line style="padding: 14px;" id="host_vulnList">
                                     <a class="displayBlock">{{host.name}}</a>
                                     <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip color="accent" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
+                                        <mat-chip class="smersh-techno" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
                                             <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
-                                <button mat-raised-button color="primary" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
+                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
                                 <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
-                                <mat-icon mat-list-icon color="primary" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
+                                <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                             </div>
                         </mat-list-item>
                     </mat-list>
@@ -87,7 +87,7 @@
                     <mat-list>
                         <mat-list-item>
                             <mat-icon mat-list-icon>fingerprint</mat-icon>
-                            <div mat-line><a class="violet" href="{{ mission?.credentials }}"  target='_blank' rel='noopener noreferrer'>Bitwarden link</a></div>
+                            <div mat-line><a mat-button href="{{ mission?.credentials }}"  target='_blank' rel='noopener noreferrer'>Bitwarden link</a></div>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>
@@ -95,7 +95,9 @@
                     <mat-list  style="padding-top: 2rem;" id="codi_content">
                         <mat-list-item>
                             <mat-icon mat-list-icon>link</mat-icon>
-                            <div mat-line><a class="violet" href="{{mission?.pathToCodi}}" target='_blank' rel='noopener noreferrer' id="update_codi_button">{{mission?.pathToCodi}}</a></div>
+                            <div mat-line>
+                                <a mat-button href="{{mission?.pathToCodi}}" target='_blank' rel='noopener noreferrer' id="update_codi_button">{{mission?.pathToCodi}}</a>
+                            </div>
                         </mat-list-item>
 
                     </mat-list>
@@ -119,7 +121,7 @@
                         <mat-form-field class="example-full-width">
                             <input matInput type="text" name="description" placeholder="write custom step : " ngModel autocomplete="off">
                         </mat-form-field> -
-                        <button mat-raised-button color="primary">ADD MY STEP</button>
+                        <button mat-raised-button color="accent">ADD MY STEP</button>
                     </form>
                     <mat-list>
                         <mat-list-item *ngFor="let step of steps">
@@ -149,7 +151,7 @@
                 <mat-form-field class="example-full-width">
                     <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
                 </mat-form-field>
-            <button mat-raised-button color="primary">ADD NEW HOST MANUALLY</button>
+            <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
             </form>
             </div>
             <h2>import hosts file here </h2>
@@ -157,22 +159,21 @@
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">
                     <input type="file" id="file" (change)="onSelectFile($event)" #fileInput>
-                    <button mat-raised-button color="primary" (click)="sendFile()" >Submit import</button>
+                    <button mat-raised-button color="accent" (click)="sendFile()" >Submit import</button>
                 </form>
             </div>
         </mat-card-actions>
     </mat-card>
     <div id="wrapper_generate">
-        <button  mat-button mat-raised-button color="primary" (click)="generate()" id="generate">Generate report</button>
-        <button  mat-button mat-raised-button color="warn" (click)="exportData()" id="generate">Dump to json file</button>
+        <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate">Generate report</button>
+        <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate">Dump to json file</button>
         <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">Download burp configuration</button>
             <form class="paddingcodi"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
                 <mat-form-field class="example-full-width">
-
                     <input matInput type="text" class="vertical-center" name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
                 </mat-form-field>
                 <div class="example-button-row vertical-center">
-                    <button mat-button mat-raised-button color="primary">Add /update codiMD link</button>
+                    <button mat-button mat-raised-button color="accent">Add /update codiMD link</button>
                 </div>
             </form>
     </div>

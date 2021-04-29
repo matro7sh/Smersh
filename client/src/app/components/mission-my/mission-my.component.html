@@ -11,7 +11,7 @@
             <mat-list>
                 <mat-list-item *ngFor="let mission of missions">
                     <mat-icon mat-list-icon>label_important</mat-icon>
-                    <div mat-line data-cy="mission">{{mission.name}} - <button mat-raised-button color="primary" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">Show</button> - <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission">Edit</button></div>
+                    <div mat-line data-cy="mission">{{mission.name}} - <button mat-raised-button color="accent" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">Show</button> - <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission">Edit</button></div>
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>

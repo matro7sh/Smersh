@@ -11,7 +11,6 @@ import { MissionRouter } from 'src/app/router/MissionRouter';
 export class MissionMyComponent implements OnInit {
   public missions = [];
   public roles = [];
-  public missionsProgress = [];
 
   constructor(private usersServices: UsersService, private router: Router) {}
 

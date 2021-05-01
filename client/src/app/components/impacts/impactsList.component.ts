@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  GenericListComponent,
-  SHOW,
-} from 'src/app/components/generic/list/generic-list.component';
+import { GenericListComponent, SHOW } from 'src/app/components/generic';
 import { ImpactsService } from 'src/app/services/impacts.service';
 import { ImpactRouter } from 'src/app/router/ImpactRouter';
 

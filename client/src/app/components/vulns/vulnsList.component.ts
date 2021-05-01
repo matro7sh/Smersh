@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { VulnsService } from 'src/app/services/vulns.service';
-import {
-  GenericListComponent,
-  SHOW,
-} from 'src/app/components/generic/list/generic-list.component';
+import { GenericListComponent, SHOW } from 'src/app/components/generic';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 
 @Component({

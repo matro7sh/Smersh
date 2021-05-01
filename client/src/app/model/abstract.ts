@@ -17,6 +17,18 @@ export class AbstractSerializerApplication {
   }
 }
 
+export class AbstractNormalizerApplication {
+  protected model = AbstractModelAPI;
+
+  public normalizeMany(items: AbstractModelApplication[]): AbstractModelAPI[] {
+    return items.map((item) => new this.model(item));
+  }
+
+  public normalize(item: AbstractModelApplication): AbstractModelAPI {
+    return new this.model(item);
+  }
+}
+
 export class AbstractModelApplication {
   public '@id': string;
   public '@type': string;
@@ -29,7 +41,7 @@ export class AbstractModelApplication {
   }
 }
 
-export abstract class AbstractModelAPI {
+export class AbstractModelAPI {
   public '@id': string;
 
   constructor(props: AbstractModelApplication) {

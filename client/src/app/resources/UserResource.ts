@@ -1,11 +1,13 @@
 import { AbstractResource } from 'src/app/resources/AbstractResource';
-import { UsersListComponent } from 'src/app/components/users/usersList.component';
-import { UserCreateComponent } from 'src/app/components/user-create/user-create.component';
-import { UserEditComponent } from 'src/app/components/user-edit/user-edit.component';
+import {
+  UsersCreateComponent,
+  UsersEditComponent,
+  UsersListComponent,
+} from 'src/app/components/users';
 
 export class UserResource extends AbstractResource {
   protected basePath = 'users';
+  protected create = UsersCreateComponent;
+  protected edit = UsersEditComponent;
   protected list = UsersListComponent;
-  protected edit = UserEditComponent;
-  protected create = UserCreateComponent;
 }

@@ -1,6 +1,7 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
@@ -26,6 +27,10 @@ interface VulnFromAPIInterface extends ObjectFromAPIInterface {
 
 export class VulnSerializerApplication extends AbstractSerializerApplication {
   protected model = VulnModelApplication;
+}
+
+export class VulnNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = VulnModelAPI;
 }
 
 export class VulnModelApplication extends AbstractModelApplication {

@@ -4,6 +4,10 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
+import {
+  MissionModelApplication,
+  MissionSerializerApplication,
+} from 'src/app/model/Mission';
 
 interface UserFromAPIInterface extends ObjectFromAPIInterface {
   phone: string;
@@ -12,6 +16,7 @@ interface UserFromAPIInterface extends ObjectFromAPIInterface {
   city: string;
   username: string;
   enabled: boolean;
+  missions: any;
 }
 
 export class UserSerializerApplication extends AbstractSerializerApplication {
@@ -25,6 +30,7 @@ export class UserModelApplication extends AbstractModelApplication {
   city: string;
   username: string;
   enabled: boolean;
+  missions: MissionModelApplication[];
 
   constructor(props: UserFromAPIInterface) {
     super(props);
@@ -34,6 +40,9 @@ export class UserModelApplication extends AbstractModelApplication {
     this.trigram = props.trigram;
     this.city = props.city;
     this.mail = props.mail;
+    this.missions = new MissionSerializerApplication().serializeMany(
+      props.missions
+    ) as MissionModelApplication[];
   }
 }
 

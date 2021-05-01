@@ -15,7 +15,7 @@ import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';
   templateUrl: './vulns-create.component.html',
   styleUrls: ['./vulns-create.component.scss'],
 })
-export class VulnsCreateComponent implements OnInit {
+export class VulnsCreateComponent2 implements OnInit {
   durationInSeconds = 4;
   public impacts = [];
   selectedType = '';
@@ -69,7 +69,7 @@ export class VulnsCreateComponent implements OnInit {
         vulnType: this.selectedType,
         impact: this.selectedImpact,
       })
-      .subscribe(
+      .then(
         () => {
           this.openSnackBar('Vuln added');
           this.router.navigateByUrl(VulnRouter.redirectToList());

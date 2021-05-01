@@ -20,12 +20,14 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    return;
+  }
 
-  submit() {
+  submit(): void {
     this.connectionService
       .login({ username: this.username, password: this.password })
-      .subscribe(({ token }: { token?: string }) => {
+      .then(({ token }: any) => {
         if (token) {
           new Token().set(token);
           this.router.navigateByUrl('/missions');

@@ -6,7 +6,7 @@ import {
   EDIT,
   GenericListComponent,
   SHOW,
-} from 'src/app/components/generic/list/generic-list.component';
+} from 'src/app/components/generic';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { HostsService } from 'src/app/services/hosts.service';
 

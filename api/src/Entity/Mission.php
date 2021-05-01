@@ -118,6 +118,7 @@ class Mission
 
     /**
      * @ORM\ManyToOne(targetEntity=MissionType::class, inversedBy="missions")
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $missionType;

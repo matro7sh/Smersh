@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
 import { MissionRouter } from 'src/app/router/MissionRouter';
-import { Locale } from 'src/app/storage/Locale';
+import { UserModelApplication } from 'src/app/model/User';
+import { HostFromAPIInterface } from 'src/app/model/Host';
 
 @Component({
   selector: 'app-mission-my',
@@ -13,29 +14,30 @@ export class MissionMyComponent implements OnInit {
   public missions = [];
   public roles = [];
 
-
-  constructor(
-    private usersServices: UsersService,
-    private router: Router,
-  ) {}
+  constructor(private usersServices: UsersService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadMissions();
   }
 
-  loadMissions() {
+  loadMissions(): void {
     const token = localStorage.getItem('token');
     const decode = atob(token.split('.')[1]);
-    const id = JSON.parse(decode).user.split('/').pop();
-    this.roles = JSON.parse(decode).roles;
-    this.usersServices.getDataById(id).subscribe(({ missions }) => {
-      this.missions = missions.map(({ hosts, name, id }) => ({
-        name,
-        current:
-          (hosts.filter(({ checked }) => checked).length / hosts.length) * 100,
-        id,
-      }));
-    });
+    const jwt = JSON.parse(decode);
+    this.roles = jwt.roles;
+    this.usersServices
+      .getDataById(jwt.user.split('/').pop())
+      .then(({ missions }: UserModelApplication) => {
+        this.missions = missions.map(({ id, hosts, name }) => ({
+          name,
+          current:
+            ((hosts as HostFromAPIInterface[]).filter(({ checked }) => checked)
+              .length /
+              hosts.length) *
+            100,
+          id,
+        }));
+      });
   }
 
   editMission(id): void {

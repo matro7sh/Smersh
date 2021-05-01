@@ -21,10 +21,12 @@ import { ConfigService } from 'src/app/services/configService';
 import ImgModule from 'docxtemplater-image-module-free';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { MatDialog } from "@angular/material/dialog";
-import { PopupComponent } from "src/app/components/popup/popup.component";
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from 'src/app/components/popup/popup.component';
+import { MissionModelApplication } from 'src/app/model/Mission';
+import { HostModelApplication } from 'src/app/model/Host';
 
-function loadFile(url, callback) {
+function loadFile(url, callback): void {
   PizZipUtils.getBinaryContent(url, callback);
 }
 
@@ -97,7 +99,7 @@ export class MissionSingleComponent implements OnInit {
       disableClose: true,
       data: host,
     });
-    diag.afterClosed().subscribe(result => {
+    diag.afterClosed().subscribe((result) => {
       if (result === true) {
         this.deleteHost(host);
       }
@@ -107,12 +109,12 @@ export class MissionSingleComponent implements OnInit {
   done(host): void {
     const idHost = host['@id'].split('/').pop();
     if (host.checked === false) {
-      this.hostsService.update(idHost, { checked: true }).subscribe(() => {
+      this.hostsService.update(idHost, { checked: true }).then(() => {
         this.openSnackBar(host.name + ' updated To True ');
         this.ngOnInit();
       });
     } else {
-      this.hostsService.update(idHost, { checked: false }).subscribe(() => {
+      this.hostsService.update(idHost, { checked: false }).then(() => {
         this.openSnackBar(host.name + ' updated To False ');
         this.ngOnInit();
       });
@@ -134,7 +136,7 @@ export class MissionSingleComponent implements OnInit {
   }
 
   editStep(id: string, form: NgForm): void {
-    this.stepsService.update(id, form.value).subscribe(
+    this.stepsService.update(id, form.value).then(
       () => {
         this.openSnackBar('step has been successfully updated'),
           this.ngOnInit();
@@ -148,15 +150,11 @@ export class MissionSingleComponent implements OnInit {
   }
 
   nmapUpdate(isChecked: boolean): void {
-    this.missionsService
-      .update(this.missionId, { nmap: isChecked })
-      .subscribe();
+    this.missionsService.update(this.missionId, { nmap: isChecked }).then();
   }
 
   nessusUpdate(isChecked: boolean): void {
-    this.missionsService
-      .update(this.missionId, { nessus: isChecked })
-      .subscribe();
+    this.missionsService.update(this.missionId, { nessus: isChecked }).then();
   }
 
   openSnackBar(message: string): void {
@@ -223,42 +221,44 @@ export class MissionSingleComponent implements OnInit {
   }
 
   loadData(id: string): void {
-    this.missionsService.getDataById(id).subscribe((mission) => {
-      this.mission = mission;
-      this.missionName = mission.name;
-      this.hosts = mission.hosts.map((host) => ({
-        ...host,
-        vulns: host.hostVulns.map((hostVuln) => {
-          const translations = hostVuln.vuln.translations;
-          const translate =
-            translations[this.currentLocal] ??
-            translations.en ??
-            translations[Object.keys(translations)[0]];
-          return {
-            ...hostVuln.vuln,
-            impact: {
-              ...hostVuln.impact,
-              color: this.getImpactColor(hostVuln.impact.name),
-            },
-            linked: hostVuln.id,
-            ...translate,
-            translate,
-          };
-        }),
-      }));
+    this.missionsService
+      .getDataById(id)
+      .then((mission: MissionModelApplication) => {
+        this.mission = mission;
+        this.missionName = mission.name;
+        this.hosts = (mission.hosts as HostModelApplication[]).map((host) => ({
+          ...host,
+          vulns: host.hostVulns.map((hostVuln) => {
+            const translations = hostVuln.vuln.translations;
+            const translate =
+              translations[this.currentLocal] ??
+              translations.en ??
+              translations[Object.keys(translations)[0]];
+            return {
+              ...hostVuln.vuln,
+              impact: {
+                ...hostVuln.impact,
+                color: this.getImpactColor(hostVuln.impact.name),
+              },
+              linked: hostVuln.id,
+              ...translate,
+              translate,
+            };
+          }),
+        }));
 
-      this.users = mission.users;
-      this.creds = mission.credentials;
-      this.clients = mission.clients;
-      this.steps = mission.steps;
-      this.nmap = mission.nmap;
-      this.nessus = mission.nessus;
-      this.id = mission.id;
-    });
+        this.users = mission.users;
+        this.creds = mission.credentials;
+        this.clients = mission.clients;
+        this.steps = mission.steps;
+        this.nmap = mission.nmap;
+        this.nessus = mission.nessus;
+        this.id = mission.id;
+      });
   }
 
   addCodiMd(form: NgForm): void {
-    this.missionsService.update(this.id, form.value).subscribe(
+    this.missionsService.update(this.id, form.value).then(
       () => {
         this.openSnackBar('codiMD updated');
         this.ngOnInit();
@@ -279,7 +279,7 @@ export class MissionSingleComponent implements OnInit {
         checked: false,
         mission: this.mission['@id'],
       })
-      .subscribe(
+      .then(
         () => {
           this.ngOnInit();
           form.reset();
@@ -301,7 +301,7 @@ export class MissionSingleComponent implements OnInit {
         mission: this.mission['@id'],
         createdAt: date,
       })
-      .subscribe(
+      .then(
         () => {
           this.ngOnInit();
           form.reset();
@@ -348,9 +348,9 @@ export class MissionSingleComponent implements OnInit {
           'one or many host in ure file already exist in database and probably used by other mission'
         )
     );
-    this.file = "";
-    document.getElementById('file-importName').innerHTML = "No file selected...";
-
+    this.file = '';
+    document.getElementById('file-importName').innerHTML =
+      'No file selected...';
   }
 
   clickFakeFileInput(): void {
@@ -378,7 +378,7 @@ export class MissionSingleComponent implements OnInit {
   }
 
   exportData(): void {
-    this.missionsService.getDataById(this.id).subscribe((data) => {
+    this.missionsService.getDataById(this.id).then((data) => {
       this.exportDocument('mission', data);
     });
   }

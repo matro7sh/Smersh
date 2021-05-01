@@ -1,0 +1,17 @@
+<h1>{{ formType }} {{ singularResource }}</h1>
+<form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)">
+  <ng-container *ngFor="let input of inputs">
+    <ng-container *ngIf="input.inputType !== 'queryable'; else queryable">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>{{ input.label }}</mat-label>
+        <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off">
+      </mat-form-field>
+    </ng-container>
+    <ng-template #queryable>
+      <app-queryable-input (updateValue)="update($event)" [input]="input"></app-queryable-input>
+    </ng-template>
+  </ng-container>
+  <div class="example-button-row">
+    <button mat-button type="submit" mat-raised-button color="accent">Submit</button>
+  </div>
+</form>

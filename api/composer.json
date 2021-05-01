@@ -23,7 +23,13 @@
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",
+        "behat/behat": "^3.8",
+        "behat/mink": "^1.8",
+        "behatch/contexts": "^3.3",
         "doctrine/doctrine-fixtures-bundle": "^3.3",
+        "friends-of-behat/mink-browserkit-driver": "^1.5",
+        "friends-of-behat/symfony-extension": "^2.1",
+        "phpunit/phpunit": "^9.5",
         "symfony/maker-bundle": "^1.23",
         "symfony/profiler-pack": "^1.0"
     },

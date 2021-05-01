@@ -57,7 +57,7 @@
 
 
 <mat-form-field appearance="fill">
-    <mat-label>Select users</mat-label>
+    <mat-label>Select pentesters</mat-label>
     <mat-select (selectionChange)="toto($event.value)" multiple>
         <mat-option *ngFor="let user of AllUsers" [value]="user['@id']">{{user.username}}</mat-option>
     </mat-select>
@@ -65,6 +65,6 @@
 
     <div class="example-button-row">
         <br/><br/><br/><br/>
-        <button mat-button mat-raised-button color="primary">Create</button>
+        <button mat-button mat-raised-button color="accent">Submit</button>
     </div>
 </form>

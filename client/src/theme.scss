@@ -2,8 +2,108 @@
 
 @include mat-core();
 
-$angular-primary: mat-palette($mat-indigo);
-$angular-accent: mat-palette($mat-pink);
+$smersh-primary: (
+        50: #e8eaf6,
+        100: #c5cae9,
+        200: #9fa8da,
+        300: #d50220,
+        400: #d50220,
+        500: #d50220,
+        600: #d50220,
+        700: #d50220,
+        800: #d50220,
+        900: #d50220,#3f51b5
+        A100: #8c9eff,
+        A200: #536dfe,
+        A400: #d50220,
+        A700: #d72906,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+                A100: $dark-primary-text,
+                A200: $light-primary-text,
+                A400: $light-primary-text,
+                A700: $light-primary-text,
+        )
+);
+
+$smersh-accent: (
+        50: #e8eaf6,
+        100: #c5cae9,
+        200: #9fa8da,
+        300: #343131,
+        400: #343131,
+        500: #343131,
+        600: #343131,
+        700: #343131,
+        800: #343131,
+        900: #343131,
+        A100: #8c9eff,
+        A200: #536dfe,
+        A400: #343131,
+        A700: #343131,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+                A100: $dark-primary-text,
+                A200: $light-primary-text,
+                A400: $light-primary-text,
+                A700: $light-primary-text,
+        )
+);
+
+$smersh-accent-dark: (
+        50: #e8eaf6,
+        100: #c5cae9,
+        200: #9fa8da,
+        300: #9a9595,
+        400: #9a9595,
+        500: #9a9595,
+        600: #9a9595,
+        700: #9a9595,
+        800: #9a9595,
+        900: #9a9595,#9a9595
+        A100: #9a9595,
+        A200: #9a9595,
+        A400: #9a9595,
+        A700: #9a9595,
+        contrast: (
+                50: $dark-primary-text,
+                100: $dark-primary-text,
+                200: $dark-primary-text,
+                300: $light-primary-text,
+                400: $light-primary-text,
+                500: $light-primary-text,
+                600: $light-primary-text,
+                700: $light-primary-text,
+                800: $light-primary-text,
+                900: $light-primary-text,
+                A100: $dark-primary-text,
+                A200: $light-primary-text,
+                A400: $light-primary-text,
+                A700: $light-primary-text,
+        )
+);
+
+$angular-primary: mat-palette($smersh-primary);
+$smersh-dark-accent: mat-palette($smersh-accent-dark);
+$angular-accent: mat-palette($smersh-accent);
 // The warn palette is optional (defaults to red).
 $angular-warn: mat-palette($mat-red);
 
@@ -17,7 +117,7 @@ $angular-default-theme: mat-light-theme((color: (primary: $angular-primary,
 @include angular-material-theme($angular-default-theme);
 
 $angular-dark-theme: mat-dark-theme((color: (primary: $angular-primary,
-            accent: $angular-accent,
+            accent: $smersh-dark-accent,
             warn: $angular-warn,
         ),
     ));

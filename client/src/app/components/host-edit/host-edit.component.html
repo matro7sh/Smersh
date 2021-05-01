@@ -1,15 +1,15 @@
-<h1 xmlns="http://www.w3.org/1999/html">Edit host {{ id }}</h1>
-<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-form-field class="example-full-width">
+<h1 xmlns="http://www.w3.org/1999/html">Edit host id : {{ id }}</h1>
+<form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+    <mat-form-field class="smersh-full-width">
         <mat-label>Name</mat-label>
         <input matInput type = "text" name="name" [(ngModel)]="name"  autocomplete="off">
     </mat-form-field><br/>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="smersh-full-width">
         <mat-label>Technology</mat-label>
         <input matInput type = "text" name="technology" [(ngModel)]="technology"  autocomplete="off">
     </mat-form-field><br/>
-    <div class="example-button-row">
+    <div class="smersh-button-row">
         <br/><br/>
-        <button mat-button mat-raised-button color="primary">Edit</button>
+        <button mat-button mat-raised-button color="accent">Submit</button>
     </div>
 </form>

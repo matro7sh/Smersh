@@ -2,14 +2,13 @@
   <mat-form-field class="pr-2" *ngFor="let filter of filters">
     <input matInput (keyup)="applyFilter(filter, $event.target)" placeholder="Filter by {{ filter }}">
   </mat-form-field>
-  <a *ngIf="isEnabledCreation()" class="ml-auto flex no-decoration add-resource" routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">
-    <span class="my-auto" data-cy="add-item">
-      Add new {{ singularResource }}
-    </span>
-    <span class="my-auto material-icons">
+  <div class="example-button-row ml-auto flex no-decoration add-resource" *ngIf="isEnabledCreation()">
+    <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">Add new {{ singularResource }}
+      <span class="my-auto material-icons">
       add
     </span>
-  </a>
+    </a>
+  </div>
 </div>
 
 <div *ngIf="dataSource" class="mat-elevation-z8">

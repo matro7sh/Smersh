@@ -27,7 +27,9 @@
         <mat-label>Current State</mat-label>
         <textarea rows="20" matInput [(ngModel)]="currentState" name="currentState"></textarea>
     </mat-form-field>
-
+    <div *ngIf="pictureName">
+        <img id="VulnPicture" src="{{url}}{{pictureName}}"/>
+    </div>
     <div class="example-button-row">
         <br/><br/>
         <button mat-button mat-raised-button color="accent">Submit</button><br/><br/>

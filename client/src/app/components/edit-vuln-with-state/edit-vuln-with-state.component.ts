@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { MissionRouter } from 'src/app/router/MissionRouter';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -14,8 +15,10 @@ export class EditVulnWithStateComponent implements OnInit {
   public panelOpenState = false;
   public id: any;
   public currentState: any;
+  public pictureName: string;
   public durationInSeconds = 4;
   public host: any;
+  public url = environment.API;
   public missionId: any;
   public vulnName: string;
 
@@ -37,6 +40,7 @@ export class EditVulnWithStateComponent implements OnInit {
     this.hostvulnService.getDataById(this.id).subscribe((hostVuln) => {
       this.host = hostVuln.host;
       this.currentState = hostVuln.currentState;
+      this.pictureName = hostVuln.image.contentUrl;
       this.vulnName = hostVuln.vuln.name;
       this.missionId = hostVuln.host.mission.split('/').pop();
     });

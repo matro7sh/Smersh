@@ -63,10 +63,10 @@ class HostVuln
     /**
      * @var MediaObject|null
      *
-     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\ManyToOne(targetEntity=MediaObject::class,  cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      * @ApiProperty(iri="http://schema.org/image")
-     * @Groups({"HostVuln:output", "HostVuln:input"})
+     * @Groups({"HostVuln:output", "HostVuln:input", "media_object_read"})
      */
     public $image;
 

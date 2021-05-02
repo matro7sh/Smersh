@@ -31,6 +31,7 @@
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "ng-material-datetimepicker": "^1.19.7",
+    "open-docxtemplater-image-module": "^1.0.3",
     "pizzip": "^3.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

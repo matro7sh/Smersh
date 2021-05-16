@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VulnsTranslationService } from '../../services/vulns-translation.service';
+import { VulnTranslationsService } from 'src/app/services/vulnTranslations.service';
 import { VulnRouter } from 'src/app/router/VulnRouter';
-import {VulnsService} from "src/app/services/vulns.service";
-import {Locale} from "src/app/storage/Locale";
+import { VulnsService } from 'src/app/services/vulns.service';
+import { Locale } from 'src/app/storage/Locale';
 
 @Component({
   selector: 'app-vulns-edit',
@@ -22,7 +22,7 @@ export class VulnsEditComponent implements OnInit {
 
   constructor(
     private vulnsService: VulnsService,
-    private vulnsTranslationsService: VulnsTranslationService,
+    private vulnsTranslationsService: VulnTranslationsService,
     private router: Router,
     private route: ActivatedRoute
   ) {

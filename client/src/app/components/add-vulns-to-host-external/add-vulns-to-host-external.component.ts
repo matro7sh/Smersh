@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VulnsService } from 'src/app/services/vulns.service';
-import { HostsVulnsService } from 'src/app/services/hosts-vulns.service';
+import { HostVulnsService } from 'src/app/services/hostVulns.service';
 import { MissionsService } from 'src/app/services/missions.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -14,7 +14,7 @@ import { HostsService } from 'src/app/services/hosts.service';
 import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 import { Observable } from 'rxjs';
-import { MediaObjectsService } from 'src/app/services/media-objects.service';
+import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -37,7 +37,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private vulnsService: VulnsService,
     private mediaObjectsService: MediaObjectsService,
     private hostsService: HostsService,
-    private hostVulnsService: HostsVulnsService,
+    private hostVulnsService: HostVulnsService,
     private activatedRoute: ActivatedRoute,
     private impactService: ImpactsService,
     private _snackBar: MatSnackBar,

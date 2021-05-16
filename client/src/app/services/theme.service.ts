@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { EventEmitter } from 'events';
 import { BehaviorSubject } from 'rxjs';
 
 export enum Theme {

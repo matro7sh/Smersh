@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HostsVulnsService } from '../../services/hosts-vulns.service';
+import { HostVulnsService } from 'src/app/services/hostVulns.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { MissionRouter } from 'src/app/router/MissionRouter';
-import { environment } from "src/environments/environment";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -23,7 +23,7 @@ export class EditVulnWithStateComponent implements OnInit {
   public vulnName: string;
 
   constructor(
-    private hostvulnService: HostsVulnsService,
+    private hostvulnService: HostVulnsService,
     private router: Router,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar

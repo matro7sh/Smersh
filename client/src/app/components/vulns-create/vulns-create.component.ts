@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ImpactsService } from '../../services/impacts.service';
 import { Locale } from '../../storage/Locale';
-import { VulnTypesService } from '../../services/vuln-types.service';
+import { VulnTypesService } from 'src/app/services/vulnTypes.service';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 import { ImpactModelApplication } from 'src/app/model/Impact';
 import { AbstractTypeModelApplication } from 'src/app/model/AbstractType';

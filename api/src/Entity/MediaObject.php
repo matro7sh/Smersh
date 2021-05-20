@@ -65,7 +65,7 @@ class MediaObject
      * @var string|null
      *
      * @ApiProperty(iri="http://schema.org/contentUrl")
-     * @Groups({"HostVuln:output", "HostVuln:input", "media_object_read"})
+     * @Groups({"HostVuln:output", "MissionSingleOutput", "HostVuln:input", "media_object_read"})
      */
     public $contentUrl;
 

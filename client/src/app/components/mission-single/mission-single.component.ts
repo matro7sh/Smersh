@@ -20,6 +20,7 @@ import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
 import { ConfigService } from 'src/app/services/configService';
 import ImgModule from 'docxtemplater-image-module-free';
 import axios from 'axios';
+import { environment } from 'src/environments/environment';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -356,6 +357,10 @@ export class MissionSingleComponent implements OnInit {
       centered: true,
       fileType: 'docx',
       getImage: (tagValue, tagName) => {
+        console.log(tagValue);
+        if (!tagValue.startsWith('https://picsum.photos/200/300')) {
+          tagValue = `${environment.API}${tagValue}`;
+        }
         return axios
           .get(tagValue, { responseType: 'arraybuffer' })
           .then(({ data }) => data);
@@ -406,6 +411,8 @@ export class MissionSingleComponent implements OnInit {
           ...host,
           hostVulns: host.hostVulns.map((hostVuln) => ({
             ...hostVuln,
+            image:
+              hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
             ...hostVuln.vuln.translations[this.currentLocal],
           })),
         })),
@@ -417,6 +424,7 @@ export class MissionSingleComponent implements OnInit {
         .compile();
       try {
         doc.resolveData(data).then(() => {
+          console.log('Biz');
           console.log(doc.render());
           const out = doc.getZip().generate({
             type: 'blob',

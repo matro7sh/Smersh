@@ -19,7 +19,7 @@
         "symfony/framework-bundle": "5.1.*",
         "symfony/mercure-bundle": "^0.2",
         "symfony/yaml": "5.1.*",
-        "vich/uploader-bundle": "^1.15"
+        "vich/uploader-bundle": "^1.17"
     },
     "require-dev": {
         "api-platform/schema-generator": "^2.1",

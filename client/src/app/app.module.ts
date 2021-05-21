@@ -62,8 +62,8 @@ import { ClientsService } from './services/clients.service';
 import { ClientsListComponent } from 'src/app/components/clients/clientsList.component';
 import { ClientEditComponent } from './components/client-edit/client-edit.component';
 import { ClientCreateComponent } from './components/client-create/client-create.component';
-import { VulnTypesService } from './services/vuln-types.service';
-import { HostsVulnsService } from './services/hosts-vulns.service';
+import { VulnTypesService } from 'src/app/services/vulnTypes.service';
+import { HostVulnsService } from 'src/app/services/hostVulns.service';
 import { EditVulnWithStateComponent } from './components/edit-vuln-with-state/edit-vuln-with-state.component';
 import {
   NgxMatDatetimePickerModule,
@@ -74,6 +74,8 @@ import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 import { ThemeService } from './services/theme.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
+import { MediasService } from 'src/app/services/medias.service';
 
 @NgModule({
   declarations: [
@@ -144,12 +146,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   ],
   providers: [
     MissionsService,
-    HostsVulnsService,
+    MediaObjectsService,
+    HostVulnsService,
     VulnTypesService,
     StepsService,
     UsersService,
     UploadsService,
     HostsService,
+    MediasService,
     ClientsService,
     MatDatepickerModule,
     TypesService,

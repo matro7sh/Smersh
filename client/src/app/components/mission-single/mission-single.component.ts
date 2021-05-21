@@ -18,10 +18,33 @@ import { HostRouter } from 'src/app/router/HostRouter';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
 import { ConfigService } from 'src/app/services/configService';
+import ImgModule from 'docxtemplater-image-module-free';
+import axios from 'axios';
+import { environment } from 'src/environments/environment';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
 }
+
+const base64MimeRetriever = (b64: string) => {
+  const mime = b64.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
+
+  if (mime && mime.length) {
+    console.log(mime);
+    return mime[1] ?? '';
+  }
+
+  return '';
+};
+
+const bufferToB64 = (arrayBuffer) => {
+  return btoa(
+    new Uint8Array(arrayBuffer).reduce(
+      (data, byte) => data + String.fromCharCode(byte),
+      ''
+    )
+  );
+};
 
 @Component({
   selector: 'app-mission',
@@ -330,15 +353,48 @@ export class MissionSingleComponent implements OnInit {
   }
 
   generate(): void {
+    const imageModule = new ImgModule({
+      centered: true,
+      fileType: 'docx',
+      getImage: (tagValue, tagName) => {
+        console.log(tagValue);
+        if (!tagValue.startsWith('https://picsum.photos/200/300')) {
+          tagValue = `${environment.API}${tagValue}`;
+        }
+        return axios
+          .get(tagValue, { responseType: 'arraybuffer' })
+          .then(({ data }) => data);
+      },
+      getSize: async (img, tagValue, tagName) => {
+        const i = new Image();
+        const b64Img = bufferToB64(img);
+        await new Promise((resolve) => {
+          i.onload = (e) => resolve(e);
+          i.src = `data:${base64MimeRetriever(b64Img)};base64,${b64Img}`;
+        });
+        const maxWidth = 1200;
+        const maxHeight = 400;
+
+        if (i.naturalWidth < i.naturalHeight) {
+          return [
+            Math.round(i.naturalWidth * (maxHeight / i.naturalHeight)),
+            maxHeight,
+          ];
+        }
+        return [
+          maxWidth,
+          Math.round(i.naturalHeight * (maxWidth / i.naturalWidth)),
+        ];
+      },
+    });
+
     loadFile(`/assets/Smersh.docx`, (error, content) => {
       if (error) {
         throw error;
       }
 
       const zip = new PizZip(content);
-      const doc = new Docxtemplater().loadZip(zip);
-
-      doc.setData({
+      const data = {
         startDate: this.mission.startDate,
         CLIENT_NAME: this.missionName,
         creds: this.mission.credentials
@@ -355,15 +411,28 @@ export class MissionSingleComponent implements OnInit {
           ...host,
           hostVulns: host.hostVulns.map((hostVuln) => ({
             ...hostVuln,
+            image:
+              hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
             ...hostVuln.vuln.translations[this.currentLocal],
           })),
         })),
-      });
-      // think to update report with new hostVuln ( 1 box by vulnerability with current state )
+      };
+      const doc = new Docxtemplater()
+        .loadZip(zip)
+        .attachModule(imageModule)
+        .setData(data)
+        .compile();
       try {
-        // render the document (replace all occurences of key by your data)
-        doc.render();
+        doc.resolveData(data).then(() => {
+          console.log('Biz');
+          console.log(doc.render());
+          const out = doc.getZip().generate({
+            type: 'blob',
+          }); // Output the document using Data-URI
+          saveAs(out, 'rapport.docx');
+        });
       } catch (error) {
+        console.log('Buz');
         if (error.properties && error.properties.errors instanceof Array) {
           console.log(
             'errorMessages',
@@ -374,12 +443,6 @@ export class MissionSingleComponent implements OnInit {
         }
         throw error;
       }
-      const out = doc.getZip().generate({
-        type: 'blob',
-        mimeType:
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      }); // Output the document using Data-URI
-      saveAs(out, 'rapport.docx');
     });
   }
 

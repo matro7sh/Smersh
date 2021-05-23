@@ -21,12 +21,12 @@ export class LocaleService {
     
   private initLanguage(){
     this.translate.setDefaultLang(Language.FR) // TODO find a correct place to put static constants
-    this.switchLanguage(this.localStorage.get() as Language || navigator.language as Language) // Get the current language from storage if not set get language from browser
+    const navigatorLang =  navigator.language.length > 2 ? navigator.language.slice(0,2): navigator.language ;
+    this.switchLanguage(this.localStorage.get() as Language || navigatorLang as Language) // Get the current language from storage if not set get language from browser
   }
 
   public switchLanguage(lang: Language){
       this.translate.use(lang);
-      this.translate.get
       this.localStorage.set(lang);
   }
 }

@@ -27,7 +27,7 @@ export class SideBarComponent implements OnInit {
   public username: '';
   public version = `${environment.version}`;
   public languages = Object.keys(Language).map(lang => Language[lang])
-  public currentLang:Language;
+  public currentLang:Language = new Locale().get() as Language;
   private _mobileQueryListener: () => void;
 
   constructor(

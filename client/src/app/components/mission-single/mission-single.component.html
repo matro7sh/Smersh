@@ -1,20 +1,22 @@
 <mat-drawer-container class="smersh-container">
     <mat-drawer mode="side" opened id="action_check">
         <mat-list role="list">
-            <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
-            <mat-list-item role="listitem">End at : {{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
+            <mat-list-item role="listitem"><b>Start at :</b> {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
+            <mat-list-item role="listitem"><b>End at :</b> {{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
             <mat-list-item role="listitem">
+                <div class="responsive_row">
                     <mat-slide-toggle class="example-margin"
                                       [color]="color"
                                       (change)="nmapUpdate($event.checked)"
                                       [(ngModel)]="nmap"
-                    >Nmap</mat-slide-toggle><br/>
+                    >Nmap</mat-slide-toggle>
 
                     <mat-slide-toggle class="example-margin"
                                       (change)="nessusUpdate($event.checked)"
                                       [color]="color"
                                       [(ngModel)]="nessus"
-                    >Nessus</mat-slide-toggle><br/>
+                    >Nessus</mat-slide-toggle>
+                </div>
             </mat-list-item>
         </mat-list>
     </mat-drawer>
@@ -39,22 +41,26 @@
                        </ng-template>
                     <mat-list id="host_list">
                         <mat-list-item style="height:auto" *ngFor="let host of hosts">
-                            <div id="single_host">
-                                <mat-icon mat-list-icon class="clickableIcon" (click)="done(host)">
-                                    <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
-                                    <ng-template #thenBlock>verified</ng-template>
-                                    <ng-template #elseBlock>hourglass_empty</ng-template>
-                                </mat-icon>
-                                <div mat-line style="padding: 14px;" id="host_vulnList">
-                                    <a class="displayBlock">{{host.name}}</a>
-                                    <mat-chip-list aria-label="Fish selection">
-                                        <mat-chip class="smersh-techno" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                            <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
-                                    </mat-chip-list>
+                            <div id="single_host" class="responsive_row">
+                                <div class="row">
+                                    <mat-icon mat-list-icon class="clickableIcon" (click)="done(host)">
+                                        <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
+                                        <ng-template #thenBlock>verified</ng-template>
+                                        <ng-template #elseBlock>hourglass_empty</ng-template>
+                                    </mat-icon>
+                                    <div mat-line style="padding: 14px;" id="host_vulnList">
+                                        <a class="displayBlock">{{host.name}}</a>
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <mat-chip class="smersh-techno" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
+                                                <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
+                                        </mat-chip-list>
+                                    </div>
                                 </div>
-                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
-                                <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
-                                <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
+                                <div class="row center">
+                                    <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
+                                    <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
+                                    <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
+                                </div>
                             </div>
                         </mat-list-item>
                     </mat-list>
@@ -92,15 +98,22 @@
                     </mat-list>
                 </mat-tab>
                 <mat-tab label="CodiMD" *ngIf="mission?.pathToCodi">
-                    <mat-list  style="padding-top: 2rem;" id="codi_content">
-                        <mat-list-item>
+                    <div id="codimd_tab" class="responsive_row">
+                        <div class="row">
                             <mat-icon mat-list-icon>link</mat-icon>
                             <div mat-line>
                                 <a mat-button href="{{mission?.pathToCodi}}" target='_blank' rel='noopener noreferrer' id="update_codi_button">{{mission?.pathToCodi}}</a>
                             </div>
-                        </mat-list-item>
-
-                    </mat-list>
+                        </div>    
+                        <form class="responsive_row"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
+                            <mat-form-field id="pathToCodi">
+                                <input matInput type="text"name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
+                            </mat-form-field>
+                            <div class="example-button-row">
+                                <button mat-button mat-raised-button color="accent">Add /update codiMD link</button>
+                            </div>
+                        </form>
+                    </div>
                 </mat-tab>
                 <mat-tab label="Hacktivity" *ngIf="mission?.steps">
                     <form class="example-form"  #myform = "ngForm" (ngSubmit)="addStep(myform)">
@@ -145,16 +158,15 @@
 
             <div id="host_add_manual">
             <form class="example-form"  #myform = "ngForm" (ngSubmit)="addHost(myform)">
-            <mat-form-field class="example-full-width">
-                <input matInput type="text" name="name" placeholder="Ex : https://poule.op" ngModel autocomplete="off">
-            </mat-form-field> -
                 <mat-form-field class="example-full-width">
-                    <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
-                </mat-form-field>
-            <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
+                    <input matInput type="text" name="name" placeholder="Ex : https://poule.op" ngModel autocomplete="off">
+                </mat-form-field> -
+                    <mat-form-field class="example-full-width">
+                        <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
+                    </mat-form-field>
+                <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
             </form>
             </div>
-            <h2>import hosts file here </h2>
             <mat-divider [vertical]="true"></mat-divider>
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">
@@ -164,18 +176,10 @@
             </div>
         </mat-card-actions>
     </mat-card>
-    <div id="wrapper_generate">
+    <div class="responsive_row" style="justify-content: right">
         <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate">Generate report</button>
         <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate">Dump to json file</button>
         <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">Download burp configuration</button>
-            <form class="paddingcodi"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
-                <mat-form-field class="example-full-width">
-                    <input matInput type="text" class="vertical-center" name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
-                </mat-form-field>
-                <div class="example-button-row vertical-center">
-                    <button mat-button mat-raised-button color="accent">Add /update codiMD link</button>
-                </div>
-            </form>
     </div>
 </mat-drawer-content>
 </mat-drawer-container>

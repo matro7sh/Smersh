@@ -40,6 +40,34 @@
     align-items: center;
 }
 
+.nopadding {
+    padding: 0;
+    margin: 0;
+}
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.responsive_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.center {
+    align-items: center;
+}
 
 #action_check {
     height: 95%;
@@ -48,6 +76,9 @@
     -moz-box-shadow:    1px 1px 5px 1px #ccc;
     box-shadow:         1px 1px 5px 1px #ccc;
     border-radius: 0.3em;
+    width: 20%;
+    min-width: 16em;
+    max-width: 20em;
 }
 
 
@@ -63,8 +94,6 @@
 }
 #single_host{
     width: 100%;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-content: center;
     min-height: max-content;
@@ -74,10 +103,10 @@
     width: 90%;
 }
 #add_vulnToHost {
-    width: 7%;
+    width: 7em;
     height: fit-content;
     align-self: center;
-    padding: 0 1em 0 1em;
+    padding: 0 1em 0s 1em;
 }
 .clickableIcon {
     cursor: pointer;
@@ -85,16 +114,8 @@
     width: 3%;
 }
 
-#wrapper_generate {
-    display: flex;
-    justify-content: right;
-}
 #generate {
     margin: 1em 0 1em 1em;
-}
-
-.paddingcodi {
-    padding-left: 30px;
 }
 
 #codi_content {
@@ -112,12 +133,18 @@
 #host_add_manual{
     width: 55%;
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    align-items: center;
 }
 #host_add_file {
     width: 45%;
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    align-items: center;
+}
+
+#pathToCodi {
+    margin-right: 1em;
 }
 
 .displayBlock {

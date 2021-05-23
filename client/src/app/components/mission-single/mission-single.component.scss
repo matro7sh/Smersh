@@ -1,27 +1,27 @@
 .smersh-container {
     height: 100%;
     width: 100%;
+    .mat-lowimpact {
+        background-color: #1F1963;
+        color: white;
+     }
+    
+    .mat-mediumimpact {
+        background-color: #FFBA29;
+        color: black;
+    }
+    
+    .mat-highimpact {
+        background-color: #A10000;
+        color: white;
+    }
+    
+    .mat-criticalimpact {
+        background-color: #211D1D;
+        color: white;
+    }
 }
 
-.mat-lowimpact {
-    background-color: #1F1963;
-    color: white;
- }
-
-.mat-mediumimpact {
-    background-color: #FFBA29;
-    color: black;
-}
-
-.mat-highimpact {
-    background-color: #A10000;
-    color: white;
-}
-
-.mat-criticalimpact {
-    background-color: #211D1D;
-    color: white;
-}
 
 .vertical-center {
     align-self: center;

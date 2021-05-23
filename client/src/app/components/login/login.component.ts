@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/storage/Token';
 import { Locale } from 'src/app/storage/Locale';
@@ -8,6 +8,7 @@ import { ConnectionService } from 'src/app/services/connection.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
   public username: string;

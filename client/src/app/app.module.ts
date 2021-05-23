@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,6 +76,14 @@ import { ThemeService } from './services/theme.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
 import { MediasService } from 'src/app/services/medias.service';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LocaleService } from './services/locale.service';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -143,6 +151,14 @@ import { MediasService } from 'src/app/services/medias.service';
     MatSortModule,
     MatTableModule,
     MatPaginatorModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      defaultLanguage: 'fr' // TODO find a correct place to put static constants
+    })
   ],
   providers: [
     MissionsService,
@@ -158,7 +174,8 @@ import { MediasService } from 'src/app/services/medias.service';
     MatDatepickerModule,
     TypesService,
     ThemeService,
+    LocaleService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

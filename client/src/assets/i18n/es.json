@@ -1,0 +1,11 @@
+{
+    "side-bar":{
+        "DASHBOARD": "Panel de control",
+        "CLIENTS": "Clientes",
+        "HOSTS": "Hosts",
+        "IMPACTS": "Impactos",
+        "MISSIONS": "Misiones",
+        "USERS": "Usuarios",
+        "VULNS":"Vulnerabilidades"
+    }
+}

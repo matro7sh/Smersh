@@ -1,19 +1,19 @@
-<h1 xmlns="http://www.w3.org/1999/html">Edit client {{ id }}</h1>
+<h1 xmlns="http://www.w3.org/1999/html">{{ 'client-create.create' | translate }} {{ id }}</h1>
 <form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field class="smersh-full-width">
-        <mat-label>Name</mat-label>
+        <mat-label>{{ 'client-create.name' | translate }}</mat-label>
         <input matInput type = "text" name="name" [(ngModel)]="name"  autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="smersh-full-width">
-        <mat-label>First name</mat-label>
+        <mat-label>{{ 'client-create.firstname' | translate }}</mat-label>
         <input matInput type = "text" name="firstName" [(ngModel)]="firstName"  autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="smersh-full-width">
-        <mat-label>Last name</mat-label>
+        <mat-label>{{ 'client-create.lastname' | translate }}</mat-label>
         <input matInput type = "text" name="lastName" [(ngModel)]="lastName"  autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="smersh-full-width">
-        <mat-label>Phone</mat-label>
+        <mat-label>{{ 'client-create.phone' | translate }}</mat-label>
         <input matInput type = "text" name="phone" [(ngModel)]="phone"  autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="smersh-full-width">
@@ -22,6 +22,6 @@
     </mat-form-field><br/>
     <div class="smersh-button-row">
         <br/><br/>
-        <button mat-button mat-raised-button color="accent">Submit</button>
+        <button mat-button mat-raised-button color="accent">{{ 'button.submit' | translate }}</button>
     </div>
 </form>

@@ -7,5 +7,41 @@
         "MISSIONS": "Misiones",
         "USERS": "Usuarios",
         "VULNS":"Vulnerabilidades"
+    },
+    "dashboard": {
+        "welcome": "Bienvenido a su tablero de mandos",
+        "linked": "Misiones asignadas",
+        "noMission": "No tienes ninguna misión por el momentoé",
+        "myMission": "Mis missions",
+        "myRoles": "Mis rôles"
+    },
+    "button": {
+        "show": "Muestra",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "add": "añadir",
+        "submit": "presentar"
+    },
+    "add-vulns-to-host-external": {
+        "addVulnTo": "Añadir vulnerabilidad a",
+        "selectVulns": "Seleccione la vulnerabilidad",
+        "selectImpacts": "Seleccione el impacto",
+        "currentState": "Estado actual",
+        "createNewVuln": "Crear nuevo vuln",
+        "addPicture": "insertar imagen"
+    },
+    "client-create": {
+        "create": "Crear un nuevo cliente",
+        "name": "Nombre cliente",
+        "firstname": "Nombre",
+        "lastname": "Apellido",
+        "phone": "Teléfono"
+    },
+    "edit-vuln-with-state": {
+        "vuln": "Vulnerabilidad",
+        "target": "Target"
+    },
+    "host-edit": {
+        "Technology": "Tecnología"
     }
 }

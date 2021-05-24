@@ -1,26 +1,26 @@
-<h1 data-cy="title">Welcome to your dashaboard </h1>
+<h1 data-cy="title">{{ 'dashboard.welcome' | translate }} </h1>
 <div *ngIf="missions">
     <p>
-    <span matBadge="{{missions.length}}" matBadgeOverlap="false">Assigned Mission</span>
+    <span matBadge="{{missions.length}}" matBadgeOverlap="false">{{ 'dashboard.linked' | translate }} </span>
     </p>
 </div>
 <mat-card-content>
     <mat-tab-group>
-        <mat-tab label="My missions" >
+        <mat-tab label="{{ 'dashboard.myMission' | translate }}" >
             <div *ngIf="missions.length ; else loggedOut">
             <mat-list>
                 <mat-list-item *ngFor="let mission of missions">
                     <mat-icon mat-list-icon>label_important</mat-icon>
-                    <div mat-line data-cy="mission">{{mission.name}} - <button mat-raised-button color="accent" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">Show</button> - <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission">Edit</button></div>
+                    <div mat-line data-cy="mission">{{mission.name}} - <button mat-raised-button color="accent" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">{{ 'button.show' | translate }}</button> - <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission">{{ 'button.edit' | translate }}</button></div>
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>
             </div>
             <ng-template #loggedOut>
-                You don't have mission yet.
+                {{ 'dashboard.noMission' | translate }}
             </ng-template>
         </mat-tab>
-        <mat-tab label="My roles" *ngIf="missions">
+        <mat-tab label=" {{ 'dashboard.myRoles' | translate }}" *ngIf="missions">
             <mat-list>
                 <mat-list-item *ngFor="let role of roles">
                     <mat-icon mat-list-icon>label_important</mat-icon>

@@ -1,0 +1,47 @@
+{
+  "side-bar":{
+    "DASHBOARD": "Tableau de bord",
+    "CLIENTS": "Clients",
+    "HOSTS": "Nom de domaine",
+    "IMPACTS": "Impacts",
+    "MISSIONS": "Missions",
+    "USERS": "Users",
+    "VULNS":"Vulnerabilities"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue sur votre tableau de bord",
+    "linked": "Mission assignés",
+    "noMission": "Vous n'avez aucune mission pour le moment",
+    "myMission": "Mes missions",
+    "myRoles": "Mes rôles"
+  },
+  "button": {
+    "show": "Voir",
+    "edit": "Editer",
+    "delete": "Supprimer",
+    "submit": "Créer"
+  },
+  "add-vulns-to-host-external": {
+    "addVulnTo": "Ajouter une vulnerabilité au domaine",
+    "selectVulns": "Selectionnez une vulnerabilité",
+    "selectImpacts": "Selectionnez un impact",
+    "currentState": "Etat constaté",
+    "createNewVuln": "Créer une nouvelle vulnerabilité",
+    "addPicture": "Ajoutez une image"
+  },
+  "client-create": {
+    "create": "Créer un nouveau client",
+    "name": "Nom du client",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "phone": "Téléphone"
+  },
+  "edit-vuln-with-state": {
+    "vuln": "Vulnerability",
+    "target": "Target"
+  },
+  "host-edit": {
+    "Technology": "Technology"
+  }
+
+}

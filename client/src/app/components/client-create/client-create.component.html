@@ -1,7 +1,7 @@
-<h1>Create Client</h1>
+<h1>{{ 'client-create.create' | translate }}</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
+        <mat-label>{{ 'client-create.name' | translate }}</mat-label>
         <input matInput type = "text" name="name" placeholder = "Ex : Name" ngModel autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
@@ -9,18 +9,18 @@
         <input matInput type = "text" name="mail" placeholder = "Ex : yelaa@localhost.com" ngModel autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
-        <mat-label>First name</mat-label>
+        <mat-label>{{ 'client-create.firstname' | translate }}</mat-label>
         <input matInput type = "text" name="firstName" placeholder = "Ex : Robert" ngModel autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
-        <mat-label>Last name</mat-label>
+        <mat-label>{{ 'client-create.lastname' | translate }}</mat-label>
         <input matInput type = "text" name="lastName" placeholder = "Ex : cooper" ngModel autocomplete="off">
     </mat-form-field><br/>
     <mat-form-field class="example-full-width">
-        <mat-label>Phone</mat-label>
+        <mat-label>{{ 'client-create.phone' | translate }}</mat-label>
         <input matInput type = "text" name="phone" placeholder = "Ex : 06 XX XX XX XX" ngModel autocomplete="off">
     </mat-form-field><br/>
     <div class="example-button-row">
-        <button mat-button type="submit" mat-raised-button color="accent">Submit</button>
+        <button mat-button type="submit" mat-raised-button color="accent">{{ 'button.submit' | translate }}</button>
     </div>
 </form>

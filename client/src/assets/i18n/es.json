@@ -11,16 +11,16 @@
     "dashboard": {
         "welcome": "Bienvenido a su tablero de mandos",
         "linked": "Misiones asignadas",
-        "noMission": "No tienes ninguna misión por el momentoé",
-        "myMission": "Mis missions",
-        "myRoles": "Mis rôles"
+        "noMission": "No tienes ninguna misión por el momento",
+        "myMission": "Mis misiones",
+        "myRoles": "Mis roles"
     },
     "button": {
         "show": "Muestra",
         "edit": "Editar",
         "delete": "Eliminar",
-        "add": "añadir",
-        "submit": "presentar"
+        "add": "Añadir",
+        "submit": "Enviar"
     },
     "add-vulns-to-host-external": {
         "addVulnTo": "Añadir vulnerabilidad a",
@@ -28,7 +28,7 @@
         "selectImpacts": "Seleccione el impacto",
         "currentState": "Estado actual",
         "createNewVuln": "Crear nuevo vuln",
-        "addPicture": "insertar imagen"
+        "addPicture": "Insertar imagen"
     },
     "client-create": {
         "create": "Crear un nuevo cliente",
@@ -39,7 +39,7 @@
     },
     "edit-vuln-with-state": {
         "vuln": "Vulnerabilidad",
-        "target": "Target"
+        "target": "Objetivo"
     },
     "host-edit": {
         "Technology": "Tecnología"

@@ -32,19 +32,19 @@
     },
     "client-create": {
         "create": "إنشاء عميل جديد",
-        "NAME": "اسم الزبون",
-        "MAIL": "البريد الإلكتروني",
-        "FIRSTNAME": "الإسم",
-        "LASTNAME": "اللقب",
-        "PHONE": "الهاتف"
+        "name": "اسم الزبون",
+        "mail": "البريد الإلكتروني",
+        "firstname": "الإسم",
+        "lastname": "اللقب",
+        "phone": "الهاتف"
     },
     "client-edit":{
         "create": "إنشاء عميل جديد",
-        "NAME": "اسم الزبون",
-        "EMAIL": "البريد الإلكتروني",
-        "FIRSTNAME": "الإسم",
-        "LASTNAME": "اللقب",
-        "PHONE": "الهاتف"
+        "name": "اسم الزبون",
+        "mail": "البريد الإلكتروني",
+        "firstname": "الإسم",
+        "lastname": "اللقب",
+        "phone": "الهاتف"
     },
     "edit-vuln-with-state": {
         "vuln": "الثغرة الأمنية",
@@ -52,7 +52,8 @@
         "currentState": "الحالة الحالية"
     },
     "host-edit": {
-        "Technology": "التكنولوجيا"
+        "Technology": "التكنولوجيا",
+        "NAME": "إسم التأثير"
     },
     "impact-create":{
         "NAME": "إسم التأثير"
@@ -60,14 +61,16 @@
     "impact-edit":{
         "NAME": "إسم التأثير"
     },
-    "mission-create":{
+    "mission-create":  {
+        "CREATENEW": "إنشاء مهمة",
         "STARTDATE": "تاريخ البداية",
         "ENDDATE": "تاريخ الانتهاء",
         "MISSIONNAME": "اسم المهمة",
         "CREDENTIALS": "المعرفات",
         "TYPEOFMISSION ": "نوع المهمة",
         "CLIENT": "الزبون",
-        "SELECTPENTESTERS": "تحديد البنتستر"
+        "SELECTPENTESTERS": "تحديد البنتستر",
+        "CODI": "الاطلاع على المذكرة"
     },
     "mission-edit":{
         "STARTDATE": "تاريخ البداية",
@@ -96,7 +99,9 @@
     "vulns-create":{
         "NAME": "الإسم",
         "DESCRIPTION": "وصف الثغرة الأمنية",
-        "REMEDIATION": "الإصلاح"
+        "REMEDIATION": "الإصلاح",
+        "SELECTVULNSTYPE": "تحديد الثغرات الأمنية",
+        "SELECTIMPACTS": "تحديد التأثير"
     },
     "vulns-edit":{
         "NAME": "الإسم",

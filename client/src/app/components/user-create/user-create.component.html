@@ -1,23 +1,23 @@
 <h1>Create User</h1>
 <form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field class="smersh-full-width">
-        <mat-label>Username</mat-label>
+        <mat-label>{{ 'user-create.USERNAME' | translate }}</mat-label>
         <input matInput type = "text" name="username" placeholder = "Username" ngModel autocomplete="off">
     </mat-form-field>
     <mat-form-field class="smersh-full-width">
-        <mat-label>Password : </mat-label>
+        <mat-label>{{ 'user-create.PASSWORD' | translate }}</mat-label>
         <input matInput type="password" name="password" placeholder = "Password" ngModel autocomplete="off">
     </mat-form-field>
     <mat-form-field class="smersh-full-width">
-        <mat-label>email : </mat-label>
+        <mat-label>{{ 'user-create.EMAIL' | translate }}</mat-label>
         <input matInput type="text" name="mail" placeholder = "exemple@smersh.app" ngModel autocomplete="off">
     </mat-form-field>
     <mat-form-field class="smersh-full-width">
-        <mat-label>Phone : </mat-label>
+        <mat-label>{{ 'user-create.PHONE' | translate }} : </mat-label>
         <input matInput type="text" name="phone" placeholder = "06 XX AA ZZ RR" ngModel autocomplete="off">
     </mat-form-field>
     <mat-form-field class="smersh-full-width">
-        <mat-label>City : </mat-label>
+        <mat-label>{{ 'user-create.CITY' | translate }} : </mat-label>
         <input matInput type="text" name="city" placeholder = "Paris" ngModel autocomplete="off">
     </mat-form-field>
     <mat-form-field class="smersh-full-width">
@@ -25,6 +25,6 @@
         <input matInput type="text" name="trigram" placeholder = "mho" ngModel autocomplete="off">
     </mat-form-field>
     <div class="smersh-button-row">
-        <button mat-button type="submit" mat-raised-button color="accent">Create</button>
+        <button mat-button type="submit" mat-raised-button color="accent">{{ 'button.submit' | translate }}</button>
     </div>
 </form>

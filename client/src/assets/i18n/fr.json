@@ -19,7 +19,8 @@
     "show": "Voir",
     "edit": "Editer",
     "delete": "Supprimer",
-    "submit": "Créer"
+    "submit": "Créer",
+    "add": "Ajouter"
   },
   "add-vulns-to-host-external": {
     "addVulnTo": "Ajouter une vulnerabilité au domaine",
@@ -32,6 +33,7 @@
   "client-create": {
     "create": "Créer un nouveau client",
     "name": "Nom du client",
+    "mail": "Email",
     "firstname": "Prénom",
     "lastname": "Nom",
     "phone": "Téléphone"
@@ -42,6 +44,59 @@
   },
   "host-edit": {
     "Technology": "Technology"
+  },
+  "impact-create":{
+    "NAME": "Nom"
+  },
+  "impact-edit":{
+    "NAME": "Nom"
+  },
+  "mission-create":{
+    "CREATENEW": "Nouvelle mission",
+    "STARTDATE": "Date de début",
+    "ENDDATE": "Date de fin",
+    "MISSIONNAME": "Nom de la mission",
+    "CREDENTIALS": "Identifiants",
+    "TYPEOFMISSION ": "Type de mission",
+    "CLIENT": "Client",
+    "SELECTPENTESTERS": "Pentesters",
+    "CODI": "Lien vers le CodiMD"
+  },
+  "mission-edit":{
+    "STARTDATE": "Date de début",
+    "ENDDATE": "Date de fin",
+    "CLIENTNAME": "Client",
+    "CREDENTIALS": "Identifiants"
+  },
+  "mission-single":{
+    "STARTAT": "Date de début",
+    "ENDAT": "Date de fin"
+
+  },
+  "user-create":{
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD":"Mot de passe",
+    "EMAIL": "Email",
+    "PHONE": "Téléphone",
+    "CITY": "Ville"
+  },
+  "user-edit":{
+    "USERNAME": "Nom d'utilisateur",
+    "EMAIL": "Email",
+    "PHONE": "Téléphone",
+    "CITY": "Ville"
+  },
+  "vulns-create":{
+    "NAME": "Nom",
+    "DESCRIPTION": "Description",
+    "REMEDIATION": "Reméditation",
+    "SELECTVULNSTYPE": "Type de vulnerabilité",
+    "SELECTIMPACTS": "Impact"
+  },
+  "vulns-edit":{
+    "NAME": "Nom",
+    "DESCRIPTION": "Description",
+    "REMEDIATION": "Reméditation"
   }
 
 }

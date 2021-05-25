@@ -3,7 +3,7 @@
     <input matInput (keyup)="applyFilter(filter, $event.target)" placeholder="Filter by {{ filter }}">
   </mat-form-field>
   <div class="example-button-row ml-auto flex no-decoration add-resource" *ngIf="isEnabledCreation()">
-    <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">Add new {{ singularResource }}
+    <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">{{ 'button.add' | translate }} {{ singularResource }}
       <span class="my-auto material-icons">
       add
     </span>

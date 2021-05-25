@@ -16,7 +16,6 @@ import { VulnRouter } from 'src/app/router/VulnRouter';
 import { Observable } from 'rxjs';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { Language, LocaleService } from 'src/app/services/locale.service';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -24,8 +23,6 @@ import { Language, LocaleService } from 'src/app/services/locale.service';
   styleUrls: ['./add-vulns-to-host-external.component.scss'],
 })
 export class AddVulnsToHostExternalComponent implements OnInit {
-  public languages = Object.keys(Language).map((lang) => Language[lang]);
-  public currentLang: Language = new Locale().get() as Language;
   public vulns = [];
   public impacts = [];
   public selectedVuln: string | null = null;
@@ -47,7 +44,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
     private router: Router,
-    public localeService: LocaleService,
     private translate: TranslateService
   ) {}
 
@@ -64,9 +60,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       .subscribe((host) => (this.host = host));
     this.loadVulns();
     this.loadImpact();
-    this.translate.onLangChange.subscribe(
-        (event: LangChangeEvent) => (this.currentLang = event.lang as Language)
-    );
   }
 
   // get all vulns

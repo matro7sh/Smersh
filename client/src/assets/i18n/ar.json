@@ -1,0 +1,106 @@
+{
+    "side-bar":{
+        "DASHBOARD": "لوحة القيادة",
+        "CLIENTS": "عملاء",
+        "HOSTS": "المضيفين",
+        "IMPACTS": "التأثيرات",
+        "MISSIONS": "المهمات",
+        "USERS": "المستخدمين",
+        "VULNS":"الثغرات الأمنية"
+    },
+    "dashboard": {
+        "welcome": "مرحبًا بك في لوحة القيادة",
+        "linked": "المهمات المعينة",
+        "noMission": "ليس لديك مهمة في الوقت الحالي",
+        "myMission": "مهماتي",
+        "myRoles": "أدواري"
+    },
+    "button": {
+        "show": "إظهار",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "add": "إضافة",
+        "submit": "إرسال"
+    },
+    "add-vulns-to-host-external": {
+        "addVulnTo": "إضافة الثغرة الأمنية إلى",
+        "selectVulns": "تحديد الثغرات الأمنية",
+        "selectImpacts": "تحديد التأثير",
+        "currentState": "الحالة الحالية",
+        "createNewVuln": "تعيين ثغرة أمنية جديدة",
+        "addPicture": "ادراج الصورة"
+    },
+    "client-create": {
+        "create": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "MAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
+    },
+    "client-edit":{
+        "create": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "EMAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
+    },
+    "edit-vuln-with-state": {
+        "vuln": "الثغرة الأمنية",
+        "target": "الهدف",
+        "currentState": "الحالة الحالية"
+    },
+    "host-edit": {
+        "Technology": "التكنولوجيا"
+    },
+    "impact-create":{
+        "NAME": "إسم التأثير"
+    },
+    "impact-edit":{
+        "NAME": "إسم التأثير"
+    },
+    "mission-create":{
+        "STARTDATE": "تاريخ البداية",
+        "ENDDATE": "تاريخ الانتهاء",
+        "MISSIONNAME": "اسم المهمة",
+        "CREDENTIALS": "المعرفات",
+        "TYPEOFMISSION ": "نوع المهمة",
+        "CLIENT": "الزبون",
+        "SELECTPENTESTERS": "تحديد البنتستر"
+    },
+    "mission-edit":{
+        "STARTDATE": "تاريخ البداية",
+        "ENDDATE": "تاريخ الانتهاء",
+        "CLIENTNAME": "اسم الزبون",
+        "CREDENTIALS": "المعرفات"
+    },
+    "mission-single":{
+        "STARTAT": "تبدأ في",
+        "ENDAT": "تنتهي في"
+
+    },
+    "user-create":{
+        "USERNAME": "اسم االمستخدم",
+        "PASSWORD":"كلمة السر",
+        "EMAIL": "البريد الإلكتروني",
+        "PHONE": "الهاتف",
+        "CITY": "المدينة"
+    },
+    "user-edit":{
+        "USERNAME": "اسم االمستخدم",
+        "EMAIL": "البريد الإلكتروني",
+        "PHONE": "الهاتف",
+        "CITY": "المدينة"
+    },
+    "vulns-create":{
+        "NAME": "الإسم",
+        "DESCRIPTION": "وصف الثغرة الأمنية",
+        "REMEDIATION": "الإصلاح"
+    },
+    "vulns-edit":{
+        "NAME": "الإسم",
+        "DESCRIPTION": "وصف الثغرة الأمنية",
+        "REMEDIATION": "الإصلاح"
+    }
+}

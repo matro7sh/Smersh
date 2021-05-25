@@ -5,7 +5,8 @@ import { Locale } from '../storage/Locale';
 export enum Language {
     EN = 'en',
     ES = 'es',
-    FR = 'fr'
+    FR = 'fr',
+    AR = 'ar'
 };
 
 @Injectable()
@@ -18,7 +19,7 @@ export class LocaleService {
         this.initLanguage();
     }
 
-    
+
   private initLanguage(){
     this.translate.setDefaultLang(Language.FR) // TODO find a correct place to put static constants
     const navigatorLang =  navigator.language.length > 2 ? navigator.language.slice(0,2): navigator.language ;

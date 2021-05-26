@@ -23,7 +23,7 @@
         "submit": "Submit"
     },
     "add-vulns-to-host-external": {
-        "addVulnTo": "Add vulns to ",
+        "addVulnTo": "Add vulnerability to ",
         "selectVulns": "Select vulnerability",
         "selectImpacts": "Select impact",
         "currentState": "Current State",
@@ -70,20 +70,30 @@
     },
     "mission-single":{
         "STARTAT": "Start date",
-        "ENDAT": "End date"
-
+        "ENDAT": "End date",
+        "GENERATE-REPORT": "Generate report",
+        "DUMPJSON": "Dump data to json file",
+        "CODI": "Add or update codiMD link",
+        "BURP": "Download burp configuration",
+        "CLIENTS": "Client",
+        "IMPORT": "Import host file",
+        "ADDNEWHOST": "Add new host manualy",
+        "SCOPE": "Scope",
+        "PENTESTERS": "Hackers",
+        "STEPS": "Steps",
+        "CREDENTIALS": "Credentials"
     },
     "user-create":{
         "USERNAME": "Username",
         "PASSWORD":"Password",
         "EMAIL": "Email",
-        "PHONE": "Phone",
+        "PHONE": "Phone number",
         "CITY": "City"
     },
     "user-edit":{
         "USERNAME": "Username",
         "EMAIL": "Email",
-        "PHONE": "Phone",
+        "PHONE": "Phone number",
         "CITY": "City"
     },
     "vulns-create":{

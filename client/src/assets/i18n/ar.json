@@ -80,8 +80,18 @@
     },
     "mission-single":{
         "STARTAT": "تبدأ في",
-        "ENDAT": "تنتهي في"
-
+        "ENDAT": "تنتهي في",
+        "GENERATE-REPORT": "انشاء التقرير",
+        "DUMPJSON": "تفريغ إلى الملف json",
+        "CODI": "اضافة/تحديث رابط codiMD",
+        "BURP": "تحميل تكوين burp",
+        "CLIENTS": "عملاء",
+        "IMPORT": "استيراد ملف المضيف",
+        "ADDNEWHOST": "إضافة مضيف جديد يدويا",
+        "SCOPE": "مجال",
+        "PENTESTERS": "هكر",
+        "STEPS": "مراقبة",
+        "CREDENTIALS": "المعرفات"
     },
     "user-create":{
         "USERNAME": "اسم االمستخدم",

@@ -43,7 +43,8 @@
     "target": "Target"
   },
   "host-edit": {
-    "Technology": "Technology"
+    "Technology": "Technology",
+    "NAME": "Nom"
   },
   "impact-create":{
     "NAME": "Nom"
@@ -70,7 +71,18 @@
   },
   "mission-single":{
     "STARTAT": "Date de début",
-    "ENDAT": "Date de fin"
+    "ENDAT": "Date de fin",
+    "GENERATE-REPORT": "Génération du rapport",
+    "DUMPJSON": "Téléchargement des données mission (JSON)",
+    "CODI": "Ajoutez ou modifier le lien codiMD",
+    "BURP": "Téléchargement du fichier de configuration BurpSuite",
+    "CLIENTS": "Client",
+    "IMPORT": "Import de plusieurs domaine",
+    "ADDNEWHOST": "Ajoutez un host manuellement",
+    "SCOPE": "Périmètre",
+    "PENTESTERS": "Auditeurs",
+    "STEPS": "Etapes",
+    "CREDENTIALS": "Identifiants"
 
   },
   "user-create":{

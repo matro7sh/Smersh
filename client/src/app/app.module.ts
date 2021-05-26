@@ -157,7 +157,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'fr' // TODO find a correct place to put static constants
+      defaultLanguage: 'en' // TODO find a correct place to put static constants
     })
   ],
   providers: [

@@ -6,7 +6,8 @@ export enum Language {
     EN = 'en',
     ES = 'es',
     FR = 'fr',
-    AR = 'ar'
+    AR = 'ar',
+    RU = 'ru'
 };
 
 @Injectable()

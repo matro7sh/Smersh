@@ -9,50 +9,50 @@
         "VULNS":"الثغرات الأمنية"
     },
     "dashboard": {
-        "welcome": "مرحبًا بك في لوحة القيادة",
-        "linked": "المهمات المعينة",
-        "noMission": "ليس لديك مهمة في الوقت الحالي",
-        "myMission": "مهماتي",
-        "myRoles": "أدواري"
+        "WELCOME": "مرحبًا بك في لوحة القيادة",
+        "LINKED": "المهمات المعينة",
+        "NOMISSION": "ليس لديك مهمة في الوقت الحالي",
+        "MYMISSION": "مهماتي",
+        "MYROLES": "أدواري"
     },
     "button": {
-        "show": "إظهار",
-        "edit": "تعديل",
-        "delete": "حذف",
-        "add": "إضافة",
-        "submit": "إرسال"
+        "SHOW": "إظهار",
+        "EDIT": "تعديل",
+        "DELETE": "حذف",
+        "ADD": "إضافة",
+        "SUBMIT": "إرسال"
     },
     "add-vulns-to-host-external": {
-        "addVulnTo": "إضافة الثغرة الأمنية إلى",
-        "selectVulns": "تحديد الثغرات الأمنية",
-        "selectImpacts": "تحديد التأثير",
-        "currentState": "الحالة الحالية",
-        "createNewVuln": "تعيين ثغرة أمنية جديدة",
-        "addPicture": "ادراج الصورة"
+        "ADDVULNTO": "إضافة الثغرة الأمنية إلى",
+        "SELECTVULNS": "تحديد الثغرات الأمنية",
+        "SELECTIMPACTS": "تحديد التأثير",
+        "CURRENTSTATE": "الحالة الحالية",
+        "CREATENEWVULN": "تعيين ثغرة أمنية جديدة",
+        "ADDPICTURE": "ادراج الصورة"
     },
     "client-create": {
-        "create": "إنشاء عميل جديد",
-        "name": "اسم الزبون",
-        "mail": "البريد الإلكتروني",
-        "firstname": "الإسم",
-        "lastname": "اللقب",
-        "phone": "الهاتف"
+        "CREATE": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "MAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
     },
     "client-edit":{
-        "create": "إنشاء عميل جديد",
-        "name": "اسم الزبون",
-        "mail": "البريد الإلكتروني",
-        "firstname": "الإسم",
-        "lastname": "اللقب",
-        "phone": "الهاتف"
+        "CREATE": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "MAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
     },
     "edit-vuln-with-state": {
-        "vuln": "الثغرة الأمنية",
-        "target": "الهدف",
-        "currentState": "الحالة الحالية"
+        "VULN": "الثغرة الأمنية",
+        "TARGET": "الهدف",
+        "CURRENTSTATE": "الحالة الحالية"
     },
     "host-edit": {
-        "Technology": "التكنولوجيا",
+        "TECHNOLOGY": "التكنولوجيا",
         "NAME": "إسم التأثير"
     },
     "impact-create":{

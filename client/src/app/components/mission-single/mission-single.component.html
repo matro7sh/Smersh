@@ -25,7 +25,7 @@
                 <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
                 <span class="vertical-center" data-cy="mission-name-type">{{mission.name}} - {{ mission.missionType.name }}</span>
                 <button mat-raised-button color="accent" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">
-                    {{ 'button.edit' | translate }}
+                    {{ 'button.EDIT' | translate }}
                 </button>
             </mat-card-title>
         </mat-card-header>
@@ -54,7 +54,7 @@
                                             <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
-                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">{{ 'button.add' | translate }}</button>
+                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">{{ 'button.ADD' | translate }}</button>
                                 <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
                                 <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                             </div>
@@ -161,7 +161,7 @@
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">
                     <input type="file" id="file" (change)="onSelectFile($event)" #fileInput>
-                    <button mat-raised-button color="accent" (click)="sendFile()" >{{ 'button.submit' | translate }}</button>
+                    <button mat-raised-button color="accent" (click)="sendFile()" >{{ 'button.SUBMIT' | translate }}</button>
                 </form>
             </div>
         </mat-card-actions>

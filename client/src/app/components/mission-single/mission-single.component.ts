@@ -219,8 +219,9 @@ export class MissionSingleComponent implements OnInit {
             color: this.getImpactColor(hostVuln.impact.name),
           },
           linked: hostVuln.id,
-          ...(hostVuln.vuln.translations[this.currentLocal] ?? {}),
-          translate: hostVuln.vuln.translations[this.currentLocal] ?? {},
+          ...(hostVuln.vuln.translations[this.currentLocal] ??
+            hostVuln.vuln.translations.en),
+          translate: hostVuln.vuln.translations[this.currentLocal] ?? hostVuln.vuln.translations.en,
         })),
       }));
 

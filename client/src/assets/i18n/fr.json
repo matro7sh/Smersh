@@ -9,41 +9,41 @@
     "VULNS":"Vulnerabilities"
   },
   "dashboard": {
-    "welcome": "Bienvenue sur votre tableau de bord",
-    "linked": "Mission assignés",
-    "noMission": "Vous n'avez aucune mission pour le moment",
-    "myMission": "Mes missions",
-    "myRoles": "Mes rôles"
+    "WELCOME": "Bienvenue sur votre tableau de bord",
+    "LINKED": "Mission assignés",
+    "NOMISSION": "Vous n'avez aucune mission pour le moment",
+    "MYMISSION": "Mes missions",
+    "MYROLES": "Mes rôles"
   },
   "button": {
-    "show": "Voir",
-    "edit": "Editer",
-    "delete": "Supprimer",
-    "submit": "Créer",
-    "add": "Ajouter"
+    "SHOW": "Voir",
+    "EDIT": "Editer",
+    "DELETE": "Supprimer",
+    "SUBMIT": "Créer",
+    "ADD": "Ajouter"
   },
   "add-vulns-to-host-external": {
-    "addVulnTo": "Ajouter une vulnerabilité au domaine",
-    "selectVulns": "Selectionnez une vulnerabilité",
-    "selectImpacts": "Selectionnez un impact",
-    "currentState": "Etat constaté",
-    "createNewVuln": "Créer une nouvelle vulnerabilité",
-    "addPicture": "Ajoutez une image"
+    "ADDVULNTO": "Ajouter une vulnerabilité au domaine",
+    "SELECTVULNS": "Selectionnez une vulnerabilité",
+    "SELECTIMPACTS": "Selectionnez un impact",
+    "CURRENTSTATE": "Etat constaté",
+    "CREATENEWVULN": "Créer une nouvelle vulnerabilité",
+    "ADDPICTURE": "Ajouter une image"
   },
   "client-create": {
-    "create": "Créer un nouveau client",
-    "name": "Nom du client",
-    "mail": "Email",
-    "firstname": "Prénom",
-    "lastname": "Nom",
-    "phone": "Téléphone"
+    "CREATE": "Créer un nouveau client",
+    "NAME": "Nom du client",
+    "MAIL": "Email",
+    "FIRSTNAME": "Prénom",
+    "LASTNAME": "Nom",
+    "PHONE": "Téléphone"
   },
   "edit-vuln-with-state": {
-    "vuln": "Vulnerability",
-    "target": "Target"
+    "VULN": "Vulnerability",
+    "TARGET": "Target"
   },
   "host-edit": {
-    "Technology": "Technology",
+    "TECHNOLOGY": "Technology",
     "NAME": "Nom"
   },
   "impact-create":{

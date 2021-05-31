@@ -9,26 +9,26 @@
         "VULNS":"Vulnerabilities"
     },
     "dashboard": {
-        "welcome": "Welcome to your dashboard",
-        "linked": "Assigned missions",
-        "noMission": "You don't have mission yet",
-        "myMission": "My missions",
-        "myRoles": "My roles"
+        "WELCOME": "Welcome to your dashboard",
+        "LINKED": "Assigned missions",
+        "NOMISSON": "You don't have mission yet",
+        "MUMISSION": "My missions",
+        "MYROLES": "My roles"
     },
     "button": {
-        "show": "Show",
-        "edit": "Edit",
-        "delete": "Delete",
-        "add": "Add",
-        "submit": "Submit"
+        "SHOW": "Show",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "ADD": "Add",
+        "SUBMIT": "Submit"
     },
     "add-vulns-to-host-external": {
-        "addVulnTo": "Add vulnerability to ",
-        "selectVulns": "Select vulnerability",
-        "selectImpacts": "Select impact",
-        "currentState": "Current State",
-        "createNewVuln": "Create new Vulnerability",
-        "addPicture": "Add screenshot"
+        "ADDVULNTO": "Add vulnerability to ",
+        "SELECTVULNS": "Select vulnerability",
+        "SELECTIMPACTS": "Select impact",
+        "CURRENTSTATE": "Current State",
+        "CREATENEWVULN": "Create new Vulnerability",
+        "ADDPICTURE": "Add screenshot"
     },
     "client-create": {
         "create": "Create a new client",

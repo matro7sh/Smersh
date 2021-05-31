@@ -9,41 +9,41 @@
         "VULNS":"Vulnerabilidades"
     },
     "dashboard": {
-        "welcome": "Bienvenido a su tablero de mandos",
-        "linked": "Misiones asignadas",
-        "noMission": "No tienes ninguna misión por el momento",
-        "myMission": "Mis misiones",
-        "myRoles": "Mis roles"
+        "WELCOME": "Bienvenido a su tablero de mandos",
+        "LINKED": "Misiones asignadas",
+        "NOMISSION": "No tienes ninguna misión por el momento",
+        "MYMISSION": "Mis misiones",
+        "MYROLES": "Mis roles"
     },
     "button": {
-        "show": "Muestra",
-        "edit": "Editar",
-        "delete": "Eliminar",
-        "add": "Añadir",
-        "submit": "Enviar"
+        "SHOW": "Muestra",
+        "EDIT": "Editar",
+        "DELETE": "Eliminar",
+        "ADD": "Añadir",
+        "SUBMIT": "Enviar"
     },
     "add-vulns-to-host-external": {
-        "addVulnTo": "Añadir vulnerabilidad a",
-        "selectVulns": "Seleccione la vulnerabilidad",
-        "selectImpacts": "Seleccione el impacto",
-        "currentState": "Estado actual",
-        "createNewVuln": "Crear nuevo vuln",
-        "addPicture": "Insertar imagen"
+        "ADDVULNTO": "Añadir vulnerabilidad a",
+        "SELECTVULNS": "Seleccione la vulnerabilidad",
+        "SELECTIMPACTS": "Seleccione el impacto",
+        "CURRENTSTATE": "Estado actual",
+        "CREATENEWVULN": "Crear nuevo vuln",
+        "ADDPICTURE": "Insertar imagen"
     },
     "client-create": {
-        "create": "Crear un nuevo cliente",
-        "mail": "Email",
-        "name": "Nombre cliente",
-        "firstname": "Nombre",
-        "lastname": "Apellido",
-        "phone": "Teléfono"
+        "CREATE": "Crear un nuevo cliente",
+        "MAIL": "Email",
+        "NAME": "Nombre cliente",
+        "FIRSTNAME": "Nombre",
+        "LASTNAME": "Apellido",
+        "PHONE": "Teléfono"
     },
     "edit-vuln-with-state": {
-        "vuln": "Vulnerabilidad",
-        "target": "Objetivo"
+        "VULN": "Vulnerabilidad",
+        "TARGET": "Objetivo"
     },
     "host-edit": {
-        "Technology": "Tecnología",
+        "TECHNOLOGY": "Tecnología",
         "NAME": "Nombre"
     },
     "impact-create":{

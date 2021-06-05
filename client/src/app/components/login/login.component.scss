@@ -1,6 +1,8 @@
 .container-login-form {
     background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
     height: 100%;
+    display: flex;
+    overflow: auto;
     $colorStar: #fff;
     @function multiple-box-shadow($n) {
         $value: "#{random(2000)}px #{random(2000)}px #{$colorStar}";
@@ -76,9 +78,7 @@
     }
 
     .login-form{
-        width: 400px;
-        top: 20%;
-        position: relative;
+        width: 350px;
         padding: 20px;
         margin: auto;
         border-radius: 4px;

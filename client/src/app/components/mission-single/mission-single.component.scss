@@ -81,7 +81,7 @@
 }
 
 #action_check:hover {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
 #dashboard {
@@ -91,7 +91,7 @@
     transition: 0.3s;
 }
 #dashboard:hover {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
 .buttons {
@@ -151,8 +151,9 @@
 #host_add_file {
     width: 45%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 1em 0 1em;
 }
 
 #pathToCodi {
@@ -166,4 +167,49 @@
 
 .smersh-techno {
     background-color: #5b5252 !important;
+}
+
+.title {
+    font-size: 1.1em;
+    font-weight: bold;
+    flex-wrap: wrap;
+    margin-right: 0em;
+}
+
+.fileInput {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 50px;
+}
+
+buttonl {
+    border: none;
+    font-weight: bold;
+    padding: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+    
+}
+
+ button:hover {
+    transform: skew(-10deg);
+    padding: 5px 10px ;
+    transition: all 0.2s;
+    box-shadow: 5px 5px 0 0 black;
+}
+
+#file {
+    display: none
+}
+
+.uploadForm {
+    width: 66%;
+    justify-content: space-between;
 }

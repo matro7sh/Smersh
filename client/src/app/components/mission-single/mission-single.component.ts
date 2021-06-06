@@ -21,6 +21,8 @@ import { ConfigService } from 'src/app/services/configService';
 import ImgModule from 'docxtemplater-image-module-free';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from "@angular/material/dialog";
+import { PopupComponent } from "src/app/components/popup/popup.component";
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -78,6 +80,7 @@ export class MissionSingleComponent implements OnInit {
     private route: ActivatedRoute,
     private burp: ConfigService,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private hostsService: HostsService,
     private stepsService: StepsService,
     private router: Router,
@@ -86,6 +89,19 @@ export class MissionSingleComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.missionId = this.router.url.split('/').pop();
+  }
+
+  openDeleteDialog(host): void {
+    const diag = this.dialog.open(PopupComponent, {
+      width: '30%',
+      disableClose: true,
+      data: host,
+    });
+    diag.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.deleteHost(host);
+      }
+    });
   }
 
   done(host): void {
@@ -325,10 +341,18 @@ export class MissionSingleComponent implements OnInit {
           'one or many host in ure file already exist in database and probably used by other mission'
         )
     );
+    this.file = "";
+    document.getElementById('file-importName').innerHTML = "No file selected...";
+
+  }
+
+  clickFakeFileInput(): void {
+    document.getElementById('file-import').click();
   }
 
   onSelectFile(event): void {
     this.file = event.target.files[0];
+    document.getElementById('file-importName').innerHTML = this.file.name;
   }
 
   selectFile(): void {

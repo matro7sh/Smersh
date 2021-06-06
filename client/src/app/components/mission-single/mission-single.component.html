@@ -59,6 +59,7 @@
                                 </div>
                                 <div class="row center">
                                     <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
+                                    <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="openDeleteDialog(host)">delete_forever</mat-icon>
                                     <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
                                     <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                                 </div>
@@ -158,20 +159,25 @@
         <mat-card-actions id="host_add">
 
             <div id="host_add_manual">
-            <form class="example-form"  #myform = "ngForm" (ngSubmit)="addHost(myform)">
-                <mat-form-field class="example-full-width">
-                    <input matInput type="text" name="name" placeholder="Ex : https://poule.op" ngModel autocomplete="off">
-                </mat-form-field> -
+                <form class="example-form"  #myform = "ngForm" (ngSubmit)="addHost(myform)">
                     <mat-form-field class="example-full-width">
-                        <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
-                    </mat-form-field>
-                <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
-            </form>
+                        <input matInput type="text" name="name" placeholder="Ex : https://poule.op" ngModel autocomplete="off">
+                    </mat-form-field> -
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
+                        </mat-form-field>
+                    <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
+                </form>
             </div>
             <mat-divider [vertical]="true"></mat-divider>
             <div id="host_add_file">
-                <form [formGroup]="uploadForm" id="k">
-                    <input type="file" id="file" (change)="onSelectFile($event)" #fileInput>
+                <p class="title nopadding">Import host file : </p>
+                <form [formGroup]="uploadForm" id="k" class="uploadForm row">
+                    <div class="file-input row">
+                        <input type="file" id="file-import" (change)="onSelectFile($event)" class="fileInput" #fileInput>
+                        <button mat-raised-button color="accent" (click)="clickFakeFileInput()">Select File</button>
+                        <span class="fileName" id="file-importName"> No file selected... </span>
+                    </div>
                     <button mat-raised-button color="accent" (click)="sendFile()" >Submit import</button>
                 </form>
             </div>
@@ -180,7 +186,7 @@
     <div class="responsive_row buttons">
         <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate">Generate report</button>
         <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate">Dump to json file</button>
-        <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">Download burp configuration</button>
+        <button  mat-button mat-raised-button color="warn" (click)="exportBurp()" id="generate">Download burp configuration</button>
     </div>
 </mat-drawer-content>
 </mat-drawer-container>

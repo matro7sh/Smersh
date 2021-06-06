@@ -21,7 +21,7 @@ export class ImpactCreateComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openSnackBar(message) {
+  openSnackBar(message: string): void {
     this._snackBar.open(message, '', {
       duration: this.durationInSeconds * 1000,
     });

@@ -1,4 +1,4 @@
-<h1 data-cy="title">Welcome to your dashaboard </h1>
+<h1 data-cy="title" class="red">Welcome to your dashaboard </h1>
 <div *ngIf="missions">
     <p>
     <span matBadge="{{missions.length}}" matBadgeOverlap="false">Assigned Mission</span>
@@ -11,7 +11,17 @@
             <mat-list>
                 <mat-list-item *ngFor="let mission of missions">
                     <mat-icon mat-list-icon>label_important</mat-icon>
-                    <div mat-line data-cy="mission">{{mission.name}} - <button mat-raised-button color="accent" [routerLink]="['/missions/',mission.id]" data-cy="show-mission">Show</button> - <button mat-raised-button (click)="editMission(mission.id)" data-cy="edit-mission">Edit</button></div>
+                    <div mat-line data-cy="mission" class="responsive_row">
+                        <div>{{mission.name}}</div>
+                        <div class="row">
+                            <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" [routerLink]="['/missions/',mission.id]" data-cy="show-mission" class="clickable">remove_red_eye</mat-icon>
+                            <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="editMission(mission.id)" data-cy="edit-mission" class="clickable">edit</mat-icon>
+                            <div class="row">
+                                <mat-progress-bar mode="determinate" class="progress-bar" value={{mission.current}}></mat-progress-bar>
+                                <span class="progress-text">{{mission.current}} %</span>
+                            </div>
+                        </div>
+                    </div>
                 </mat-list-item>
                 <mat-divider></mat-divider>
             </mat-list>

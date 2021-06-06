@@ -23,8 +23,13 @@ export class MissionMyComponent implements OnInit {
     const decode = atob(token.split('.')[1]);
     const id = JSON.parse(decode).user.split('/').pop();
     this.roles = JSON.parse(decode).roles;
-    this.usersServices.getDataById(id).subscribe((res) => {
-      this.missions = res['missions'];
+    this.usersServices.getDataById(id).subscribe(({ missions }) => {
+      this.missions = missions.map(({ hosts, name, id }) => ({
+        name,
+        current:
+          (hosts.filter(({ checked }) => checked).length / hosts.length) * 100,
+        id,
+      }));
     });
   }
 

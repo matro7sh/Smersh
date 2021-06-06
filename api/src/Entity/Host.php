@@ -54,7 +54,7 @@ class Host
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"MissionSingleOutput", "Host:output", "HostVuln:output"})
+     * @Groups({"MissionSingleOutput", "Host:output", "HostVuln:output", "HostDashboard"})
      * @Assert\AtLeastOneOf({
      *     @AppConstraint\Ip(message="The server name must be at least a valid IP."),
      *     @Assert\Hostname(message="The server name must be at least a valid hostname."),
@@ -70,7 +70,7 @@ class Host
 
     /**
      * @ORM\Column(type="boolean", options={"default":0}, nullable=false)
-     * @Groups({"MissionSingleOutput"})
+     * @Groups({"MissionSingleOutput", "HostDashboard"})
      */
     private $checked;
 

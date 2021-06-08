@@ -26,6 +26,6 @@ abstract class AbstractTranslation extends LocasticAbstractTranslation
 
     public function setLocale(?string $locale): void
     {
-        $this->locale = $locale;
+        $this->locale = $locale ?? 'en';
     }
 }

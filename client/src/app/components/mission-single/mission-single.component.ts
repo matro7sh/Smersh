@@ -212,17 +212,23 @@ export class MissionSingleComponent implements OnInit {
       this.missionName = mission.name;
       this.hosts = mission.hosts.map((host) => ({
         ...host,
-        vulns: host.hostVulns.map((hostVuln) => ({
-          ...hostVuln.vuln,
-          impact: {
-            ...hostVuln.impact,
-            color: this.getImpactColor(hostVuln.impact.name),
-          },
-          linked: hostVuln.id,
-          ...(hostVuln.vuln.translations[this.currentLocal] ??
-            hostVuln.vuln.translations.en),
-          translate: hostVuln.vuln.translations[this.currentLocal] ?? hostVuln.vuln.translations.en,
-        })),
+        vulns: host.hostVulns.map((hostVuln) => {
+          const translations = hostVuln.vuln.translations;
+          const translate =
+            translations[this.currentLocal] ??
+            translations.en ??
+            translations[Object.keys(translations)[0]];
+          return {
+            ...hostVuln.vuln,
+            impact: {
+              ...hostVuln.impact,
+              color: this.getImpactColor(hostVuln.impact.name),
+            },
+            linked: hostVuln.id,
+            ...translate,
+            translate,
+          };
+        }),
       }));
 
       this.users = mission.users;
@@ -410,12 +416,19 @@ export class MissionSingleComponent implements OnInit {
         state: 'draft',
         scope: this.hosts.map((host) => ({
           ...host,
-          hostVulns: host.hostVulns.map((hostVuln) => ({
-            ...hostVuln,
-            image:
-              hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
-            ...hostVuln.vuln.translations[this.currentLocal],
-          })),
+          hostVulns: host.hostVulns.map((hostVuln) => {
+            const translations = hostVuln.vuln.translations;
+            const translation =
+              translations[this.currentLocal] ??
+              translations.en ??
+              translations[Object.keys(translations)[0]];
+            return {
+              ...hostVuln,
+              image:
+                hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
+              ...translation,
+            };
+          }),
         })),
       };
       const doc = new Docxtemplater()

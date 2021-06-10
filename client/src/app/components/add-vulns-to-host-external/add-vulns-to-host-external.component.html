@@ -1,15 +1,14 @@
 <div class="flex">
-    <h1>Add vulnerability to <b>{{ host.name }}</b></h1>
+    <h1> {{ 'add-vulns-to-host-external.ADDVULNTO' | translate }} <b>{{ host.name }}</b></h1>
     <div (click)="createVuln()" class="ml-auto">
         <button mat-raised-button class="h-100" color="primary">
-            <span class="my-auto">Create new vuln</span>
-            <span class="material-icons" style="cursor: pointer">add</span>
+            <span class="my-auto"> {{ 'add-vulns-to-host-external.CREATENEWVULN' | translate }}</span>
         </button>
     </div>
 </div>
 <form class="smersh-form" #myform= "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-form-field appearance="fill" class="addSpace">
-        <mat-label>Select Vuln</mat-label>
+        <mat-label> {{ 'add-vulns-to-host-external.SELECTVULNS' | translate }} </mat-label>
         <mat-select [value]="selectedVuln" (selectionChange)="Vulns($event.value)">
             <mat-option *ngFor="let vuln of vulns" [value]="vuln.value">
                 {{vuln.name}}
@@ -17,7 +16,7 @@
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill">
-        <mat-label>Select Impact</mat-label>
+        <mat-label> {{ 'add-vulns-to-host-external.SELECTIMPACTS' | translate }} </mat-label>
         <mat-select [value]="selectedImpact" (selectionChange)="Impacts($event.value)">
             <mat-option *ngFor="let impact of impacts" [value]="impact.value">
                 {{impact.name}}
@@ -25,14 +24,14 @@
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill" class="smersh-full-width">
-        <mat-label>Current State</mat-label>
+        <mat-label> {{ 'add-vulns-to-host-external.CURRENTSTATE' | translate }} </mat-label>
         <textarea rows="20" matInput [(ngModel)]="currentStateUser" name="currentState"></textarea>
     </mat-form-field>
     <div class="example-button-row">
-        <button mat-button mat-raised-button color="accent">Add</button>
+        <button mat-button mat-raised-button color="accent"> {{ 'button.ADD' | translate }} </button>
     </div>
     <div class="form-group">
-        <label for="file">Choisir un fichier</label>
+        <label for="file">{{ 'add-vulns-to-host-external.ADDPICTURE' | translate }}</label>
         <input type="file" id="file" (change)="storeImage($event.target)"/>
     </div>
 </form>

@@ -15,6 +15,7 @@ import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 import { Observable } from 'rxjs';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -42,7 +43,8 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private impactService: ImpactsService,
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {}
 
   openSnackBar(message: string): void {
@@ -66,10 +68,17 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       .getData()
       .then(({ data }: { count: number; data: VulnModelApplication[] }) => {
         const locale = new Locale().get();
-        this.vulns = data.map((e) => ({
-          name: e.translations[locale.toString()].name,
-          value: e['@id'],
-        }));
+        this.vulns = data.map((e) => {
+          const { translations } = e;
+          return {
+            name: (
+              translations[locale.toString()] ??
+              translations.en ??
+              translations[Object.keys(translations)[0]]
+            ).name,
+            value: e['@id'],
+          };
+        });
       });
   }
 

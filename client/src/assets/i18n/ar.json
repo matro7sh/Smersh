@@ -1,0 +1,121 @@
+{
+    "side-bar":{
+        "DASHBOARD": "لوحة القيادة",
+        "CLIENTS": "عملاء",
+        "HOSTS": "المضيفين",
+        "IMPACTS": "التأثيرات",
+        "MISSIONS": "المهمات",
+        "USERS": "المستخدمين",
+        "VULNS":"الثغرات الأمنية"
+    },
+    "dashboard": {
+        "WELCOME": "مرحبًا بك في لوحة القيادة",
+        "LINKED": "المهمات المعينة",
+        "NOMISSION": "ليس لديك مهمة في الوقت الحالي",
+        "MYMISSION": "مهماتي",
+        "MYROLES": "أدواري"
+    },
+    "button": {
+        "SHOW": "إظهار",
+        "EDIT": "تعديل",
+        "DELETE": "حذف",
+        "ADD": "إضافة",
+        "SUBMIT": "إرسال"
+    },
+    "add-vulns-to-host-external": {
+        "ADDVULNTO": "إضافة الثغرة الأمنية إلى",
+        "SELECTVULNS": "تحديد الثغرات الأمنية",
+        "SELECTIMPACTS": "تحديد التأثير",
+        "CURRENTSTATE": "الحالة الحالية",
+        "CREATENEWVULN": "تعيين ثغرة أمنية جديدة",
+        "ADDPICTURE": "ادراج الصورة"
+    },
+    "client-create": {
+        "CREATE": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "MAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
+    },
+    "client-edit":{
+        "CREATE": "إنشاء عميل جديد",
+        "NAME": "اسم الزبون",
+        "MAIL": "البريد الإلكتروني",
+        "FIRSTNAME": "الإسم",
+        "LASTNAME": "اللقب",
+        "PHONE": "الهاتف"
+    },
+    "edit-vuln-with-state": {
+        "VULN": "الثغرة الأمنية",
+        "TARGET": "الهدف",
+        "CURRENTSTATE": "الحالة الحالية"
+    },
+    "host-edit": {
+        "TECHNOLOGY": "التكنولوجيا",
+        "NAME": "إسم التأثير"
+    },
+    "impact-create":{
+        "NAME": "إسم التأثير"
+    },
+    "impact-edit":{
+        "NAME": "إسم التأثير"
+    },
+    "mission-create":  {
+        "CREATENEW": "إنشاء مهمة",
+        "STARTDATE": "تاريخ البداية",
+        "ENDDATE": "تاريخ الانتهاء",
+        "MISSIONNAME": "اسم المهمة",
+        "CREDENTIALS": "المعرفات",
+        "TYPEOFMISSION ": "نوع المهمة",
+        "CLIENT": "الزبون",
+        "SELECTPENTESTERS": "تحديد البنتستر",
+        "CODI": "الاطلاع على المذكرة"
+    },
+    "mission-edit":{
+        "STARTDATE": "تاريخ البداية",
+        "ENDDATE": "تاريخ الانتهاء",
+        "CLIENTNAME": "اسم الزبون",
+        "CREDENTIALS": "المعرفات"
+    },
+    "mission-single":{
+        "STARTAT": "تبدأ في",
+        "ENDAT": "تنتهي في",
+        "GENERATE-REPORT": "انشاء التقرير",
+        "DUMPJSON": "تفريغ إلى الملف json",
+        "CODI": "اضافة/تحديث رابط codiMD",
+        "BURP": "تحميل تكوين burp",
+        "CLIENTS": "عملاء",
+        "IMPORT": "استيراد ملف المضيف",
+        "ADDNEWHOST": "إضافة مضيف جديد يدويا",
+        "SCOPE": "مجال",
+        "PENTESTERS": "هكر",
+        "STEPS": "مراقبة",
+        "CREDENTIALS": "المعرفات"
+    },
+    "user-create":{
+        "USERNAME": "اسم االمستخدم",
+        "PASSWORD":"كلمة السر",
+        "EMAIL": "البريد الإلكتروني",
+        "PHONE": "الهاتف",
+        "CITY": "المدينة"
+    },
+    "user-edit":{
+        "USERNAME": "اسم االمستخدم",
+        "EMAIL": "البريد الإلكتروني",
+        "PHONE": "الهاتف",
+        "CITY": "المدينة"
+    },
+    "vulns-create":{
+        "NAME": "الإسم",
+        "DESCRIPTION": "وصف الثغرة الأمنية",
+        "REMEDIATION": "الإصلاح",
+        "SELECTVULNSTYPE": "تحديد الثغرات الأمنية",
+        "SELECTIMPACTS": "تحديد التأثير"
+    },
+    "vulns-edit":{
+        "NAME": "الإسم",
+        "DESCRIPTION": "وصف الثغرة الأمنية",
+        "REMEDIATION": "الإصلاح"
+    }
+}

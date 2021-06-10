@@ -1,8 +1,8 @@
-<h1 xmlns="http://www.w3.org/1999/html">Create Mission</h1>
+<h1 xmlns="http://www.w3.org/1999/html">{{ 'mission-create.CREATENEW' | translate }}</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
 
     <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Start date</mat-label>
+        <mat-label>{{ 'mission-create.STARTDATE' | translate }}</mat-label>
         <input matInput [matDatepicker]="picker" ngModel name="startDate">
         <mat-datepicker-toggle matSuffix [for]="picker">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -11,7 +11,7 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>End date</mat-label>
+        <mat-label>{{ 'mission-create.ENDDATE' | translate }}</mat-label>
         <input matInput [matDatepicker]="picker2" ngModel name="endDate">
         <mat-datepicker-toggle matSuffix [for]="picker2">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
@@ -22,17 +22,17 @@
     <br/>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Mission name</mat-label>
+        <mat-label>{{ 'mission-create.MISSIONNAME' | translate }}</mat-label>
         <input matInput type = "text" name="name" ngModel  autocomplete="off">
     </mat-form-field><br/>
 
     <mat-form-field class="example-full-width">
-        <mat-label>credentials : </mat-label>
+        <mat-label>{{ 'mission-create.CREDENTIALS' | translate }}</mat-label>
         <textarea matInput type="text" name="credentials" placeholder="link to bitwarden" ngModel autocomplete="off"></textarea>
     </mat-form-field><br/>
 
     <mat-form-field appearance="fill">
-        <mat-label>Type of Mission</mat-label>
+        <mat-label>Type</mat-label>
         <mat-select (selectionChange)="getTypeValue($event.value)">
             <mat-option *ngFor="let type of types" [value]="type['@id']" name="type">
                 {{type.name}}
@@ -42,7 +42,7 @@
 <br/>
 
     <mat-form-field appearance="fill">
-        <mat-label>Client</mat-label>
+        <mat-label>{{ 'mission-create.CLIENT' | translate }}</mat-label>
         <mat-select (selectionChange)="myClient($event.value)">
             <mat-option *ngFor="let client of clients" [value]="client['@id']" name="clients">
                 {{client.name}}
@@ -51,13 +51,13 @@
     </mat-form-field><br/>
 
 <mat-form-field class="example-full-width">
-    <mat-label>pathToCodi : </mat-label>
+    <mat-label>{{ 'mission-create.CODI' | translate }}</mat-label>
         <input matInput type="text" name="pathToCodi" placeholder = "https://localhost:3000/1I3dN9kOQkCK" ngModel  autocomplete="off">
 </mat-form-field><br/>
 
 
 <mat-form-field appearance="fill">
-    <mat-label>Select pentesters</mat-label>
+    <mat-label>{{ 'mission-create.SELECTPENTESTERS' | translate }}</mat-label>
     <mat-select (selectionChange)="toto($event.value)" multiple>
         <mat-option *ngFor="let user of AllUsers" [value]="user['@id']">{{user.username}}</mat-option>
     </mat-select>
@@ -65,6 +65,6 @@
 
     <div class="example-button-row">
         <br/><br/><br/><br/>
-        <button mat-button mat-raised-button color="accent">Submit</button>
+        <button mat-button mat-raised-button color="accent">{{ 'button.SUBMIT' | translate }}</button>
     </div>
 </form>

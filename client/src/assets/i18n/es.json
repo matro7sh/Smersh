@@ -1,0 +1,112 @@
+{
+    "side-bar":{
+        "DASHBOARD": "Panel de control",
+        "CLIENTS": "Clientes",
+        "HOSTS": "Hosts",
+        "IMPACTS": "Impactos",
+        "MISSIONS": "Misiones",
+        "USERS": "Usuarios",
+        "VULNS":"Vulnerabilidades"
+    },
+    "dashboard": {
+        "WELCOME": "Bienvenido a su tablero de mandos",
+        "LINKED": "Misiones asignadas",
+        "NOMISSION": "No tienes ninguna misión por el momento",
+        "MYMISSION": "Mis misiones",
+        "MYROLES": "Mis roles"
+    },
+    "button": {
+        "SHOW": "Muestra",
+        "EDIT": "Editar",
+        "DELETE": "Eliminar",
+        "ADD": "Añadir",
+        "SUBMIT": "Enviar"
+    },
+    "add-vulns-to-host-external": {
+        "ADDVULNTO": "Añadir vulnerabilidad a",
+        "SELECTVULNS": "Seleccione la vulnerabilidad",
+        "SELECTIMPACTS": "Seleccione el impacto",
+        "CURRENTSTATE": "Estado actual",
+        "CREATENEWVULN": "Crear nuevo vuln",
+        "ADDPICTURE": "Insertar imagen"
+    },
+    "client-create": {
+        "CREATE": "Crear un nuevo cliente",
+        "MAIL": "Email",
+        "NAME": "Nombre cliente",
+        "FIRSTNAME": "Nombre",
+        "LASTNAME": "Apellido",
+        "PHONE": "Teléfono"
+    },
+    "edit-vuln-with-state": {
+        "VULN": "Vulnerabilidad",
+        "TARGET": "Objetivo"
+    },
+    "host-edit": {
+        "TECHNOLOGY": "Tecnología",
+        "NAME": "Nombre"
+    },
+    "impact-create":{
+        "NAME": "Nombre"
+    },
+    "impact-edit":{
+        "NAME": "Nombre"
+    },
+    "mission-create":{
+        "CREATENEW": "Nueva misión",
+        "STARTDATE": "Fecha de inicio",
+        "ENDDATE": "Fecha de finalización",
+        "MISSIONNAME": "Nombre de la misión",
+        "CREDENTIALS": "Credenciales",
+        "TYPEOFMISSION ": "Type",
+        "CLIENT": "Cliente",
+        "SELECTPENTESTERS": "Pentesters",
+        "CODI": "Enlace a CodiMD"
+    },
+    "mission-edit":{
+        "STARTDATE": "Fecha de inicio",
+        "ENDDATE": "Fecha de finalización",
+        "CLIENTNAME": "Cliente",
+        "CREDENTIALS": "Credenciales"
+    },
+    "mission-single":{
+        "STARTAT": "Fecha de inicio",
+        "ENDAT": "Fecha de finalización",
+        "GENERATE-REPORT": "Generar informe",
+        "DUMPJSON": "Volcar los datos a un archivo json",
+        "CODI": "Añadir o actualizar el enlace de codiMD",
+        "BURP": "Descargar la configuración del eructo\n",
+        "CLIENTS": "Cliente",
+        "IMPORT": "Importar archivo de host",
+        "ADDNEWHOST": "Añadir manualmente un nuevo host",
+        "SCOPE": "Alcance",
+        "PENTESTERS": "Hackers",
+        "STEPS": "Pasos",
+        "CREDENTIALS": "Credenciales"
+    },
+    "user-create":{
+        "USERNAME": "Nombre de usuario",
+        "PASSWORD":"Contraseña",
+        "EMAIL": "Email",
+        "PHONE": "Teléfono",
+        "CITY": "Ciudad"
+    },
+    "user-edit":{
+        "USERNAME": "Nombre de usuario",
+        "EMAIL": "Email",
+        "PHONE": "Teléfono",
+        "CITY": "Ciudad"
+    },
+    "vulns-create":{
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "REMEDIATION": "Remeditación",
+        "SELECTVULNSTYPE": "Tipo de vulnerabilidad",
+        "SELECTIMPACTS": "Seleccione el impacto"
+    },
+    "vulns-edit":{
+        "NAME": "Nombre",
+        "DESCRIPTION": "Descripción",
+        "REMEDIATION": "Remeditación"
+    }
+}

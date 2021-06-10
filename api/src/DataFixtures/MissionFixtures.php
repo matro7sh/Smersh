@@ -140,6 +140,7 @@ class MissionFixtures extends Fixture
             ->setName('sqli');
         $sqliFR->setLocale('fr');
         $sqliFR->setRemediation("fait des requetes parametrer pelo");
+
         $sqliEN
             ->setDescription('Sql injection')
             ->setName('sqli');
@@ -147,6 +148,7 @@ class MissionFixtures extends Fixture
         $sqliEN->setRemediation("Use of Prepared Statements (with Parameterized Queries, you can also use of Stored Procedures and escaping All User Supplied Input");
         $manager->persist($sqliFR);
         $manager->persist($sqliEN);
+
         $sqli->setCurrentLocale('en');
         $sqli->addTranslation($sqliFR);
         $sqli->addTranslation($sqliEN);

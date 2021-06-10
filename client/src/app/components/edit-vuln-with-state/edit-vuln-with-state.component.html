@@ -1,10 +1,10 @@
-<h1 xmlns="http://www.w3.org/1999/html">Edit</h1>
+<h1 xmlns="http://www.w3.org/1999/html">{{ 'button.EDIT' | translate }}</h1>
 <form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-accordion>
         <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <span class="bold">Vulnerability :</span>
+                    <span class="bold">{{ 'edit-vuln-with-state.VULN' | translate }} :</span>
                 </mat-panel-title>
                 <mat-panel-description>
                     {{ vulnName }}
@@ -24,7 +24,7 @@
         </mat-expansion-panel>
     </mat-accordion>
     <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>Current State</mat-label>
+        <mat-label>{{ 'add-vulns-to-host-external.CURRENTSTATE' | translate }}</mat-label>
         <textarea rows="20" matInput [(ngModel)]="currentState" name="currentState"></textarea>
     </mat-form-field>
     <div *ngIf="pictureName">
@@ -32,8 +32,8 @@
     </div>
     <div class="example-button-row">
         <br/><br/>
-        <button mat-button mat-raised-button color="accent">Submit</button><br/><br/>
-        <button mat-button mat-raised-button color="warn" (click)="delete()">Delete this vulnerability</button>
+        <button mat-button mat-raised-button color="accent"> {{ 'button.SUBMIT' | translate }}</button><br/><br/>
+        <button mat-button mat-raised-button color="warn" (click)="delete()"> {{ 'button.DELETE' | translate }}</button>
     </div>
 </form>
 

@@ -11,6 +11,8 @@ import { ImpactRouter } from 'src/app/router/ImpactRouter';
 import { ClientRouter } from 'src/app/router/ClientRouter';
 import { ThemeService } from 'src/app/services/theme.service';
 import { isGranted } from 'src/app/security/isGranted';
+import { Language, LocaleService } from 'src/app/services/locale.service';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-side-bar',
@@ -24,14 +26,17 @@ export class SideBarComponent implements OnInit {
   fillerNav: Record<string, string> = {};
   public username: '';
   public version = `${environment.version}`;
-
+  public languages = Object.keys(Language).map(lang => Language[lang])
+  public currentLang:Language = new Locale().get() as Language;
   private _mobileQueryListener: () => void;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private connection: ConnectionService,
-    public themeService: ThemeService
+    public themeService: ThemeService,
+    public localeService: LocaleService,
+    private translate: TranslateService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -57,15 +62,10 @@ export class SideBarComponent implements OnInit {
     const token = localStorage.getItem('token');
     const decode = atob(token.split('.')[1]);
     this.username = JSON.parse(decode).username;
+
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => this.currentLang = event.lang as Language);
   }
 
-  switchToFR(): void {
-    new Locale().set('fr');
-  }
-
-  switchToEN(): void {
-    new Locale().set('en');
-  }
 
   logout(): void {
     this.connection.logout();

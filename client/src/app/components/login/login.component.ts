@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
       .subscribe(({ token }: { token?: string }) => {
         if (token) {
           new Token().set(token);
-          const userLang = navigator.language;
-          new Locale().set(userLang.slice(0, 2));
           this.router.navigateByUrl('/missions');
         }
       });

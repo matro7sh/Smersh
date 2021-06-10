@@ -1,8 +1,8 @@
 <mat-drawer-container class="smersh-container">
     <mat-drawer mode="side" opened id="action_check">
         <mat-list role="list">
-            <mat-list-item role="listitem">Start at : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
-            <mat-list-item role="listitem">End at : {{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
+            <mat-list-item role="listitem"> {{ 'mission-single.STARTAT' | translate }} : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
+            <mat-list-item role="listitem">{{ 'mission-single.ENDAT' | translate }} :{{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
             <mat-list-item role="listitem">
                     <mat-slide-toggle class="example-margin"
                                       [color]="color"
@@ -24,12 +24,14 @@
             <mat-card-title style="display:flex; flex-direction: row;">
                 <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
                 <span class="vertical-center" data-cy="mission-name-type">{{mission.name}} - {{ mission.missionType.name }}</span>
-                <button mat-raised-button color="accent" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">Edit</button>
+                <button mat-raised-button color="accent" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">
+                    {{ 'button.EDIT' | translate }}
+                </button>
             </mat-card-title>
         </mat-card-header>
         <mat-card-content id="dashboard_main">
             <mat-tab-group>
-                <mat-tab label="Scope" *ngIf="hosts">
+                <mat-tab label="{{ 'mission-single.SCOPE' | translate }}" *ngIf="hosts">
                     <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
                     <ng-template #Host></ng-template>
                     <ng-template #ThereIsNoHosts>
@@ -52,14 +54,14 @@
                                             <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
                                     </mat-chip-list>
                                 </div>
-                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">Add vuln</button>
+                                <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">{{ 'button.ADD' | translate }}</button>
                                 <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="deleteHost(host)">close</mat-icon>
                                 <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
                             </div>
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>
-                <mat-tab label="Pentesters" *ngIf="users">
+                <mat-tab label="{{ 'mission-single.PENTESTERS' | translate }}" *ngIf="users">
                     <mat-list>
                         <mat-list-item *ngFor="let user of users">
                             <mat-icon mat-list-icon>account_circle</mat-icon>
@@ -72,7 +74,7 @@
                     </mat-list>
                 </mat-tab>
 
-                <mat-tab label="Clients" *ngIf="clients">
+                <mat-tab label="{{ 'mission-single.CLIENTS' | translate }}" *ngIf="clients">
                     <mat-list>
                         <mat-list-item *ngFor="let client of clients">
                             <mat-icon mat-list-icon>account_circle</mat-icon>
@@ -83,7 +85,7 @@
                         </mat-list-item>
                     </mat-list>
                 </mat-tab>
-                <mat-tab label="Credentials" *ngIf="mission?.credentials">
+                <mat-tab label="{{ 'mission-single.CREDENTIALS' | translate }}" *ngIf="mission?.credentials">
                     <mat-list>
                         <mat-list-item>
                             <mat-icon mat-list-icon>fingerprint</mat-icon>
@@ -102,7 +104,7 @@
 
                     </mat-list>
                 </mat-tab>
-                <mat-tab label="Hacktivity" *ngIf="mission?.steps">
+                <mat-tab label="{{ 'mission-single.STEPS' | translate }}" *ngIf="mission?.steps">
                     <form class="example-form"  #myform = "ngForm" (ngSubmit)="addStep(myform)">
                     <mat-form-field>
                         <input matInput ngModel  name="findAt" [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
@@ -151,29 +153,29 @@
                 <mat-form-field class="example-full-width">
                     <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
                 </mat-form-field>
-            <button mat-raised-button color="accent">ADD NEW HOST MANUALLY</button>
+            <button mat-raised-button color="accent">{{ 'mission-single.ADDNEWHOST' | translate }}</button>
             </form>
             </div>
-            <h2>import hosts file here </h2>
+            <h2>{{ 'mission-single.IMPORT' | translate }}</h2>
             <mat-divider [vertical]="true"></mat-divider>
             <div id="host_add_file">
                 <form [formGroup]="uploadForm" id="k">
                     <input type="file" id="file" (change)="onSelectFile($event)" #fileInput>
-                    <button mat-raised-button color="accent" (click)="sendFile()" >Submit import</button>
+                    <button mat-raised-button color="accent" (click)="sendFile()" >{{ 'button.SUBMIT' | translate }}</button>
                 </form>
             </div>
         </mat-card-actions>
     </mat-card>
     <div id="wrapper_generate">
-        <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate">Generate report</button>
-        <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate">Dump to json file</button>
-        <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">Download burp configuration</button>
+        <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate"> {{ 'mission-single.GENERATE-REPORT' | translate }}</button>
+        <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate"> {{ 'mission-single.DUMPJSON' | translate }}</button>
+        <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">{{ 'mission-single.BURP' | translate }}</button>
             <form class="paddingcodi"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
                 <mat-form-field class="example-full-width">
                     <input matInput type="text" class="vertical-center" name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
                 </mat-form-field>
                 <div class="example-button-row vertical-center">
-                    <button mat-button mat-raised-button color="accent">Add /update codiMD link</button>
+                    <button mat-button mat-raised-button color="accent">{{ 'mission-single.CODI' | translate }}</button>
                 </div>
             </form>
     </div>

@@ -8,13 +8,15 @@ import {
   VulnTranslationFromAPIInterface,
   VulnTranslationModelApplication,
 } from 'src/app/model/VulnTranslation';
+import { Locale } from 'src/app/storage/Locale';
+
+const ALLOWED_LANGUAGES = ['fr', 'en', 'ar', 'es', 'ru'];
 
 interface VulnFromAPIInterface extends ObjectFromAPIInterface {
   vulnType: string;
   impact: string;
   translations: {
-    fr: VulnTranslationFromAPIInterface;
-    en: VulnTranslationFromAPIInterface;
+    [key: string]: VulnTranslationFromAPIInterface;
   };
   hostVulns: string[];
   description: string;
@@ -30,8 +32,7 @@ export class VulnModelApplication extends AbstractModelApplication {
   type: string;
   impact: string;
   translations: {
-    fr: VulnTranslationModelApplication;
-    en: VulnTranslationModelApplication;
+    [key: string]: VulnTranslationModelApplication;
   };
   hostVulns: string[];
   description: string;
@@ -40,20 +41,25 @@ export class VulnModelApplication extends AbstractModelApplication {
 
   constructor(props: VulnFromAPIInterface) {
     super(props);
-    this.translations = {
-      fr: props.translations.fr
-        ? new VulnTranslationModelApplication(props.translations.fr)
-        : undefined,
-      en: props.translations.en
-        ? new VulnTranslationModelApplication(props.translations.en)
-        : undefined,
-    };
+    this.translations = ALLOWED_LANGUAGES.reduce((acc, language) => {
+      if (props.translations[language.toString()]) {
+        acc[language.toString()] = new VulnTranslationModelApplication(
+          props.translations[language.toString()]
+        );
+      }
+
+      return acc;
+    }, {});
+    const translation =
+      this.translations[new Locale().get()] ??
+      this.translations.en ??
+      this.translations[Object.keys(this.translations)[0]];
     this.type = props.vulnType;
     this.impact = props.impact;
     this.hostVulns = props.hostVulns;
-    this.description = props.description;
-    this.name = props.name;
-    this.remediation = props.remediation;
+    this.description = translation.description;
+    this.name = translation.name;
+    this.remediation = translation.remediation;
   }
 }
 
@@ -61,8 +67,7 @@ class VulnModelAPI extends AbstractModelAPI {
   vulnType: string;
   impact: string;
   translations: {
-    fr: VulnTranslationModelApplication;
-    en: VulnTranslationModelApplication;
+    [key: string]: VulnTranslationModelApplication;
   };
   hostVulns: string[];
   description: string;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Router } from '@angular/router';
-import {MissionRouter} from "src/app/router/MissionRouter";
+import { MissionRouter } from 'src/app/router/MissionRouter';
+import { Locale } from 'src/app/storage/Locale';
 
 @Component({
   selector: 'app-mission-my',
@@ -12,7 +13,11 @@ export class MissionMyComponent implements OnInit {
   public missions = [];
   public roles = [];
 
-  constructor(private usersServices: UsersService, private router: Router) {}
+
+  constructor(
+    private usersServices: UsersService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loadMissions();
@@ -24,7 +29,7 @@ export class MissionMyComponent implements OnInit {
     const id = JSON.parse(decode).user.split('/').pop();
     this.roles = JSON.parse(decode).roles;
     this.usersServices.getDataById(id).subscribe((res) => {
-      this.missions = res['missions'];
+      this.missions = res.missions;
     });
   }
 

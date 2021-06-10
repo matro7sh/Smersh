@@ -1,0 +1,47 @@
+{
+  "side-bar":{
+    "DASHBOARD": "Приборная панель",
+    "CLIENTS": "Клиенты",
+    "HOSTS": "Гости",
+    "IMPACTS": "Действия",
+    "MISSIONS": "Миссии",
+    "USERS": "Пользователи",
+    "VULNS":"Уязвимости"
+  },
+  "dashboard": {
+    "WELCOME": "Добро пожаловать в твою личную панель",
+    "LINKED": "Назначенные миссии",
+    "NOMISSION": "У тебя еще нет миссии",
+    "MYMISSION": "Мои миссии",
+    "MYROLES": "Мои роли"
+  },
+  "button": {
+    "SHOW": "Показывать",
+    "EDIT": "Редактировать",
+    "DELETE": "Удалить",
+    "ADD": "Добавить",
+    "SUBMIT": "Подтвердить"
+  },
+  "add-vulns-to-host-external": {
+    "ADDVULNTO": "Добавить уязвимость в",
+    "SELECTVULNS": "Выберите уязвимость",
+    "SELECTIMPACTS": "Выберите действия",
+    "CURRENTSTATE": "Текущее состояние",
+    "CREATENEWVULN": "Задать новую уязвимость",
+    "ADDPICTURE": "Добавить скриншот"
+  },
+  "client-create": {
+    "CREATE": "Создать нового клиента",
+    "NAME": "Имя клиента",
+    "FIRSTNAME": "Имя",
+    "LASTNAME": "Фамилия",
+    "PHONE": "Номер телефона"
+  },
+  "edit-vuln-with-state": {
+    "VULN": "Уязвимость",
+    "TARGET": "Цель"
+  },
+  "host-edit": {
+    "TECHNOLOGY": "Технология"
+  }
+}

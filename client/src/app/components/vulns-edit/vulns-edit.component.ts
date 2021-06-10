@@ -17,8 +17,9 @@ export class VulnsEditComponent implements OnInit {
   public description: any;
   public remediation: any;
   public translationId: string;
-  public currentLocal = localStorage.getItem('local');
+  public currentLocale = new Locale().get();
   public local;
+  public selectedTranslationLanguage: string;
 
   constructor(
     private vulnsService: VulnsService,
@@ -35,7 +36,10 @@ export class VulnsEditComponent implements OnInit {
 
   loadVuln(id): void {
     this.vulnsService.getDataById(this.id).subscribe((vuln) => {
-      const translation = vuln.translations[new Locale().get()];
+      const translation =
+        vuln.translations[new Locale().get()] ??
+        vuln.translations.en ??
+        vuln.translations[Object.keys(vuln.translations)[0]];
       this.translationId = translation.id;
       this.name = translation.name;
       this.description = translation.description;
@@ -43,15 +47,22 @@ export class VulnsEditComponent implements OnInit {
     });
   }
 
-  onSubmit(form: NgForm) {
-    this.vulnsTranslationsService
-      .update(this.translationId, {
-        ...form.value,
-        currentLocale: this.currentLocal,
-        translations: ['fr'],
-      })
-      .subscribe(() => {
-        this.router.navigateByUrl(VulnRouter.redirectToList());
-      });
+  onSubmit(form: NgForm): void {
+    const data = {
+      ...form.value,
+      translatable: `/api/vulns/${this.id}`,
+      currentLocale: this.currentLocale,
+      locale: this.currentLocale,
+      translations: [this.currentLocale],
+    };
+    let apply = () =>
+      this.vulnsTranslationsService.update(this.translationId, data);
+    if (this.currentLocale !== this.selectedTranslationLanguage) {
+      apply = () => this.vulnsTranslationsService.insert(data);
+    }
+
+    apply().subscribe(() => {
+      this.router.navigateByUrl(VulnRouter.redirectToList());
+    });
   }
 }

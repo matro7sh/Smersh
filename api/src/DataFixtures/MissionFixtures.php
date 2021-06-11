@@ -34,11 +34,11 @@ class MissionFixtures extends Fixture
         $manager->persist($user);
 
         $typeExterne = new MissionType();
-        $typeExterne->setName("interne");
+        $typeExterne->setName("Web Penetration Test");
         $manager->persist($typeExterne);
 
         $typeInterne = new MissionType();
-        $typeInterne->setName("externe");
+        $typeInterne->setName("Infrastructure Penetration Test");
         $manager->persist($typeInterne);
 
         $client = new Client();
@@ -60,13 +60,13 @@ class MissionFixtures extends Fixture
         $mission = new Mission();
         $mission->setNessus(0);
         $mission->addClient($client);
-        $mission->setName("FAKE-MISSION-EXTERNE");
+        $mission->setName("FAME MISSION WEB");
         $mission->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission->setNmap(1);
-        $mission->setCredentials("http://localhost:8888/YOLO");
+        $mission->setCredentials("http://localhost:8888/");
         $mission->addUser($user);
-        $mission->setPathToCodi("http://localhost:3000/YOLO");
+        $mission->setPathToCodi("http://localhost:3000/PathToCodi");
         $mission->setNessusFiler(0);
         $mission->setNmapFiler(0);
         $mission->setMissionType($typeExterne);
@@ -74,7 +74,7 @@ class MissionFixtures extends Fixture
         $mission2 = new Mission();
         $mission2->setNessus(0);
         $mission->addClient($client2);
-        $mission2->setName("FAKE-MISSION-INTERNE");
+        $mission2->setName("FAKE MISSION 2");
         $mission2->setstartDate(\DateTime::createFromFormat('Y-m-d', "2020-11-08"));
         $mission2->setEndDate(\DateTime::createFromFormat('Y-m-d', "2020-11-13"));
         $mission2->setNmap(0);
@@ -98,19 +98,11 @@ class MissionFixtures extends Fixture
 
         /* Create VulnType and persist */
         $type = new VulnType();
-        $type->setName("externe");
+        $type->setName("Web Penetration Test");
         $type2 = new VulnType();
-        $type2->setName("interne");
+        $type2->setName("Infrastructure Penetration Test");
         $manager->persist($type2);
         $manager->persist($type);
-
-
-        /* impact for behat */
-
-        $impactBehat = new Impact();
-        $impactBehat->setName("yolo");
-        $manager->persist($impactBehat);
-
 
         /* Create Impact and persist */
 
@@ -136,14 +128,14 @@ class MissionFixtures extends Fixture
         $sqliFR = new VulnTranslation();
         $sqliEN = new VulnTranslation();
         $sqliFR
-            ->setDescription('Injection sql')
-            ->setName('sqli');
+            ->setDescription('Injection SQL')
+            ->setName('SQLi');
         $sqliFR->setLocale('fr');
-        $sqliFR->setRemediation("fait des requetes parametrer pelo");
+        $sqliFR->setRemediation("Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).");
 
         $sqliEN
-            ->setDescription('Sql injection')
-            ->setName('sqli');
+            ->setDescription('SQL injection')
+            ->setName('SQLi');
         $sqliEN->setLocale('en');
         $sqliEN->setRemediation("Use of Prepared Statements (with Parameterized Queries, you can also use of Stored Procedures and escaping All User Supplied Input");
         $manager->persist($sqliFR);
@@ -156,17 +148,42 @@ class MissionFixtures extends Fixture
         $sqli->setImpact($impact3);
         $manager->persist($sqli);
 
+        $lfi = new Vuln();
+
+        $lfiFR = new VulnTranslation();
+        $lfiEN = new VulnTranslation();
+        $lfiFR
+            ->setDescription('Local file inclusion')
+            ->setName('LFI');
+        $lfiFR->setLocale('fr');
+        $lfiFR->setRemediation("Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).");
+
+        $lfiEN
+            ->setDescription('LFI attack may lead to information disclosure, remote code execution, or even Cross-site Scripting (XSS).')
+            ->setName('LFI');
+        $lfiEN->setLocale('en');
+        $lfiEN->setRemediation("Make the server send download headers automatically instead of executing files in a specified directory and save your file paths in a secure database and give an ID for every single one, this way users only get to see their ID without viewing or altering the path");
+        $manager->persist($lfiFR);
+        $manager->persist($lfiEN);
+
+        $lfi->setCurrentLocale('en');
+        $lfi->addTranslation($lfiFR);
+        $lfi->addTranslation($lfiEN);
+        $lfi->setVulnType($type);
+        $lfi->setImpact($impact3);
+        $manager->persist($lfi);
+
         $xss = new Vuln();
 
         $xssFR = new VulnTranslation();
         $xssEN = new VulnTranslation();
         $xssFR
-            ->setDescription('exemple : execute /js')
+            ->setDescription("La XSS une faille qui permet d'injecter du code HTML et/ou Javascript dans des variables mal protégées.")
             ->setName('XSS')
-            ->setRemediation(" tu devrais mettre des headers et verifier les champs")
+            ->setRemediation("Pour se protéger contre les failles XSS, il y a deux solutions possibilités, supprimer tout contenu HTML de la saisie utilisateur ou échapper  les caractères formant les balises HTML")
             ->setLocale('fr');
         $xssEN
-            ->setDescription('example : execute /js')
+            ->setDescription('The XSS flaw, from its full name Cross-Site Scripting, is a flaw that allows HTML and/or Javascript code to be injected into poorly protected variables or databases.')
             ->setName('XSS')
             ->setRemediation('HTML Encode Before Inserting Untrusted Data into HTML Element Content and add some headers')
             ->setLocale('en');

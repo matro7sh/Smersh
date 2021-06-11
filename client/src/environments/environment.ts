@@ -7,7 +7,7 @@ export const environment = {
   API: 'http://localhost:8000/api',
   HOST: 'http://localhost:8000',
   MAPS_KEY: '',
-  version: '1.0.8',
+  version: '1.0.0',
 };
 /*
  * For easier debugging in development mode, you can import the following file

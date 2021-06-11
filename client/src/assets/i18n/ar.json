@@ -1,7 +1,7 @@
 {
     "side-bar":{
         "DASHBOARD": "لوحة القيادة",
-        "CLIENTS": "عملاء",
+        "CLIENTS": "العملاء",
         "HOSTS": "المضيفين",
         "IMPACTS": "التأثيرات",
         "MISSIONS": "المهمات",
@@ -85,11 +85,11 @@
         "DUMPJSON": "تفريغ إلى الملف json",
         "CODI": "اضافة/تحديث رابط codiMD",
         "BURP": "تحميل تكوين burp",
-        "CLIENTS": "عملاء",
+        "CLIENTS": "العملاء",
         "IMPORT": "استيراد ملف المضيف",
         "ADDNEWHOST": "إضافة مضيف جديد يدويا",
-        "SCOPE": "مجال",
-        "PENTESTERS": "هكر",
+        "SCOPE": "المجال",
+        "PENTESTERS": "الهكر",
         "STEPS": "مراقبة",
         "CREDENTIALS": "المعرفات"
     },

@@ -24,8 +24,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MissionSingleComponent } from './components/mission-single/mission-single.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -74,6 +75,7 @@ import { StepsService } from './services/steps.service';
 import { GenericListComponent } from 'src/app/components/generic/list/generic-list.component';
 import { ThemeService } from './services/theme.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { PopupComponent } from './components/popup/popup.component';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
 import { MediasService } from 'src/app/services/medias.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -95,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MissionSingleComponent,
     SideBarComponent,
     UsersListComponent,
+    PopupComponent,
     UserSingleComponent,
     HomepageComponent,
     UserCreateComponent,
@@ -116,6 +119,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClientEditComponent,
     ClientCreateComponent,
     EditVulnWithStateComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,6 +129,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMatNativeDateModule,
     MatDatepickerModule,
     MatTabsModule,
+    MatProgressBarModule,
     HttpClientModule,
     MatChipsModule,
     MatNativeDateModule,
@@ -141,6 +146,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbarModule,
     MatCardModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatSidenavModule,
     BrowserModule,
     MatCheckboxModule,

@@ -23,7 +23,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
  *      },
  *      itemOperations={
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
- *          "get"={"security"="is_granted('ROLE_USER_GET_ITEM', object)"},
+ *          "get"={
+ *      "normalization_context"={"groups"={"HostDashboard"}},
+ *     "security"="is_granted('ROLE_USER_GET_ITEM', object)"
+ * },
  *          "patch"={"security"="is_granted('ROLE_USER_PATCH', object)"},
  *          "put"={"security"="is_granted('ROLE_USER_PUT', object)"}
  *      },
@@ -46,7 +49,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"User", "MissionSingleOutput"})
+     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
      */
     private $username;
 
@@ -58,7 +61,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(name="enabled", type="boolean", options={"default":true}, nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User", "HostDashboard", "HostDashboard"})
      */
     protected $enabled;
 
@@ -71,31 +74,31 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Mission::class, inversedBy="users")
-     * @Groups({"User"})
+     * @Groups({"User", "HostDashboard"})
      */
     private $missions;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput"})
+     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput"})
+     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
      */
     private $trigram;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput"})
+     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput"})
+     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
      */
     private $city;
 

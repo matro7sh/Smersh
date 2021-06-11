@@ -94,15 +94,11 @@
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
 }
 
-.buttons {
-    justify-content: right;
-    margin-right: 0.5em;
-}
-
 #host_list {
     max-height: 35em;
     overflow: auto;
 }
+
 #single_host{
     width: 100%;
     justify-content: space-between;
@@ -189,10 +185,10 @@ body {
     padding: 50px;
 }
 
-buttonl {
+button {
     border: none;
     font-weight: bold;
-    padding: 5px;
+    padding: 0 5px 0 5px;
     cursor: pointer;
     transition: all 0.5s;
     
@@ -200,9 +196,14 @@ buttonl {
 
  button:hover {
     transform: skew(-10deg);
-    padding: 5px 10px ;
+    padding: 0 5px 0 5px;
     transition: all 0.2s;
-    box-shadow: 5px 5px 0 0 black;
+    box-shadow: 3px 3px 0 0 black;
+}
+
+.buttons {
+    justify-content: right;
+    margin-right: 0.5em;
 }
 
 #file {

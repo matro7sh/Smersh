@@ -184,7 +184,7 @@ docker-compose exec php sh
 - SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr
 - sanchis  - https://github.com/sanchis
 - RayMoDev  - https://github.com/RayMoDev
-
+- Linda - https://github.com/proglin
 
 # Official Discord Channel
 

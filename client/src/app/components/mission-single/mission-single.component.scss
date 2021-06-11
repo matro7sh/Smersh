@@ -40,44 +40,81 @@
     align-items: center;
 }
 
-
-#action_check {
-    height: 95%;
-    padding: 1em;
-    -webkit-box-shadow: 1px 1px 5px 1px #ccc;
-    -moz-box-shadow:    1px 1px 5px 1px #ccc;
-    box-shadow:         1px 1px 5px 1px #ccc;
-    border-radius: 0.3em;
+.nopadding {
+    padding: 0;
+    margin: 0;
 }
 
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.responsive_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.center {
+    align-items: center;
+}
+
+#action_check {
+    height: 70%;
+    padding: 0 1em 1em 1em;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 0.3em;
+    width: 20%;
+    min-width: 16em;
+    max-width: 20em;
+}
+
+#action_check:hover {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
 
 #dashboard {
     padding: 0 1em 1em 1em;
-    -webkit-box-shadow: 1px 1px 5px 1px #ccc;
-    -moz-box-shadow:    1px 1px 5px 1px #ccc;
-    box-shadow:         1px 1px 5px 1px #ccc;
+    margin: 0 0.5em 0 0.5em;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
+#dashboard:hover {
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+}
+
 #host_list {
     max-height: 35em;
     overflow: auto;
 }
+
 #single_host{
     width: 100%;
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-content: center;
     min-height: max-content;
     overflow: hidden;
 }
+
 #host_vulnList {
     width: 90%;
 }
 #add_vulnToHost {
-    width: 7%;
+    width: 7em;
     height: fit-content;
     align-self: center;
-    padding: 0 1em 0 1em;
+    padding: 0 1em 0s 1em;
 }
 .clickableIcon {
     cursor: pointer;
@@ -85,16 +122,8 @@
     width: 3%;
 }
 
-#wrapper_generate {
-    display: flex;
-    justify-content: right;
-}
 #generate {
     margin: 1em 0 1em 1em;
-}
-
-.paddingcodi {
-    padding-left: 30px;
 }
 
 #codi_content {
@@ -112,12 +141,19 @@
 #host_add_manual{
     width: 55%;
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    align-items: center;
 }
 #host_add_file {
     width: 45%;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em 0 1em;
+}
+
+#pathToCodi {
+    margin-right: 1em;
 }
 
 .displayBlock {
@@ -127,4 +163,54 @@
 
 .smersh-techno {
     background-color: #5b5252 !important;
+}
+
+.title {
+    font-size: 1.1em;
+    font-weight: bold;
+    flex-wrap: wrap;
+    margin-right: 0em;
+}
+
+.fileInput {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    padding: 50px;
+}
+
+button {
+    border: none;
+    font-weight: bold;
+    padding: 0 5px 0 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+    
+}
+
+ button:hover {
+    transform: skew(-10deg);
+    padding: 0 5px 0 5px;
+    transition: all 0.2s;
+    box-shadow: 3px 3px 0 0 black;
+}
+
+.buttons {
+    justify-content: right;
+    margin-right: 0.5em;
+}
+
+#file {
+    display: none
+}
+
+.uploadForm {
+    width: 66%;
+    justify-content: space-between;
 }

@@ -185,6 +185,7 @@ docker-compose exec php sh
 - sanchis  - https://github.com/sanchis
 - RayMoDev  - https://github.com/RayMoDev
 - Linda - https://github.com/proglin
+- Log_s - https://rmrf-logs.com/man-log_s/
 
 # Official Discord Channel
 

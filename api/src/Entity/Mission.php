@@ -41,13 +41,13 @@ class Mission
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Mission", "MissionSingleOutput", "User"})
+     * @Groups({"Mission", "MissionSingleOutput", "User", "HostDashboard"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"Mission", "MissionSingleOutput", "User"})
+     * @Groups({"Mission", "MissionSingleOutput", "User", "HostDashboard"})
      */
     private $name;
 
@@ -88,7 +88,7 @@ class Mission
 
     /**
      * @ORM\OneToMany(targetEntity=Host::class, mappedBy="mission", cascade={"remove"})
-     * @Groups({"Mission", "MissionSingleOutput"})
+     * @Groups({"Mission", "MissionSingleOutput", "HostDashboard"})
      */
     private $hosts;
 

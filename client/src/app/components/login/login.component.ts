@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { Token } from 'src/app/storage/Token';
 import { Locale } from 'src/app/storage/Locale';
 import { ConnectionService } from 'src/app/services/connection.service';
+import { DashboardRouter } from 'src/app/router/DashboardRouter';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
   public username: string;
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
       .then(({ token }: any) => {
         if (token) {
           new Token().set(token);
-          this.router.navigateByUrl('/missions');
+          this.router.navigateByUrl(DashboardRouter.redirectToList());
         }
       });
   }

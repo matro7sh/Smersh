@@ -6,21 +6,22 @@ import { VulnRouter } from 'src/app/router/VulnRouter';
 import { VulnsService } from 'src/app/services/vulns.service';
 import { Locale } from 'src/app/storage/Locale';
 import { VulnModelApplication } from 'src/app/model/Vuln';
+import { getTranslation } from 'src/app/helpers/translation';
+import { VulnTranslationModelApplication } from 'src/app/model/VulnTranslation';
 
 @Component({
-  selector: 'app-vulns-edit',
+  selector: 'app-vulns-edit-2',
   templateUrl: './vulns-edit.component.html',
   styleUrls: ['./vulns-edit.component.scss'],
 })
-export class VulnsEditComponent implements OnInit {
+export class VulnsEditComponent2 implements OnInit {
   public id: any;
   public name: any;
   public description: any;
   public remediation: any;
   public translationId: string;
   public currentLocale = new Locale().get();
-  public local;
-  public selectedTranslationLanguage: string;
+  public locale: string;
 
   constructor(
     private vulnsService: VulnsService,
@@ -39,14 +40,14 @@ export class VulnsEditComponent implements OnInit {
     this.vulnsService
       .getDataById(this.id)
       .then((vuln: VulnModelApplication) => {
-        const translation =
-          vuln.translations[new Locale().get()] ??
-          vuln.translations.en ??
-          vuln.translations[Object.keys(vuln.translations)[0]];
+        const translation = getTranslation(
+          vuln.translations
+        ) as VulnTranslationModelApplication;
         this.translationId = translation.id;
         this.name = translation.name;
         this.description = translation.description;
         this.remediation = translation.remediation;
+        this.locale = translation.locale;
       });
   }
 
@@ -60,7 +61,7 @@ export class VulnsEditComponent implements OnInit {
     };
     let apply = () =>
       this.vulnsTranslationsService.update(this.translationId, data);
-    if (this.currentLocale !== this.selectedTranslationLanguage) {
+    if (this.currentLocale !== this.locale) {
       apply = () => this.vulnsTranslationsService.insert(data);
     }
 

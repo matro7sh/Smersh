@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Locale } from '../storage/Locale';
 import { AbstractService } from 'src/app/services/abstract';
-import { VulnSerializerApplication } from 'src/app/model/Vuln';
 import { AbstractModelApplication } from 'src/app/model/abstract';
+import {
+  VulnTranslationNormalizerApplication,
+  VulnTranslationSerializerApplication,
+} from 'src/app/model/VulnTranslation';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VulnTranslationsService extends AbstractService {
   protected endpoint = 'vuln_translations';
-  public serializer = new VulnSerializerApplication();
+  public serializer = new VulnTranslationSerializerApplication();
+  public normalizer = new VulnTranslationNormalizerApplication();
 
   constructor(protected http: HttpClient) {
     super(http);

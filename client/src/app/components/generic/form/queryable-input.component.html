@@ -26,7 +26,7 @@
            matInput
            [matAutocomplete]="auto">
   </ng-template>
-  <mat-autocomplete [displayWith]="parse" (optionSelected)="onSelected($event)" #auto="matAutocomplete">
+  <mat-autocomplete [displayWith]="parse" (optionSelected)="onSelected($event)" #auto="matAutocomplete" [formControl]="queryableInputControl">
     <mat-option *ngFor="let option of records" [value]="option">
       {{ option.label }}
     </mat-option>

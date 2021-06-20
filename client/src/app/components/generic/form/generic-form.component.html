@@ -4,11 +4,11 @@
     <ng-container *ngIf="input.inputType !== 'queryable'; else queryable">
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>{{ input.label }}</mat-label>
-        <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off">
+        <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off" />
       </mat-form-field>
     </ng-container>
     <ng-template #queryable>
-      <app-queryable-input (updateValue)="update($event)" [input]="input"></app-queryable-input>
+      <app-queryable-input (updateValue)="update($event)" [input]="input" [item]="getInputValue(input)"></app-queryable-input>
     </ng-template>
   </ng-container>
   <div class="example-button-row">

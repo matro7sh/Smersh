@@ -55,9 +55,9 @@ import { HostsService } from './services/hosts.service';
 import { MissionMyComponent } from './components/mission-my/mission-my.component';
 import {
   VulnsCreateComponent,
+  VulnsEditComponent,
   VulnsListComponent,
 } from 'src/app/components/vulns';
-import { VulnsEditComponent } from './components/vulns-edit/vulns-edit.component';
 import { AddVulnsToHostExternalComponent } from './components/add-vulns-to-host-external/add-vulns-to-host-external.component';
 import {
   HostsEditComponent,

@@ -5,7 +5,10 @@ import { Input, Name } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { MissionsService } from 'src/app/services/missions.service';
-import { UserAutocompleteInput } from 'src/app/form/Queryable';
+import {
+  MultipleUsersAutocompleteInput,
+  UserAutocompleteInput,
+} from 'src/app/form/Queryable';
 
 @Component({
   selector: 'app-missions-edit',
@@ -22,9 +25,9 @@ export class MissionsEditComponent extends GenericEditComponent {
     protected router: Router,
     protected route: ActivatedRoute,
     protected snackBar: MatSnackBar,
-    userAutocompleteInput: UserAutocompleteInput
+    usersSelectInput: MultipleUsersAutocompleteInput
   ) {
     super(service, router, route, snackBar);
-    this.inputs.push(userAutocompleteInput);
+    this.inputs.push(usersSelectInput);
   }
 }

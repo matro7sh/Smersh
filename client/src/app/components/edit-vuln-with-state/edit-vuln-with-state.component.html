@@ -1,5 +1,5 @@
 <h1 xmlns="http://www.w3.org/1999/html">{{ 'button.EDIT' | translate }}</h1>
-<form class="example-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
+<form class="example-form" #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
     <mat-accordion>
         <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
@@ -18,7 +18,7 @@
                    <span class="bold">Target</span>
                 </mat-panel-title>
                 <mat-panel-description>
-                    {{ host.name }}
+                    {{ host?.name }}
                 </mat-panel-description>
             </mat-expansion-panel-header>
         </mat-expansion-panel>

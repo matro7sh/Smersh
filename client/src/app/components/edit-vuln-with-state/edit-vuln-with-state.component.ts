@@ -5,7 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { environment } from 'src/environments/environment';
-import { Locale } from 'src/app/storage/Locale';
+import { getTranslation } from 'src/app/helpers/translation';
+import { VulnTranslationFromAPIInterface } from 'src/app/model/VulnTranslation';
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -39,16 +40,13 @@ export class EditVulnWithStateComponent implements OnInit {
 
   loadVuln(): void {
     this.hostvulnService.getDataById(this.id).then((hostVuln: any) => {
-      const translations = hostVuln.vuln.translations;
       this.host = hostVuln.host;
       this.currentState = hostVuln.currentState;
       this.pictureName = hostVuln.image?.contentUrl ?? '';
-      this.vulnName = (
-        translations[new Locale().get()] ??
-        translations.en ??
-        translations[Object.keys(translations)[0]]
-      ).name;
-      this.missionId = hostVuln.host.mission?.split('/').pop() ?? '';
+      this.vulnName = (getTranslation(
+        hostVuln.vuln?.translations
+      ) as VulnTranslationFromAPIInterface)?.name;
+      this.missionId = hostVuln.host?.mission?.split('/').pop() ?? '';
     });
   }
 

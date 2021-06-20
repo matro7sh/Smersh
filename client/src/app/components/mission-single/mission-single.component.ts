@@ -34,7 +34,6 @@ const base64MimeRetriever = (b64: string) => {
   const mime = b64.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
 
   if (mime && mime.length) {
-    console.log(mime);
     return mime[1] ?? '';
   }
 
@@ -388,7 +387,6 @@ export class MissionSingleComponent implements OnInit {
       centered: true,
       fileType: 'docx',
       getImage: (tagValue, tagName) => {
-        console.log(tagValue);
         if (!tagValue.startsWith('https://picsum.photos/200/300')) {
           tagValue = `${environment.API}${tagValue}`;
         }
@@ -462,15 +460,12 @@ export class MissionSingleComponent implements OnInit {
         .compile();
       try {
         doc.resolveData(data).then(() => {
-          console.log('Biz');
-          console.log(doc.render());
           const out = doc.getZip().generate({
             type: 'blob',
           }); // Output the document using Data-URI
           saveAs(out, 'rapport.docx');
         });
       } catch (error) {
-        console.log('Buz');
         if (error.properties && error.properties.errors instanceof Array) {
           console.log(
             'errorMessages',

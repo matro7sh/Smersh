@@ -15,7 +15,7 @@ type Item = Record<string, unknown | unknown[]> | AbstractModelApplication;
 })
 export class GenericFormComponent implements OnInit {
   public formType = '';
-  protected item: Item;
+  item: Item;
   public inputs: Input[] = [];
   public routerHelper = AbstractRouter;
   public dataSource: MatTableDataSource<AbstractModelApplication>;
@@ -54,11 +54,11 @@ export class GenericFormComponent implements OnInit {
     return;
   }
 
-  protected getItem(): Item {
+  getItem(): Item {
     return this.item;
   }
 
-  protected setItem(value: Record<string, unknown | unknown[]>): void {
+  setItem(value: Record<string, unknown | unknown[]>): void {
     this.item = value;
   }
 

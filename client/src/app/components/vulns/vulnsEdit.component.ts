@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  GenericCreateComponent,
-  GenericEditComponent,
-} from 'src/app/components/generic';
+import { GenericEditComponent } from 'src/app/components/generic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Input, Name, TextAreaInput } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +12,6 @@ import { VulnRouter } from 'src/app/router/VulnRouter';
 import { NgForm } from '@angular/forms';
 import { VulnTranslationsService } from 'src/app/services/vulnTranslations.service';
 import { Locale } from 'src/app/storage/Locale';
-import { TranslationModelApplication } from 'src/app/model/Translation';
 import { VulnModelApplication } from 'src/app/model/Vuln';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 
@@ -58,12 +54,16 @@ export class VulnsEditComponent extends GenericEditComponent {
   }
 
   onSubmit({ value }: NgForm): void {
+    const vulnData = { ...this.itemTransformer(), ...value };
     const data = {
-      ...value,
-      translatable: `/api/vulns/${this.id}`,
+      ...vulnData,
+      translatable: `${this.service.getUrl()}/${this.id}`,
       currentLocale: this.currentLocale,
       locale: this.currentLocale,
     };
+
+    this.service.update(this.id, vulnData);
+
     let apply: () => Promise<AbstractModelApplication>;
     const currentTranslation = (this.item as VulnModelApplication).translations[
       this.currentLocale

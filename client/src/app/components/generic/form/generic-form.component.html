@@ -1,15 +1,31 @@
 <h1>{{ formType }} {{ singularResource }}</h1>
 <form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)">
   <ng-container *ngFor="let input of inputs">
-    <ng-container *ngIf="input.inputType !== 'queryable'; else queryable">
-      <mat-form-field appearance="fill" class="w-100">
-        <mat-label>{{ input.label }}</mat-label>
-        <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off" />
-      </mat-form-field>
+    <ng-container [ngSwitch]="true">
+      <div *ngSwitchCase="input.inputType === ''">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>{{ input.label }}</mat-label>
+          <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off" />
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="input.inputType === 'date'">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>{{ input.label }}</mat-label>
+          <mat-date-range-input [formGroup]="period" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="stop" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error *ngIf="period.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="period.controls.stop.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="input.inputType === 'queryable'">
+        <app-queryable-input (updateValue)="update($event)" [input]="input" [item]="getInputValue(input)"></app-queryable-input>
+      </div>
     </ng-container>
-    <ng-template #queryable>
-      <app-queryable-input (updateValue)="update($event)" [input]="input" [item]="getInputValue(input)"></app-queryable-input>
-    </ng-template>
   </ng-container>
   <div class="example-button-row">
     <button mat-button type="submit" mat-raised-button color="accent">Submit</button>

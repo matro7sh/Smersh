@@ -59,7 +59,8 @@ export class QueryableInputComponent implements OnInit, OnChanges {
       );
     }
     const value = data.find(
-      (item) => currentSelectedItem === (item[this.source] ?? item.id)
+      (item) =>
+        (currentSelectedItem?.value ?? currentSelectedItem) === item['@id']
     );
 
     if (value === undefined) {
@@ -84,8 +85,8 @@ export class QueryableInputComponent implements OnInit, OnChanges {
           this.selectedRecords = this.item.map(
             (item) =>
               ({
-                label: item[this.source] ?? item.id,
-                value: item['@id'],
+                label: item.label ?? item[this.source] ?? item.id,
+                value: item.value ?? item['@id'],
               } as unknown)
           ) as MatOption[];
         } else {

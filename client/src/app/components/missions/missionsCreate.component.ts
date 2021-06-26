@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 import { GenericCreateComponent } from 'src/app/components/generic';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Input, Name } from 'src/app/form/Input';
+import { Input, Name, TextInput } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { MissionsService } from 'src/app/services/missions.service';
-import { MultipleUsersAutocompleteInput } from 'src/app/form/Queryable';
+import {
+  MissionTypeAutocompleteInput,
+  MultipleClientsAutocompleteInput,
+  MultipleUsersAutocompleteInput,
+} from 'src/app/form/Queryable';
+import { RangeDateInput } from 'src/app/form/Date';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-missions-create',
@@ -22,9 +28,24 @@ export class MissionsCreateComponent extends GenericCreateComponent {
     protected router: Router,
     protected route: ActivatedRoute,
     protected snackBar: MatSnackBar,
-    usersSelectInput: MultipleUsersAutocompleteInput
+    usersSelectInput: MultipleUsersAutocompleteInput,
+    clientsSelectInput: MultipleClientsAutocompleteInput,
+    missionTypeSelectInput: MissionTypeAutocompleteInput
   ) {
     super(service, router, route, snackBar);
-    this.inputs = [new Name(), usersSelectInput];
+    this.inputs = [
+      new Name(),
+      usersSelectInput,
+      clientsSelectInput,
+      new RangeDateInput(),
+      missionTypeSelectInput,
+      new TextInput({ name: 'credentials', label: 'Credentials' }),
+    ];
+  }
+
+  onSubmit({ value }: NgForm): void {
+    super.onSubmit({
+      value: { ...value, period: this.period.value },
+    } as NgForm);
   }
 }

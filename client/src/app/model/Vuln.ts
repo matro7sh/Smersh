@@ -69,9 +69,7 @@ export class VulnModelApplication extends AbstractModelApplication {
 }
 
 class VulnModelAPI extends AbstractModelAPI {
-  hostVulns: string[];
   impact: string;
-  locale: string;
   translations: {
     [key: string]: VulnTranslationModelApplication;
   };
@@ -79,9 +77,7 @@ class VulnModelAPI extends AbstractModelAPI {
 
   constructor(props: VulnModelApplication) {
     super(props);
-    this.hostVulns = props.hostVulns;
     this.impact = props.impact;
-    this.locale = new Locale().get();
     this.translations = props.translations;
     this.vulnType = props.type;
   }

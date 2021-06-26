@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ImpactsService } from 'src/app/services/impacts.service';
 import { VulnTypesService } from 'src/app/services/vulnTypes.service';
+import { TypesService } from 'src/app/services/types.service';
 
 abstract class QueryableInput extends Input {
   public inputType = 'queryable';
@@ -39,11 +40,17 @@ export class MultipleUsersAutocompleteInput extends UserAutocompleteInput {
 @Injectable()
 export class ClientAutocompleteInput extends QueryableAutocompleteInput {
   name = 'client';
-  source = 'username';
+  source = 'name';
 
   constructor(public service: ClientsService) {
     super(service);
   }
+}
+
+@Injectable()
+export class MultipleClientsAutocompleteInput extends ClientAutocompleteInput {
+  name = 'clients';
+  multiple = true;
 }
 
 @Injectable()
@@ -69,6 +76,15 @@ export class VulnAutocompleteInput extends QueryableAutocompleteInput {
   name = 'vuln';
 
   constructor(public service: VulnsService) {
+    super(service);
+  }
+}
+
+@Injectable()
+export class MissionTypeAutocompleteInput extends QueryableAutocompleteInput {
+  name = 'type';
+
+  constructor(public service: TypesService) {
     super(service);
   }
 }

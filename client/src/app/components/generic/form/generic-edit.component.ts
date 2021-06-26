@@ -20,7 +20,7 @@ export abstract class GenericEditComponent extends GenericFormComponent {
 
   onSubmit({ value }: NgForm): void {
     this.service
-      .update(this.id, value)
+      .update(this.id, { ...this.itemTransformer(), ...value })
       .then(() => {
         this.notifyActionSuccessAndRedirect('updated');
       })

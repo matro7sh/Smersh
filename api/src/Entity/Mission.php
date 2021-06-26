@@ -93,25 +93,25 @@ class Mission
     private $hosts;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $nmap;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $nessus;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $nmapFiler;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0})
+     * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
     private $nessusFiler;
@@ -273,7 +273,7 @@ class Mission
         return $this->nmap;
     }
 
-    public function setNmap(bool $nmap): self
+    public function setNmap(?bool $nmap): self
     {
         $this->nmap = $nmap;
 
@@ -285,7 +285,7 @@ class Mission
         return $this->nessus;
     }
 
-    public function setNessus(bool $nessus): self
+    public function setNessus(?bool $nessus): self
     {
         $this->nessus = $nessus;
 
@@ -297,7 +297,7 @@ class Mission
         return $this->nmapFiler;
     }
 
-    public function setNmapFiler(bool $nmapFiler): self
+    public function setNmapFiler(?bool $nmapFiler): self
     {
         $this->nmapFiler = $nmapFiler;
 
@@ -309,7 +309,7 @@ class Mission
         return $this->nessusFiler;
     }
 
-    public function setNessusFiler(bool $nessusFiler): self
+    public function setNessusFiler(?bool $nessusFiler): self
     {
         $this->nessusFiler = $nessusFiler;
 

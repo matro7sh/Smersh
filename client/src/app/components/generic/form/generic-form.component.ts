@@ -6,7 +6,7 @@ import { AbstractRouter } from 'src/app/router/router';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 import { Input } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 
 type Item = Record<string, unknown | unknown[]> | AbstractModelApplication;
 
@@ -31,6 +31,10 @@ export class GenericFormComponent implements OnInit {
   public fields = [];
   public filters = ['name'];
   protected excludedFields = ['@id', '@type'];
+  public period = new FormGroup({
+    start: new FormControl(),
+    stop: new FormControl(),
+  });
 
   constructor(
     protected service: AbstractService,
@@ -71,6 +75,17 @@ export class GenericFormComponent implements OnInit {
       ...this.item,
       ...value,
     };
+  }
+
+  itemTransformer(): Record<string, string> {
+    const entries = Object.entries(this.item ?? {}).map(([k, v]) => [
+      k,
+      Array.isArray(v) ? v.map(({ value }) => value) : v?.value ?? v,
+    ]);
+    return entries.reduce((acc, [k, v]) => {
+      acc[k.toString()] = v;
+      return acc;
+    }, {});
   }
 
   onSubmit(_: NgForm): void {}

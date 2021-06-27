@@ -1,43 +1,49 @@
 <h1 data-cy="title">{{ 'dashboard.WELCOME' | translate }} </h1>
 <div *ngIf="missions">
-    <p>
+  <p>
     <span matBadge="{{missions.length}}" matBadgeOverlap="false">{{ 'dashboard.LINKED' | translate }} </span>
-    </p>
+  </p>
 </div>
 <mat-card-content>
-    <mat-tab-group>
-        <mat-tab label="{{ 'dashboard.MYMISSION' | translate }}" >
-            <div *ngIf="missions.length ; else loggedOut">
-            <mat-list>
-                <mat-list-item *ngFor="let mission of missions">
-                    <mat-icon mat-list-icon>label_important</mat-icon>
-                    <div mat-line data-cy="mission" class="responsive_row">
-                        <div>{{mission.name}}</div>
-                        <div class="row">
-                            <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" [routerLink]="['/missions/',mission.id]" data-cy="show-mission" class="clickable">remove_red_eye</mat-icon>
-                            <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="editMission(mission.id)" data-cy="edit-mission" class="clickable">edit</mat-icon>
-                            <div class="row">
-                                <mat-progress-bar mode="determinate" class="progress-bar" value={{mission.current}}></mat-progress-bar>
-                                <span class="progress-text">{{mission.current}} %</span>
-                            </div>
-                        </div>
-                    </div>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-            </mat-list>
+  <mat-tab-group>
+    <mat-tab label="{{ 'dashboard.MYMISSION' | translate }}">
+      <div *ngIf="missions.length ; else loggedOut">
+        <mat-list>
+          <mat-list-item *ngFor="let mission of missions">
+            <mat-icon mat-list-icon>label_important</mat-icon>
+            <div class="responsive_row" data-cy="mission" mat-line>
+              <div>{{mission.name}}</div>
+              <div class="row">
+                <mat-icon [routerLink]="['/missions/',mission.id]" class="clickableIcon" class="clickable" color="accent"
+                          data-cy="show-mission" mat-list-icon style="margin-left: 0.5em;">
+                  remove_red_eye
+                </mat-icon>
+                <mat-icon (click)="editMission(mission.id)" class="clickableIcon" class="clickable" color="accent"
+                          data-cy="edit-mission" mat-list-icon style="margin-left: 0.5em;">edit
+                </mat-icon>
+                <div class="row">
+                  <mat-progress-bar class="progress-bar" mode="determinate"
+                                    value={{mission.current}}></mat-progress-bar>
+                  <span class="progress-text">{{mission.current}} %</span>
+                </div>
+              </div>
             </div>
-            <ng-template #loggedOut>
-                {{ 'dashboard.NOMISSION' | translate }}
-            </ng-template>
-        </mat-tab>
-        <mat-tab label=" {{ 'dashboard.MYROLES' | translate }}" *ngIf="missions">
-            <mat-list>
-                <mat-list-item *ngFor="let role of roles">
-                    <mat-icon mat-list-icon>label_important</mat-icon>
-                    <div mat-line>{{role}}</div>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-            </mat-list>
-        </mat-tab>
-    </mat-tab-group>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+      <ng-template #loggedOut>
+        {{ 'dashboard.NOMISSION' | translate }}
+      </ng-template>
+    </mat-tab>
+    <mat-tab *ngIf="missions" label=" {{ 'dashboard.MYROLES' | translate }}">
+      <mat-list>
+        <mat-list-item *ngFor="let role of roles">
+          <mat-icon mat-list-icon>label_important</mat-icon>
+          <div mat-line>{{role}}</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-tab>
+  </mat-tab-group>
 </mat-card-content>

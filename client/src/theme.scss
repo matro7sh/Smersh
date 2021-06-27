@@ -12,8 +12,7 @@ $smersh-primary: (
         600: #d50220,
         700: #d50220,
         800: #d50220,
-        900: #d50220,#3f51b5
-        A100: #8c9eff,
+        900: #d50220, #3f51b5 A100: #8c9eff,
         A200: #536dfe,
         A400: #d50220,
         A700: #d72906,
@@ -78,8 +77,7 @@ $smersh-accent-dark: (
         600: #9a9595,
         700: #9a9595,
         800: #9a9595,
-        900: #9a9595,#9a9595
-        A100: #9a9595,
+        900: #9a9595, #9a9595 A100: #9a9595,
         A200: #9a9595,
         A400: #9a9595,
         A700: #9a9595,
@@ -109,19 +107,19 @@ $angular-warn: mat-palette($mat-red);
 
 
 $angular-default-theme: mat-light-theme((color: (primary: $angular-primary,
-            accent: $angular-accent,
-            warn: $angular-warn,
-        ),
-    ));
+        accent: $angular-accent,
+        warn: $angular-warn,
+),
+));
 
 @include angular-material-theme($angular-default-theme);
 
 $angular-dark-theme: mat-dark-theme((color: (primary: $angular-primary,
-            accent: $smersh-dark-accent,
-            warn: $angular-warn,
-        ),
-    ));
+        accent: $smersh-dark-accent,
+        warn: $angular-warn,
+),
+));
 
 .dark-theme {
-    @include angular-material-color($angular-dark-theme);
+  @include angular-material-color($angular-dark-theme);
 }

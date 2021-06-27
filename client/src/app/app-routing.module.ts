@@ -15,7 +15,10 @@ import { ClientResource } from 'src/app/resources/ClientResource';
 import { HostVulnResource } from 'src/app/resources/HostVulnResource';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
   new MissionResource().generateResource(),
   new UserResource().generateResource(),
   new VulnResource().generateResource(),
@@ -36,9 +39,18 @@ const routes: Routes = [
   new HostVulnResource().generateResource(),
 
   // otherwise redirect to home
-  { path: '404', component: ErrorsComponent },
-  { path: '', component: HomepageComponent },
-  { path: '**', component: ErrorsComponent },
+  {
+    path: '404',
+    component: ErrorsComponent,
+  },
+  {
+    path: '',
+    component: HomepageComponent,
+  },
+  {
+    path: '**',
+    component: ErrorsComponent,
+  },
 ];
 
 @NgModule({

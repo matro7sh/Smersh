@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
 import { Token } from 'src/app/storage/Token';
 import { environment } from 'src/environments/environment';
-import { AbstractModelApplication } from 'src/app/model/abstract';
 import {
   AuthenticationModelApplication,
   AuthenticationNormalizerApplication,
@@ -15,9 +14,9 @@ import {
   providedIn: 'root',
 })
 export class ConnectionService extends AbstractService {
-  protected endpoint = 'authentication_token';
   normalizer = new AuthenticationNormalizerApplication();
   serializer = new AuthenticationSerializerApplication();
+  protected endpoint = 'authentication_token';
 
   constructor(protected http: HttpClient, private router: Router) {
     super(http);
@@ -40,7 +39,7 @@ export class ConnectionService extends AbstractService {
   }
 
   login(data: unknown): Promise<{ token: string }> {
-    return this.insert(data).then(({ token }) => ({ token }));
+    return this.insert(data).then(({token}) => ({token}));
   }
 
   logout(): void {

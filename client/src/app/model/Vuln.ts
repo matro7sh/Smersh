@@ -5,12 +5,8 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import {
-  VulnTranslationFromAPIInterface,
-  VulnTranslationModelApplication,
-} from 'src/app/model/VulnTranslation';
+import { VulnTranslationFromAPIInterface, VulnTranslationModelApplication, } from 'src/app/model/VulnTranslation';
 import { getTranslation } from 'src/app/helpers/translation';
-import { Locale } from 'src/app/storage/Locale';
 
 const ALLOWED_LANGUAGES = ['fr', 'en', 'ar', 'es', 'ru'];
 

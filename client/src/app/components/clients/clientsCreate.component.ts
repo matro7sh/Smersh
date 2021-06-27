@@ -1,14 +1,7 @@
 import { GenericCreateComponent } from 'src/app/components/generic';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Email,
-  FirstName,
-  Input,
-  LastName,
-  Name,
-  Phone,
-} from 'src/app/form/Input';
+import { Email, FirstName, Input, LastName, Name, Phone, } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientRouter } from 'src/app/router/ClientRouter';
 import { Component } from '@angular/core';

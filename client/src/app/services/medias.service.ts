@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class MediasService extends AbstractService {
-  protected endpoint = 'media';
   public serializer = new ClientSerializerApplication();
+  protected endpoint = 'media';
 
   constructor(protected http: HttpClient) {
     super(http);

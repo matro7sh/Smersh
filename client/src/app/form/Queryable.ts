@@ -19,7 +19,8 @@ abstract class QueryableInput extends Input {
   }
 }
 
-abstract class QueryableAutocompleteInput extends QueryableInput {}
+abstract class QueryableAutocompleteInput extends QueryableInput {
+}
 
 @Injectable()
 export class UserAutocompleteInput extends QueryableAutocompleteInput {
@@ -27,7 +28,7 @@ export class UserAutocompleteInput extends QueryableAutocompleteInput {
   source = 'username';
 
   constructor(public service: UsersService) {
-    super({ service });
+    super({service});
   }
 }
 

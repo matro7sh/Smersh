@@ -5,17 +5,18 @@
       <div *ngSwitchCase="input.inputType === ''">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>{{ input.label }}</mat-label>
-          <input matInput type="{{ input.type }}" name="{{ input.name }}" placeholder="{{ input.placeholder }}" [ngModel]="getInputValue(input)" autocomplete="off" />
+          <input [ngModel]="getInputValue(input)" autocomplete="off" matInput name="{{ input.name }}"
+                 placeholder="{{ input.placeholder }}" type="{{ input.type }}"/>
         </mat-form-field>
       </div>
       <div *ngSwitchCase="input.inputType === 'date'">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>{{ input.label }}</mat-label>
           <mat-date-range-input [formGroup]="period" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date">
-            <input matEndDate formControlName="stop" placeholder="End date">
+            <input formControlName="start" matStartDate placeholder="Start date">
+            <input formControlName="stop" matEndDate placeholder="End date">
           </mat-date-range-input>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
 
           <mat-error *ngIf="period.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
@@ -23,11 +24,12 @@
         </mat-form-field>
       </div>
       <div *ngSwitchCase="input.inputType === 'queryable'">
-        <app-queryable-input (updateValue)="update($event)" [input]="input" [item]="getInputValue(input)"></app-queryable-input>
+        <app-queryable-input (updateValue)="update($event)" [input]="input"
+                             [item]="getInputValue(input)"></app-queryable-input>
       </div>
     </ng-container>
   </ng-container>
   <div class="example-button-row">
-    <button mat-button type="submit" mat-raised-button color="accent">Submit</button>
+    <button color="accent" mat-button mat-raised-button type="submit">Submit</button>
   </div>
 </form>

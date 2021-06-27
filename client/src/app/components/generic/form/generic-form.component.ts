@@ -8,7 +8,7 @@ import { Input } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 
-type Item = Record<string, unknown | unknown[]> | AbstractModelApplication;
+type Item = Record<string, unknown|unknown[]>|AbstractModelApplication;
 
 @Component({
   templateUrl: 'generic-form.component.html',
@@ -30,18 +30,19 @@ export class GenericFormComponent implements OnInit {
   public actionMatcher = null;
   public fields = [];
   public filters = ['name'];
-  protected excludedFields = ['@id', '@type'];
   public period = new FormGroup({
     start: new FormControl(),
     stop: new FormControl(),
   });
+  protected excludedFields = ['@id', '@type'];
 
   constructor(
     protected service: AbstractService,
     protected router: Router,
     protected route: ActivatedRoute,
     protected snackBar: MatSnackBar
-  ) {}
+  ) {
+  }
 
   public initialize(): void {
     return;
@@ -62,15 +63,15 @@ export class GenericFormComponent implements OnInit {
     return this.item;
   }
 
-  setItem(value: Record<string, unknown | unknown[]>): void {
+  setItem(value: Record<string, unknown|unknown[]>): void {
     this.item = value;
   }
 
-  getInputValue({ name }: Input): unknown {
+  getInputValue({name}: Input): unknown {
     return this.item?.[name.toString()];
   }
 
-  update(value: Record<string, unknown | unknown[]>): void {
+  update(value: Record<string, unknown|unknown[]>): void {
     this.item = {
       ...this.item,
       ...value,
@@ -80,7 +81,7 @@ export class GenericFormComponent implements OnInit {
   itemTransformer(): Record<string, string> {
     const entries = Object.entries(this.item ?? {}).map(([k, v]) => [
       k,
-      Array.isArray(v) ? v.map(({ value }) => value) : v?.value ?? v,
+      Array.isArray(v) ? v.map(({value}) => value) : v?.value ?? v,
     ]);
     return entries.reduce((acc, [k, v]) => {
       acc[k.toString()] = v;
@@ -88,7 +89,8 @@ export class GenericFormComponent implements OnInit {
     }, {});
   }
 
-  onSubmit(_: NgForm): void {}
+  onSubmit(_: NgForm): void {
+  }
 
   notifyActionSuccessAndRedirect(action: string): void {
     this.openSnackBar(`The ${this.singularResource} has been ${action}`);

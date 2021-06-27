@@ -1,40 +1,41 @@
 <h1 xmlns="http://www.w3.org/1999/html">{{ 'button.EDIT' | translate }}</h1>
-<form class="example-form" #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-accordion>
-        <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <span class="bold">{{ 'edit-vuln-with-state.VULN' | translate }} :</span>
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{ vulnName }}
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-        </mat-expansion-panel>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                   <span class="bold">Target</span>
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{ host?.name }}
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-        </mat-expansion-panel>
-    </mat-accordion>
-    <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>{{ 'add-vulns-to-host-external.CURRENTSTATE' | translate }}</mat-label>
-        <textarea rows="20" matInput [(ngModel)]="currentState" name="currentState"></textarea>
-    </mat-form-field>
-    <div *ngIf="pictureName">
-        <img id="VulnPicture" src="{{url}}{{pictureName}}"/>
-    </div>
-    <div class="example-button-row">
-        <br/><br/>
-        <button mat-button mat-raised-button color="accent"> {{ 'button.SUBMIT' | translate }}</button><br/><br/>
-        <button mat-button mat-raised-button color="warn" (click)="delete()"> {{ 'button.DELETE' | translate }}</button>
-    </div>
+<form #myform="ngForm" (ngSubmit)="onSubmit(myform)" class="example-form">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="bold">{{ 'edit-vuln-with-state.VULN' | translate }} :</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ vulnName }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+    <mat-expansion-panel (closed)="panelOpenState = false"
+                         (opened)="panelOpenState = true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="bold">Target</span>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ host?.name }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>{{ 'add-vulns-to-host-external.CURRENTSTATE' | translate }}</mat-label>
+    <textarea [(ngModel)]="currentState" matInput name="currentState" rows="20"></textarea>
+  </mat-form-field>
+  <div *ngIf="pictureName">
+    <img id="VulnPicture" src="{{url}}{{pictureName}}"/>
+  </div>
+  <div class="example-button-row">
+    <br/><br/>
+    <button color="accent" mat-button mat-raised-button> {{ 'button.SUBMIT' | translate }}</button>
+    <br/><br/>
+    <button (click)="delete()" color="warn" mat-button mat-raised-button> {{ 'button.DELETE' | translate }}</button>
+  </div>
 </form>
 
 

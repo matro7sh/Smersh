@@ -16,7 +16,10 @@ export class HostsEditComponent extends GenericEditComponent {
   public routerHelper = HostRouter;
   public inputs: Input[] = [
     new Name(),
-    new TextInput({ name: 'technology', label: 'Technology' }),
+    new TextInput({
+      name: 'technology',
+      label: 'Technology'
+    }),
   ];
 
   constructor(

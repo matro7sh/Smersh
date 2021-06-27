@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ThemeStorage } from 'src/app/storage/Theme';
+
 export enum Theme {
   DARK_THEME = 'dark-theme',
   LIGHT_THEME = '',

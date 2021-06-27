@@ -1,193 +1,220 @@
 <mat-drawer-container class="smersh-container">
-    <mat-drawer mode="side" opened id="action_check">
-        <mat-list role="list">
-            <mat-list-item role="listitem"> {{ 'mission-single.STARTAT' | translate }} : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
-            <mat-list-item role="listitem">{{ 'mission-single.ENDAT' | translate }} :{{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
-            <mat-list-item role="listitem">
-                <div class="responsive_row">
-                    <mat-slide-toggle class="example-margin"
-                                      [color]="color"
-                                      (change)="nmapUpdate($event.checked)"
-                                      [(ngModel)]="nmap"
-                    >Nmap</mat-slide-toggle>
+  <mat-drawer id="action_check" mode="side" opened>
+    <mat-list role="list">
+      <mat-list-item role="listitem"> {{ 'mission-single.STARTAT' | translate }}
+        : {{ mission?.startDate | date: 'dd/MM/yyyy'}}</mat-list-item>
+      <mat-list-item role="listitem">{{ 'mission-single.ENDAT' | translate }}
+        :{{mission?.endDate  | date: 'dd/MM/yyyy' }}</mat-list-item>
+      <mat-list-item role="listitem">
+        <div class="responsive_row">
+          <mat-slide-toggle (change)="nmapUpdate($event.checked)"
+                            [(ngModel)]="nmap"
+                            [color]="color"
+                            class="example-margin"
+          >Nmap
+          </mat-slide-toggle>
 
-                    <mat-slide-toggle class="example-margin"
-                                      (change)="nessusUpdate($event.checked)"
-                                      [color]="color"
-                                      [(ngModel)]="nessus"
-                    >Nessus</mat-slide-toggle>
+          <mat-slide-toggle (change)="nessusUpdate($event.checked)"
+                            [(ngModel)]="nessus"
+                            [color]="color"
+                            class="example-margin"
+          >Nessus
+          </mat-slide-toggle>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <mat-card id="dashboard">
+      <mat-card-header>
+        <mat-card-title style="display:flex; flex-direction: row;">
+          <mat-icon class="example-header-image vertical-center" mat-card-avatar
+                    style="margin-right: 0.7em;"></mat-icon>
+          <span class="vertical-center" data-cy="mission-name-type">{{mission?.name}}
+            - {{ mission?.missionType?.name }}</span>
+          <button [routerLink]="['/missions/', mission?.id, 'edit']" color="accent" mat-raised-button
+                  style="margin-left: 0.7em;">
+            {{ 'button.EDIT' | translate }}
+          </button>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content id="dashboard_main">
+        <mat-tab-group>
+          <mat-tab *ngIf="hosts" label="{{ 'mission-single.SCOPE' | translate }}">
+            <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
+            <ng-template #Host></ng-template>
+            <ng-template #ThereIsNoHosts>
+              <mat-list-item style="height:auto">
+                <mat-card>There is no Host in the current mission.<br/> Add one and happy hacking :)</mat-card>
+              </mat-list-item>
+            </ng-template>
+            <mat-list id="host_list">
+              <mat-list-item *ngFor="let host of hosts" style="height:auto">
+                <div class="responsive_row" id="single_host">
+                  <div class="row">
+                    <mat-icon (click)="done(host)" class="clickableIcon" mat-list-icon>
+                      <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
+                      <ng-template #thenBlock>verified</ng-template>
+                      <ng-template #elseBlock>hourglass_empty</ng-template>
+                    </mat-icon>
+                    <div id="host_vulnList" mat-line style="padding: 14px;">
+                      <a class="displayBlock">{{host.name}}</a>
+                      <mat-chip-list aria-label="Fish selection">
+                        <mat-chip *ngIf="host.technology" class="smersh-techno" selected>{{host.technology}}</mat-chip>
+                        <mat-chip (click)="editThisVuln(vuln.linked)" *ngFor="let vuln of host.vulns" [color]="vuln.impact.color"
+                                  selected>{{ vuln.translate.name }}
+                          - {{vuln.impact.name}}</mat-chip>
+                      </mat-chip-list>
+                    </div>
+                  </div>
+                  <div class="row center">
+                    <button (click)="goToAddVulns(host['@id'])" color="accent" id="add_vulnToHost"
+                            mat-raised-button>{{ 'button.ADD' | translate }}</button>
+                    <mat-icon (click)="openDeleteDialog(host)" class="clickableIcon" color="warn" mat-list-icon
+                              style="margin-left: 0.5em;">delete_forever
+                    </mat-icon>
+                    <mat-icon (click)="updateHost(host)" class="clickableIcon" color="accent" mat-list-icon
+                              style="margin-left: 0.5em;">edit
+                    </mat-icon>
+                  </div>
                 </div>
-            </mat-list-item>
-        </mat-list>
-    </mat-drawer>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+          <mat-tab *ngIf="users" label="{{ 'mission-single.PENTESTERS' | translate }}">
+            <mat-list>
+              <mat-list-item *ngFor="let user of users">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <div mat-line>{{user.username}}</div>
+                <div mat-line>{{user.phone}}</div>
+                <div mat-line>{{user.mail}}</div>
+                <div mat-line>{{user.city}}</div>
+                <div mat-line>{{user.trigram}}</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
 
-    <mat-drawer-content>
-        <mat-card id="dashboard">
-        <mat-card-header>
-            <mat-card-title style="display:flex; flex-direction: row;">
-                <mat-icon mat-card-avatar class="example-header-image vertical-center" style="margin-right: 0.7em;"></mat-icon>
-                <span class="vertical-center" data-cy="mission-name-type">{{mission?.name}} - {{ mission?.missionType?.name }}</span>
-                <button mat-raised-button color="accent" style="margin-left: 0.7em;" [routerLink]="['/missions/', mission?.id, 'edit']">
-                    {{ 'button.EDIT' | translate }}
-                </button>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content id="dashboard_main">
-            <mat-tab-group>
-                <mat-tab label="{{ 'mission-single.SCOPE' | translate }}" *ngIf="hosts">
-                    <div *ngIf="hosts.length;then Host else ThereIsNoHosts">useless content</div>
-                    <ng-template #Host></ng-template>
-                    <ng-template #ThereIsNoHosts>
-                        <mat-list-item style="height:auto">
-                        <mat-card>There is no Host in the current mission.<br/> Add one and happy hacking :) </mat-card>
-                        </mat-list-item>
-                       </ng-template>
-                    <mat-list id="host_list">
-                        <mat-list-item style="height:auto" *ngFor="let host of hosts">
-                            <div id="single_host" class="responsive_row">
-                                <div class="row">
-                                    <mat-icon mat-list-icon class="clickableIcon" (click)="done(host)">
-                                        <div *ngIf="host.checked; then thenBlock else elseBlock"></div>
-                                        <ng-template #thenBlock>verified</ng-template>
-                                        <ng-template #elseBlock>hourglass_empty</ng-template>
-                                    </mat-icon>
-                                    <div mat-line style="padding: 14px;" id="host_vulnList">
-                                        <a class="displayBlock">{{host.name}}</a>
-                                        <mat-chip-list aria-label="Fish selection">
-                                            <mat-chip class="smersh-techno" selected *ngIf="host.technology">{{host.technology}}</mat-chip>
-                                                <mat-chip *ngFor="let vuln of host.vulns" selected [color]="vuln.impact.color" (click)="editThisVuln(vuln.linked)">{{ vuln.translate.name }} - {{vuln.impact.name}}</mat-chip>
-                                        </mat-chip-list>
-                                    </div>
-                                </div>
-                                <div class="row center">
-                                    <button mat-raised-button color="accent" (click)="goToAddVulns(host['@id'])" id="add_vulnToHost">{{ 'button.ADD' | translate }}</button>
-                                    <mat-icon mat-list-icon color="warn" class="clickableIcon" style="margin-left: 0.5em;" (click)="openDeleteDialog(host)">delete_forever</mat-icon>
-                                    <mat-icon mat-list-icon color="accent" class="clickableIcon" style="margin-left: 0.5em;" (click)="updateHost(host)">edit</mat-icon>
-                                </div>
-                            </div>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-                <mat-tab label="{{ 'mission-single.PENTESTERS' | translate }}" *ngIf="users">
-                    <mat-list>
-                        <mat-list-item *ngFor="let user of users">
-                            <mat-icon mat-list-icon>account_circle</mat-icon>
-                            <div mat-line>{{user.username}}</div>
-                            <div mat-line>{{user.phone}}</div>
-                            <div mat-line>{{user.mail}}</div>
-                            <div mat-line>{{user.city}}</div>
-                            <div mat-line>{{user.trigram}}</div>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-
-                <mat-tab label="{{ 'mission-single.CLIENTS' | translate }}" *ngIf="clients">
-                    <mat-list>
-                        <mat-list-item *ngFor="let client of clients">
-                            <mat-icon mat-list-icon>account_circle</mat-icon>
-                            <div mat-line>{{client.firstName}}</div>
-                            <div mat-line>{{client.lastName}}</div>
-                            <div mat-line>{{client.phone}}</div>
-                            <div mat-line>{{client.mail}}</div>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-                <mat-tab label="{{ 'mission-single.CREDENTIALS' | translate }}" *ngIf="mission?.credentials">
-                    <mat-list>
-                        <mat-list-item>
-                            <mat-icon mat-list-icon>fingerprint</mat-icon>
-                            <div mat-line><a mat-button href="{{ mission?.credentials }}"  target='_blank' rel='noopener noreferrer'>Bitwarden link</a></div>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-                <mat-tab label="CodiMD" *ngIf="mission?.pathToCodi">
-                    <div id="codimd_tab" class="responsive_row">
-                        <div class="row">
-                            <mat-icon mat-list-icon>link</mat-icon>
-                            <div mat-line>
-                                <a mat-button href="{{mission?.pathToCodi}}" target='_blank' rel='noopener noreferrer' id="update_codi_button">{{mission?.pathToCodi}}</a>
-                            </div>
-                        </div>    
-                        <form class="responsive_row"  #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)">
-                            <mat-form-field id="pathToCodi">
-                                <input matInput type="text"name="pathToCodi" placeholder="Copy Path To Codi" ngModel>
-                            </mat-form-field>
-                            <div class="example-button-row">
-                                <button mat-button mat-raised-button color="accent">{{ 'mission-single.CODI' | translate }}</button>
-                            </div>
-                        </form>
-                    </div>
-                </mat-tab>
-                <mat-tab label="{{ 'mission-single.STEPS' | translate }}" *ngIf="mission?.steps">
-                    <form class="example-form"  #myform = "ngForm" (ngSubmit)="addStep(myform)">
-                    <mat-form-field>
-                        <input matInput ngModel  name="findAt" [ngxMatDatetimePicker]="picker" placeholder="Choose a date"
-                               [min]="minDate" [max]="maxDate" [disabled]="disabled">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds" [stepHour]="stepHour"
-                                                 [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color"
-                                                 [enableMeridian]="enableMeridian" [disableMinute]="disableMinute" [hideTime]="hideTime">
-                            <!-- Custom icon or text of Apply icon -->
-                            <ng-template>
-                                <!-- <mat-icon>star</mat-icon> -->
-                                <span>OK</span>
-                            </ng-template>
-                        </ngx-mat-datetime-picker>
-                    </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input matInput type="text" name="description" placeholder="write custom step : " ngModel autocomplete="off">
-                        </mat-form-field> -
-                        <button mat-raised-button color="accent">ADD MY STEP</button>
-                    </form>
-                    <mat-list>
-                        <mat-list-item *ngFor="let step of steps">
-                            <mat-icon mat-list-icon>schedule</mat-icon>
-                            <form class="example-form"  #myform = "ngForm" (ngSubmit)="editStep(step.id, myform)">
-                                <input matInput type="text" name="description" placeholder="Your description " ngModel autocomplete="off">
-                                <button mat-raised-button color="danger">edit</button>
-                            </form>
-                            <div mat-line>Action : {{step.description}}</div>
-                            <div mat-line>Date : {{step.findAt | date }} </div>
-
-                            <button (click)="deleteStep(step.id)" mat-raised-button color="warn">delete</button>
-                        </mat-list-item>
-                    </mat-list>
-                </mat-tab>
-            </mat-tab-group>
-
-        </mat-card-content>
-        <mat-divider ></mat-divider>
-        <mat-card-actions id="host_add">
-
-            <div id="host_add_manual">
-                <form class="example-form"  #myform = "ngForm" (ngSubmit)="addHost(myform)">
-                    <mat-form-field class="example-full-width">
-                        <input matInput type="text" name="name" placeholder="Ex : https://poule.op" ngModel autocomplete="off">
-                    </mat-form-field> -
-                        <mat-form-field class="example-full-width">
-                            <input matInput type="text" name="technology" placeholder="Ex : Reactjs ( optionnal ) " ngModel autocomplete="off">
-                        </mat-form-field>
-                    <button mat-raised-button color="accent">{{ 'mission-single.ADDNEWHOST' | translate }}</button>
-                </form>
+          <mat-tab *ngIf="clients" label="{{ 'mission-single.CLIENTS' | translate }}">
+            <mat-list>
+              <mat-list-item *ngFor="let client of clients">
+                <mat-icon mat-list-icon>account_circle</mat-icon>
+                <div mat-line>{{client.firstName}}</div>
+                <div mat-line>{{client.lastName}}</div>
+                <div mat-line>{{client.phone}}</div>
+                <div mat-line>{{client.mail}}</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+          <mat-tab *ngIf="mission?.credentials" label="{{ 'mission-single.CREDENTIALS' | translate }}">
+            <mat-list>
+              <mat-list-item>
+                <mat-icon mat-list-icon>fingerprint</mat-icon>
+                <div mat-line><a href="{{ mission?.credentials }}" mat-button rel='noopener noreferrer' target='_blank'>Bitwarden
+                  link</a></div>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+          <mat-tab *ngIf="mission?.pathToCodi" label="CodiMD">
+            <div class="responsive_row" id="codimd_tab">
+              <div class="row">
+                <mat-icon mat-list-icon>link</mat-icon>
+                <div mat-line>
+                  <a href="{{mission?.pathToCodi}}" id="update_codi_button" mat-button rel='noopener noreferrer'
+                     target='_blank'>{{mission?.pathToCodi}}</a>
+                </div>
+              </div>
+              <form #myForm="ngForm" (ngSubmit)="addCodiMd(myForm)" class="responsive_row">
+                <mat-form-field id="pathToCodi">
+                  <input matInput name="pathToCodi" ngModel placeholder="Copy Path To Codi" type="text">
+                </mat-form-field>
+                <div class="example-button-row">
+                  <button color="accent" mat-button mat-raised-button>{{ 'mission-single.CODI' | translate }}</button>
+                </div>
+              </form>
             </div>
-            <mat-divider [vertical]="true"></mat-divider>
-            <div id="host_add_file">
-                <p class="title nopadding">{{ 'mission-single.IMPORT' | translate }}</p>
-                <form [formGroup]="uploadForm" id="k" class="uploadForm row">
-                    <div class="file-input row">
-                        <input type="file" id="file-import" (change)="onSelectFile($event)" class="fileInput" #fileInput>
-                        <button mat-raised-button color="accent" (click)="clickFakeFileInput()">Select File</button>
-                        <span class="fileName" id="file-importName"> No file selected... </span>
-                    </div>
-                    <button mat-raised-button color="accent" (click)="sendFile()" >{{ 'button.SUBMIT' | translate }}</button>
+          </mat-tab>
+          <mat-tab *ngIf="mission?.steps" label="{{ 'mission-single.STEPS' | translate }}">
+            <form #myform="ngForm" (ngSubmit)="addStep(myform)" class="example-form">
+              <mat-form-field>
+                <input [disabled]="disabled" [max]="maxDate" [min]="minDate" [ngxMatDatetimePicker]="picker" matInput
+                       name="findAt" ngModel placeholder="Choose a date">
+                <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #picker [color]="color" [disableMinute]="disableMinute"
+                                         [enableMeridian]="enableMeridian"
+                                         [hideTime]="hideTime" [showSeconds]="showSeconds" [showSpinners]="showSpinners"
+                                         [stepHour]="stepHour"
+                                         [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                                         [touchUi]="touchUi">
+                  <!-- Custom icon or text of Apply icon -->
+                  <ng-template>
+                    <!-- <mat-icon>star</mat-icon> -->
+                    <span>OK</span>
+                  </ng-template>
+                </ngx-mat-datetime-picker>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <input autocomplete="off" matInput name="description" ngModel placeholder="write custom step : "
+                       type="text">
+              </mat-form-field>
+              -
+              <button color="accent" mat-raised-button>ADD MY STEP</button>
+            </form>
+            <mat-list>
+              <mat-list-item *ngFor="let step of steps">
+                <mat-icon mat-list-icon>schedule</mat-icon>
+                <form #myform="ngForm" (ngSubmit)="editStep(step.id, myform)" class="example-form">
+                  <input autocomplete="off" matInput name="description" ngModel placeholder="Your description "
+                         type="text">
+                  <button color="danger" mat-raised-button>edit</button>
                 </form>
+                <div mat-line>Action : {{step.description}}</div>
+                <div mat-line>Date : {{step.findAt | date }} </div>
+
+                <button (click)="deleteStep(step.id)" color="warn" mat-raised-button>delete</button>
+              </mat-list-item>
+            </mat-list>
+          </mat-tab>
+        </mat-tab-group>
+
+      </mat-card-content>
+      <mat-divider></mat-divider>
+      <mat-card-actions id="host_add">
+
+        <div id="host_add_manual">
+          <form #myform="ngForm" (ngSubmit)="addHost(myform)" class="example-form">
+            <mat-form-field class="example-full-width">
+              <input autocomplete="off" matInput name="name" ngModel placeholder="Ex : https://poule.op" type="text">
+            </mat-form-field>
+            -
+            <mat-form-field class="example-full-width">
+              <input autocomplete="off" matInput name="technology" ngModel placeholder="Ex : Reactjs ( optionnal ) "
+                     type="text">
+            </mat-form-field>
+            <button color="accent" mat-raised-button>{{ 'mission-single.ADDNEWHOST' | translate }}</button>
+          </form>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+        <div id="host_add_file">
+          <p class="title nopadding">{{ 'mission-single.IMPORT' | translate }}</p>
+          <form [formGroup]="uploadForm" class="uploadForm row" id="k">
+            <div class="file-input row">
+              <input #fileInput (change)="onSelectFile($event)" class="fileInput" id="file-import" type="file">
+              <button (click)="clickFakeFileInput()" color="accent" mat-raised-button>Select File</button>
+              <span class="fileName" id="file-importName"> No file selected... </span>
             </div>
-        </mat-card-actions>
+            <button (click)="sendFile()" color="accent" mat-raised-button>{{ 'button.SUBMIT' | translate }}</button>
+          </form>
+        </div>
+      </mat-card-actions>
     </mat-card>
     <div class="responsive_row buttons">
-        <button  mat-button mat-raised-button color="accent" (click)="generate()" id="generate">{{ 'mission-single.GENERATE-REPORT' | translate }}</button>
-        <button  mat-button mat-raised-button color="primary" (click)="exportData()" id="generate">{{ 'mission-single.DUMPJSON' | translate }}</button>
-        <button  mat-button mat-raised-button (click)="exportBurp()" id="generate">{{ 'mission-single.BURP' | translate }}</button>
+      <button (click)="generate()" color="accent" id="generate" mat-button
+              mat-raised-button>{{ 'mission-single.GENERATE-REPORT' | translate }}</button>
+      <button (click)="exportData()" color="primary" id="generate" mat-button
+              mat-raised-button>{{ 'mission-single.DUMPJSON' | translate }}</button>
+      <button (click)="exportBurp()" id="generate" mat-button
+              mat-raised-button>{{ 'mission-single.BURP' | translate }}</button>
     </div>
-</mat-drawer-content>
+  </mat-drawer-content>
 </mat-drawer-container>

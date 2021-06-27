@@ -4,10 +4,7 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import {
-  MissionModelApplication,
-  MissionSerializerApplication,
-} from 'src/app/model/Mission';
+import { MissionModelApplication, MissionSerializerApplication, } from 'src/app/model/Mission';
 
 interface UserFromAPIInterface extends ObjectFromAPIInterface {
   phone: string;

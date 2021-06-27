@@ -39,13 +39,19 @@ export class MissionsCreateComponent extends GenericCreateComponent {
       clientsSelectInput,
       new RangeDateInput(),
       missionTypeSelectInput,
-      new TextInput({ name: 'credentials', label: 'Credentials' }),
+      new TextInput({
+        name: 'credentials',
+        label: 'Credentials'
+      }),
     ];
   }
 
-  onSubmit({ value }: NgForm): void {
+  onSubmit({value}: NgForm): void {
     super.onSubmit({
-      value: { ...value, period: this.period.value },
+      value: {
+        ...value,
+        period: this.period.value
+      },
     } as NgForm);
   }
 }

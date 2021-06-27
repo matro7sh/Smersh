@@ -13,9 +13,8 @@ import { VulnModelApplication } from 'src/app/model/Vuln';
 import { HostsService } from 'src/app/services/hosts.service';
 import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
-import { Observable } from 'rxjs';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -135,6 +134,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   Impacts(value: string): void {
     this.selectedImpact = value;
   }
+
   createVuln(): void {
     this.router.navigateByUrl(VulnRouter.redirectToCreate());
   }

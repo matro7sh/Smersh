@@ -1,24 +1,25 @@
 <h1 xmlns="http://www.w3.org/1999/html">Edit vuln {{ id }} - {{ currentLocale }}</h1>
-<form class="smersh-form"  #myform = "ngForm" (ngSubmit)="onSubmit(myform)">
-    <mat-form-field class="smersh-full-width">
-        <mat-label>Name</mat-label>
-        <input matInput type = "text" name="name" [(ngModel)]="name"  autocomplete="off">
-    </mat-form-field><br/><br/>
-    <mat-form-field class="smersh-full-width">
-        <mat-label>Description</mat-label>
-        <input matInput type = "text" name="description" [(ngModel)]="description"  autocomplete="off">
-    </mat-form-field>
-    <br/>
-    <br/>
-    <mat-form-field class="smersh-full-width">
-        <mat-label>Remediation</mat-label>
-        <textarea matInput type="text" name="remediation" placeholder="jenaye:yolo" [(ngModel)]="remediation" autocomplete="off"></textarea>
-    </mat-form-field>
+<form #myform="ngForm" (ngSubmit)="onSubmit(myform)" class="smersh-form">
+  <mat-form-field class="smersh-full-width">
+    <mat-label>Name</mat-label>
+    <input [(ngModel)]="name" autocomplete="off" matInput name="name" type="text">
+  </mat-form-field>
+  <br/><br/>
+  <mat-form-field class="smersh-full-width">
+    <mat-label>Description</mat-label>
+    <input [(ngModel)]="description" autocomplete="off" matInput name="description" type="text">
+  </mat-form-field>
+  <br/>
+  <br/>
+  <mat-form-field class="smersh-full-width">
+    <mat-label>Remediation</mat-label>
+    <textarea [(ngModel)]="remediation" autocomplete="off" matInput name="remediation" placeholder="jenaye:yolo"
+              type="text"></textarea>
+  </mat-form-field>
 
 
-
-    <div class="smersh-button-row">
-        <br/><br/>
-        <button mat-button mat-raised-button color="accent">Edit</button>
-    </div>
+  <div class="smersh-button-row">
+    <br/><br/>
+    <button color="accent" mat-button mat-raised-button>Edit</button>
+  </div>
 </form>

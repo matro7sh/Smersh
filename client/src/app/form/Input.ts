@@ -21,6 +21,7 @@ export class TextInput extends Input {
 
 export class TextAreaInput extends Input {
   public field = 'textarea';
+
   constructor(props) {
     super();
     Object.entries(props).map(([k, v]) => {

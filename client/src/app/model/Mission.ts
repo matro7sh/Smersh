@@ -5,11 +5,7 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import {
-  HostFromAPIInterface,
-  HostModelApplication,
-  HostSerializerApplication,
-} from 'src/app/model/Host';
+import { HostFromAPIInterface, } from 'src/app/model/Host';
 
 interface MissionFromAPIInterface extends ObjectFromAPIInterface {
   name: string;
@@ -17,7 +13,7 @@ interface MissionFromAPIInterface extends ObjectFromAPIInterface {
   pathToCodi: string;
   EndDate: string;
   users: string[];
-  hosts: (HostFromAPIInterface | string)[];
+  hosts: (HostFromAPIInterface|string)[];
   nmap: boolean;
   nessus: boolean;
   nmapFiler: boolean;
@@ -44,7 +40,7 @@ export class MissionModelApplication extends AbstractModelApplication {
   };
   pathToCodi: string;
   users: string[];
-  hosts: (HostFromAPIInterface | string)[];
+  hosts: (HostFromAPIInterface|string)[];
   nmap: boolean;
   nessus: boolean;
   filer: {

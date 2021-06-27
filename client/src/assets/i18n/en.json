@@ -1,112 +1,111 @@
 {
-    "side-bar":{
-        "DASHBOARD": "Dashboard",
-        "CLIENTS": "Clients",
-        "HOSTS": "Hosts",
-        "IMPACTS": "Impacts",
-        "MISSIONS": "Missions",
-        "USERS": "Users",
-        "VULNS":"Vulnerabilities"
-    },
-    "dashboard": {
-        "WELCOME": "Welcome to your dashboard",
-        "LINKED": "Assigned missions",
-        "NOMISSON": "You don't have mission yet",
-        "MUMISSION": "My missions",
-        "MYROLES": "My roles"
-    },
-    "button": {
-        "SHOW": "Show",
-        "EDIT": "Edit",
-        "DELETE": "Delete",
-        "ADD": "Add",
-        "SUBMIT": "Submit"
-    },
-    "add-vulns-to-host-external": {
-        "ADDVULNTO": "Add vulnerability to ",
-        "SELECTVULNS": "Select vulnerability",
-        "SELECTIMPACTS": "Select impact",
-        "CURRENTSTATE": "Current State",
-        "CREATENEWVULN": "Create new Vulnerability",
-        "ADDPICTURE": "Add screenshot"
-    },
-    "client-create": {
-        "create": "Create a new client",
-        "name": "Client name",
-        "firstname": "Firstname",
-        "lastname": "Lastname",
-        "phone": "Phone"
-    },
-    "edit-vuln-with-state": {
+  "side-bar": {
+    "DASHBOARD": "Dashboard",
+    "CLIENTS": "Clients",
+    "HOSTS": "Hosts",
+    "IMPACTS": "Impacts",
+    "MISSIONS": "Missions",
+    "USERS": "Users",
+    "VULNS": "Vulnerabilities"
+  },
+  "dashboard": {
+    "WELCOME": "Welcome to your dashboard",
+    "LINKED": "Assigned missions",
+    "NOMISSON": "You don't have mission yet",
+    "MUMISSION": "My missions",
+    "MYROLES": "My roles"
+  },
+  "button": {
+    "SHOW": "Show",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "ADD": "Add",
+    "SUBMIT": "Submit"
+  },
+  "add-vulns-to-host-external": {
+    "ADDVULNTO": "Add vulnerability to ",
+    "SELECTVULNS": "Select vulnerability",
+    "SELECTIMPACTS": "Select impact",
+    "CURRENTSTATE": "Current State",
+    "CREATENEWVULN": "Create new Vulnerability",
+    "ADDPICTURE": "Add screenshot"
+  },
+  "client-create": {
+    "create": "Create a new client",
+    "name": "Client name",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "phone": "Phone"
+  },
+  "edit-vuln-with-state": {
     "vuln": "Vulnerability",
     "target": "Target"
-    },
-    "host-edit": {
-        "NAME": "Name",
-        "Technology": "Technology"
-    },
-    "impact-create":{
-        "NAME": "Name"
-    },
-    "impact-edit":{
-        "NAME": "Name"
-    },
-    "mission-create":{
-        "CREATENEW": "New mission",
-        "STARTDATE": "Start date",
-        "ENDDATE": "End date",
-        "MISSIONNAME": "Mission name",
-        "CREDENTIALS": "Credentials",
-        "TYPEOFMISSION ": "Mission type",
-        "CLIENT": "Client",
-        "SELECTPENTESTERS": "Pentesters",
-        "CODI": "Link to CodiMD"
-    },
-    "mission-edit":{
-        "STARTDATE": "Date de début",
-        "ENDDATE": "Date de fin",
-        "CLIENTNAME": "Client",
-        "CREDENTIALS": "Credentials"
-    },
-    "mission-single":{
-        "STARTAT": "Start date",
-        "ENDAT": "End date",
-        "GENERATE-REPORT": "Generate report",
-        "DUMPJSON": "Dump data to json file",
-        "CODI": "Add or update codiMD link",
-        "BURP": "Download burp configuration",
-        "CLIENTS": "Client",
-        "IMPORT": "Import host file",
-        "ADDNEWHOST": "Add new host manualy",
-        "SCOPE": "Scope",
-        "PENTESTERS": "Hackers",
-        "STEPS": "Steps",
-        "CREDENTIALS": "Credentials"
-    },
-    "user-create":{
-        "USERNAME": "Username",
-        "PASSWORD":"Password",
-        "EMAIL": "Email",
-        "PHONE": "Phone number",
-        "CITY": "City"
-    },
-    "user-edit":{
-        "USERNAME": "Username",
-        "EMAIL": "Email",
-        "PHONE": "Phone number",
-        "CITY": "City"
-    },
-    "vulns-create":{
-        "NAME": "Name",
-        "DESCRIPTION": "Description",
-        "REMEDIATION": "Remeditation",
-        "SELECTVULNSTYPE": "Select type",
-        "SELECTIMPACTS": "Select impact"
-    },
-    "vulns-edit":{
-        "NAME": "Name",
-        "DESCRIPTION": "Description",
-        "REMEDIATION": "Remeditation"
-    }
-
+  },
+  "host-edit": {
+    "NAME": "Name",
+    "Technology": "Technology"
+  },
+  "impact-create": {
+    "NAME": "Name"
+  },
+  "impact-edit": {
+    "NAME": "Name"
+  },
+  "mission-create": {
+    "CREATENEW": "New mission",
+    "STARTDATE": "Start date",
+    "ENDDATE": "End date",
+    "MISSIONNAME": "Mission name",
+    "CREDENTIALS": "Credentials",
+    "TYPEOFMISSION ": "Mission type",
+    "CLIENT": "Client",
+    "SELECTPENTESTERS": "Pentesters",
+    "CODI": "Link to CodiMD"
+  },
+  "mission-edit": {
+    "STARTDATE": "Date de début",
+    "ENDDATE": "Date de fin",
+    "CLIENTNAME": "Client",
+    "CREDENTIALS": "Credentials"
+  },
+  "mission-single": {
+    "STARTAT": "Start date",
+    "ENDAT": "End date",
+    "GENERATE-REPORT": "Generate report",
+    "DUMPJSON": "Dump data to json file",
+    "CODI": "Add or update codiMD link",
+    "BURP": "Download burp configuration",
+    "CLIENTS": "Client",
+    "IMPORT": "Import host file",
+    "ADDNEWHOST": "Add new host manualy",
+    "SCOPE": "Scope",
+    "PENTESTERS": "Hackers",
+    "STEPS": "Steps",
+    "CREDENTIALS": "Credentials"
+  },
+  "user-create": {
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "EMAIL": "Email",
+    "PHONE": "Phone number",
+    "CITY": "City"
+  },
+  "user-edit": {
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "PHONE": "Phone number",
+    "CITY": "City"
+  },
+  "vulns-create": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "REMEDIATION": "Remeditation",
+    "SELECTVULNSTYPE": "Select type",
+    "SELECTIMPACTS": "Select impact"
+  },
+  "vulns-edit": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "REMEDIATION": "Remeditation"
+  }
 }

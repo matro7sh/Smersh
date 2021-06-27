@@ -26,7 +26,10 @@ export class AuthenticationModelApplication extends AbstractModelApplication {
   token?: string;
 
   constructor(props: AuthenticationFromAPIInterface) {
-    super({ '@id': '', '@type': '' });
+    super({
+      '@id': '',
+      '@type': ''
+    });
     this.username = props.username;
     this.password = props.password;
     this.token = props.token;

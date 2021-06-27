@@ -6,9 +6,10 @@ import { CanActivate, Router } from '@angular/router';
  * user potected pages acess without a token.
  */
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   canActivate() {
     if (localStorage.getItem('token')) {

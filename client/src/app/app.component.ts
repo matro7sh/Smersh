@@ -12,15 +12,16 @@ import { Theme, ThemeService } from 'src/app/services/theme.service';
 })
 export class AppComponent implements OnInit {
   title = 'Smersh';
+  @HostBinding('class') className = Theme.LIGHT_THEME;
+  protected logged: boolean;
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private dialog: MatDialog,
     private themeService: ThemeService
   ) {}
-  @HostBinding('class') className = Theme.LIGHT_THEME;
 
-  protected logged: boolean;
   ngOnInit(): void {
     this.themeService.onChangeTheme.subscribe(
       (theme) => (this.className = theme)
@@ -34,5 +35,4 @@ export class AppComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
   }
-
 }

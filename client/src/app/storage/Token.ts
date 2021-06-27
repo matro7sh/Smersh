@@ -12,6 +12,6 @@ interface SmershToken extends JwtPayload {
 export class DecodedToken extends Token {
   public getDecoded(): SmershToken {
     const token = this.get();
-    return token ? jwtDecode<SmershToken>(this.get()) : { roles: [] };
+    return token ? jwtDecode<SmershToken>(this.get()) : {roles: []};
   }
 }

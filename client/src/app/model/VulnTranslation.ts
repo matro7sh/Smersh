@@ -3,10 +3,7 @@ import {
   TranslationModelAPI,
   TranslationModelApplication,
 } from 'src/app/model/Translation';
-import {
-  AbstractNormalizerApplication,
-  AbstractSerializerApplication,
-} from 'src/app/model/abstract';
+import { AbstractNormalizerApplication, AbstractSerializerApplication, } from 'src/app/model/abstract';
 
 export interface VulnTranslationFromAPIInterface
   extends TranslationFromAPIInterface {

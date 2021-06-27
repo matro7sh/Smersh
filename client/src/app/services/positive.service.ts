@@ -7,8 +7,8 @@ import { PointSerializerApplication } from 'src/app/model/Point';
   providedIn: 'root',
 })
 export class PositivePointsService extends AbstractService {
-  protected endpoint = 'positive_points';
   public serializer = new PointSerializerApplication();
+  protected endpoint = 'positive_points';
 
   constructor(protected http: HttpClient) {
     super(http);

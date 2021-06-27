@@ -26,8 +26,8 @@ export class SideBarComponent implements OnInit {
   fillerNav: Record<string, string> = {};
   public username: '';
   public version = `${environment.version}`;
-  public languages = Object.keys(Language).map(lang => Language[lang])
-  public currentLang:Language = new Locale().get() as Language;
+  public languages = Object.keys(Language).map((lang) => Language[lang]);
+  public currentLang: Language = new Locale().get() as Language;
   private _mobileQueryListener: () => void;
 
   constructor(
@@ -63,9 +63,10 @@ export class SideBarComponent implements OnInit {
     const decode = atob(token.split('.')[1]);
     this.username = JSON.parse(decode).username;
 
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => this.currentLang = event.lang as Language);
+    this.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => (this.currentLang = event.lang as Language)
+    );
   }
-
 
   logout(): void {
     this.connection.logout();

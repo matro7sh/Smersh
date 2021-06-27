@@ -191,7 +191,10 @@ export class MissionSingleComponent implements OnInit {
           ...burpConfig.target.scope,
           include: [
             ...burpConfig.target.scope.include,
-            ...this.hosts.map((h) => ({ enabled: true, prefix: h.name })),
+            ...this.hosts.map((h) => ({
+              enabled: true,
+              prefix: h.name,
+            })),
           ],
         },
       },

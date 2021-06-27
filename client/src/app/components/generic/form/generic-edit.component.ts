@@ -12,19 +12,22 @@ export abstract class GenericEditComponent extends GenericFormComponent {
   }
 
   initialize(): void {
-    this.route.params.subscribe(({ id }) => {
+    this.route.params.subscribe(({id}) => {
       this.id = id;
       this.fetchItem();
     });
   }
 
-  onSubmit({ value }: NgForm): void {
+  onSubmit({value}: NgForm): void {
     this.service
-      .update(this.id, { ...this.itemTransformer(), ...value })
+      .update(this.id, {...this.itemTransformer(), ...value})
       .then(() => {
         this.notifyActionSuccessAndRedirect('updated');
       })
-      .catch(({ error: { ['hydra:description']: error }, status }) => {
+      .catch(({
+                error: {['hydra:description']: error},
+                status
+              }) => {
         if (status === '400') {
           this.openSnackBar(`Error : ${error}`);
         }

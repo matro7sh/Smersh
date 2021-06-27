@@ -24,6 +24,7 @@ export class ClientModelApplication extends AbstractModelApplication {
 
 class ClientModelAPI extends AbstractModelAPI {
   name: string;
+
   constructor(props: ClientModelApplication) {
     super(props);
     this.name = props.name;

@@ -9,12 +9,11 @@ import {
 } from 'src/app/model/abstract';
 
 export class AbstractService {
-  protected endpoint = '';
-
-  protected headers: HttpHeaders;
-  protected http: HttpClient;
   public serializer = new AbstractSerializerApplication();
   public normalizer = new AbstractNormalizerApplication();
+  protected endpoint = '';
+  protected headers: HttpHeaders;
+  protected http: HttpClient;
 
   public constructor(http: HttpClient) {
     this.http = http;

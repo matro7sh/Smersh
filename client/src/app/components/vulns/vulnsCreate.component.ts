@@ -4,10 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Input, Name, TextAreaInput } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VulnsService } from 'src/app/services/vulns.service';
-import {
-  ImpactAutocompleteInput,
-  VulnTypeAutocompleteInput,
-} from 'src/app/form/Queryable';
+import { ImpactAutocompleteInput, VulnTypeAutocompleteInput, } from 'src/app/form/Queryable';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 
 @Component({

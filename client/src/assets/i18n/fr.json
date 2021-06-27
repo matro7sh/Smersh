@@ -1,12 +1,12 @@
 {
-  "side-bar":{
+  "side-bar": {
     "DASHBOARD": "Tableau de bord",
     "CLIENTS": "Clients",
     "HOSTS": "Nom de domaine",
     "IMPACTS": "Impacts",
     "MISSIONS": "Missions",
     "USERS": "Users",
-    "VULNS":"Vulnerabilities"
+    "VULNS": "Vulnerabilities"
   },
   "dashboard": {
     "WELCOME": "Bienvenue sur votre tableau de bord",
@@ -46,13 +46,13 @@
     "TECHNOLOGY": "Technology",
     "NAME": "Nom"
   },
-  "impact-create":{
+  "impact-create": {
     "NAME": "Nom"
   },
-  "impact-edit":{
+  "impact-edit": {
     "NAME": "Nom"
   },
-  "mission-create":{
+  "mission-create": {
     "CREATENEW": "Nouvelle mission",
     "STARTDATE": "Date de début",
     "ENDDATE": "Date de fin",
@@ -63,13 +63,13 @@
     "SELECTPENTESTERS": "Pentesters",
     "CODI": "Lien vers le CodiMD"
   },
-  "mission-edit":{
+  "mission-edit": {
     "STARTDATE": "Date de début",
     "ENDDATE": "Date de fin",
     "CLIENTNAME": "Client",
     "CREDENTIALS": "Identifiants"
   },
-  "mission-single":{
+  "mission-single": {
     "STARTAT": "Date de début",
     "ENDAT": "Date de fin",
     "GENERATE-REPORT": "Génération du rapport",
@@ -83,32 +83,30 @@
     "PENTESTERS": "Auditeurs",
     "STEPS": "Etapes",
     "CREDENTIALS": "Identifiants"
-
   },
-  "user-create":{
+  "user-create": {
     "USERNAME": "Nom d'utilisateur",
-    "PASSWORD":"Mot de passe",
+    "PASSWORD": "Mot de passe",
     "EMAIL": "Email",
     "PHONE": "Téléphone",
     "CITY": "Ville"
   },
-  "user-edit":{
+  "user-edit": {
     "USERNAME": "Nom d'utilisateur",
     "EMAIL": "Email",
     "PHONE": "Téléphone",
     "CITY": "Ville"
   },
-  "vulns-create":{
+  "vulns-create": {
     "NAME": "Nom",
     "DESCRIPTION": "Description",
     "REMEDIATION": "Reméditation",
     "SELECTVULNSTYPE": "Type de vulnerabilité",
     "SELECTIMPACTS": "Impact"
   },
-  "vulns-edit":{
+  "vulns-edit": {
     "NAME": "Nom",
     "DESCRIPTION": "Description",
     "REMEDIATION": "Reméditation"
   }
-
 }

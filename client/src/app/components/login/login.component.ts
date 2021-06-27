@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/storage/Token';
-import { Locale } from 'src/app/storage/Locale';
 import { ConnectionService } from 'src/app/services/connection.service';
 import { DashboardRouter } from 'src/app/router/DashboardRouter';
 
@@ -19,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     return;
@@ -27,8 +27,11 @@ export class LoginComponent implements OnInit {
 
   submit(): void {
     this.connectionService
-      .login({ username: this.username, password: this.password })
-      .then(({ token }: any) => {
+      .login({
+        username: this.username,
+        password: this.password
+      })
+      .then(({token}: any) => {
         if (token) {
           new Token().set(token);
           this.router.navigateByUrl(DashboardRouter.redirectToList());

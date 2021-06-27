@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  CREATE,
-  DELETE,
-  EDIT,
-  GenericListComponent,
-  SHOW,
-} from 'src/app/components/generic';
+import { CREATE, DELETE, EDIT, GenericListComponent, SHOW, } from 'src/app/components/generic';
 import { HostRouter } from 'src/app/router/HostRouter';
 import { HostsService } from 'src/app/services/hosts.service';
 

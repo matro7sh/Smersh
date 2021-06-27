@@ -1,36 +1,36 @@
-<div class="example-container app-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
-    <img [routerLink]="['/missions/']" src="/assets/logo.png" class="logo-navbar"/>
+<div [class.example-is-mobile]="mobileQuery.matches" class="example-container app-container">
+  <mat-toolbar class="example-toolbar" color="primary">
+    <img [routerLink]="['/missions/']" class="logo-navbar" src="/assets/logo.png"/>
     {{title}} - {{version}} <span class="example-spacer"></span>
     <div class="smersh-button-row">
-      <mat-form-field >
-        <mat-select [value]="currentLang" (selectionChange)="localeService.switchLanguage($event.value)"> 
+      <mat-form-field>
+        <mat-select (selectionChange)="localeService.switchLanguage($event.value)" [value]="currentLang">
           <mat-option *ngFor="let lang of languages" [value]="lang">
-            <img  src="/assets/flags/{{ lang }}.png" class="lang-selector"/>
+            <img class="lang-selector" src="/assets/flags/{{ lang }}.png"/>
             {{ lang | titlecase }}
           </mat-option>
           <mat-select-trigger>
-            <img  src="/assets/flags/{{ currentLang }}.png" class="lang-selector"/> {{ currentLang | titlecase }}
+            <img class="lang-selector" src="/assets/flags/{{ currentLang }}.png"/> {{ currentLang | titlecase }}
           </mat-select-trigger>
         </mat-select>
       </mat-form-field>
-      <button mat-mini-fab color="warn" (click)="themeService.toggleTheme()">
+      <button (click)="themeService.toggleTheme()" color="warn" mat-mini-fab>
         <mat-icon>
           {{ themeService.currentTheme === 'dark-theme' ? 'light' : 'dark' }}_mode
         </mat-icon>
       </button>
     </div>
-    <button mat-raised-button (click)="logout()">Logout - {{ username }}</button>
+    <button (click)="logout()" mat-raised-button>Logout - {{ username }}</button>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav class="sizeofNavbar" opened="true" #snav mode="side" fixedInViewport="true" fixedTopGap="56">
+    <mat-sidenav #snav class="sizeofNavbar" fixedInViewport="true" fixedTopGap="56" mode="side" opened="true">
       <mat-nav-list>
-        <a mat-list-item data-cy="links" routerLink="/missions">
+        <a data-cy="links" mat-list-item routerLink="/missions">
           <b>{{ 'side-bar.DASHBOARD' | translate }}</b>
         </a>
-        <a mat-list-item data-cy="links" *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]">
-          <b>{{ 'side-bar.'+(item?.key.toUpperCase()) | translate }}</b>
+        <a *ngFor="let item of fillerNav | keyvalue" [routerLink]="[item.value]" data-cy="links" mat-list-item>
+          <b>{{ 'side-bar.' + (item?.key.toUpperCase()) | translate }}</b>
         </a>
       </mat-nav-list>
     </mat-sidenav>

@@ -12,9 +12,9 @@ import {
   providedIn: 'root',
 })
 export class VulnTranslationsService extends AbstractService {
-  protected endpoint = 'vuln_translations';
   public serializer = new VulnTranslationSerializerApplication();
   public normalizer = new VulnTranslationNormalizerApplication();
+  protected endpoint = 'vuln_translations';
 
   constructor(protected http: HttpClient) {
     super(http);
@@ -23,6 +23,6 @@ export class VulnTranslationsService extends AbstractService {
   getData(
     params: Record<string, string> = {}
   ): Promise<{ count: number; data: AbstractModelApplication[] }> {
-    return super.getData({ locale: new Locale().get(), ...params });
+    return super.getData({locale: new Locale().get(), ...params});
   }
 }

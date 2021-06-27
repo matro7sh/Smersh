@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import burpConfig from 'src/assets/burp.json';
 
 interface BurpInterface {
-  [key: string]: unknown;
   target: {
     [key: string]: unknown;
     scope: {
@@ -10,6 +9,8 @@ interface BurpInterface {
       include: { enabled: boolean; prefix: string }[];
     };
   };
+
+  [key: string]: unknown;
 }
 
 @Injectable({

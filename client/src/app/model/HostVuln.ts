@@ -50,5 +50,8 @@ class HostVulnModelAPI extends AbstractModelAPI {
   constructor(props: HostVulnModelApplication) {
     super(props);
     this.currentState = props.currentState;
+    this.host = (props.host as unknown) as string;
+    this.impact = props.impact;
+    this.vuln = (props.vuln as unknown) as string;
   }
 }

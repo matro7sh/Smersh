@@ -13,7 +13,7 @@ abstract class QueryableInput extends Input {
 
   constructor(props) {
     super();
-    Object.entries(props).map(([k, v]) => {
+    Object.entries(props ?? {}).map(([k, v]) => {
       this[k.toString()] = v;
     });
   }
@@ -86,5 +86,32 @@ export class MissionTypeAutocompleteInput extends QueryableAutocompleteInput {
 
   constructor(public service: TypesService) {
     super(service);
+  }
+}
+
+export class RoleAutocompleteInput extends QueryableAutocompleteInput {
+  name = 'roles';
+  label = 'Select a role';
+  choices = [
+    {
+      label: 'Admin',
+      value: 'ROLE_ADMIN',
+    },
+    {
+      label: 'Manager',
+      value: 'ROLE_MANAGER',
+    },
+    {
+      label: 'Pentester',
+      value: 'ROLE_PENTESTER',
+    },
+    {
+      label: 'Guest',
+      value: 'ROLE_CLIENT',
+    },
+  ];
+
+  constructor() {
+    super(undefined);
   }
 }

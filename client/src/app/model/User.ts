@@ -1,10 +1,14 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import { MissionModelApplication, MissionSerializerApplication, } from 'src/app/model/Mission';
+import {
+  MissionModelApplication,
+  MissionSerializerApplication,
+} from 'src/app/model/Mission';
 
 interface UserFromAPIInterface extends ObjectFromAPIInterface {
   phone: string;
@@ -20,13 +24,19 @@ export class UserSerializerApplication extends AbstractSerializerApplication {
   protected model = UserModelApplication;
 }
 
+export class UserNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = UserModelAPI;
+}
+
 export class UserModelApplication extends AbstractModelApplication {
   phone: string;
   trigram: string;
   mail: string;
   city: string;
+  password: string;
   username: string;
   enabled: boolean;
+  roles: string;
   missions: MissionModelApplication[];
 
   constructor(props: UserFromAPIInterface) {
@@ -49,15 +59,20 @@ class UserModelAPI extends AbstractModelAPI {
   phone: string;
   trigram: string;
   mail: string;
+  password: string;
+  roles: string[];
   city: string;
 
   constructor(props: UserModelApplication) {
     super(props);
+    console.log(props);
     this.username = props.username;
     this.enabled = props.enabled;
     this.phone = props.phone;
     this.trigram = props.trigram;
     this.city = props.city;
     this.mail = props.mail;
+    this.password = props.password;
+    this.roles = [props.roles];
   }
 }

@@ -8,6 +8,7 @@ export abstract class Input {
   public placeholder = '';
   public name = '';
   public label = '';
+  public choices = [];
 }
 
 export class TextInput extends Input {
@@ -95,8 +96,8 @@ export class Email extends TextInput {
 export class Password extends TextInput {
   constructor() {
     super({
-      label: 'password',
-      name: 'Password',
+      label: 'Password',
+      name: 'password',
       type: 'password',
     });
   }

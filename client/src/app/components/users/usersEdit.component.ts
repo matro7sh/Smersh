@@ -19,14 +19,14 @@ export class UsersEditComponent extends GenericEditComponent {
     new Email(),
     new Phone(),
     new TextInput({
-      name: 'city',
-      label: 'City',
-      Placeholder: 'Bikini bottom',
+      label: 'Trigram',
+      name: 'trigram',
+      placeholder: 'JZN',
     }),
     new TextInput({
-      name: 'trigram',
-      label: 'Trigram',
-      Placeholder: 'Bikini bottom',
+      label: 'City',
+      name: 'city',
+      placeholder: 'Bikini bottom',
     }),
   ];
 

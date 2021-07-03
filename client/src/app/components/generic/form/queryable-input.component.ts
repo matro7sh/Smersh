@@ -50,6 +50,10 @@ export class QueryableInputComponent implements OnInit, OnChanges {
     if (changes.item) {
       this.fetch();
     }
+    if (changes.input?.currentValue.choices) {
+      console.log(changes.input?.currentValue.choices);
+      this.records = changes.input?.currentValue.choices;
+    }
   }
 
   retrieveInformations(

@@ -48,7 +48,7 @@ export class UserModelApplication extends AbstractModelApplication {
     this.city = props.city;
     this.mail = props.mail;
     this.missions = new MissionSerializerApplication().serializeMany(
-      props.missions
+      props.missions ?? []
     ) as MissionModelApplication[];
   }
 }
@@ -65,7 +65,6 @@ class UserModelAPI extends AbstractModelAPI {
 
   constructor(props: UserModelApplication) {
     super(props);
-    console.log(props);
     this.username = props.username;
     this.enabled = props.enabled;
     this.phone = props.phone;

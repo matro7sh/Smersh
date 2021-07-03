@@ -468,7 +468,7 @@ export class MissionSingleComponent implements OnInit {
         .compile();
       try {
         doc.resolveData(data).then(() => {
-          const out = doc.getZip().generate({
+          const out = doc.render().getZip().generate({
             type: 'blob',
           }); // Output the document using Data-URI
           saveAs(out, 'rapport.docx');

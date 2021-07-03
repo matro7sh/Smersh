@@ -37,7 +37,7 @@ export class HostVulnModelApplication extends AbstractModelApplication {
     this.currentState = props.currentState;
     this.host = props.host;
     this.impact = props.impact;
-    this.vuln = new VulnModelApplication(props.vuln);
+    this.vuln = props.vuln ? new VulnModelApplication(props.vuln) : null;
   }
 }
 

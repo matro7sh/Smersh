@@ -41,10 +41,12 @@ export class HostModelApplication extends AbstractModelApplication {
 class HostModelAPI extends AbstractModelAPI {
   name: string;
   technology: string;
+  mission: string;
 
   constructor(props: HostModelApplication) {
     super(props);
     this.name = props.name;
     this.technology = props.technology;
+    this.mission = props.mission;
   }
 }

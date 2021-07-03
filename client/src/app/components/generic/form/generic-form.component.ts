@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
@@ -8,7 +8,7 @@ import { Input } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 
-type Item = Record<string, unknown|unknown[]>|AbstractModelApplication;
+type Item = Record<string, unknown | unknown[]> | AbstractModelApplication;
 
 @Component({
   templateUrl: 'generic-form.component.html',
@@ -41,8 +41,7 @@ export class GenericFormComponent implements OnInit {
     protected router: Router,
     protected route: ActivatedRoute,
     protected snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   public initialize(): void {
     return;
@@ -63,15 +62,15 @@ export class GenericFormComponent implements OnInit {
     return this.item;
   }
 
-  setItem(value: Record<string, unknown|unknown[]>): void {
+  setItem(value: Record<string, unknown | unknown[]>): void {
     this.item = value;
   }
 
-  getInputValue({name}: Input): unknown {
+  getInputValue({ name }: Input): unknown {
     return this.item?.[name.toString()];
   }
 
-  update(value: Record<string, unknown|unknown[]>): void {
+  update(value: Record<string, unknown | unknown[]>): void {
     this.item = {
       ...this.item,
       ...value,
@@ -81,7 +80,9 @@ export class GenericFormComponent implements OnInit {
   itemTransformer(): Record<string, string> {
     const entries = Object.entries(this.item ?? {}).map(([k, v]) => [
       k,
-      Array.isArray(v) ? v.map(({value}) => value) : v?.value ?? v,
+      Array.isArray(v)
+        ? v.map(({ ['@id']: iri, value }) => value ?? iri)
+        : v?.value ?? v,
     ]);
     return entries.reduce((acc, [k, v]) => {
       acc[k.toString()] = v;
@@ -89,8 +90,7 @@ export class GenericFormComponent implements OnInit {
     }, {});
   }
 
-  onSubmit(_: NgForm): void {
-  }
+  onSubmit(_: NgForm): void {}
 
   notifyActionSuccessAndRedirect(action: string): void {
     this.openSnackBar(`The ${this.singularResource} has been ${action}`);

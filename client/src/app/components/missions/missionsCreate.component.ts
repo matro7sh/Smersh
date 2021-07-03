@@ -41,16 +41,16 @@ export class MissionsCreateComponent extends GenericCreateComponent {
       missionTypeSelectInput,
       new TextInput({
         name: 'credentials',
-        label: 'Credentials'
+        label: 'Credentials',
       }),
     ];
   }
 
-  onSubmit({value}: NgForm): void {
+  onSubmit({ value }: NgForm): void {
     super.onSubmit({
       value: {
         ...value,
-        period: this.period.value
+        period: this.period.value,
       },
     } as NgForm);
   }

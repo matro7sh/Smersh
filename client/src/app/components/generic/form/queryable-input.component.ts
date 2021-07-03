@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { UsersService } from 'src/app/services/users.service';
@@ -25,14 +33,15 @@ export class QueryableInputComponent implements OnInit, OnChanges {
   public source = 'name';
   queryableInputControl: FormControl = new FormControl();
   separators: number[] = [ENTER, COMMA];
-  @Output() updateValue = new EventEmitter<Record<string, unknown|unknown[]>>();
+  @Output() updateValue = new EventEmitter<
+    Record<string, unknown | unknown[]>
+  >();
   @Input() public updateParentModel: (
-    value: Record<string, unknown|unknown[]>
+    value: Record<string, unknown | unknown[]>
   ) => void;
   protected filters = {};
 
-  constructor(protected service: UsersService) {
-  }
+  constructor(protected service: UsersService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.item) {
@@ -65,8 +74,8 @@ export class QueryableInputComponent implements OnInit, OnChanges {
 
   fetch(params: Record<string, string> = {}): void {
     this.service
-      .getData({...this.filters, ...params})
-      .then(({data}: { data: AbstractModelApplication[] }) => {
+      .getData({ ...this.filters, ...params })
+      .then(({ data }: { data: AbstractModelApplication[] }) => {
         this.records = data.map((item) => ({
           label: item[this.source] ?? item.id,
           value: item['@id'],
@@ -93,14 +102,14 @@ export class QueryableInputComponent implements OnInit, OnChanges {
       });
   }
 
-  parse(data: Record<string, string>|string): string {
+  parse(data: Record<string, string> | string): string {
     if (data) {
       return (data as Record<string, string>).label ?? (data as string) ?? '';
     }
     return '';
   }
 
-  onSelected({option: {value}}: MatAutocompleteSelectedEvent): void {
+  onSelected({ option: { value } }: MatAutocompleteSelectedEvent): void {
     let selectedValue = value;
     if (this.multiple) {
       if (!this.selectedRecords.some((item) => item.value === value.value)) {
@@ -110,13 +119,14 @@ export class QueryableInputComponent implements OnInit, OnChanges {
     } else {
       this.record = value;
     }
-    this.updateValue.emit({[this.name]: selectedValue});
+    this.updateValue.emit({ [this.name]: selectedValue });
   }
 
-  remove({value}: MatOption): void {
+  remove({ value }: MatOption): void {
     this.selectedRecords = this.selectedRecords.filter(
       (item) => item.value !== value
     );
+    this.updateValue.emit({ [this.name]: this.selectedRecords });
   }
 
   ngOnInit(): void {
@@ -129,7 +139,7 @@ export class QueryableInputComponent implements OnInit, OnChanges {
         if (v.value) {
           return;
         }
-        this.fetch({[this.source]: v});
+        this.fetch({ [this.source]: v });
       });
     this.fetch();
   }

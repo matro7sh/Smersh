@@ -5,15 +5,15 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import { HostFromAPIInterface, } from 'src/app/model/Host';
+import { HostFromAPIInterface } from 'src/app/model/Host';
 
 interface MissionFromAPIInterface extends ObjectFromAPIInterface {
   name: string;
   startDate: string;
   pathToCodi: string;
-  EndDate: string;
+  endDate: string;
   users: string[];
-  hosts: (HostFromAPIInterface|string)[];
+  hosts: (HostFromAPIInterface | string)[];
   nmap: boolean;
   nessus: boolean;
   nmapFiler: boolean;
@@ -40,7 +40,7 @@ export class MissionModelApplication extends AbstractModelApplication {
   };
   pathToCodi: string;
   users: string[];
-  hosts: (HostFromAPIInterface|string)[];
+  hosts: (HostFromAPIInterface | string)[];
   nmap: boolean;
   nessus: boolean;
   filer: {
@@ -57,7 +57,7 @@ export class MissionModelApplication extends AbstractModelApplication {
     this.name = props.name;
     this.period = {
       start: new Date(props.startDate),
-      stop: new Date(props.EndDate),
+      stop: new Date(props.endDate),
     };
     this.pathToCodi = props.pathToCodi;
     this.users = props.users;
@@ -68,7 +68,7 @@ export class MissionModelApplication extends AbstractModelApplication {
       nmap: props.nmapFiler,
       nessus: props.nessusFiler,
     };
-    this.type = props.missionType?.name;
+    this.type = props.missionType?.['@id'] ?? props.missionType;
     this.credentials = props.credentials;
     this.clients = props.clients;
     this.steps = props.steps;

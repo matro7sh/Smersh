@@ -11,6 +11,7 @@ import {
   MultipleUsersAutocompleteInput,
 } from 'src/app/form/Queryable';
 import { RangeDateInput } from 'src/app/form/Date';
+import { MissionModelApplication } from 'src/app/model/Mission';
 
 @Component({
   selector: 'app-missions-edit',
@@ -39,8 +40,15 @@ export class MissionsEditComponent extends GenericEditComponent {
       missionTypeSelectInput,
       new TextInput({
         name: 'credentials',
-        label: 'Credentials'
+        label: 'Credentials',
       }),
     ];
+  }
+
+  fetchItem(): Promise<void> {
+    return super.fetchItem().then(() => {
+      const period = (this.item as MissionModelApplication).period;
+      this.period.setValue(period);
+    });
   }
 }

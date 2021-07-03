@@ -11,6 +11,7 @@
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
+              name="{{ name }}"
               [formControl]="queryableInputControl"
               [matAutocomplete]="auto"
               [matChipInputFor]="chipList"
@@ -20,7 +21,8 @@
     </mat-chip-list>
   </ng-container>
   <ng-template #single>
-    <input [formControl]="queryableInputControl"
+    <input  name="{{ name }}"
+            [formControl]="queryableInputControl"
            [matAutocomplete]="auto"
            matInput
            placeholder="Select one {{ name }}"

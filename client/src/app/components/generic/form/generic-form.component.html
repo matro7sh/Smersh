@@ -13,8 +13,8 @@
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>{{ input.label }}</mat-label>
           <mat-date-range-input [formGroup]="period" [rangePicker]="picker">
-            <input formControlName="start" matStartDate placeholder="Start date">
-            <input formControlName="stop" matEndDate placeholder="End date">
+            <input name="start" formControlName="start" matStartDate placeholder="Start date">
+            <input name="stop" formControlName="stop" matEndDate placeholder="End date">
           </mat-date-range-input>
           <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>

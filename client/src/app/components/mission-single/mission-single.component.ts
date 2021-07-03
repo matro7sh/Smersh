@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/components/popup/popup.component';
 import { MissionModelApplication } from 'src/app/model/Mission';
 import { HostModelApplication } from 'src/app/model/Host';
+import { getTranslation } from 'src/app/helpers/translation';
 
 function loadFile(url, callback): void {
   PizZipUtils.getBinaryContent(url, callback);
@@ -230,23 +231,25 @@ export class MissionSingleComponent implements OnInit {
         this.missionName = mission.name;
         this.hosts = (mission.hosts as HostModelApplication[]).map((host) => ({
           ...host,
-          vulns: host.hostVulns.map((hostVuln) => {
-            const translations = hostVuln.vuln.translations;
-            const translate =
-              translations[this.currentLocal] ??
-              translations.en ??
-              translations[Object.keys(translations)[0]];
-            return {
-              ...hostVuln.vuln,
-              impact: {
-                ...hostVuln.impact,
-                color: this.getImpactColor(hostVuln.impact.name),
-              },
-              linked: hostVuln.id,
-              ...translate,
-              translate,
-            };
-          }),
+          vulns: host.hostVulns
+            .filter((hostVuln) => hostVuln.vuln?.translations)
+            .map((hostVuln) => {
+              const translations = hostVuln.vuln.translations;
+              const translate =
+                translations[this.currentLocal] ??
+                translations.en ??
+                translations[Object.keys(translations)[0]];
+              return {
+                ...hostVuln.vuln,
+                impact: {
+                  ...hostVuln.impact,
+                  color: this.getImpactColor(hostVuln.impact.name),
+                },
+                linked: hostVuln.id,
+                ...translate,
+                translate,
+              };
+            }),
         }));
 
         this.users = mission.users;
@@ -441,19 +444,21 @@ export class MissionSingleComponent implements OnInit {
         state: 'draft',
         scope: this.hosts.map((host) => ({
           ...host,
-          hostVulns: host.hostVulns.map((hostVuln) => {
-            const translations = hostVuln.vuln.translations;
-            const translation =
-              translations[this.currentLocal] ??
-              translations.en ??
-              translations[Object.keys(translations)[0]];
-            return {
-              ...hostVuln,
-              image:
-                hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
-              ...translation,
-            };
-          }),
+          hostVulns: host.hostVulns
+            .filter((hostVuln) => hostVuln.vuln?.translations)
+            .map((hostVuln) => {
+              const translations = hostVuln.vuln.translations;
+              const translation =
+                translations[this.currentLocal] ??
+                translations.en ??
+                translations[Object.keys(translations)[0]];
+              return {
+                ...hostVuln,
+                image:
+                  hostVuln.image?.contentUrl ?? 'https://picsum.photos/200/300',
+                ...translation,
+              };
+            }),
         })),
       };
       const doc = new Docxtemplater()

@@ -14,7 +14,6 @@ import { HostsService } from 'src/app/services/hosts.service';
 import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -30,8 +29,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public host: HostModelApplication;
   public durationInSeconds = 4;
   public missionId: string;
-  public fichierAEnvoyer: File = null;
-  public onsaitpascomment = null;
+  public image: FormData = null;
 
   constructor(
     private vulnsService: VulnsService,
@@ -42,8 +40,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private impactService: ImpactsService,
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
-    private router: Router,
-    private translate: TranslateService
+    private router: Router
   ) {}
 
   openSnackBar(message: string): void {
@@ -105,7 +102,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     const callback = (body) =>
       this.hostVulnsService.insert(body).then(
         () => {
-          this.openSnackBar('vulnerabilitie added');
+          this.openSnackBar('vulnerability added');
           this.router.navigateByUrl(
             MissionRouter.redirectToShow(this.missionId)
           );
@@ -115,13 +112,11 @@ export class AddVulnsToHostExternalComponent implements OnInit {
         }
       );
 
-    if (this.onsaitpascomment) {
-      this.mediaObjectsService
-        .insert(this.onsaitpascomment)
-        .then(({ ['@id']: id }) => {
-          data.image = id;
-          callback(data);
-        });
+    if (this.image) {
+      this.mediaObjectsService.insert(this.image).then(({ ['@id']: id }) => {
+        data.image = id;
+        callback(data);
+      });
     } else {
       callback(data);
     }
@@ -142,6 +137,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   storeImage(inputElement: HTMLInputElement): void {
     const formdata = new FormData();
     formdata.append('file', inputElement.files[0]);
-    this.onsaitpascomment = formdata;
+    this.image = formdata;
   }
 }

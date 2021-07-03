@@ -9,13 +9,13 @@ import {
 } from '@angular/core';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { UsersService } from 'src/app/services/users.service';
 import { MatOption } from '@angular/material/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AbstractRouter } from 'src/app/router/router';
 import { Input as InputModel } from 'src/app/form/Input';
+import { AbstractService } from 'src/app/services/abstract';
 
 @Component({
   selector: 'app-queryable-input',
@@ -40,8 +40,11 @@ export class QueryableInputComponent implements OnInit, OnChanges {
     value: Record<string, unknown | unknown[]>
   ) => void;
   protected filters = {};
+  protected service: AbstractService;
 
-  constructor(protected service: UsersService) {}
+  constructor() {
+    this.service = this.input?.service;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.item) {
@@ -74,7 +77,7 @@ export class QueryableInputComponent implements OnInit, OnChanges {
 
   fetch(params: Record<string, string> = {}): void {
     this.service
-      .getData({ ...this.filters, ...params })
+      ?.getData({ ...this.filters, ...params })
       .then(({ data }: { data: AbstractModelApplication[] }) => {
         this.records = data.map((item) => ({
           label: item[this.source] ?? item.id,

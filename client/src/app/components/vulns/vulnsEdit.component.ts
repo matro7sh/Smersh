@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Input, Name, TextAreaInput } from 'src/app/form/Input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { VulnsService } from 'src/app/services/vulns.service';
-import { ImpactAutocompleteInput, VulnTypeAutocompleteInput, } from 'src/app/form/Queryable';
+import {
+  ImpactAutocompleteInput,
+  VulnTypeAutocompleteInput,
+} from 'src/app/form/Queryable';
 import { VulnRouter } from 'src/app/router/VulnRouter';
 import { NgForm } from '@angular/forms';
 import { VulnTranslationsService } from 'src/app/services/vulnTranslations.service';
@@ -50,8 +53,8 @@ export class VulnsEditComponent extends GenericEditComponent {
     ];
   }
 
-  onSubmit({value}: NgForm): void {
-    const vulnData = {...this.itemTransformer(), ...value};
+  onSubmit({ value }: NgForm): void {
+    const vulnData = { ...this.itemTransformer(), ...value };
     const data = {
       ...vulnData,
       translatable: `${this.service.getUrl()}/${this.id}`,
@@ -64,7 +67,7 @@ export class VulnsEditComponent extends GenericEditComponent {
     let apply: () => Promise<AbstractModelApplication>;
     const currentTranslation = (this.item as VulnModelApplication).translations[
       this.currentLocale
-      ];
+    ];
     if (!currentTranslation) {
       apply = () => this.vulnsTranslationsService.insert(data);
     } else {
@@ -76,10 +79,7 @@ export class VulnsEditComponent extends GenericEditComponent {
       .then(() => {
         this.notifyActionSuccessAndRedirect('updated');
       })
-      .catch(({
-                error: {['hydra:description']: error},
-                status
-              }) => {
+      .catch(({ error: { ['hydra:description']: error }, status }) => {
         if (status === '400') {
           this.openSnackBar(`Error : ${error}`);
         }

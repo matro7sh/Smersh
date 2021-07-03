@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { UserModelApplication } from 'src/app/model/User';
 import { HostFromAPIInterface } from 'src/app/model/Host';
+import { DecodedToken } from 'src/app/storage/Token';
 
 @Component({
   selector: 'app-mission-my',
@@ -21,12 +22,10 @@ export class MissionMyComponent implements OnInit {
   }
 
   loadMissions(): void {
-    const token = localStorage.getItem('token');
-    const decode = atob(token.split('.')[1]);
-    const jwt = JSON.parse(decode);
-    this.roles = jwt.roles;
+    const decodedToken = new DecodedToken().getDecoded();
+    this.roles = decodedToken.roles;
     this.usersServices
-      .getDataById(jwt.user.split('/').pop())
+      .getDataById(decodedToken.user.split('/').pop())
       .then(({ missions }: UserModelApplication) => {
         this.missions = missions.map(({ id, hosts, name }) => ({
           name,

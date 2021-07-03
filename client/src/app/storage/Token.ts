@@ -7,11 +7,15 @@ export class Token extends AbstractStorage {
 
 interface SmershToken extends JwtPayload {
   roles: string[];
+  username: string;
+  user: string;
 }
 
 export class DecodedToken extends Token {
   public getDecoded(): SmershToken {
     const token = this.get();
-    return token ? jwtDecode<SmershToken>(this.get()) : {roles: []};
+    return token
+      ? jwtDecode<SmershToken>(this.get())
+      : { roles: [], username: '', user: '' };
   }
 }

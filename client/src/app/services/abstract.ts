@@ -17,10 +17,6 @@ export class AbstractService {
 
   public constructor(http: HttpClient) {
     this.http = http;
-    this.headers = new HttpHeaders({
-      Authorization: `Bearer ${new Token().get()}`,
-      'Content-Type': 'application/json; charset=utf-8',
-    });
   }
 
   getUrl(): string {
@@ -29,7 +25,10 @@ export class AbstractService {
 
   getOptions(): { headers: HttpHeaders } {
     return {
-      headers: this.headers,
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${new Token().get()}`,
+        'Content-Type': 'application/json; charset=utf-8',
+      }),
     };
   }
 

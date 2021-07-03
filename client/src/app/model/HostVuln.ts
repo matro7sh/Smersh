@@ -31,6 +31,7 @@ export class HostVulnModelApplication extends AbstractModelApplication {
   };
   impact: string;
   vuln: VulnModelApplication;
+  image: string;
 
   constructor(props: HostVulnFromAPIInterface) {
     super(props);
@@ -45,12 +46,14 @@ class HostVulnModelAPI extends AbstractModelAPI {
   currentState: string;
   host: string;
   impact: string;
+  image: string;
   vuln: string;
 
   constructor(props: HostVulnModelApplication) {
     super(props);
     this.currentState = props.currentState;
     this.host = (props.host as unknown) as string;
+    this.image = props.image;
     this.impact = props.impact;
     this.vuln = (props.vuln as unknown) as string;
   }

@@ -1,4 +1,4 @@
 .idea/
-.env
+*/.env
 .env.local
 data/

@@ -1,4 +1,9 @@
-version: '3.4'
+version: '3.7'
+
+x-network:
+  &network
+  networks:
+    - smersh
 
 x-cache-from:
   - &api-cache-from
@@ -7,6 +12,18 @@ x-cache-from:
       - ${PHP_IMAGE:-quay.io/api-platform/php}
 
 services:
+  traefik:
+    image: traefik:v2.4
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml
+    ports:
+      # Disable this dashboard in production
+      - 8080:8080
+      - 80:80
+      - 443:443
+    <<: *network
+
   php:
     build:
       context: ./api
@@ -18,15 +35,22 @@ services:
       timeout: 3s
       retries: 3
       start_period: 30s
+    environment:
+      - APP_ENV=${APP_ENV}
+      - DOMAIN=${TRANSPORT}${DOMAIN}
+      - TRUSTED_HOSTS=^((${SUBDOMAINS}\.)?${DOMAIN})|api$$
+      - CORS_ALLOW_ORIGIN=^${TRANSPORT}(${SUBDOMAINS}.)?${DOMAIN}$$
+      - DATABASE_URL=postgres://${API_DB_USER}:${API_DB_PASS}@db/${API_DB_NAME}
+      - JWT_PASSPHRASE=${JWT_KEY}
+      - BASE_URL=${TRANSPORT}${DOMAIN}
     depends_on:
       - db
-      - dev-tls
     volumes:
       - ./api:/srv/api:rw,cached
       - ./api/docker/php/conf.d/api-platform.dev.ini:/usr/local/etc/php/conf.d/api-platform.ini
       # if you develop on Linux, you may use a bind-mounted host directory instead
       # - ./api/var:/srv/api/var:rw
-      - dev-certs:/certs:ro,nocopy
+    <<: *network
 
   api:
     build:
@@ -35,129 +59,92 @@ services:
       <<: *api-cache-from
     image: ${NGINX_IMAGE:-quay.io/api-platform/nginx}
     depends_on:
+      - traefik
       - php
+    expose:
+      - 80
     volumes:
       - ./api/public:/srv/api/public:ro
-    ports:
-      - target: 80
-        published: 8000
-        protocol: tcp
-
-  vulcain:
-    image: dunglas/vulcain
-    environment:
-      - CERT_FILE=/certs/localhost.crt
-      - KEY_FILE=/certs/localhost.key
-      - UPSTREAM=http://api
-    depends_on:
-      - api
-      - dev-tls
-    volumes:
-      - dev-certs:/certs:ro,nocopy
-    ports:
-      - target: 443
-        published: 8443
-        protocol: tcp
+    labels:
+      - traefik.http.routers.api.rule=Host(`api.${DOMAIN}`)
+    <<: *network
 
   db:
     image: postgres:12-alpine
     environment:
-      - POSTGRES_DB=api
-      - POSTGRES_PASSWORD=!ChangeMe!
-      - POSTGRES_USER=api-platform
+      - POSTGRES_DB=${API_DB_NAME}
+      - POSTGRES_PASSWORD=${API_DB_PASS}
+      - POSTGRES_USER=${API_DB_USER}
     volumes:
       - db-data:/var/lib/postgresql/data:rw
       # you may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./api/docker/db/data:/var/lib/postgresql/data:rw
-    ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-
-  mercure:
-    image: dunglas/mercure
-    environment:
-      - ALLOW_ANONYMOUS=1
-      - CERT_FILE=/certs/localhost.crt
-      - CORS_ALLOWED_ORIGINS=*
-      - DEMO=1
-      - JWT_KEY=!ChangeMe!
-      - KEY_FILE=/certs/localhost.key
-      - PUBLISH_ALLOWED_ORIGINS=https://localhost:1337 # required for publishing from the demo page
-    depends_on:
-      - dev-tls
-    volumes:
-      - dev-certs:/certs:ro,nocopy
-    ports:
-      - target: 443
-        published: 1337
-        protocol: tcp
-
-  dev-tls:
-    build:
-      context: ./docker/dev-tls
-    volumes:
-      - dev-certs:/certs:rw
-    ports:
-      - target: 80
-        published: 80
-        protocol: tcp
+    # Uncomment to expose db
+    # ports:
+    #   - target: 5432
+    #     published: 5432
+    #     protocol: tcp
+    <<: *network
 
   db_codimd:
     image: postgres:latest
     environment:
-      - POSTGRES_USER=codimd
-      - POSTGRES_PASSWORD=change_password
-      - POSTGRES_DB=codimd
+      - POSTGRES_DB=${CODI_DB_NAME}
+      - POSTGRES_PASSWORD=${CODI_DB_PASS}
+      - POSTGRES_USER=${CODI_DB_USER}
     volumes:
-      - "db-codimd-data:/var/lib/postgresql/data"
-    restart: always
+      - db-codimd-data:/var/lib/postgresql/data
+#    restart: always
+    <<: *network
 
   codimd:
     image: nabo.codimd.dev/hackmdio/hackmd:latest
     environment:
-      - CMD_DB_URL=postgres://codimd:change_password@db_codimd/codimd
+      - CMD_DB_URL=postgres://${CODI_DB_USER}:${CODI_DB_PASS}@db_codimd/${CODI_DB_NAME}
       - CMD_USECDN=false
     depends_on:
       - db_codimd
-    ports:
-      - target: 3000
-        published: 3000
-        protocol: tcp
+    expose:
+      - 3000
+    labels:
+      - traefik.http.routers.codimd.rule=Host(`codimd.${DOMAIN}`)
+      - traefik.http.services.codimd.loadBalancer.port=3000
     volumes:
       - upload-data:/home/hackmd/app/public/uploads
-    restart: always
+#    restart: always
+    <<: *network
 
   client:
     build:
       context: ./client
-      target: client_angular
+      args:
+        TRANSPORT: ${TRANSPORT}
+        API_BASE_URL: api.${DOMAIN}
     image: node:latest
     environment:
       - PATH=/app/node_modules/.bin:$PATH
-    ports:
-      - target: 4200
-        published: 4200
-        protocol: tcp
+    expose:
+      - 80
+    labels:
+      - traefik.http.routers.client.rule=Host(`${DOMAIN}`)
     volumes:
-      - client:/app
-    depends_on:
-      - api
-      - dev-tls
+      - ./client:/app
+    <<: *network
 
   bitwarden:
-    image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
-    ports:
-      - target: 80
-        published: 8888
-        protocol: tcp
+    image: bitwardenrs/server:latest
+    labels:
+      - traefik.http.routers.bitwarden.rule=Host(`bitwarden.${DOMAIN}`)
     volumes:
       - ./data/bitwarden:/data
-    restart: on-failure
+#    restart: on-failure
+    <<: *network
 
 volumes:
   db-data: {}
   db-codimd-data: {}
-  dev-certs: {}
   upload-data: {}
-  client: {}
+
+networks:
+  smersh:
+    external: true

@@ -1,0 +1,10 @@
+[providers.docker]
+  endpoint = "unix:///var/run/docker.sock"
+
+[api]
+  insecure = true
+  dashboard = true
+  debug = true
+
+[entryPoints.web]
+  address = ":80"

@@ -20,11 +20,11 @@ import { CRITICAL, HIGH, LOW, MEDIUM } from 'src/app/model/Impact';
 import { ConfigService } from 'src/app/services/configService';
 import ImgModule from 'docxtemplater-image-module-free';
 import axios from 'axios';
-import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/components/popup/popup.component';
 import { MissionModelApplication } from 'src/app/model/Mission';
 import { HostModelApplication } from 'src/app/model/Host';
+import { AbstractService } from 'src/app/services/abstract';
 
 function loadFile(url, callback): void {
   PizZipUtils.getBinaryContent(url, callback);
@@ -393,7 +393,7 @@ export class MissionSingleComponent implements OnInit {
       fileType: 'docx',
       getImage: (tagValue, tagName) => {
         if (!tagValue.startsWith('https://picsum.photos/200/300')) {
-          tagValue = `${environment.API}${tagValue}`;
+          tagValue = `${AbstractService.getBaseAPIEndpoint()}${tagValue}`;
         }
         return axios
           .get(tagValue, { responseType: 'arraybuffer' })

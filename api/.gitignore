@@ -8,3 +8,5 @@ config/jwt/*.pem
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+public/media/

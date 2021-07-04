@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import axios from 'axios';
+import { AbstractService } from 'src/app/services/abstract';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +14,15 @@ export class UploadsService {
   }
 
   uploadHosts(data: any): any {
-    return axios.post(`${environment.API}/upload/host`, data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+    return axios.post(
+      `${AbstractService.getBaseAPIEndpoint()}/upload/host`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    );
   }
 }

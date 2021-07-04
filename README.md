@@ -25,18 +25,20 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 # preview API (Symfony + Api Platform) :
 ![api](img/api.png)
 
-# Ports mapping
-| Container | Internal port | External port |
-| ------ | ----------- | ---- |
-| Vulcain | 443 | 8443 |
-| Api | 80 | 8000 |
-| Bitwarden | 80 | 8888 |
-| Db | 5432 | 5432 |
-| Mercure | 443, 80, 2019 | 1337 |
-| dev-tls | 80 | 80 |
-| php | 9000 | / |
-| CodiMD | 3000 | 3000 |
-| db-codiMD | 5432 | / |
+# Services
+In Smersh we are using the environment variable called `DOMAIN` declared in the `.env` at the root folder of the project.  
+You can override this variable as your own. Be sure to register the domain in your `/etc/hosts` that point to your local host.  
+As we use [træfik](https://github.com/traefik/traefik) as reverse-proxy, you can refer to [their documentation](https://docs.traefik.io) to learn how to customize this instance.
+
+| Container | Default DNS          |
+| --------- | -------------------- |
+| Api       | `api.{DOMAIN}`       |
+| Bitwarden | `bitwarden.{DOMAIN}` |
+| Client    | `{DOMAIN}`           |
+| Db        | NOT EXPOSED          |
+| php       | NOT EXPOSED          |
+| CodiMD    | `codimd.{DOMAIN}`    |
+| db-codiMD | NOT EXPOSED          |
 
 # Preview Report
 

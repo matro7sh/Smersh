@@ -96,25 +96,25 @@ class Mission
      * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
-    private $nmap;
+    private $nmap = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
-    private $nessus;
+    private $nessus = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
-    private $nmapFiler;
+    private $nmapFiler = false;
 
     /**
      * @ORM\Column(type="boolean", options={"default":0}, nullable=true)
      * @Groups({"Mission", "MissionSingleOutput"})
      */
-    private $nessusFiler;
+    private $nessusFiler = false;
 
     /**
      * @ORM\ManyToOne(targetEntity=MissionType::class, inversedBy="missions")

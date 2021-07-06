@@ -66,10 +66,10 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(name="enabled", type="boolean", options={"default":true}, nullable=true)
+     * @ORM\Column(name="enabled", type="boolean", options={"default":1})
      * @Groups({"User", "HostDashboard", "HostDashboard"})
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * @var string The hashed password
@@ -210,18 +210,12 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnabled()
+    public function getEnabled(): ?bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param mixed $enabled
-     */
-    public function setEnabled($enabled): void
+    public function setEnabled(?bool $enabled): void
     {
         $this->enabled = $enabled;
     }

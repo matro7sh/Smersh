@@ -82,6 +82,7 @@ class MissionModelAPI extends AbstractModelAPI {
   endDate: string;
   missionType: string;
   credentials: string;
+  pathToCodi: string;
   clients: string[];
   nmap: boolean;
   nessus: boolean;
@@ -97,5 +98,6 @@ class MissionModelAPI extends AbstractModelAPI {
     this.clients = props?.clients;
     this.nmap = props.nmap;
     this.nessus = props.nessus;
+    this.pathToCodi = props.pathToCodi;
   }
 }

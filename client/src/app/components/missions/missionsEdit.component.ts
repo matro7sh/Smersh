@@ -42,6 +42,10 @@ export class MissionsEditComponent extends GenericEditComponent {
         name: 'credentials',
         label: 'Credentials',
       }),
+      new TextInput({
+        name: 'pathToCodi',
+        label: 'Path to CodiMD',
+      }),
     ];
   }
 

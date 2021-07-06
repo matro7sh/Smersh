@@ -43,6 +43,10 @@ export class MissionsCreateComponent extends GenericCreateComponent {
         name: 'credentials',
         label: 'Credentials',
       }),
+      new TextInput({
+        name: 'pathToCodi',
+        label: 'Path to CodiMD',
+      }),
     ];
   }
 

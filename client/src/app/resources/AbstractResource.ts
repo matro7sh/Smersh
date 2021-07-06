@@ -1,12 +1,7 @@
 import { SideBarComponent } from 'src/app/components/side-bar/side-bar.component';
 import { AuthGuard } from 'src/app/guard/auth.guard';
 import { Route, Routes } from '@angular/router';
-import {
-  CREATE_ROUTE,
-  EDIT_ROUTE,
-  LIST_ROUTE,
-  SHOW_ROUTE,
-} from 'src/app/router/router';
+import { CREATE_ROUTE, EDIT_ROUTE, LIST_ROUTE, SHOW_ROUTE, } from 'src/app/router/router';
 
 export abstract class AbstractResource {
   protected basePath = '';

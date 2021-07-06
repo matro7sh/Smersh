@@ -5,8 +5,8 @@ import { AbstractTypeSerializerApplication } from 'src/app/model/AbstractType';
 
 @Injectable()
 export class TypesService extends AbstractService {
-  protected endpoint = 'mission_types';
   serializer = new AbstractTypeSerializerApplication();
+  protected endpoint = 'mission_types';
 
   constructor(protected http: HttpClient) {
     super(http);

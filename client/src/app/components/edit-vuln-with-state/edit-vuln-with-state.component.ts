@@ -5,7 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { MissionRouter } from 'src/app/router/MissionRouter';
 import { environment } from 'src/environments/environment';
-import { Locale } from 'src/app/storage/Locale';
+import { getTranslation } from 'src/app/helpers/translation';
+import { VulnTranslationFromAPIInterface } from 'src/app/model/VulnTranslation';
+import { HostVulnModelApplication } from 'src/app/model/HostVuln';
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -38,22 +40,23 @@ export class EditVulnWithStateComponent implements OnInit {
   }
 
   loadVuln(): void {
-    this.hostvulnService.getDataById(this.id).subscribe((hostVuln) => {
-      const translations = hostVuln.vuln.translations;
-      this.host = hostVuln.host;
-      this.currentState = hostVuln.currentState;
-      this.pictureName = hostVuln.image?.contentUrl ?? '';
-      this.vulnName = (
-        translations[new Locale().get()] ??
-        translations.en ??
-        translations[Object.keys(translations)[0]]
-      ).name;
-      this.missionId = hostVuln.host.mission?.split('/').pop() ?? '';
-    });
+    this.hostvulnService
+      .getDataById(this.id)
+      .then((hostVuln: HostVulnModelApplication) => {
+        this.host = hostVuln.host;
+        this.currentState = hostVuln.currentState;
+        this.pictureName = hostVuln.image;
+        this.vulnName = (
+          getTranslation(
+            hostVuln.vuln?.translations
+          ) as VulnTranslationFromAPIInterface
+        )?.name;
+        this.missionId = hostVuln.host?.mission?.split('/').pop() ?? '';
+      });
   }
 
   onSubmit(form: NgForm): void {
-    this.hostvulnService.update(this.id, form.value).subscribe(
+    this.hostvulnService.update(this.id, form.value).then(
       () => {
         this.openSnackBar('Host updated');
         this.router.navigateByUrl(MissionRouter.redirectToList());

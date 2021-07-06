@@ -1,9 +1,10 @@
 <div class="mat-form-field-flex flex">
-  <mat-form-field class="pr-2" *ngFor="let filter of filters">
-    <input matInput (keyup)="applyFilter(filter, $event.target)" placeholder="Filter by {{ filter }}">
+  <mat-form-field *ngFor="let filter of filters" class="pr-2">
+    <input (keyup)="applyFilter(filter, $event.target)" matInput placeholder="Filter by {{ filter }}">
   </mat-form-field>
-  <div class="example-button-row ml-auto flex no-decoration add-resource" *ngIf="isEnabledCreation()">
-    <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}" routerLinkActive="active">{{ 'button.ADD' | translate }} {{ singularResource }}
+  <div *ngIf="isEnabledCreation()" class="example-button-row ml-auto flex no-decoration add-resource">
+    <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}"
+       routerLinkActive="active">{{ 'button.ADD' | translate }} {{ singularResource }}
       <span class="my-auto material-icons">
       add
     </span>
@@ -15,17 +16,19 @@
   <mat-table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let field of fields" matColumnDef="{{ field }}">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ field }} </mat-header-cell>
-      <ng-template [ngIf]="field.match(actionMatcher)" [ngIfElse]="elseTemplate">
+      <ng-template [ngIfElse]="elseTemplate" [ngIf]="field.match(actionMatcher)">
         <mat-cell *matCellDef="let row">
-          <button data-cy="action-button-{{ field }}" mat-raised-button color="{{ row[field] }}" (click)="applyActionOnResource(field, row.id)">{{ field }}</button>
+          <button (click)="applyActionOnResource(field, row.id)" color="{{ row[field] }}" data-cy="action-button-{{ field }}"
+                  mat-raised-button>{{ field }}</button>
         </mat-cell>
       </ng-template>
       <ng-template #elseTemplate>
-        <mat-cell *matCellDef="let row">{{ row[field] }}</mat-cell>
+        <mat-cell *matCellDef="let row">{{ row[ field ] }}</mat-cell>
       </ng-template>
     </ng-container>
     <mat-header-row *matHeaderRowDef="fields"></mat-header-row>
     <mat-row *matRowDef="let row; columns: fields;"></mat-row>
   </mat-table>
-  <mat-paginator (page)="onUpdatePaginator($event)" [length]="paginator.count" [pageSize]="paginator.itemsPerPage" [pageSizeOptions]="paginator.options"></mat-paginator>
+  <mat-paginator (page)="onUpdatePaginator($event)" [length]="paginator.count" [pageSizeOptions]="paginator.options"
+                 [pageSize]="paginator.itemsPerPage"></mat-paginator>
 </div>

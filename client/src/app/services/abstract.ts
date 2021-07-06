@@ -4,22 +4,19 @@ import { environment } from 'src/environments/environment';
 import { Token } from 'src/app/storage/Token';
 import {
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
 } from 'src/app/model/abstract';
 
 export class AbstractService {
+  public serializer = new AbstractSerializerApplication();
+  public normalizer = new AbstractNormalizerApplication();
   protected endpoint = '';
-
   protected headers: HttpHeaders;
   protected http: HttpClient;
-  public serializer = new AbstractSerializerApplication();
 
   public constructor(http: HttpClient) {
     this.http = http;
-    this.headers = new HttpHeaders({
-      Authorization: `Bearer ${new Token().get()}`,
-      'Content-Type': 'application/json; charset=utf-8',
-    });
   }
 
   getUrl(): string {
@@ -28,7 +25,10 @@ export class AbstractService {
 
   getOptions(): { headers: HttpHeaders } {
     return {
-      headers: this.headers,
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${new Token().get()}`,
+        'Content-Type': 'application/json; charset=utf-8',
+      }),
     };
   }
 
@@ -44,25 +44,38 @@ export class AbstractService {
       }));
   }
 
-  getDataById(id: string): Observable<any> {
-    return this.http.get(`${this.getUrl()}/${id}`, this.getOptions());
+  getDataById(id: string): Promise<AbstractModelApplication> {
+    return this.http
+      .get(`${this.getUrl()}/${id}`, this.getOptions())
+      .toPromise()
+      .then((result: any) => this.serializer.serialize(result));
   }
 
-  insert(data: unknown): Observable<any> {
-    return this.http.post(`${this.getUrl()}`, data, this.getOptions());
+  insert(data: any): Promise<AbstractModelApplication> {
+    return this.http
+      .post(
+        `${this.getUrl()}`,
+        this.normalizer.normalize(data),
+        this.getOptions()
+      )
+      .toPromise()
+      .then((result: any) => this.serializer.serialize(result));
   }
 
   delete(id: string): Observable<any> {
     return this.http.delete(`${this.getUrl()}/${id}`, this.getOptions());
   }
 
-  update(id: string, data: unknown): Observable<any> {
-    return this.http.patch(`${this.getUrl()}/${id}`, data, {
-      ...this.getOptions(),
-      headers: this.getOptions().headers.set(
-        'Content-Type',
-        'application/merge-patch+json; charset=utf-8'
-      ),
-    });
+  update(id: string, data: any): Promise<AbstractModelApplication> {
+    return this.http
+      .patch(`${this.getUrl()}/${id}`, this.normalizer.normalize(data), {
+        ...this.getOptions(),
+        headers: this.getOptions().headers.set(
+          'Content-Type',
+          'application/merge-patch+json; charset=utf-8'
+        ),
+      })
+      .toPromise()
+      .then((result: any) => this.serializer.serialize(result));
   }
 }

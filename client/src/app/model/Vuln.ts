@@ -1,18 +1,16 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import {
-  VulnTranslationFromAPIInterface,
-  VulnTranslationModelApplication,
-} from 'src/app/model/VulnTranslation';
-import { Locale } from 'src/app/storage/Locale';
+import { VulnTranslationFromAPIInterface, VulnTranslationModelApplication, } from 'src/app/model/VulnTranslation';
+import { getTranslation } from 'src/app/helpers/translation';
 
 const ALLOWED_LANGUAGES = ['fr', 'en', 'ar', 'es', 'ru'];
 
-interface VulnFromAPIInterface extends ObjectFromAPIInterface {
+export interface VulnFromAPIInterface extends ObjectFromAPIInterface {
   vulnType: string;
   impact: string;
   translations: {
@@ -28,16 +26,20 @@ export class VulnSerializerApplication extends AbstractSerializerApplication {
   protected model = VulnModelApplication;
 }
 
+export class VulnNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = VulnModelAPI;
+}
+
 export class VulnModelApplication extends AbstractModelApplication {
-  type: string;
+  description: string;
+  hostVulns: string[];
   impact: string;
+  name: string;
   translations: {
     [key: string]: VulnTranslationModelApplication;
   };
-  hostVulns: string[];
-  description: string;
-  name: string;
   remediation: string;
+  type: string;
 
   constructor(props: VulnFromAPIInterface) {
     super(props);
@@ -50,38 +52,29 @@ export class VulnModelApplication extends AbstractModelApplication {
 
       return acc;
     }, {});
-    const translation =
-      this.translations[new Locale().get()] ??
-      this.translations.en ??
-      this.translations[Object.keys(this.translations)[0]];
-    this.type = props.vulnType;
-    this.impact = props.impact;
+    const translation = getTranslation(
+      this.translations
+    ) as VulnTranslationFromAPIInterface;
+    this.description = translation?.description;
     this.hostVulns = props.hostVulns;
-    this.description = translation.description;
-    this.name = translation.name;
-    this.remediation = translation.remediation;
+    this.impact = props.impact;
+    this.name = translation?.name;
+    this.remediation = translation?.remediation;
+    this.type = props.vulnType;
   }
 }
 
 class VulnModelAPI extends AbstractModelAPI {
-  vulnType: string;
   impact: string;
   translations: {
     [key: string]: VulnTranslationModelApplication;
   };
-  hostVulns: string[];
-  description: string;
-  name: string;
-  remediation: string;
+  vulnType: string;
 
   constructor(props: VulnModelApplication) {
     super(props);
-    this.translations = props.translations;
     this.impact = props.impact;
+    this.translations = props.translations;
     this.vulnType = props.type;
-    this.hostVulns = props.hostVulns;
-    this.description = props.description;
-    this.name = props.name;
-    this.remediation = props.remediation;
   }
 }

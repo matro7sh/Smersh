@@ -1,0 +1,35 @@
+<h1>{{ formType }} {{ singularResource }}</h1>
+<form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)">
+  <ng-container *ngFor="let input of inputs">
+    <ng-container [ngSwitch]="true">
+      <div *ngSwitchCase="input.inputType === ''">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>{{ input.label }}</mat-label>
+          <input [ngModel]="getInputValue(input)" autocomplete="off" matInput name="{{ input.name }}"
+                 placeholder="{{ input.placeholder }}" type="{{ input.type }}"/>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="input.inputType === 'date'">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>{{ input.label }}</mat-label>
+          <mat-date-range-input [formGroup]="period" [rangePicker]="picker">
+            <input name="start" formControlName="start" matStartDate placeholder="Start date">
+            <input name="stop" formControlName="stop" matEndDate placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error *ngIf="period.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+          <mat-error *ngIf="period.controls.stop.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngSwitchCase="input.inputType === 'queryable'">
+        <app-queryable-input (updateValue)="update($event)" [input]="input"
+                             [item]="getInputValue(input)"></app-queryable-input>
+      </div>
+    </ng-container>
+  </ng-container>
+  <div class="example-button-row">
+    <button color="accent" mat-button mat-raised-button type="submit">Submit</button>
+  </div>
+</form>

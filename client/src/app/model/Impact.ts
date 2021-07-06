@@ -1,6 +1,7 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
@@ -16,6 +17,10 @@ interface ImpactFromAPIInterface extends ObjectFromAPIInterface {
 
 export class ImpactSerializerApplication extends AbstractSerializerApplication {
   protected model = ImpactModelApplication;
+}
+
+export class ImpactNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = ImpactModelAPI;
 }
 
 export class ImpactModelApplication extends AbstractModelApplication {

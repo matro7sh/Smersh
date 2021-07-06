@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Token } from 'src/app/storage/Token';
-import { Locale } from 'src/app/storage/Locale';
 import { ConnectionService } from 'src/app/services/connection.service';
+import { DashboardRouter } from 'src/app/router/DashboardRouter';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
   public username: string;
@@ -18,17 +18,23 @@ export class LoginComponent implements OnInit {
   constructor(
     private connectionService: ConnectionService,
     private router: Router
-  ) {}
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    return;
+  }
 
-  submit() {
+  submit(): void {
     this.connectionService
-      .login({ username: this.username, password: this.password })
-      .subscribe(({ token }: { token?: string }) => {
+      .login({
+        username: this.username,
+        password: this.password
+      })
+      .then(({token}: any) => {
         if (token) {
           new Token().set(token);
-          this.router.navigateByUrl('/missions');
+          this.router.navigateByUrl(DashboardRouter.redirectToList());
         }
       });
   }

@@ -1,216 +1,223 @@
 .smersh-container {
-    height: 100%;
-    width: 100%;
-    .mat-lowimpact {
-        background-color: #1F1963;
-        color: white;
-     }
-    
-    .mat-mediumimpact {
-        background-color: #FFBA29;
-        color: black;
-    }
-    
-    .mat-highimpact {
-        background-color: #A10000;
-        color: white;
-    }
-    
-    .mat-criticalimpact {
-        background-color: #211D1D;
-        color: white;
-    }
+  height: 100%;
+  width: 100%;
+
+  .mat-lowimpact {
+    background-color: #1F1963;
+    color: white;
+  }
+
+  .mat-mediumimpact {
+    background-color: #FFBA29;
+    color: black;
+  }
+
+  .mat-highimpact {
+    background-color: #A10000;
+    color: white;
+  }
+
+  .mat-criticalimpact {
+    background-color: #211D1D;
+    color: white;
+  }
 }
 
 
 .vertical-center {
-    align-self: center;
+  align-self: center;
 }
 
 .smersh-header-image {
-    transform: scale(1.5);
-    background-image: url('http://localhost:4200/assets/logo.png');
-    background-position: center;
-    background-size: 78%;
+  transform: scale(1.5);
+  background-image: url('http://localhost:4200/assets/logo.png');
+  background-position: center;
+  background-size: 78%;
 }
 
 .horizontal-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .nopadding {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 
 .row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .responsive_row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .center {
-    align-items: center;
+  align-items: center;
 }
 
 #action_check {
-    height: 70%;
-    padding: 0 1em 1em 1em;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    border-radius: 0.3em;
-    width: 20%;
-    min-width: 16em;
-    max-width: 20em;
+  height: 70%;
+  padding: 0 1em 1em 1em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 0.3em;
+  width: 20%;
+  min-width: 16em;
+  max-width: 20em;
 }
 
 #action_check:hover {
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 #dashboard {
-    padding: 0 1em 1em 1em;
-    margin: 0 0.5em 0 0.5em;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
+  padding: 0 1em 1em 1em;
+  margin: 0 0.5em 0 0.5em;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
 }
+
 #dashboard:hover {
-    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 #host_list {
-    max-height: 35em;
-    overflow: auto;
+  max-height: 35em;
+  overflow: auto;
 }
 
-#single_host{
-    width: 100%;
-    justify-content: space-between;
-    align-content: center;
-    min-height: max-content;
-    overflow: hidden;
+#single_host {
+  width: 100%;
+  justify-content: space-between;
+  align-content: center;
+  min-height: max-content;
+  overflow: hidden;
 }
 
 #host_vulnList {
-    width: 90%;
+  width: 90%;
 }
+
 #add_vulnToHost {
-    width: 7em;
-    height: fit-content;
-    align-self: center;
-    padding: 0 1em 0s 1em;
+  width: 7em;
+  height: fit-content;
+  align-self: center;
+  padding: 0 1em 0s 1em;
 }
+
 .clickableIcon {
-    cursor: pointer;
-    align-self: center;
-    width: 3%;
+  cursor: pointer;
+  align-self: center;
+  width: 3%;
 }
 
 #generate {
-    margin: 1em 0 1em 1em;
+  margin: 1em 0 1em 1em;
 }
 
 #codi_content {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
+
 #update_codi_button {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 #host_add {
-    display: flex;
+  display: flex;
 }
-#host_add_manual{
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+#host_add_manual {
+  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 #host_add_file {
-    width: 45%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1em 0 1em;
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1em 0 1em;
 }
 
 #pathToCodi {
-    margin-right: 1em;
+  margin-right: 1em;
 }
 
 .displayBlock {
-    display: block
+  display: block
 }
 
 
 .smersh-techno {
-    background-color: #5b5252 !important;
+  background-color: #5b5252 !important;
 }
 
 .title {
-    font-size: 1.1em;
-    font-weight: bold;
-    flex-wrap: wrap;
-    margin-right: 0em;
+  font-size: 1.1em;
+  font-weight: bold;
+  flex-wrap: wrap;
+  margin-right: 0em;
 }
 
 .fileInput {
-    opacity: 0;
-    width: 0.1px;
-    height: 0.1px;
-    position: absolute;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    padding: 50px;
+  width: 100vw;
+  height: 100vh;
+  padding: 50px;
 }
 
 button {
-    border: none;
-    font-weight: bold;
-    padding: 0 5px 0 5px;
-    cursor: pointer;
-    transition: all 0.5s;
-    
+  border: none;
+  font-weight: bold;
+  padding: 0 5px 0 5px;
+  cursor: pointer;
+  transition: all 0.5s;
+
 }
 
- button:hover {
-    transform: skew(-10deg);
-    padding: 0 5px 0 5px;
-    transition: all 0.2s;
-    box-shadow: 3px 3px 0 0 black;
+button:hover {
+  transform: skew(-10deg);
+  padding: 0 5px 0 5px;
+  transition: all 0.2s;
+  box-shadow: 3px 3px 0 0 black;
 }
 
 .buttons {
-    justify-content: right;
-    margin-right: 0.5em;
+  justify-content: right;
+  margin-right: 0.5em;
 }
 
 #file {
-    display: none
+  display: none
 }
 
 .uploadForm {
-    width: 66%;
-    justify-content: space-between;
+  width: 66%;
+  justify-content: space-between;
 }

@@ -1,49 +1,49 @@
 .app-container {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 .example-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .example-is-mobile, .example-toolbar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 999;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 }
 
 h1.example-app-name {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .example-sidenav-container {
-    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
-       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
-    flex: 1;
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
 }
 
 .example-is-mobile .example-sidenav-container {
-    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
-       `<body>` to be our scrolling element for mobile layouts. */
-    flex: 1 0 auto;
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
 }
 
 .logo-navbar {
-    width: 3%;
-    padding-right: 10px;
+  width: 3%;
+  padding-right: 10px;
 }
 
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .smersh-button-row button {
-    margin-right: 8px;
+  margin-right: 8px;
 }
 
 .sizeofNavbar {
-    width: 15rem;
+  width: 15rem;
 }

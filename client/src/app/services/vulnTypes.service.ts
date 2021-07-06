@@ -5,8 +5,8 @@ import { AbstractTypeSerializerApplication } from 'src/app/model/AbstractType';
 
 @Injectable()
 export class VulnTypesService extends AbstractService {
-  protected endpoint = 'vuln_types';
   serializer = new AbstractTypeSerializerApplication();
+  protected endpoint = 'vuln_types';
 
   constructor(protected http: HttpClient) {
     super(http);

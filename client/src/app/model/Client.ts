@@ -1,6 +1,7 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
@@ -15,6 +16,10 @@ interface ClientFromAPIInterface extends ObjectFromAPIInterface {
 
 export class ClientSerializerApplication extends AbstractSerializerApplication {
   protected model = ClientModelApplication;
+}
+
+export class ClientNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = ClientModelAPI;
 }
 
 export class ClientModelApplication extends AbstractModelApplication {
@@ -39,16 +44,16 @@ export class ClientModelApplication extends AbstractModelApplication {
 class ClientModelAPI extends AbstractModelAPI {
   name: string;
   phone: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   mail: string;
 
   constructor(props: ClientModelApplication) {
     super(props);
     this.name = props.name;
     this.phone = props.phone;
-    this.firstname = props.firstname;
-    this.lastname = props.lastname;
+    this.firstName = props.firstname;
+    this.lastName = props.lastname;
     this.mail = props.mail;
   }
 }

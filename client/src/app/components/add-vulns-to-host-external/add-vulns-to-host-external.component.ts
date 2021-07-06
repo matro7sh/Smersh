@@ -13,9 +13,7 @@ import { VulnModelApplication } from 'src/app/model/Vuln';
 import { HostsService } from 'src/app/services/hosts.service';
 import { HostModelApplication } from 'src/app/model/Host';
 import { VulnRouter } from 'src/app/router/VulnRouter';
-import { Observable } from 'rxjs';
 import { MediaObjectsService } from 'src/app/services/mediaObjects.service';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-vulns-to-host-external',
@@ -31,8 +29,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   public host: HostModelApplication;
   public durationInSeconds = 4;
   public missionId: string;
-  public fichierAEnvoyer: File = null;
-  public onsaitpascomment = null;
+  public image: FormData = null;
 
   constructor(
     private vulnsService: VulnsService,
@@ -43,8 +40,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     private impactService: ImpactsService,
     private _snackBar: MatSnackBar,
     private missionServices: MissionsService,
-    private router: Router,
-    private translate: TranslateService
+    private router: Router
   ) {}
 
   openSnackBar(message: string): void {
@@ -57,7 +53,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
     this.missionId = this.activatedRoute.snapshot.params.id;
     this.hostsService
       .getDataById(this.activatedRoute.snapshot.params.targetHost)
-      .subscribe((host) => (this.host = host));
+      .then((host: HostModelApplication) => (this.host = host));
     this.loadVulns();
     this.loadImpact();
   }
@@ -104,9 +100,9 @@ export class AddVulnsToHostExternalComponent implements OnInit {
       currentState: this.currentStateUser,
     };
     const callback = (body) =>
-      this.hostVulnsService.insert(body).subscribe(
+      this.hostVulnsService.insert(body).then(
         () => {
-          this.openSnackBar('vulnerabilitie added');
+          this.openSnackBar('vulnerability added');
           this.router.navigateByUrl(
             MissionRouter.redirectToShow(this.missionId)
           );
@@ -116,13 +112,11 @@ export class AddVulnsToHostExternalComponent implements OnInit {
         }
       );
 
-    if (this.onsaitpascomment) {
-      this.mediaObjectsService
-        .insert(this.onsaitpascomment)
-        .subscribe(({ ['@id']: id }) => {
-          data.image = id;
-          callback(data);
-        });
+    if (this.image) {
+      this.mediaObjectsService.insert(this.image).then(({ ['@id']: id }) => {
+        data.image = id;
+        callback(data);
+      });
     } else {
       callback(data);
     }
@@ -135,6 +129,7 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   Impacts(value: string): void {
     this.selectedImpact = value;
   }
+
   createVuln(): void {
     this.router.navigateByUrl(VulnRouter.redirectToCreate());
   }
@@ -142,6 +137,6 @@ export class AddVulnsToHostExternalComponent implements OnInit {
   storeImage(inputElement: HTMLInputElement): void {
     const formdata = new FormData();
     formdata.append('file', inputElement.files[0]);
-    this.onsaitpascomment = formdata;
+    this.image = formdata;
   }
 }

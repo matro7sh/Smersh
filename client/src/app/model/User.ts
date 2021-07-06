@@ -1,9 +1,14 @@
 import {
   AbstractModelAPI,
   AbstractModelApplication,
+  AbstractNormalizerApplication,
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
+import {
+  MissionModelApplication,
+  MissionSerializerApplication,
+} from 'src/app/model/Mission';
 
 interface UserFromAPIInterface extends ObjectFromAPIInterface {
   phone: string;
@@ -12,10 +17,15 @@ interface UserFromAPIInterface extends ObjectFromAPIInterface {
   city: string;
   username: string;
   enabled: boolean;
+  missions: any;
 }
 
 export class UserSerializerApplication extends AbstractSerializerApplication {
   protected model = UserModelApplication;
+}
+
+export class UserNormalizerApplication extends AbstractNormalizerApplication {
+  protected model = UserModelAPI;
 }
 
 export class UserModelApplication extends AbstractModelApplication {
@@ -23,8 +33,11 @@ export class UserModelApplication extends AbstractModelApplication {
   trigram: string;
   mail: string;
   city: string;
+  password: string;
   username: string;
   enabled: boolean;
+  roles: string;
+  missions: MissionModelApplication[];
 
   constructor(props: UserFromAPIInterface) {
     super(props);
@@ -34,6 +47,9 @@ export class UserModelApplication extends AbstractModelApplication {
     this.trigram = props.trigram;
     this.city = props.city;
     this.mail = props.mail;
+    this.missions = new MissionSerializerApplication().serializeMany(
+      props.missions ?? []
+    ) as MissionModelApplication[];
   }
 }
 
@@ -43,6 +59,8 @@ class UserModelAPI extends AbstractModelAPI {
   phone: string;
   trigram: string;
   mail: string;
+  password: string;
+  roles: string[];
   city: string;
 
   constructor(props: UserModelApplication) {
@@ -53,5 +71,7 @@ class UserModelAPI extends AbstractModelAPI {
     this.trigram = props.trigram;
     this.city = props.city;
     this.mail = props.mail;
+    this.password = props.password;
+    this.roles = [props.roles];
   }
 }

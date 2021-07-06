@@ -13,6 +13,7 @@ import { ThemeService } from 'src/app/services/theme.service';
 import { isGranted } from 'src/app/security/isGranted';
 import { Language, LocaleService } from 'src/app/services/locale.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { DecodedToken } from 'src/app/storage/Token';
 
 @Component({
   selector: 'app-side-bar',
@@ -24,10 +25,12 @@ export class SideBarComponent implements OnInit {
   mobileQuery: MediaQueryList;
   title = 'Smersh';
   fillerNav: Record<string, string> = {};
-  public username: '';
-  public version = `${environment.version}`;
-  public languages = Object.keys(Language).map(lang => Language[lang])
-  public currentLang:Language = new Locale().get() as Language;
+  public username = '';
+  public version = environment.version;
+  public languages = Object.keys(Language).map(
+    (lang) => Language[lang.toString()]
+  );
+  public currentLang: Language = new Locale().get() as Language;
   private _mobileQueryListener: () => void;
 
   constructor(
@@ -59,13 +62,12 @@ export class SideBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const token = localStorage.getItem('token');
-    const decode = atob(token.split('.')[1]);
-    this.username = JSON.parse(decode).username;
+    this.username = new DecodedToken().getDecoded().username;
 
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => this.currentLang = event.lang as Language);
+    this.translate.onLangChange.subscribe(
+      (event: LangChangeEvent) => (this.currentLang = event.lang as Language)
+    );
   }
-
 
   logout(): void {
     this.connection.logout();

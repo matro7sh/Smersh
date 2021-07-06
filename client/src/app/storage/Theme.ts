@@ -1,6 +1,5 @@
-import { AbstractStorage } from "./AbstractStorage";
+import { AbstractStorage } from './AbstractStorage';
 
 export class ThemeStorage extends AbstractStorage {
-    protected key = 'theme';
+  protected key = 'theme';
 }
-  

@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Inject } from '@angular/core';
 import { HostsService } from 'src/app/services/hosts.service';
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { MissionRouter } from "src/app/router/MissionRouter";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,8 +19,8 @@ export class PopupComponent implements OnInit {
     private hostsService: HostsService,
     private _snackBar: MatSnackBar,
     private route: Router,
-  )
-  {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.missionId = this.route.url.split('/')[2];

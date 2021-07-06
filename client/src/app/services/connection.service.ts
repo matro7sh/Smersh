@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { AbstractService } from 'src/app/services/abstract';
 import { Token } from 'src/app/storage/Token';
 import { environment } from 'src/environments/environment';
+import {
+  AuthenticationModelApplication,
+  AuthenticationNormalizerApplication,
+  AuthenticationSerializerApplication,
+} from 'src/app/model/Authentication';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ConnectionService extends AbstractService {
+  normalizer = new AuthenticationNormalizerApplication();
+  serializer = new AuthenticationSerializerApplication();
   protected endpoint = 'authentication_token';
 
   constructor(protected http: HttpClient, private router: Router) {
@@ -28,8 +34,12 @@ export class ConnectionService extends AbstractService {
     return `${environment.HOST}/${this.endpoint}`;
   }
 
-  login(data: unknown): Observable<unknown> {
-    return this.insert(data);
+  insert(data: any): Promise<AuthenticationModelApplication> {
+    return super.insert(data);
+  }
+
+  login(data: unknown): Promise<{ token: string }> {
+    return this.insert(data).then(({token}) => ({token}));
   }
 
   logout(): void {

@@ -1,0 +1,37 @@
+<mat-form-field appearance="fill" class="w-100">
+  <mat-label>Select {{ name }}</mat-label>
+  <ng-container *ngIf="multiple; else single">
+    <mat-chip-list #chipList>
+      <mat-chip
+              (removed)="remove(selectedRecord)"
+              *ngFor="let selectedRecord of selectedRecords"
+              removable
+              selectable>
+        {{ selectedRecord.label }}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+              name="{{ name }}"
+              [formControl]="queryableInputControl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separators"
+              placeholder="Select multiple {{ name }}"
+      >
+    </mat-chip-list>
+  </ng-container>
+  <ng-template #single>
+    <input  name="{{ name }}"
+            [formControl]="queryableInputControl"
+           [matAutocomplete]="auto"
+           matInput
+           placeholder="Select one {{ name }}"
+           type="text">
+  </ng-template>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)" [displayWith]="parse"
+                    [formControl]="queryableInputControl">
+    <mat-option *ngFor="let option of records" [value]="option">
+      {{ option.label }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

@@ -69,7 +69,6 @@ class MissionFixtures extends Fixture
         $mission->setPathToCodi("http://localhost:3000/PathToCodi");
         $mission->setNessusFiler(0);
         $mission->setNmapFiler(0);
-        $mission->setMissionType($typeExterne);
 
         $mission2 = new Mission();
         $mission2->setNessus(0);
@@ -83,7 +82,6 @@ class MissionFixtures extends Fixture
         $mission2->setCredentials(null);
         $mission2->setNessusFiler(0);
         $mission2->setNmapFiler(0);
-        $mission2->setMissionType($typeInterne);
 
         $manager->persist($mission);
         $manager->persist($mission2);

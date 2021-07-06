@@ -69,10 +69,10 @@ class Host
     private $nmaps;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":0}, nullable=false)
+     * @ORM\Column(type="boolean", options={"default":0})
      * @Groups({"MissionSingleOutput", "HostDashboard"})
      */
-    private $checked;
+    private $checked = false;
 
 
     /**
@@ -157,26 +157,17 @@ class Host
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getChecked()
+    public function getChecked(): ?bool
     {
         return $this->checked;
     }
 
-    /**
-     * @param mixed $checked
-     */
-    public function setChecked($checked): void
+    public function setChecked(?bool $checked): void
     {
         $this->checked = $checked;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTechnology()
+    public function getTechnology(): ?string
     {
         return $this->technology;
     }
@@ -184,7 +175,7 @@ class Host
     /**
      * @param mixed $technology
      */
-    public function setTechnology($technology): void
+    public function setTechnology(?string $technology): void
     {
         $this->technology = $technology;
     }

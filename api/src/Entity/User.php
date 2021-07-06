@@ -16,17 +16,23 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
 
 /**
  * @ApiResource(
- *      attributes={"normalization_context"={"groups"={"User"}}},
+ *      attributes={
+ *          "normalization_context"={"groups"={"User"}},
+ *          "denormalization_context"={"groups"={"User:input"}}
+ *      },
  *      collectionOperations={
  *          "get"={"security"="is_granted('ROLE_USER_GET_LIST')"},
- *          "post"={"security"="is_granted('ROLE_USER_POST')"}
+ *          "post"={
+ *              "normalization_context"={"groups"={"User:input", "User:create"}},
+ *              "security"="is_granted('ROLE_USER_POST')"
+ *          }
  *      },
  *      itemOperations={
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
  *          "get"={
- *      "normalization_context"={"groups"={"HostDashboard"}},
- *     "security"="is_granted('ROLE_USER_GET_ITEM', object)"
- * },
+ *              "normalization_context"={"groups"={"HostDashboard"}},
+ *              "security"="is_granted('ROLE_USER_GET_ITEM', object)"
+ *          },
  *          "patch"={"security"="is_granted('ROLE_USER_PATCH', object)"},
  *          "put"={"security"="is_granted('ROLE_USER_PUT', object)"}
  *      },
@@ -49,26 +55,26 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
+     * @Groups({"User", "User:input", "MissionSingleOutput", "HostDashboard"})
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"User"})
+     * @Groups({"User", "User:input"})
      */
     private $roles = [];
 
     /**
-     * @ORM\Column(name="enabled", type="boolean", options={"default":true}, nullable=true)
+     * @ORM\Column(name="enabled", type="boolean", options={"default":1})
      * @Groups({"User", "HostDashboard", "HostDashboard"})
      */
-    protected $enabled;
-
+    protected $enabled = true;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Groups({"User:input"})
      */
     private $password;
 
@@ -80,25 +86,25 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
+     * @Groups({"User", "User:input", "MissionSingleOutput", "HostDashboard"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
+     * @Groups({"User", "User:input", "MissionSingleOutput", "HostDashboard"})
      */
     private $trigram;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
+     * @Groups({"User", "User:input", "MissionSingleOutput", "HostDashboard"})
      */
     private $mail;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"User", "MissionSingleOutput", "HostDashboard"})
+     * @Groups({"User", "User:input", "MissionSingleOutput", "HostDashboard"})
      */
     private $city;
 
@@ -204,18 +210,12 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEnabled()
+    public function getEnabled(): ?bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param mixed $enabled
-     */
-    public function setEnabled($enabled): void
+    public function setEnabled(?bool $enabled): void
     {
         $this->enabled = $enabled;
     }

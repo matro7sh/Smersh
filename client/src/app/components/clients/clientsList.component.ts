@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
-import {
-  GenericListComponent,
-  SHOW,
-} from 'src/app/components/generic/list/generic-list.component';
+import { GenericListComponent, SHOW } from 'src/app/components/generic';
 import { ClientRouter } from 'src/app/router/ClientRouter';
 
 @Component({

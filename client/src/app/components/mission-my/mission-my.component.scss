@@ -1,27 +1,27 @@
 .row {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
 }
 
 .responsive_row {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .clickable:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .progress-bar {
-    width: 10em;
-    margin-left: 1em;
+  width: 10em;
+  margin-left: 1em;
 }
-  
+
 .progress-text {
-    width: 2em;
-    padding: 1em;
+  width: 2em;
+  padding: 1em;
 }

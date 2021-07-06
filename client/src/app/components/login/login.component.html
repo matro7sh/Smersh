@@ -1,36 +1,37 @@
 <div class="container-login-form">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
 
-    <div class="login-form">
-        <img src="./assets/logo.png"
-             class="logo">
-        <h2>Smersh Authentication</h2>
-        <form (submit)="submit()"
-              class="form">
-            <mat-form-field appearance="outline">
-                <input matInput
-                       data-cy="login"
-                       [(ngModel)]="username"
-                       type="text"
-                       name="login"
-                       autofocus
-                       autocomplete="off"
-                       placeholder="Username">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <input matInput
-                       data-cy="password"
-                       [(ngModel)]="password"
-                       type="password"
-                       name="password"
-                       autocomplete="off"
-                       placeholder="Password">
-            </mat-form-field>
-            <button mat-raised-button
-                    data-cy="submit"
-                    color="primary">Connect</button>
-        </form>
-    </div>
+  <div class="login-form">
+    <img class="logo"
+         src="./assets/logo.png">
+    <h2>Smersh Authentication</h2>
+    <form (submit)="submit()"
+          class="form">
+      <mat-form-field appearance="outline">
+        <input [(ngModel)]="username"
+               autocomplete="off"
+               autofocus
+               data-cy="login"
+               matInput
+               name="login"
+               placeholder="Username"
+               type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input [(ngModel)]="password"
+               autocomplete="off"
+               data-cy="password"
+               matInput
+               name="password"
+               placeholder="Password"
+               type="password">
+      </mat-form-field>
+      <button color="primary"
+              data-cy="submit"
+              mat-raised-button>Connect
+      </button>
+    </form>
+  </div>
 </div>

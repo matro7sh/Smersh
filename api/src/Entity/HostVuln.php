@@ -43,7 +43,7 @@ class HostVuln
 
     /**
      * @ORM\ManyToOne(targetEntity=Host::class, inversedBy="hostVulns")
-     * @Groups({"HostVuln:output", "HostVuln:input"})
+     * @Groups({"HostVuln:output", "HostVuln:input", "Vulns"})
      */
     private $host;
 

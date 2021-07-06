@@ -83,15 +83,19 @@ class MissionModelAPI extends AbstractModelAPI {
   missionType: string;
   credentials: string;
   clients: string[];
+  nmap: boolean;
+  nessus: boolean;
 
   constructor(props: MissionModelApplication) {
     super(props);
     this.name = props.name;
-    this.startDate = props.period.start.toISOString();
-    this.endDate = props.period.stop.toISOString();
-    this.users = props.users;
-    this.missionType = props.type;
-    this.credentials = props.credentials;
-    this.clients = props.clients;
+    this.startDate = props.period?.start.toISOString();
+    this.endDate = props.period?.stop.toISOString();
+    this.users = props?.users;
+    this.missionType = props?.type;
+    this.credentials = props?.credentials;
+    this.clients = props?.clients;
+    this.nmap = props.nmap;
+    this.nessus = props.nessus;
   }
 }

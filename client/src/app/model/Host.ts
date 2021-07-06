@@ -42,11 +42,13 @@ class HostModelAPI extends AbstractModelAPI {
   name: string;
   technology: string;
   mission: string;
+  checked: boolean;
 
   constructor(props: HostModelApplication) {
     super(props);
     this.name = props.name;
     this.technology = props.technology;
     this.mission = props.mission;
+    this.checked = props.checked;
   }
 }

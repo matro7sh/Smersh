@@ -25,7 +25,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from 'src/app/components/popup/popup.component';
 import { MissionModelApplication } from 'src/app/model/Mission';
 import { HostModelApplication } from 'src/app/model/Host';
-import { getTranslation } from 'src/app/helpers/translation';
 
 function loadFile(url, callback): void {
   PizZipUtils.getBinaryContent(url, callback);

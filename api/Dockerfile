@@ -2,16 +2,26 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
-
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=7.4.16
 ARG OPENRESTY_VERSION=1.15.8.3
 ARG VARNISH_VERSION=6.4
 
-
-
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS api_platform_php
+
+# Retrieving arguments from .env file
+ARG HTTP_PROXY_URL
+ARG HTTPS_PROXY_URL
+
+# Setting proxy conf for compose
+ENV http_proxy=$HTTP_PROXY_URL
+ENV https_proxy=$HTTPS_PROXY_URL
+
+# Setting proxy conf for pear
+RUN  if [ -n "$HTTP_PROXY_URL" ] ; then pear config-set http_proxy $HTTP_PROXY_URL ; : ; fi
+
+RUN sed -i -e 's/https/http/' /etc/apk/repositories;
 
 # persistent / runtime deps
 RUN apk add --no-cache \
@@ -70,25 +80,25 @@ RUN set -eux; \
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
+
 # install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
 RUN set -eux; \
-	composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
+	composer global require "symfony/flex" --prefer-dist --no-progress  --classmap-authoritative; \
 	composer clear-cache
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
-
-WORKDIR /srv/api
 
 # build for production
 ARG APP_ENV=prod
 
+WORKDIR /srv/api
 # prevent the reinstallation of vendors at every changes in the source code
 COPY composer.json ./
 RUN set -eux; \
-	composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest; \
+	composer install --prefer-dist --no-dev --no-scripts --no-progress; \
 	composer clear-cache
 
 # copy only specifically what we need
-COPY .env ./
+COPY .env .
 COPY bin bin/
 COPY config config/
 COPY public public/
@@ -110,27 +120,21 @@ COPY docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN mkdir -p public/media
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
-ENTRYPOINT ["docker-entrypoint"]
-CMD ["php-fpm"]
-
+# Setting entrypoint giving proxy conf
+ENTRYPOINT ["/bin/sh", "-c", "/usr/local/bin/docker-entrypoint"]
+CMD ["php-fpm", $HTTP_PROXY_URL, $HTTPS_PROXY_URL]
 
 # "nginx" stage
 # depends on the "php" stage above
 # The OpenResty distribution of NGINX is only needed for Kubernetes compatiblity (dynamic upstream resolution)
 FROM openresty/openresty:${OPENRESTY_VERSION}-alpine AS api_platform_nginx
-
 RUN echo -e "env UPSTREAM;\n$(cat /usr/local/openresty/nginx/conf/nginx.conf)" > /usr/local/openresty/nginx/conf/nginx.conf
 COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
-
 WORKDIR /srv/api/public
-
 COPY --from=api_platform_php /srv/api/public ./
-
 
 # "varnish" stage
 # does not depend on any of the above stages, but placed here to keep everything in one Dockerfile
 FROM varnish:${VARNISH_VERSION} AS api_platform_varnish
-
 COPY docker/varnish/conf/default.vcl /etc/varnish/default.vcl
-
 CMD ["varnishd", "-F", "-f", "/etc/varnish/default.vcl", "-p", "http_resp_hdr_len=65536", "-p", "http_resp_size=98304"]

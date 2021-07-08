@@ -10,6 +10,9 @@ services:
   php:
     build:
       context: ./api
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: api_platform_php
       <<: *api-cache-from
     image: ${PHP_IMAGE:-quay.io/api-platform/php}
@@ -31,6 +34,9 @@ services:
   api:
     build:
       context: ./api
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: api_platform_nginx
       <<: *api-cache-from
     image: ${NGINX_IMAGE:-quay.io/api-platform/nginx}
@@ -131,6 +137,9 @@ services:
   client:
     build:
       context: ./client
+      args:
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
       target: client_angular
     image: node:latest
     environment:
@@ -144,7 +153,6 @@ services:
     depends_on:
       - api
       - dev-tls
-
   bitwarden:
     image: bitwardenrs/server:latest #swap tag to raspberry to run on a raspberry pi
     ports:

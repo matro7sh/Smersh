@@ -1,56 +1,63 @@
 .PHONY: cache composer-install composer-update create-network help install jwt up update upAll
 
 CONFIG_DIR=api/config
-DC=docker-compose
-DC_UP=$(DC) up -d
-DC_EXEC=$(DC) exec php
-BIN_CONSOLE=$(DC_EXEC) bin/console
+include .env
 
 help:
-	@grep -E '(^[0-9a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-25s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
+	@grep -E '(^[0-9a-zA-Z_-]+:.*?##.*$$)|(^####)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-25s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
-cache: ## Clear cache
-	$(BIN_CONSOLE) cache:clear
+cache: #### Clear cache
+	docker-compose exec php bin/console cache:clear
 
-composer-install: ## Install composer packages
-	$(DC_EXEC) composer install
+composer-install: #### Install composer packages
+	docker-compose exec -e http_proxy=$(HTTP_PROXY_URL) -e https_proxy=$(HTTPS_PROXY_URL) php composer install 
 
-composer-update: ## Update composer
-	$(DC_EXEC) composer update
+composer-update: #### Update composer
+	docker-compose exec -e http_proxy=$(HTTP_PROXY_URL) -e https_proxy=$(HTTPS_PROXY_URL) php composer update 
 
-copy-files-prod: ## Copy prod files to dev
+copy-files-prod: #### Copy prod files to dev
 	cp .env.prod .env
 	cp docker-compose.prod.yml docker-compose.yml
 
-create-network: ## Create docker network if not exists
+copy-env-file: #### Copy env file from .env to api/.env
+	cp .env api/.env
+
+create-network: #### Create docker network if not exists
 	docker network create smersh || true
 
 init-db:
-	$(BIN_CONSOLE) do:da:dr --force
-	$(BIN_CONSOLE) do:da:cr
-	$(BIN_CONSOLE) do:sc:up --force
+	docker-compose exec php bin/console do:da:dr --force
+	docker-compose exec php bin/console do:da:cr
+	docker-compose exec php bin/console do:sc:up --force
 
-install: create-network up jwt composer-install cache ## Install and setup project
+install: create-network up jwt composer-install cache #### Install and setup project
 
-initialize: install reset-db ## Initialize and setup the project
+initialize: install reset-db #### Initialize and setup the project
 
-jwt: ## Generate jwt
-	cd api && sh ./generateJWT.sh
+jwt: #### Generate jwt
+	sh api/generateJWT.sh $(JWT_PASSPHRASE) $(HTTP_PROXY_URL) $(HTTPS_PROXY_URL)
 
 load-data:
-	$(BIN_CONSOLE) do:fi:load --quiet
+	docker-compose exec php bin/console do:fi:load --quiet
 
 reset-db: init-db load-data
 
-up: ## Start containers
-	$(DC_UP)
+up: #### Start containers
+	docker-compose up -d
 
-update-db-schema: ## Update database schema
-	$(BIN_CONSOLE) do:sc:up --force
 
-update: ## Update containers composer packages then re-up containers
-	$(DC) pull
+up-rebuild: #### Rebuild and launch containers
+	docker-compose up --build --force-recreate --remove-orphans -d
+
+update-db-schema: #### Update database schema
+	docker-compose exec php bin/console do:sc:up --force
+
+update: #### Update containers composer packages then re-up containers
+	docker-compose pull
 	$(MAKE) composer-update
 	$(MAKE) up
 
-upAll: up install init-db load-data
+upAll: copy-env-file up install init-db load-data
+
+upAll-rebuild: copy-env-file up-rebuild install init-db load-data
+

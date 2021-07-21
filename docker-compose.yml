@@ -127,8 +127,6 @@ services:
       - 80
     labels:
       - traefik.http.routers.client.rule=Host(`${DOMAIN}`)
-    volumes:
-      - ./client:/app
     <<: *network
 
   bitwarden:

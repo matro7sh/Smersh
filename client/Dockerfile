@@ -1,4 +1,4 @@
-FROM node:12.16.1-alpine As builder
+FROM node:12.16.1-alpine AS runner
 
 WORKDIR /usr/src/app
 
@@ -22,10 +22,25 @@ export const environment = { \n\
   MAPS_KEY: '', \n\
   version: '1.0.0', \n\
   environment: 'prod', \n\
-" > src/environments/environments.prod.ts
-RUN cat src/environments/environments.prod.ts
+} \n\
+" > src/environments/environment.prod.ts
+RUN echo -e "\
+export const environment = { \n\
+  production: true, \n\
+  API_DOMAIN: '${API_BASE_URL}', \n\
+  TRANSPORT: '${TRANSPORT}', \n\
+  API_ENDPOINT: '/api', \n\
+  MAPS_KEY: '', \n\
+  version: '1.0.0', \n\
+  environment: 'prod', \n\
+} \n\
+" > src/environments/environment.ts
 
-RUN npm run build --configuration=production
+FROM node:12.16.1-alpine AS builder
+WORKDIR /usr/src/app
+COPY --from=runner /usr/src/app/ .
+RUN npm install
+RUN npm run build --configuration=prod
 
 FROM nginx:1.15.8-alpine
 

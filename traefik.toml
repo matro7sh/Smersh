@@ -8,3 +8,5 @@
 
 [entryPoints.web]
   address = ":80"
+[entryPoints.web-secure]
+  address = ":443"

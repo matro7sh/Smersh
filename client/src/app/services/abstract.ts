@@ -19,8 +19,16 @@ export class AbstractService {
     this.http = http;
   }
 
+  static getBaseAPI(): string {
+    return `${environment.TRANSPORT}${environment.API_DOMAIN}`;
+  }
+
+  static getBaseAPIEndpoint(): string {
+    return `${AbstractService.getBaseAPI()}${environment.API_ENDPOINT}`;
+  }
+
   getUrl(): string {
-    return `${environment.API}/${this.endpoint}`;
+    return `${AbstractService.getBaseAPIEndpoint()}/${this.endpoint}`;
   }
 
   getOptions(): { headers: HttpHeaders } {

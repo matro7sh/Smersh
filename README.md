@@ -25,18 +25,20 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 # preview API (Symfony + Api Platform) :
 ![api](img/api.png)
 
-# Ports mapping
-| Container | Internal port | External port |
-| ------ | ----------- | ---- |
-| Vulcain | 443 | 8443 |
-| Api | 80 | 8000 |
-| Bitwarden | 80 | 8888 |
-| Db | 5432 | 5432 |
-| Mercure | 443, 80, 2019 | 1337 |
-| dev-tls | 80 | 80 |
-| php | 9000 | / |
-| CodiMD | 3000 | 3000 |
-| db-codiMD | 5432 | / |
+# Services
+In Smersh we are using the environment variable called `DOMAIN` declared in the `.env` at the root folder of the project.  
+You can override this variable as your own. Be sure to register the domain in your `/etc/hosts` that point to your local host.  
+As we use [træfik](https://github.com/traefik/traefik) as reverse-proxy, you can refer to [their documentation](https://docs.traefik.io) to learn how to customize this instance.
+
+| Container | Default DNS          |
+| --------- | -------------------- |
+| Api       | `api.{DOMAIN}`       |
+| Bitwarden | `bitwarden.{DOMAIN}` |
+| Client    | `{DOMAIN}`           |
+| Db        | NOT EXPOSED          |
+| php       | NOT EXPOSED          |
+| CodiMD    | `codimd.{DOMAIN}`    |
+| db-codiMD | NOT EXPOSED          |
 
 # Preview Report
 
@@ -53,7 +55,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 in `api` folder copy `.env-dist` to `.env` 
 
-Run `make upAll` then go to `http://localhost:4200` and use "jenaye:jenaye" to log in.
+Run `make initialize` then go to `http://{DOMAIN}` and use "jenaye:jenaye" to log in.
 
 
 
@@ -146,7 +148,7 @@ Host smersh
   LocalForward 127.0.0.1:8888 127.0.0.1:8888
 
 ``` 
-then you can run `ssh smersh` and go to `http://localhost:4200`
+then you can run `ssh smersh` and go to `http://{DOMAIN}`
 
 
 ## How to Make Backup of database

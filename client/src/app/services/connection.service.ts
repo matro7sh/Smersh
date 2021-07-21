@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AbstractService } from 'src/app/services/abstract';
 import { Token } from 'src/app/storage/Token';
-import { environment } from 'src/environments/environment';
 import {
   AuthenticationModelApplication,
   AuthenticationNormalizerApplication,
@@ -31,7 +30,7 @@ export class ConnectionService extends AbstractService {
   }
 
   getUrl(): string {
-    return `${environment.HOST}/${this.endpoint}`;
+    return `${ConnectionService.getBaseAPI()}/${this.endpoint}`;
   }
 
   insert(data: any): Promise<AuthenticationModelApplication> {
@@ -39,7 +38,7 @@ export class ConnectionService extends AbstractService {
   }
 
   login(data: unknown): Promise<{ token: string }> {
-    return this.insert(data).then(({token}) => ({token}));
+    return this.insert(data).then(({ token }) => ({ token }));
   }
 
   logout(): void {

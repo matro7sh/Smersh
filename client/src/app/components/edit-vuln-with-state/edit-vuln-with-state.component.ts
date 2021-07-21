@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgForm } from '@angular/forms';
 import { MissionRouter } from 'src/app/router/MissionRouter';
-import { environment } from 'src/environments/environment';
 import { getTranslation } from 'src/app/helpers/translation';
 import { VulnTranslationFromAPIInterface } from 'src/app/model/VulnTranslation';
 import { HostVulnModelApplication } from 'src/app/model/HostVuln';
+import { AbstractService } from 'src/app/services/abstract';
 
 @Component({
   selector: 'app-edit-vuln-with-state',
@@ -21,7 +21,7 @@ export class EditVulnWithStateComponent implements OnInit {
   public pictureName: string;
   public durationInSeconds = 4;
   public host: any;
-  public url = environment.API;
+  public url = AbstractService.getBaseAPIEndpoint();
   public missionId: any;
   public vulnName: string;
 

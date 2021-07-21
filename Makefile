@@ -43,7 +43,7 @@ load-data:
 reset-db: init-db load-data
 
 up: ## Start containers
-	$(DC_UP)
+	$(DC_UP) client api
 
 update-db-schema: ## Update database schema
 	$(BIN_CONSOLE) do:sc:up --force

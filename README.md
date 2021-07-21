@@ -55,7 +55,7 @@ As we use [træfik](https://github.com/traefik/traefik) as reverse-proxy, you ca
 
 in `api` folder copy `.env-dist` to `.env` 
 
-Run `make upAll` then go to `http://localhost:4200` and use "jenaye:jenaye" to log in.
+Run `make initialize` then go to `http://{DOMAIN}` and use "jenaye:jenaye" to log in.
 
 
 
@@ -148,7 +148,7 @@ Host smersh
   LocalForward 127.0.0.1:8888 127.0.0.1:8888
 
 ``` 
-then you can run `ssh smersh` and go to `http://localhost:4200`
+then you can run `ssh smersh` and go to `http://{DOMAIN}`
 
 
 ## How to Make Backup of database

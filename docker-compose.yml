@@ -108,7 +108,7 @@ services:
       - 3000
     labels:
       - traefik.http.routers.codimd.rule=Host(`codimd.${DOMAIN}`)
-      - traefik.http.services.codimd.loadBalancer.port=3000
+      - traefik.http.services.codimd.loadbalancer.server.port=3000
     volumes:
       - upload-data:/home/hackmd/app/public/uploads
 #    restart: always

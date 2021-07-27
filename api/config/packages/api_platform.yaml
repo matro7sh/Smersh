@@ -1,6 +1,6 @@
 api_platform:
     title: Smersh
-    version: 1.0.0
+    version: 1.1.1
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:

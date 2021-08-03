@@ -23,7 +23,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	fi
 
 	if [ "$APP_ENV" != 'prod' ]; then
-		composer install --prefer-dist --no-progress --no-suggest --no-interaction
+		http_proxy=$HTTP_PROXY_URL https_proxy=$HTTPS_PROXY_URL composer install --prefer-dist --no-progress --no-suggest --no-interaction
 	fi
 
 	echo "Waiting for db to be ready..."

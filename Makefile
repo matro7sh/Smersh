@@ -3,7 +3,7 @@
 CONFIG_DIR=api/config
 DC=docker-compose
 DC_UP=$(DC) up -d
-DC_EXEC=$(DC) exec php
+DC_EXEC=$(DC) exec -e http_proxy=$(HTTP_PROXY_URL) -e https_proxy=$(HTTPS_PROXY_URL) php
 BIN_CONSOLE=$(DC_EXEC) bin/console
 
 help:
@@ -52,5 +52,3 @@ update: ## Update containers composer packages then re-up containers
 	$(DC) pull
 	$(MAKE) composer-update
 	$(MAKE) up
-
-upAll: up install init-db load-data

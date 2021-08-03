@@ -29,6 +29,9 @@ services:
       context: ./api
       target: api_platform_php
       <<: *api-cache-from
+      args:
+        HTTP_PROXY_URL: ${HTTP_PROXY_URL}
+        HTTPS_PROXY_URL: ${HTTPS_PROXY_URL}
     image: ${PHP_IMAGE:-quay.io/api-platform/php}
     healthcheck:
       interval: 10s
@@ -43,6 +46,8 @@ services:
       - DATABASE_URL=postgres://${API_DB_USER}:${API_DB_PASS}@db/${API_DB_NAME}
       - JWT_PASSPHRASE=${JWT_KEY}
       - BASE_URL=${TRANSPORT}${DOMAIN}
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
     depends_on:
       - db
     volumes:
@@ -120,9 +125,13 @@ services:
       args:
         TRANSPORT: ${TRANSPORT}
         API_BASE_URL: api.${DOMAIN}
+        HTTP_PROXY_URL: ${HTTP_PROXY_URL}
+        HTTPS_PROXY_URL: ${HTTPS_PROXY_URL}
     image: node:latest
     environment:
       - PATH=/app/node_modules/.bin:$PATH
+      - HTTP_PROXY_URL=${HTTP_PROXY_URL}
+      - HTTPS_PROXY_URL=${HTTPS_PROXY_URL}
     expose:
       - 80
     labels:

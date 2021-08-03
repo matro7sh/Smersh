@@ -1,5 +1,7 @@
 #!/bin/sh
 docker-compose exec php sh -c '
+    export HTTP_PROXY="$HTTP_PROXY"
+    export HTTPS_PROXY="$HTTPS_PROXY"
     set -e
     apk add openssl
     mkdir -p config/jwt

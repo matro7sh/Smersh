@@ -6,9 +6,15 @@ ARG API_BASE_URL
 ARG TRANSPORT
 ENV API_BASE_URL $API_BASE_URL
 ENV TRANSPORT $TRANSPORT
+ARG HTTP_PROXY_URL
+ARG HTTPS_PROXY_URL
+ENV HTTPS_PROXY $HTTPS_PROXY_URL
+ENV HTTP_PROXY $HTTP_PROXY_URL
 RUN echo "Api base url: ${TRANSPORT}${API_BASE_URL}"
 
 COPY package.json ./
+RUN if [ -n "$HTTP_PROXY_URL" ] ; then npm config set proxy $HTTP_PROXY_URL ; : ; fi
+RUN if [ -n "$HTTPS_PROXY_URL" ] ; then npm config set https-proxy $HTTPS_PROXY_URL ; : ; fi
 RUN npm install
 
 COPY . .

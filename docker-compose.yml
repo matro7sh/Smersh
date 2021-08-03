@@ -67,6 +67,9 @@ services:
       - ./api/public:/srv/api/public:ro
     labels:
       - traefik.http.routers.api.rule=Host(`api.${DOMAIN}`)
+      - traefik.http.routers.api.tls=true
+      - traefik.http.routers.api.tls.domains[0].main=${DOMAIN}
+      - traefik.http.routers.api.tls.domains[0].sans=*.${DOMAIN}
     <<: *network
 
   db:
@@ -109,6 +112,9 @@ services:
     labels:
       - traefik.http.routers.codimd.rule=Host(`codimd.${DOMAIN}`)
       - traefik.http.services.codimd.loadbalancer.server.port=3000
+      - traefik.http.routers.codimd.tls=true
+      - traefik.http.routers.codimd.tls.domains[0].main=${DOMAIN}
+      - traefik.http.routers.codimd.tls.domains[0].sans=*.${DOMAIN}
     volumes:
       - upload-data:/home/hackmd/app/public/uploads
 #    restart: always
@@ -127,12 +133,18 @@ services:
       - 80
     labels:
       - traefik.http.routers.client.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.client.tls=true
+      - traefik.http.routers.client.tls.domains[0].main=${DOMAIN}
+      - traefik.http.routers.client.tls.domains[0].sans=*.${DOMAIN}
     <<: *network
 
   bitwarden:
     image: bitwardenrs/server:latest
     labels:
       - traefik.http.routers.bitwarden.rule=Host(`bitwarden.${DOMAIN}`)
+      - traefik.http.routers.bitwarden.tls=true
+      - traefik.http.routers.bitwarden.tls.domains[0].main=${DOMAIN}
+      - traefik.http.routers.bitwarden.tls.domains[0].sans=*.${DOMAIN}
     volumes:
       - ./data/bitwarden:/data
 #    restart: on-failure

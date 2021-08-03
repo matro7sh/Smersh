@@ -13,8 +13,8 @@ FROM php:${PHP_VERSION}-fpm-alpine AS api_platform_php
 
 ARG HTTP_PROXY_URL
 ARG HTTPS_PROXY_URL
-ENV http_proxy $HTTP_PROXY_URL
-ENV https_proxy $HTTPS_PROXY_URL
+ENV http_proxy=$HTTP_PROXY_URL
+ENV https_proxy=$HTTPS_PROXY_URL
 RUN  if [ -n "$HTTP_PROXY_URL" ] ; then pear config-set http_proxy $HTTP_PROXY_URL ; : ; fi
 RUN sed -i -e 's/https/http/' /etc/apk/repositories;
 

@@ -6,7 +6,13 @@
   dashboard = true
   debug = true
 
-[entryPoints.web]
-  address = ":80"
-[entryPoints.web-secure]
-  address = ":443"
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+    [entryPoints.web.http]
+      [entryPoints.web.http.redirections]
+        [entryPoints.web.http.redirections.entryPoint]
+          to = "web-secure"
+          scheme = "https"
+  [entryPoints.web-secure]
+    address = ":443"

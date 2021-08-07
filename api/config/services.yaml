@@ -26,6 +26,7 @@ services:
     App\Listener\UserCreateListener:
         tags:
             - { name: doctrine.event_listener, event: prePersist, connection: default }
+            - { name: doctrine.event_listener, event: postPersist, connection: default }
 
     App\Listener\PasswordEncoderListener:
         tags:

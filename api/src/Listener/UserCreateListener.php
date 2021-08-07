@@ -7,22 +7,33 @@ namespace App\Listener;
 use App\Entity\User;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class UserCreateListener implements EventSubscriberInterface
 {
     /** @var KernelInterface $kernel */
     private $kernel;
+    private $logger;
+    private $client;
 
     /** @var UserPasswordEncoderInterface $userPasswordEncoder */
     private $userPasswordEncoder;
 
-    public function __construct(KernelInterface $kernel, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function __construct(
+        KernelInterface $kernel,
+        UserPasswordEncoderInterface $userPasswordEncoder,
+        HttpClientInterface $client,
+        LoggerInterface $logger
+    )
     {
         $this->kernel = $kernel;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->client = $client;
+        $this->logger = $logger;
     }
 
     /**
@@ -31,11 +42,11 @@ class UserCreateListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::prePersist,
+            Events::postPersist
         ];
     }
 
-    public function prePersist(LifecycleEventArgs $args): void
+    public function postPersist(LifecycleEventArgs $args): void
     {
         $user = $args->getObject();
 
@@ -43,6 +54,22 @@ class UserCreateListener implements EventSubscriberInterface
             return;
         }
 
+        try {
+            $this->client->request(
+                'POST',
+                'http://codimd:3000/register', [
+                    'headers' => [
+                        'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
+                        'Content-Type' => 'application/x-www-form-urlencoded',
+                    ],
+                    'body' => ['email' => $user->getMail() , 'password' => $user->getPassword()]
+                ]
+            );
+        } catch (\Exception $e) {
+            $this->logger->error('Error to create codimd account : ' . $e);
+        }
+
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $user->getPassword()));
     }
+
 }

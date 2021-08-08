@@ -3,7 +3,7 @@
 CONFIG_DIR=api/config
 DC=docker-compose
 DC_UP=$(DC) up -d
-DC_EXEC=$(DC) exec php
+DC_EXEC=$(DC) exec -T php
 BIN_CONSOLE=$(DC_EXEC) bin/console
 
 help:
@@ -13,7 +13,7 @@ cache: ## Clear cache
 	$(BIN_CONSOLE) cache:clear
 
 composer-install: ## Install composer packages
-	$(DC_EXEC) composer install
+	$(DC_EXEC) composer install --no-progress
 
 composer-update: ## Update composer
 	$(DC_EXEC) composer update

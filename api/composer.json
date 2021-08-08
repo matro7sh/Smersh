@@ -11,7 +11,7 @@
         "gedmo/doctrine-extensions": "2.4.42",
         "guzzlehttp/guzzle": "^6.3",
         "lexik/jwt-authentication-bundle": "^2.8",
-        "locastic/api-platform-translation-bundle": "^1.3",
+        "locastic/api-platform-translation-bundle": "^v1.3.3",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/console": "5.1.*",
         "symfony/dotenv": "5.1.*",

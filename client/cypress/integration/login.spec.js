@@ -11,8 +11,8 @@ describe('Admin login', () => {
     cy.loginAs('manager');
   });
 
-  it('Should login successfully as guest', function () {
-    cy.loginAs('guest');
+  it('Should login successfully as client', function () {
+    cy.loginAs('client');
   });
 
   it('Should not login as nonexistent user', function () {

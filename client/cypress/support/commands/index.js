@@ -26,7 +26,9 @@ import { requestBaseApi } from '../../integration/helpers';
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-let LOCAL_STORAGE_MEMORY = {};
+let LOCAL_STORAGE_MEMORY = {
+  locale: 'en',
+};
 
 Cypress.Commands.add('saveLocalStorage', () => {
   Object.keys(localStorage).forEach((key) => {
@@ -42,10 +44,6 @@ Cypress.Commands.add('restoreLocalStorage', () => {
 
 Cypress.Commands.add('loadData', function () {
   cy.fixture('data.json').as('data');
-});
-
-Cypress.Commands.add('fillInput', (input, value) => {
-  cy.get(`[data-cy=${input}]`).type(value);
 });
 
 Cypress.Commands.add(
@@ -92,11 +90,13 @@ Cypress.Commands.add(
         cy.get('[data-cy=submit]').click();
       },
       () => {
-        if (!isValid) {
-          expect(localStorage.getItem(token)).to.not.exist;
-        } else {
-          expect(localStorage.getItem(token)).to.exist;
-        }
+        cy.wait(500).then(() => {
+          if (!isValid) {
+            expect(localStorage.getItem(token)).to.not.exist;
+          } else {
+            expect(localStorage.getItem(token)).to.exist;
+          }
+        });
       }
     );
   }

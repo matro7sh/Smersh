@@ -29,7 +29,8 @@
       "base": "https://api.smersh.lan",
       "api": "/api",
       "login": "/authentication_token",
-      "missions": "/missions"
+      "missions": "/missions",
+      "vulnerabilities": "/vulns"
     }
   },
   "storage": {

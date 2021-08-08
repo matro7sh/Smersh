@@ -1,5 +1,5 @@
 #!/bin/sh
-docker-compose exec php sh -c '
+docker-compose exec -T php sh -c '
     set -e
     apk add openssl
     mkdir -p config/jwt

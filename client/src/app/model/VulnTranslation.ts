@@ -3,7 +3,10 @@ import {
   TranslationModelAPI,
   TranslationModelApplication,
 } from 'src/app/model/Translation';
-import { AbstractNormalizerApplication, AbstractSerializerApplication, } from 'src/app/model/abstract';
+import {
+  AbstractNormalizerApplication,
+  AbstractSerializerApplication,
+} from 'src/app/model/abstract';
 
 export interface VulnTranslationFromAPIInterface
   extends TranslationFromAPIInterface {
@@ -21,7 +24,6 @@ export class VulnTranslationNormalizerApplication extends AbstractNormalizerAppl
 }
 
 export class VulnTranslationModelApplication extends TranslationModelApplication {
-  currentLocale: string;
   description: string;
   locale: string;
   name: string;
@@ -37,7 +39,6 @@ export class VulnTranslationModelApplication extends TranslationModelApplication
 }
 
 class VulnTranslationModelAPI extends TranslationModelAPI {
-  currentLocale: string;
   description: string;
   locale: string;
   name: string;
@@ -46,7 +47,6 @@ class VulnTranslationModelAPI extends TranslationModelAPI {
 
   constructor(props: VulnTranslationModelApplication) {
     super(props);
-    this.currentLocale = props.currentLocale;
     this.description = props.description;
     this.locale = props.locale;
     this.name = props.name;

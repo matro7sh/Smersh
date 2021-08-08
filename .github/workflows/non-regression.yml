@@ -1,0 +1,39 @@
+name: Build container and validate lint/tests
+
+on: [push]
+
+jobs:
+  checkout-code-and-validate:
+    name: Checkout code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Add SMERSH hosts to /etc/hosts
+        run: |
+          sudo echo "127.0.0.1 smersh.lan api.smersh.lan codimd.smersh.lan bitwarden.smersh.lan" | sudo tee -a /etc/hosts
+      - name: Composer install
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+          tools: composer
+      - name: Install PHP dependencies
+        run: cd api && composer install
+      - name: Create the SMERSH network
+        run: docker network create smersh || true
+      - name: Prepare the stack to build
+        run: cp api/.env-dist api/.env
+      - name: Install docker stack and populate database with fixtures
+        run: make create-network up
+      - name: Populate database with fixtures
+        run: make reset-db jwt cache
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: npm install
+        working-directory: client
+      - name: Run e2e tests
+        run: npm run e2e
+        working-directory: client

@@ -1,0 +1,33 @@
+App\Entity\PositivePoint:
+  positive_point_cloisonnement:
+    name: Cloisonnement
+    description: The partitioning between accounts is managed on the server side. It is not possible to elevate privileges or access other users data.
+
+  positive_point_sqli:
+    name: SQLi
+    description: It was not possible to use SQL injection on the audited site, preventing recovery from the database.
+
+  positive_point_xss:
+    name: XSS
+    description: It was not possible to use XSS on the audited site.
+
+  positive_point_low_exposure:
+    name: Low Exposure
+    description: The server exposes only the services necessary for its proper operation, thus reducing the perimeter of attack. This is good practice in line with the state of the art.
+
+App\Entity\NegativePoint:
+  negative_point_ssl:
+    name: SSL
+    description: Some algorithms authorized by the SSL/TLS layer no longer provide encryption robust enough to withstand the computing power of today's machines. An attacker can exploit this flaw to carry out a Man-In-The-Middle attack or decrypt communications captured between the vulnerable service and its customers and thus affect the confidentiality and integrity of exchanges. However, the overall risk involved by this vulnerability remains low, because for such an attack to succeed, the attacker must be in a position to intercept the traffic of his victim. Moreover, breaking a TLS communication may require, in some cases, the use of considerable resources and very high computing power.
+
+  negative_point_http:
+    name: HTTP
+    description: Finally, the communication between the client and the server is not encrypted. An attacker could exploit this flaw to carry out a Man-In-The-Middle attack and decrypt captured communications between the vulnerable service and its clients and thus affect the confidentiality and integrity of exchanges. However, the overall risk involved by this vulnerability remains low, because for such an attack to succeed, the attacker must be in a position to intercept the traffic of his victim. Moreover, breaking a TLS communication may require, in some cases, the use of considerable resources and very high computing power.
+
+  negative_point_sqli:
+    name: SQLi
+    description: It was not possible to use SQL injection on the audited site, preventing recovery from the database.
+
+  negative_point_xss:
+    name: XSS
+    description: The server does not filter user input properly. It is therefore possible to inject code into a field allowing an attacker to redirect the user to a site of his choice. For example, the attacker can send a hyperlink in a message that the user will have to click on.

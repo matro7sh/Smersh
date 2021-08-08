@@ -98,6 +98,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LocaleService } from './services/locale.service';
 import { QueryableInputComponent } from 'src/app/components/generic/form/queryable-input.component';
 import { QueryableModule } from 'src/app/form';
+import { interceptors } from 'src/app/interceptor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -198,6 +199,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     UsersService,
     VulnTypesService,
     Object.values(QueryableModule).map((m) => m),
+    ...interceptors,
   ],
   bootstrap: [AppComponent],
 })

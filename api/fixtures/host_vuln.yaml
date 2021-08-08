@@ -1,0 +1,12 @@
+App\Entity\HostVuln:
+  host_vuln_jenaye:
+    currentState: We just found Sqli on jenaye.fr
+    host: '@host_jenaye'
+    impact: '@impact_Low'
+    vuln: '@sqli'
+
+  host_vuln_souin:
+    currentState: We just found Sqli on jenaye.fr
+    host: '@host_souin'
+    impact: '@impact_Medium'
+    vuln: '@xss'

@@ -38,7 +38,7 @@ jwt: ## Generate jwt
 	cd api && sh ./generateJWT.sh
 
 load-data:
-	$(BIN_CONSOLE) do:fi:load --quiet
+	$(BIN_CONSOLE) ha:fi:load --quiet
 
 reset-db: init-db load-data
 

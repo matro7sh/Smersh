@@ -1,0 +1,41 @@
+App\Entity\Translation\VulnTranslation:
+  sqli_translation (template):
+    name: SQLi
+
+  sqli_fr (extends sqli_translation):
+    description: Injection SQL.
+    locale: fr
+    remediation: Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).
+
+  sqli_en (extends sqli_translation):
+    description: SQL injection.
+    locale: en
+    remediation: Use of Prepared Statements (with Parameterized Queries, you can also use of Stored Procedures and escaping All User Supplied Input.
+
+  lfi_translation (template):
+    name: LFI
+
+  lfi_fr (extends lfi_translation):
+    description: Local file inclusion.
+    locale: fr
+    remediation: Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).
+
+  lfi_en (extends lfi_translation):
+    description: Local file inclusion.
+    locale: en
+    remediation: Make the server send download headers automatically instead of executing files in a specified directory and save your file paths in a secure database and give an ID for every single one, this way users only get to see their ID without viewing or altering the path.
+
+
+  xss_translation (template):
+    name: XSS
+
+  xss_fr (extends xss_translation):
+    description: La XSS une faille qui permet d'injecter du code HTML et/ou Javascript dans des variables mal protégées.
+    locale: fr
+    remediation: Pour se protéger contre les failles XSS, il y a deux solutions possibilités, supprimer tout contenu HTML de la saisie utilisateur ou échapper  les caractères formant les balises HTML
+
+  xss_en (extends xss_translation):
+    description: The XSS flaw, from its full name Cross-Site Scripting, is a flaw that allows HTML and/or Javascript code to be injected into poorly protected variables or databases.
+    locale: en
+    remediation: HTML Encode Before Inserting Untrusted Data into HTML Element Content and add some headers.
+

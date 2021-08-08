@@ -1,10 +1,38 @@
 {
-  "username": "jenaye",
-  "password": "jenaye",
-  "baseUrl": "http://localhost:4200",
-  "backendUrl": "http://localhost:8000",
-  "dashboardRoute": "/dashboard",
-  "loginRoute": "/login",
-  "missionsRoute": "/missions",
-  "vulnerabilitiesRoute": "/vulnerabilities"
+  "user": {
+    "admin": {
+      "username": "admin",
+      "password": "admin"
+    },
+    "manager": {
+      "username": "manager",
+      "password": "manager"
+    },
+    "guest": {
+      "username": "guest",
+      "password": "guest"
+    }
+  },
+  "routes": {
+    "client": {
+      "login": "/login",
+      "dashboard": "/",
+      "resources": {
+        "missions": {
+          "base": "/missions",
+          "list": "/missions/all"
+        },
+        "vulnerabilities": "/vulnerabilities"
+      }
+    },
+    "api": {
+      "base": "https://api.smersh.lan",
+      "api": "/api",
+      "login": "/authentication_token",
+      "missions": "/missions"
+    }
+  },
+  "storage": {
+    "token": "token"
+  }
 }

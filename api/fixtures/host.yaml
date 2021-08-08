@@ -1,0 +1,16 @@
+App\Entity\Host:
+  host_ca_devrait_le_faire:
+    name: https://cadevraitlefaire.fr
+    mission: '@internal_mission_1'
+    checked: true
+
+  host_jenaye:
+    name: https://jenaye.fr
+    mission: '@internal_mission_0'
+    checked: true
+    technology: ReactJS
+
+  host_souin:
+    name: https://github.com/Darkweak/Souin
+    mission: '@internal_mission_0'
+    checked: false

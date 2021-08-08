@@ -1,0 +1,21 @@
+App\Entity\Vuln:
+  vulnerability (template):
+    currentLocale: en
+    impact: '@impact_High'
+    vulnType: '@vuln_type_0'
+
+  sqli (extends vulnerability):
+    translations:
+      - '@sqli_fr'
+      - '@sqli_en'
+
+  lfi (extends vulnerability):
+    translations:
+      - '@lfi_fr'
+      - '@lfi_en'
+
+  xss (extends vulnerability):
+    impact: '@impact_Medium'
+    translations:
+      - '@xss_fr'
+      - '@xss_en'

@@ -1,4 +1,4 @@
-<h1>{{ formType }} {{ singularResource }}</h1>
+<h1 data-cy="title">{{ formType }} {{ singularResource }}</h1>
 <form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)">
   <ng-container *ngFor="let input of inputs">
     <ng-container [ngSwitch]="true">

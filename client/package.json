@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
-    "e2e": "ng e2e"
+    "e2e": "cypress run --spec cypress/integration/missions.spec.js"
   },
   "private": true,
   "dependencies": {

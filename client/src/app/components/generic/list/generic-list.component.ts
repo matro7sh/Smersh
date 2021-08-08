@@ -103,10 +103,7 @@ export class GenericListComponent implements OnInit {
         page: this.paginator.page.toString(),
         itemsPerPage: this.paginator.itemsPerPage.toString(),
       })
-      .then(({
-               count,
-               data
-             }) => {
+      .then(({ count, data }) => {
         this.paginator.count = count;
         const items = data.map((e) => ({
           ...e,
@@ -121,9 +118,9 @@ export class GenericListComponent implements OnInit {
     this.retrieveData();
   }
 
-  applyFilter(filterValue: string, {value}: HTMLInputElement): void {
+  applyFilter(filterValue: string, { value }: HTMLInputElement): void {
     this.filterService.applyFilter(
-      {[filterValue]: value},
+      { [filterValue]: value },
       (data: Record<string, string>) => this.retrieveData(data)
     );
   }
@@ -180,6 +177,10 @@ export class GenericListComponent implements OnInit {
       case DELETE_ACTION:
         return API_DELETE_ACTION;
     }
+  }
+
+  formatActionAttribute(action): string {
+    return `action-button-${action}`;
   }
 
   applyActionOnResource(action: string, id: string): void {

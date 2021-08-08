@@ -1,0 +1,15 @@
+App\Entity\Client:
+  client (template):
+    phone: 06 XX XX XX XX
+
+  not_apple (extends client):
+    firstName: Steve
+    lastName: Jobs
+    mail: contact@not_apple.com
+    name: not apple
+
+  blue_bird (extends client):
+    firstName: Jack
+    lastName: Dorsey
+    mail: contact@blue_bird.com
+    name: blue bird

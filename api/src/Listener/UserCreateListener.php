@@ -15,6 +15,10 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class UserCreateListener implements EventSubscriberInterface
 {
+
+    const CODI_URL = 'http://codimd:3000/register';
+    const HTTP_CODI_METHOD = 'POST';
+
     /** @var KernelInterface $kernel */
     private $kernel;
     private $logger;
@@ -56,8 +60,8 @@ class UserCreateListener implements EventSubscriberInterface
 
         try {
             $this->client->request(
-                'POST',
-                'http://codimd:3000/register', [
+                self::HTTP_CODI_METHOD,
+                self::CODI_URL, [
                     'headers' => [
                         'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
                         'Content-Type' => 'application/x-www-form-urlencoded',

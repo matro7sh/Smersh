@@ -35,9 +35,9 @@ git push origin MyBranch
 
 # Contributors 
 
-- Darkweak - https://github.com/orgs/CMEPW/people/Darkweak
+- Darkweak - https://github.com/Darkweak
 - michmich1000 - https://michmich.eu
-- SilouFr  - https://github.com/orgs/CMEPW/people/SilouFr
+- SilouFr  - https://github.com/SilouFr
 - sanchis  - https://github.com/sanchis
 - RayMoDev  - https://github.com/RayMoDev
 - Linda - https://github.com/proglin

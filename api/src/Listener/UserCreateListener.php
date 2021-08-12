@@ -9,9 +9,11 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserCreateListener implements EventSubscriberInterface
 {
@@ -23,6 +25,7 @@ class UserCreateListener implements EventSubscriberInterface
     private $kernel;
     private $logger;
     private $client;
+    private $em;
 
     /** @var UserPasswordEncoderInterface $userPasswordEncoder */
     private $userPasswordEncoder;
@@ -31,13 +34,16 @@ class UserCreateListener implements EventSubscriberInterface
         KernelInterface $kernel,
         UserPasswordEncoderInterface $userPasswordEncoder,
         HttpClientInterface $client,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        EntityManagerInterface $em
+
     )
     {
         $this->kernel = $kernel;
         $this->userPasswordEncoder = $userPasswordEncoder;
         $this->client = $client;
         $this->logger = $logger;
+        $this->em = $em;
     }
 
     /**
@@ -60,7 +66,7 @@ class UserCreateListener implements EventSubscriberInterface
 
         try {
             $this->client->request(
-                self::HTTP_CODI_METHOD,
+                Request::METHOD_POST,
                 self::CODI_URL, [
                     'headers' => [
                         'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
@@ -74,6 +80,7 @@ class UserCreateListener implements EventSubscriberInterface
         }
 
         $user->setPassword($this->userPasswordEncoder->encodePassword($user, $user->getPassword()));
+        $this->em->flush();
     }
 
 }

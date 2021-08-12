@@ -19,7 +19,6 @@ class UserCreateListener implements EventSubscriberInterface
 {
 
     const CODI_URL = 'http://codimd:3000/register';
-    const HTTP_CODI_METHOD = 'POST';
 
     /** @var KernelInterface $kernel */
     private $kernel;

@@ -1,0 +1,24 @@
+site_name: Smersh documentation
+site_url: https://docs.smersh.app
+repo_url: https://github.com/CMEPW/Smersh
+repo_name: Smersh
+edit_uri: documentation
+theme:
+  palette:
+    primary: red
+    accent: deep orange
+  logo: img/logo-white.png
+  favicon: img/favicon.ico
+  name: material
+  features:
+    - toc.integrate
+markdown_extensions:
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/CMEPW/Smersh
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/smersh_sec

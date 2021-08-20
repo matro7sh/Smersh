@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   API_DOMAIN: 'api.smersh.lan',
-  TRANSPORT: 'http://',
+  TRANSPORT: 'https://',
   API_ENDPOINT: '/api',
   MAPS_KEY: '',
   version: '1.1.2',

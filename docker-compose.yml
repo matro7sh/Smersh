@@ -45,6 +45,7 @@ services:
       - BASE_URL=${TRANSPORT}${DOMAIN}
     depends_on:
       - db
+      - codimd
     volumes:
       - ./api:/srv/api:rw,cached
       - ./api/docker/php/conf.d/api-platform.dev.ini:/usr/local/etc/php/conf.d/api-platform.ini

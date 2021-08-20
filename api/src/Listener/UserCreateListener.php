@@ -51,17 +51,20 @@ class UserCreateListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::postPersist
+            Events::prePersist
         ];
     }
 
-    public function postPersist(LifecycleEventArgs $args): void
+    public function prePersist(LifecycleEventArgs $args): void
     {
         $user = $args->getObject();
 
         if (!$user instanceof User) {
             return;
         }
+
+        $plainPassword = $user->getPassword();
+        $user->setPassword($this->userPasswordEncoder->encodePassword($user, $plainPassword));
 
         try {
             $this->client->request(
@@ -71,15 +74,11 @@ class UserCreateListener implements EventSubscriberInterface
                         'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
                         'Content-Type' => 'application/x-www-form-urlencoded',
                     ],
-                    'body' => ['email' => $user->getMail() , 'password' => $user->getPassword()]
+                    'body' => ['email' => $user->getMail() , 'password' => $plainPassword]
                 ]
             );
         } catch (\Exception $e) {
             $this->logger->error('Error to create codimd account : ' . $e);
         }
-
-        $user->setPassword($this->userPasswordEncoder->encodePassword($user, $user->getPassword()));
-        $this->em->flush();
     }
-
 }

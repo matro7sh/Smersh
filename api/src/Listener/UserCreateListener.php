@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class UserCreateListener implements EventSubscriberInterface
 {
-
     const CODI_URL = 'http://codimd:3000/register';
 
     /** @var KernelInterface $kernel */
@@ -35,7 +34,6 @@ class UserCreateListener implements EventSubscriberInterface
         HttpClientInterface $client,
         LoggerInterface $logger,
         EntityManagerInterface $em
-
     )
     {
         $this->kernel = $kernel;
@@ -71,7 +69,6 @@ class UserCreateListener implements EventSubscriberInterface
                 Request::METHOD_POST,
                 self::CODI_URL, [
                     'headers' => [
-                        'User-Agent' => 'Mozilla/5.0 (X11; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0',
                         'Content-Type' => 'application/x-www-form-urlencoded',
                     ],
                     'body' => ['email' => $user->getMail() , 'password' => $plainPassword]

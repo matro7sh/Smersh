@@ -30,7 +30,9 @@ init-db:
 	$(BIN_CONSOLE) do:da:cr
 	$(BIN_CONSOLE) do:sc:up --force
 
-install: create-network up jwt composer-install cache ## Install and setup project
+install: ## Install and setup project
+	cp api/.env-dist api/.env
+	$(MAKE) create-network up jwt composer-install cache
 
 initialize: install reset-db ## Initialize and setup the project
 

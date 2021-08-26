@@ -45,6 +45,15 @@ export const environment = { \n\
 FROM node:12.16.1-alpine AS builder
 WORKDIR /usr/src/app
 COPY --from=runner /usr/src/app/ .
+
+ARG HTTP_PROXY_URL
+ARG HTTPS_PROXY_URL
+ENV HTTPS_PROXY_URL $HTTPS_PROXY_URL
+ENV HTTPS_PROXY_URL $HTTP_PROXY_URL
+
+RUN if [ -n "$HTTP_PROXY_URL" ] ; then npm config set proxy $HTTP_PROXY_URL ; : ; echo "http_proxy :: "$HTTP_PROXY_URL ; fi
+RUN if [ -n "$HTTPS_PROXY_URL" ] ; then npm config set https-proxy $HTTPS_PROXY_URL ; : ; echo "https_proxy :: "$HTTPS_PROXY_URL ; fi
+
 RUN npm install
 RUN npm run build --configuration=prod
 

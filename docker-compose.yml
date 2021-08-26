@@ -62,6 +62,9 @@ services:
       context: ./api
       target: api_platform_nginx
       <<: *api-cache-from
+      args:
+	      HTTP_PROXY_URL: ${HTTP_PROXY_URL}
+        HTTPS_PROXY_URL: ${HTTPS_PROXY_URL}
     image: ${NGINX_IMAGE:-quay.io/api-platform/nginx}
     depends_on:
       - traefik

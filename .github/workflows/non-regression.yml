@@ -12,6 +12,8 @@ jobs:
       - name: Add SMERSH hosts to /etc/hosts
         run: |
           sudo echo "127.0.0.1 smersh.lan api.smersh.lan codimd.smersh.lan bitwarden.smersh.lan" | sudo tee -a /etc/hosts
+      - name: Prepare the stack to build
+        run: cp api/.env-dist api/.env
       - name: Composer install
         uses: shivammathur/setup-php@v2
         with:
@@ -21,8 +23,6 @@ jobs:
         run: cd api && composer install
       - name: Create the SMERSH network
         run: docker network create smersh || true
-      - name: Prepare the stack to build
-        run: cp api/.env-dist api/.env
       - name: Install docker stack and populate database with fixtures
         run: make create-network up
       - name: Populate database with fixtures

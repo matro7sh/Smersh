@@ -19,3 +19,28 @@ App\Entity\Vuln:
     translations:
       - '@xss_fr'
       - '@xss_en'
+
+  xxe (extends vulnerability):
+    translations:
+      - '@xxe_fr'
+      - '@xxe_en'
+
+  ssrf (extends vulnerability):
+    translations:
+      - '@ssrf_fr'
+      - '@ssrf_en'
+
+  cors (extends vulnerability):
+    translations:
+      - '@CORS_fr'
+      - '@CORS_en'
+
+  sti (extends vulnerability):
+    translations:
+      - '@SSTI_fr'
+      - '@SSTI_en'
+
+  osinjection (extends vulnerability):
+    translations:
+      - '@OSinjection_fr'
+      - '@OSinjection_fr'

@@ -1,10 +1,16 @@
 import { SideBarComponent } from 'src/app/components/side-bar/side-bar.component';
-import { AuthGuard } from 'src/app/guard/auth.guard';
 import { Route, Routes } from '@angular/router';
-import { CREATE_ROUTE, EDIT_ROUTE, LIST_ROUTE, SHOW_ROUTE, } from 'src/app/router/router';
+import {
+  CREATE_ROUTE,
+  EDIT_ROUTE,
+  LIST_ROUTE,
+  SHOW_ROUTE,
+} from 'src/app/router/router';
+import { AuthGuard, RoleGuard } from 'src/app/guard';
 
 export abstract class AbstractResource {
   protected basePath = '';
+  protected type = '';
   protected list = null;
   protected show = null;
   protected edit = null;
@@ -16,8 +22,10 @@ export abstract class AbstractResource {
     }
     return [
       {
-        path: CREATE_ROUTE,
+        canActivate: [AuthGuard, RoleGuard],
         component: this.create,
+        data: { role: `ROLE_${this.type}_POST` },
+        path: CREATE_ROUTE,
       },
     ];
   }
@@ -28,8 +36,10 @@ export abstract class AbstractResource {
     }
     return [
       {
-        path: EDIT_ROUTE,
+        canActivate: [AuthGuard, RoleGuard],
         component: this.edit,
+        data: { role: `ROLE_${this.type}_PATCH` },
+        path: EDIT_ROUTE,
       },
     ];
   }
@@ -40,8 +50,10 @@ export abstract class AbstractResource {
     }
     return [
       {
-        path: LIST_ROUTE,
+        canActivate: [AuthGuard, RoleGuard],
         component: this.list,
+        data: { role: `ROLE_${this.type}_GET_LIST` },
+        path: LIST_ROUTE,
       },
     ];
   }
@@ -52,8 +64,10 @@ export abstract class AbstractResource {
     }
     return [
       {
-        path: SHOW_ROUTE,
+        canActivate: [AuthGuard, RoleGuard],
         component: this.show,
+        data: { role: `ROLE_${this.type}_GET_ITEM` },
+        path: SHOW_ROUTE,
       },
     ];
   }
@@ -67,10 +81,11 @@ export abstract class AbstractResource {
     ];
 
     return {
-      path: this.basePath,
-      component: SideBarComponent,
       canActivate: [AuthGuard],
       children,
+      component: SideBarComponent,
+      data: { role: `ROLE_${this.type}_GET_LIST` },
+      path: this.basePath,
     };
   }
 }

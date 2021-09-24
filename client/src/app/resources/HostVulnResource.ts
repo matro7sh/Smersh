@@ -3,5 +3,6 @@ import { EditVulnWithStateComponent } from 'src/app/components/edit-vuln-with-st
 
 export class HostVulnResource extends AbstractResource {
   protected basePath = 'host_vulns';
+  protected type = 'HOST_VULN';
   protected edit = EditVulnWithStateComponent;
 }

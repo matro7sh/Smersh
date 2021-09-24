@@ -1,0 +1,8 @@
+App\Entity\Step:
+  step (template):
+    createdAt: '<date_create()>'
+    findAt: '<date_create()>'
+
+  step_0 (extends step):
+    mission: '@internal_mission_0'
+    description: <text(20)>

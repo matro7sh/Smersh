@@ -3,7 +3,7 @@
 CONFIG_DIR=api/config
 DC=docker-compose
 DC_UP=$(DC) up -d
-DC_EXEC=$(DC) exec php
+DC_EXEC=$(DC) exec -T php
 BIN_CONSOLE=$(DC_EXEC) bin/console
 
 help:
@@ -13,7 +13,7 @@ cache: ## Clear cache
 	$(BIN_CONSOLE) cache:clear
 
 composer-install: ## Install composer packages
-	$(DC_EXEC) composer install
+	$(DC_EXEC) composer install --no-progress
 
 composer-update: ## Update composer
 	$(DC_EXEC) composer update
@@ -30,7 +30,9 @@ init-db:
 	$(BIN_CONSOLE) do:da:cr
 	$(BIN_CONSOLE) do:sc:up --force
 
-install: create-network up jwt composer-install cache ## Install and setup project
+install: ## Install and setup project
+	cp api/.env-dist api/.env
+	$(MAKE) create-network up jwt composer-install cache
 
 initialize: install reset-db ## Initialize and setup the project
 
@@ -38,7 +40,7 @@ jwt: ## Generate jwt
 	cd api && sh ./generateJWT.sh
 
 load-data:
-	$(BIN_CONSOLE) do:fi:load --quiet
+	$(BIN_CONSOLE) ha:fi:load --quiet
 
 reset-db: init-db load-data
 

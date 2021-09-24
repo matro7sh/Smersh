@@ -2,7 +2,7 @@
   <mat-form-field *ngFor="let filter of filters" class="pr-2">
     <input (keyup)="applyFilter(filter, $event.target)" matInput placeholder="Filter by {{ filter }}">
   </mat-form-field>
-  <div *ngIf="isEnabledCreation()" class="example-button-row ml-auto flex no-decoration add-resource">
+  <div *ngIf="isEnabledCreation()" data-cy="action-button-create" class="example-button-row ml-auto flex no-decoration add-resource">
     <a mat-button routerLink="{{ routerHelper.redirectToCreate() }}"
        routerLinkActive="active">{{ 'button.ADD' | translate }} {{ singularResource }}
       <span class="my-auto material-icons">
@@ -18,8 +18,9 @@
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ field }} </mat-header-cell>
       <ng-template [ngIfElse]="elseTemplate" [ngIf]="field.match(actionMatcher)">
         <mat-cell *matCellDef="let row">
-          <button (click)="applyActionOnResource(field, row.id)" color="{{ row[field] }}" data-cy="action-button-{{ field }}"
-                  mat-raised-button>{{ field }}</button>
+          <button (click)="applyActionOnResource(field, row.id)" color="{{ row[field] }}" [attr.data-cy]="formatActionAttribute(field)" mat-raised-button>
+            {{ field }}
+          </button>
         </mat-cell>
       </ng-template>
       <ng-template #elseTemplate>

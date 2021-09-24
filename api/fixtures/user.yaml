@@ -1,0 +1,27 @@
+App\Entity\User:
+  user (template):
+    city: russia
+    enabled: true
+    phone: 06 XX YY ZZ AA
+    roles: ['ROLE_USER']
+
+  user_{admin, client, manager, pentester, guest} (extends user):
+    mail: '<current()>\@smersh.app'
+    password: <current()>
+    trigram: '<mb_substr(<current()>, 0, 3)>'
+    roles: ['ROLE_<strtoupper(<current()>)>']
+    username: <current()>
+
+  jenaye (extends user):
+    mail: jenaye@protonmail.com
+    password: jenaye
+    roles: ['ROLE_ADMIN']
+    trigram: jen
+    username: jenaye
+
+  unassigned_pentester (extends user):
+    mail: unassigned_pentester@smersh.app
+    password: unassigned_pentester
+    roles: ['ROLE_PENTESTER']
+    trigram: una
+    username: unassigned_pentester

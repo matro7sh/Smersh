@@ -7,7 +7,7 @@ export enum Language {
   ES = 'es',
   FR = 'fr',
   AR = 'ar',
-  RU = 'ru'
+  RU = 'ru',
 }
 
 @Injectable()
@@ -21,14 +21,19 @@ export class LocaleService {
     this.initLanguage();
   }
 
-  public switchLanguage(lang: Language) {
+  public switchLanguage(lang: Language): void {
     this.translate.use(lang);
     this.localStorage.set(lang);
   }
 
-  private initLanguage() {
-    this.translate.setDefaultLang(Language.FR) // TODO find a correct place to put static constants
-    const navigatorLang = navigator.language.length > 2 ? navigator.language.slice(0, 2) : navigator.language;
-    this.switchLanguage(this.localStorage.get() as Language || navigatorLang as Language) // Get the current language from storage if not set get language from browser
+  private initLanguage(): void {
+    this.translate.setDefaultLang(Language.EN); // TODO find a correct place to put static constants
+    const navigatorLang =
+      navigator.language.length > 2
+        ? navigator.language.slice(0, 2)
+        : navigator.language;
+    this.switchLanguage(
+      (this.localStorage.get() as Language) || (navigatorLang as Language)
+    ); // Get the current language from storage if not set get language from browser
   }
 }

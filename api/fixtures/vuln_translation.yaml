@@ -1,0 +1,124 @@
+App\Entity\Translation\VulnTranslation:
+  sqli_translation (template):
+    name: SQLi
+
+  sqli_fr (extends sqli_translation):
+    description: L'injection SQL est une vulnérabilité de sécurité web qui permet à un attaquant d'interférer avec les requêtes qu'une application effectue dans sa base de données. Elle permet généralement à un attaquant de visualiser des données qu'il n'est normalement pas en mesure de récupérer.
+    locale: fr
+    remediation: Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).
+
+  sqli_en (extends sqli_translation):
+    description: SQL injection is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. It generally allows an attacker to view data that they are not normally able to retrieve.
+    locale: en
+    remediation: Use of Prepared Statements (with Parameterized Queries, you can also use of Stored Procedures and escaping All User Supplied Input.
+
+
+  lfi_translation (template):
+    name: LFI
+
+  lfi_fr (extends lfi_translation):
+    description: Local file inclusion.
+    locale: fr
+    remediation: Utilisation des instructions préparées (avec les requêtes paramétrées, vous pouvez également utiliser les procédures stockées et l'échappement de toutes les entrées fournies par l'utilisateur).
+
+  lfi_en (extends lfi_translation):
+    description: Local file inclusion.
+    locale: en
+    remediation: Make the server send download headers automatically instead of executing files in a specified directory and save your file paths in a secure database and give an ID for every single one, this way users only get to see their ID without viewing or altering the path.
+
+
+  xss_translation (template):
+    name: XSS
+
+  xss_fr (extends xss_translation):
+    description: La XSS une faille qui permet d'injecter du code HTML et/ou Javascript dans des variables mal protégées.
+    locale: fr
+    remediation: Pour se protéger contre les failles XSS, il y a deux solutions possibilités, supprimer tout contenu HTML de la saisie utilisateur ou échapper  les caractères formant les balises HTML
+
+  xss_en (extends xss_translation):
+    description: The XSS flaw, from its full name Cross-Site Scripting, is a flaw that allows HTML and/or Javascript code to be injected into poorly protected variables or databases.
+    locale: en
+    remediation: HTML Encode Before Inserting Untrusted Data into HTML Element Content and add some headers.
+
+
+  xxe_translation (template):
+    name: XXE
+
+  xxe_fr (extends xxe_translation):
+    description: L'injection d'entité externe XML (également connue sous le nom de XXE) est une vulnérabilité de sécurité web qui permet à un attaquant d'interférer avec le traitement des données XML par une application. Elle permet souvent à un attaquant de visualiser des fichiers sur le système de fichiers du serveur d'application et d'interagir avec tout système back-end ou externe auquel l'application elle-même peut accéder.
+    locale: fr
+    remediation: Désactiver la résolution des entités externes et le support de XInclude, qui sont des capacités inutiles.
+
+  xxe_en (extends xxe_translation):
+    description: XML external entity injection (also known as XXE) is a web security vulnerability that allows an attacker to interfere with an application's processing of XML data. It often allows an attacker to view files on the application server filesystem, and to interact with any back-end or external systems that the application itself can access.
+    locale: en
+    remediation: Disable resolution of external entities and support for XInclude, which are unecessary capabilities.
+
+
+  ssrf_translation (template):
+    name: SSRF
+
+  ssrf_fr (extends ssrf_translation):
+    description: La falsification des requêtes côté serveur (également connue sous le nom de SSRF) est une vulnérabilité de la sécurité du Web qui permet à un attaquant d'inciter l'application côté serveur à effectuer des requêtes HTTP vers un domaine arbitraire choisi par l'attaquant.
+    locale: fr
+    remediation: Utilisation d'un Parefeu Web ou Contrôle d'application
+
+  ssrf_en (extends ssrf_translation):
+    description: Server-side request forgery (also known as SSRF) is a web security vulnerability that allows an attacker to induce the server-side application to make HTTP requests to an arbitrary domain of the attacker's choosing.
+    locale: en
+    remediation: Usage of Web Firewall or Application Control
+
+
+  CORS_translation (template):
+    name: CORS
+
+  CORS_fr (extends CORS_translation):
+    description: Cross-origin ressource sharing (également connue sous le nom de CORS) est un mécanisme de navigateur qui permet un accès contrôlé aux ressources situées en dehors d'un domaine donné. Il étend et ajoute de la flexibilité à la politique de l'origine identique (SOP). Cependant, il offre également un potentiel pour les attaques basées sur les domaines croisés, si la politique CORS d'un site web est mal configurée et mise en œuvre. La politique CORS ne constitue pas une protection contre les attaques d'origine croisée telles que la falsification de requêtes intersites (CSRF).
+    locale: fr
+    remediation: N'autorisez que les sites de confiance. Évitez les null whitelisting. Évitez les caractères de remplacement dans les réseaux internes. CORS ne remplace pas les politiques de sécurité côté serveur.
+
+  CORS_en (extends CORS_translation):
+    description: Cross-origin resource sharing (CORS) is a browser mechanism which enables controlled access to resources located outside of a given domain. It extends and adds flexibility to the same-origin policy (SOP). However, it also provides potential for cross-domain based attacks, if a website's CORS policy is poorly configured and implemented. CORS is not a protection against cross-origin attacks such as cross-site request forgery (CSRF).
+    locale: en
+    remediation: Only allow trusted sites. Avoid whitelisting null. Avoid wildcards in internal networks. CORS is not a substitute for server-side security policies
+
+
+  CSRF_translation (template):
+    name: CORS
+
+  CSRF_fr (extends CSRF_translation):
+    description: Cross-site request forger (également connue sous le nom de CSRF) est une vulnérabilité de la sécurité du Web qui permet à un attaquant d'inciter les utilisateurs à effectuer des actions qu'ils n'ont pas l'intention de réaliser. Elle permet à un attaquant de contourner partiellement la politique de la même origine, qui est conçue pour empêcher des sites web différents d'interférer les uns avec les autres.
+    locale: fr
+    remediation: La façon la plus robuste de se défendre contre les attaques CSRF est d'inclure un jeton CSRF dans les requêtes concernées. Le jeton doit être imprévisible avec une entropie élevée, comme pour les jetons de session en général. Lié à la session de l'utilisateur. être strictement validé dans tous les cas avant l'exécution de l'action concernée.
+
+  CSRF_en (extends CSRF_translation):
+    description: Cross-site request forgery (also known as CSRF) is a web security vulnerability that allows an attacker to induce users to perform actions that they do not intend to perform. It allows an attacker to partly circumvent the same origin policy, which is designed to prevent different websites from interfering with each other.
+    locale: en
+    remediation: The most robust way to defend against CSRF attacks is to include a CSRF token within relevant requests. The token should be unpredictable with high entropy, as for session tokens in general. Tied to the user's session. Strictly validated in every case before the relevant action is executed.
+
+
+  SSTI_translation (template):
+    name: SSTI
+
+  SSTI_fr (extends SSTI_translation):
+    description: On parle d'injection de modèle côté serveur lorsqu'un attaquant est capable d'utiliser la syntaxe native des modèles pour injecter une charge utile malveillante dans un modèle, qui est ensuite exécuté côté serveur.
+    locale: fr
+    remediation: La meilleure façon d'éviter l'injection de modèles côté serveur est d'interdire à tout utilisateur de modifier ou de soumettre de nouveaux modèles. Cependant, cela est parfois inévitable en raison d'exigences commerciales. L'utilisation d'un environnement sandbox pour exécuter le code de l'utilisateur est une bonne mesure.
+
+  SSTI_en (extends SSTI_translation):
+    description: Server-side template injection is when an attacker is able to use native template syntax to inject a malicious payload into a template, which is then executed server-side.
+    locale: en
+    remediation: The best way to prevent server-side template injection is to not allow any users to modify or submit new templates. However, this is sometimes unavoidable due to business requirements. Using a sandboxed environment to execute the user's code is a good measure.
+
+  OSinjection_translation (template):
+    name: OSinjection
+
+  OSinjection_fr (extends OSinjection_translation):
+    description: L'injection de commandes OS (également connue sous le nom d'injection de shell) est une vulnérabilité de sécurité web qui permet à un attaquant d'exécuter des commandes de système d'exploitation (OS) arbitraires sur le serveur qui exécute une application, et généralement de compromettre complètement l'application et toutes ses données.
+    locale: fr
+    remediation: Ne jamais faire appel aux commandes du système d'exploitation à partir du code de la couche application. S'il est considéré comme inévitable de faire appel aux commandes du système d'exploitation à partir d'une entrée fournie par l'utilisateur, une validation forte de l'entrée doit être effectuée. Validation par rapport à une liste blanche de valeurs autorisées. Valider que l'entrée est un nombre. Valider que l'entrée ne contient que des caractères alphanumériques, aucune autre syntaxe ou espace.
+
+  OSinjection_en (extends OSinjection_translation):
+    description: OS command injection (also known as shell injection) is a web security vulnerability that allows an attacker to execute arbitrary operating system (OS) commands on the server that is running an application, and typically fully compromise the application and all its data.
+    locale: en
+    remediation: Never call out to OS commands from application-layer code. If it is considered unavoidable to call out to OS commands with user-supplied input, then strong input validation must be performed. Validating against a whitelist of permitted values. Validating that the input is a number. Validating that the input contains only alphanumeric characters, no other syntax or whitespace.

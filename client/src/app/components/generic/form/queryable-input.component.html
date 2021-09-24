@@ -30,7 +30,7 @@
   </ng-template>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event)" [displayWith]="parse"
                     [formControl]="queryableInputControl">
-    <mat-option *ngFor="let option of records" [value]="option">
+    <mat-option *ngFor="let option of records" [value]="option" attr.data-cy="{{ input.name }}-item">
       {{ option.label }}
     </mat-option>
   </mat-autocomplete>

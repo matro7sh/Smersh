@@ -1,0 +1,29 @@
+App\Entity\Mission:
+  mission (template):
+    clients: []
+    endDate: <datetime('+10 days')>
+    name: Default mission name
+    nmapFiler: false
+    nessus: false
+    nessusFiler: false
+    nmap: false
+    startDate: <datetime('+3 days')>
+    users: []
+
+  internal_mission_0 (extends mission):
+    clients:
+      - '@not_apple'
+    credentials: http://path_to_credentials
+    name: FAME MISSION WEB
+    nmap: true
+    pathToCodi: https://codimd.smersh.lan/path_to_codi
+    users:
+      - '@user_pentester'
+
+  internal_mission_1 (extends mission):
+    clients:
+      - '@blue_bird'
+    name: FAKE MISSION 2
+    users:
+      - '@user_pentester'
+      - '@jenaye'

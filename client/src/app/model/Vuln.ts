@@ -5,8 +5,12 @@ import {
   AbstractSerializerApplication,
   ObjectFromAPIInterface,
 } from 'src/app/model/abstract';
-import { VulnTranslationFromAPIInterface, VulnTranslationModelApplication, } from 'src/app/model/VulnTranslation';
+import {
+  VulnTranslationFromAPIInterface,
+  VulnTranslationModelApplication,
+} from 'src/app/model/VulnTranslation';
 import { getTranslation } from 'src/app/helpers/translation';
+import { Locale } from 'src/app/storage/Locale';
 
 const ALLOWED_LANGUAGES = ['fr', 'en', 'ar', 'es', 'ru'];
 
@@ -34,6 +38,7 @@ export class VulnModelApplication extends AbstractModelApplication {
   description: string;
   hostVulns: string[];
   impact: string;
+  locale: string;
   name: string;
   translations: {
     [key: string]: VulnTranslationModelApplication;
@@ -65,7 +70,9 @@ export class VulnModelApplication extends AbstractModelApplication {
 }
 
 class VulnModelAPI extends AbstractModelAPI {
+  description: string;
   impact: string;
+  name: string;
   translations: {
     [key: string]: VulnTranslationModelApplication;
   };
@@ -73,7 +80,9 @@ class VulnModelAPI extends AbstractModelAPI {
 
   constructor(props: VulnModelApplication) {
     super(props);
+    this.description = props.description;
     this.impact = props.impact;
+    this.name = props.name;
     this.translations = props.translations;
     this.vulnType = props.type;
   }

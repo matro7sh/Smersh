@@ -81,6 +81,7 @@ class Vuln extends AbstractTranslatable
 
     public function __construct()
     {
+        $this->currentLocale = 'en';
         $this->translations = new ArrayCollection();
         parent::__construct();
         $this->hostVulns = new ArrayCollection();

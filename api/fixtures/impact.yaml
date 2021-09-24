@@ -1,0 +1,3 @@
+App\Entity\Impact:
+  impact_{Low, Medium, High, Critical}:
+    name: <current()>

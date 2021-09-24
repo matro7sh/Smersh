@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AbstractService } from 'src/app/services/abstract';
 import { Locale } from 'src/app/storage/Locale';
-import { VulnNormalizerApplication, VulnSerializerApplication, } from 'src/app/model/Vuln';
+import {
+  VulnNormalizerApplication,
+  VulnSerializerApplication,
+} from 'src/app/model/Vuln';
 import { AbstractModelApplication } from 'src/app/model/abstract';
 
 @Injectable({
@@ -33,6 +36,6 @@ export class VulnsService extends AbstractService {
   getData(
     params: Record<string, string> = {}
   ): Promise<{ count: number; data: AbstractModelApplication[] }> {
-    return super.getData({locale: new Locale().get(), ...params});
+    return super.getData({ locale: new Locale().get(), ...params });
   }
 }

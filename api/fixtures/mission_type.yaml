@@ -1,0 +1,6 @@
+App\Entity\MissionType:
+  external:
+    name: Web Penetration Test
+
+  internal:
+    name: Infrastructure Penetration Test

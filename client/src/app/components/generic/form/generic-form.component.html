@@ -1,12 +1,18 @@
-<h1>{{ formType }} {{ singularResource }}</h1>
+<h1 data-cy="title">{{ formType }} {{ singularResource }}</h1>
 <form #genericForm="ngForm" (ngSubmit)="onSubmit(genericForm)">
   <ng-container *ngFor="let input of inputs">
     <ng-container [ngSwitch]="true">
       <div *ngSwitchCase="input.inputType === ''">
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>{{ input.label }}</mat-label>
-          <input [ngModel]="getInputValue(input)" autocomplete="off" matInput name="{{ input.name }}"
-                 placeholder="{{ input.placeholder }}" type="{{ input.type }}"/>
+          <mat-label [attr.for]="input.name">{{ input.label }}</mat-label>
+          <input [ngModel]="getInputValue(input)"
+                 autocomplete="off"
+                 matInput
+                 [attr.name]="input.name"
+                 name="{{ input.name }}"
+                 placeholder="{{ input.placeholder }}"
+                 type="{{ input.type }}"
+          />
         </mat-form-field>
       </div>
       <div *ngSwitchCase="input.inputType === 'date'">

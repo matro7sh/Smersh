@@ -1,0 +1,6 @@
+App\Entity\VulnType:
+  vuln_type_0:
+    name: Web Penetration Test
+
+  vuln_type_1:
+    name: Infrastructure Penetration Test

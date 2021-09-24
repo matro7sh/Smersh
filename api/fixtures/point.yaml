@@ -1,6 +1,6 @@
 App\Entity\PositivePoint:
-  positive_point_cloisonnement:
-    name: Cloisonnement
+  positive_point_partitions:
+    name: Partitions
     description: The partitioning between accounts is managed on the server side. It is not possible to elevate privileges or access other users data.
 
   positive_point_sqli:

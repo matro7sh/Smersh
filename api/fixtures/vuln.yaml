@@ -43,4 +43,4 @@ App\Entity\Vuln:
   osinjection (extends vulnerability):
     translations:
       - '@OSinjection_fr'
-      - '@OSinjection_fr'
+      - '@OSinjection_en'

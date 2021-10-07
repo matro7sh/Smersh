@@ -110,6 +110,7 @@ App\Entity\Translation\VulnTranslation:
     locale: en
     remediation: The best way to prevent server-side template injection is to not allow any users to modify or submit new templates. However, this is sometimes unavoidable due to business requirements. Using a sandboxed environment to execute the user's code is a good measure.
 
+
   OSinjection_translation (template):
     name: OSinjection
 
@@ -122,3 +123,144 @@ App\Entity\Translation\VulnTranslation:
     description: OS command injection (also known as shell injection) is a web security vulnerability that allows an attacker to execute arbitrary operating system (OS) commands on the server that is running an application, and typically fully compromise the application and all its data.
     locale: en
     remediation: Never call out to OS commands from application-layer code. If it is considered unavoidable to call out to OS commands with user-supplied input, then strong input validation must be performed. Validating against a whitelist of permitted values. Validating that the input is a number. Validating that the input contains only alphanumeric characters, no other syntax or whitespace.
+
+
+  XPATH-Injection_translation (template):
+    name: XPATH Injection
+
+  XPATH-Injection_fr (extends XPATH-Injection_translation):
+    description: Les attaques par injection XPath se produisent lorsqu'un site web utilise des informations fournies par l'utilisateur pour construire une requête XPath pour des données XML. En envoyant des informations intentionnellement malformées sur le site web, un attaquant peut découvrir la structure des données XML ou accéder à des données auxquelles il n'a normalement pas accès. Il peut même être en mesure d'élever ses privilèges sur le site Web si les données XML sont utilisées pour l'authentification (comme un fichier utilisateur basé sur XML).
+    locale: fr
+    remediation: Utilisez une requête XPath1 précompilée. Les requêtes XPath précompilées sont déjà prédéfinies avant que le programme ne s'exécute, plutôt que d'être créées à la volée après que l'entrée de l'utilisateur ait été ajoutée à la chaîne.
+
+  XPATH-Injection_en (extends XPATH-Injection_translation):
+    description: XPath Injection attacks occur when a web site uses user-supplied information to construct an XPath query for XML data. By sending intentionally malformed information into the web site, an attacker can find out how the XML data is structured, or access data that they may not normally have access to. They may even be able to elevate their privileges on the web site if the XML data is being used for authentication (such as an XML based user file).
+    locale: en
+    remediation: Use a precompiled XPath1 query. Precompiled XPath queries are already preset before the program executes, rather than created on the fly after the user’s input has been added to the string.
+
+
+
+  HRHI_translation (template):
+    name: HTTP Response Header Injection
+
+  HRHI_fr (extends HRHI_translation):
+    description: Les vulnérabilités d'injection d'en-tête de réponse HTTP apparaissent lorsque des données fournies par l'utilisateur sont copiées dans un en-tête de réponse d'une manière non sécurisée. Différents types d'attaques peuvent être menées via les vulnérabilités d'injection d'en-tête de réponse HTTP.
+    locale: fr
+    remediation: N'autorisez que les chaînes alphanumériques courtes à être copiées dans les en-têtes, toute autre entrée doit être rejetée. Au minimum, les entrées contenant des caractères dont le code ASCII est inférieur à 0x20 doivent être rejetées.
+  
+  HRHI_en (extends HRHI_translation):
+    description: HTTP response header injection vulnerabilities arise when user-supplied data is copied into a response header in an unsafe way. Various kinds of attack can be delivered via HTTP response header injection vulnerabilities.
+    locale: en
+    remediation: If possible, applications should avoid copying user-controllable data into HTTP response headers. If this is unavoidable, then the data should be strictly validated to prevent response header injection attacks. Allow only short alphanumeric strings to be copied into headers, any other input should be rejected. At a minimum, input containing any characters with ASCII codes less than 0x20 should be rejected.
+
+
+  LDAP-Injection_translation (template):
+    name: LDAP Injection
+
+  LDAP-Injection_fr (extends LDAP-Injection_translation):
+    description: L'injection LDAP se produit lorsque des données contrôlables par l'utilisateur sont copiées de manière non sécurisée dans une requête LDAP exécutée par l'application. Selon la fonction pour laquelle la requête est utilisée, l'attaquant peut être en mesure de récupérer des données sensibles auxquelles il n'est pas autorisé, ou de détourner la logique de l'application pour effectuer une action non autorisée.
+    locale: fr
+    remediation: N'autorisez que les chaînes alphanumériques courtes à être copiées dans les requêtes, et toute autre entrée doit être rejetée. Au minimum, les entrées contenant des métacaractères LDAP doivent être rejetées ; les caractères qui doivent être bloqués comprennent ( ) ; , * | & = et les espaces.
+  
+  LDAP-Injection_en (extends LDAP-Injection_translation):
+    description: LDAP injection arises when user-controllable data is copied in an unsafe way into an LDAP query that is performed by the application. Depending on the function for which the query is used, the attacker may be able to retrieve sensitive data to which they are not authorized, or subvert the application's logic to perform some unauthorized action.
+    locale: en
+    remediation: If possible, applications should avoid copying user-controllable data into LDAP queries. If this is unavoidable, then the data should be strictly validated to prevent LDAP injection attacks. Allow only short alphanumeric strings to be copied into queries, and any other input should be rejected. At a minimum, input containing any LDAP metacharacters should be rejected; characters that should be blocked include ( ) ; , * | & = and whitespace.
+
+
+  SSI_translation (template):
+    name: Server-Side Include
+
+  SSI_fr (extends SSI_translation):
+    description: Les vulnérabilités d'injection SSI (Server-Side Include) surviennent lorsqu'une application incorpore des données contrôlables par l'utilisateur dans une réponse qui est ensuite analysée à la recherche de directives Server-Side Include. Si les données ne sont pas strictement validées, en fonction de la configuration du serveur, un attaquant peut être en mesure de lire des fichiers protégés ou d'exécuter du code arbitraire sur le serveur, avec le même impact que l'injection de commandes OS.
+    locale: fr
+    remediation: Les applications doivent éviter d'incorporer des données contrôlables par l'utilisateur dans les pages qui sont traitées pour les directives SSI. Sinon, seules de courtes chaînes alphanumériques devraient être acceptées. Les entrées contenant toute autre donnée, y compris tout métacaractère SSI imaginable, doivent être rejetées.
+  
+  SSI_en (extends SSI_translation):
+    description: Server-Side Include (SSI) injection vulnerabilities arise when an application incorporates user-controllable data into response that is then parsed for Server-Side Include directives. If the data is not strictly validated, depending on the server configuration, an attacker might be able to read protected files, or perform arbitrary code execution on the server, with the same impact as OS command injection.
+    locale: en
+    remediation: Applications should avoid incorporating user-controllable data into pages that are processed for SSI directives. Otherwise, only short alphanumeric strings should be accepted. Input containing any other data, including any conceivable SSI metacharacter, should be rejected.
+
+
+  XML-Injection_translation (template):
+    name: XML Injection
+
+  XML-Injection_fr (extends XML-Injection_translation):
+    description: Les vulnérabilités d'injection XML ou SOAP surviennent lorsqu'une entrée utilisateur est insérée dans un document XML côté serveur ou un message SOAP d'une manière non sécurisée. Selon la fonction dans laquelle le XML est utilisé, il peut être possible d'interférer avec la logique de l'application, d'effectuer des actions non autorisées ou d'accéder à des données sensibles.
+    locale: fr
+    remediation: L'application doit valider ou assainir les entrées de l'utilisateur avant de les incorporer dans un document XML ou un message SOAP. Il peut être possible de bloquer toute entrée contenant des métacaractères XML tels que < et >. 
+  
+  XML-Injection_en (extends XML-Injection_translation):
+    description: XML or SOAP injection vulnerabilities arise when user input is inserted into a server-side XML document or SOAP message in an unsafe way. Depending on the function in which the XML is used, it may be possible to interfere with the application's logic, to perform unauthorized actions or access sensitive data.
+    locale: en
+    remediation: The application should validate or sanitize user input before incorporating it into an XML document or SOAP message. It may be possible to block any input containing XML metacharacters such as < and >. 
+
+
+  Code-Injection_translation (template):
+    name: Code Injection
+
+  Code-Injection_fr (extends Code-Injection_translation):
+    description: Les vulnérabilités d'injection de code côté serveur apparaissent lorsqu'une application incorpore des données contrôlables par l'utilisateur dans une chaîne de caractères qui est évaluée dynamiquement par un interpréteur de code. Si les données de l'utilisateur ne sont pas strictement validées, un attaquant peut utiliser des entrées falsifiées pour modifier le code à exécuter, et injecter du code arbitraire qui sera exécuté par le serveur.
+    locale: fr
+    remediation: Dans la mesure du possible, les applications doivent éviter d'incorporer des données contrôlables par l'utilisateur dans du code évalué dynamiquement. S'il est considéré comme inévitable d'incorporer des données fournies par l'utilisateur dans du code évalué dynamiquement, ces données doivent être strictement validées. Idéalement, une liste blanche de valeurs spécifiques acceptées devrait être utilisée.
+  
+  Code-Injection_en (extends Code-Injection_translation):
+    description: Server-side code injection vulnerabilities arise when an application incorporates user-controllable data into a string that is dynamically evaluated by a code interpreter. If the user data is not strictly validated, an attacker can use crafted input to modify the code to be executed, and inject arbitrary code that will be executed by the server.
+    locale: en
+    remediation: Whenever possible, applications should avoid incorporating user-controllable data into dynamically evaluated code. If it is considered unavoidable to incorporate user-supplied data into dynamically evaluated code, then the data should be strictly validated. Ideally, a whitelist of specific accepted values should be used
+
+
+  HTTP-Request-Smuggling_translation (template):
+    name: HTTP Request Smuggling
+
+  HTTP-Request-Smuggling_fr (extends HTTP-Request-Smuggling_translation):
+    description: La contrebande de requêtes HTTP est une technique permettant d'interférer avec la manière dont un site Web traite les séquences de requêtes HTTP reçues d'un ou de plusieurs utilisateurs. Les vulnérabilités de Request smuggling sont souvent de nature critique, permettant à un attaquant de contourner les contrôles de sécurité, d'obtenir un accès non autorisé à des données sensibles et de compromettre directement d'autres utilisateurs d'applications.
+    locale: fr
+    remediation: Désactivez la réutilisation des connexions back-end, de sorte que chaque demande back-end est envoyée sur une connexion réseau distincte. Utilisez HTTP/2 pour les connexions back-end, car ce protocole évite toute ambiguïté quant aux limites entre les requêtes. Utilisez exactement le même logiciel de serveur web pour les serveurs frontaux et dorsaux, afin qu'ils s'accordent sur les limites entre les demandes.
+  
+  HTTP-Request-Smuggling_en (extends HTTP-Request-Smuggling_translation):
+    description: HTTP request smuggling is a technique for interfering with the way a web site processes sequences of HTTP requests that are received from one or more users. Request smuggling vulnerabilities are often critical in nature, allowing an attacker to bypass security controls, gain unauthorized access to sensitive data, and directly compromise other application users.
+    locale: en
+    remediation: Disable reuse of back-end connections, so that each back-end request is sent over a separate network connection. Use HTTP/2 for back-end connections, as this protocol prevents ambiguity about the boundaries between requests. Use exactly the same web server software for the front-end and back-end servers, so that they agree about the boundaries between requests.
+
+
+  Web-Cache-Poisoning_translation (template):
+    name: Web Cache Poisoning
+
+  Web-Cache-Poisoning_fr (extends Web-Cache-Poisoning_translation):
+    description: L'empoisonnement du cache web est une technique avancée par laquelle un attaquant exploite le comportement d'un serveur web et du cache de manière à ce qu'une réponse HTTP nuisible soit servie aux autres utilisateurs. Un cache web empoisonné peut potentiellement être un moyen dévastateur de distribuer de nombreuses attaques différentes, exploitant des vulnérabilités telles que XSS, l'injection de JavaScript, la redirection ouverte, etc.
+    locale: fr
+    remediation: Désactivez la mise en cache si vous n'en avez pas besoin. Si un en-tête n'est pas nécessaire au fonctionnement du site, il doit être désactivé. N'acceptez pas les grosses requêtes GET. Sachez que certaines technologies tierces peuvent le permettre par défaut. Corrigez les vulnérabilités côté client, même si elles semblent inexploitables. Si vous envisagez d'exclure quelque chose de la clé de cache pour des raisons de performances, réécrivez plutôt la requête.
+  
+  Web-Cache-Poisoning_en (extends Web-Cache-Poisoning_translation):
+    description: Web cache poisoning is an advanced technique whereby an attacker exploits the behavior of a web server and cache so that a harmful HTTP response is served to other users. A poisoned web cache can potentially be a devastating means of distributing numerous different attacks, exploiting vulnerabilities such as XSS, JavaScript injection, open redirection, and so on.
+    locale: en
+    remediation: Disable caching if you do not need it. If a header isn't needed for the site to work, then it should be disabled. Don't accept fat GET requests. Be aware that some third-party technologies may permit this by default. Patch client-side vulnerabilities even if they seem unexploitable. If you are considering excluding something from the cache key for performance reasons, rewrite the request instead.
+
+
+  Source-Code-Disclosure_translation (template):
+    name: Source Code Disclosure
+
+  Source-Code-Disclosure_fr (extends Source-Code-Disclosure_translation):
+    description: Le code source destiné à être conservé côté serveur peut parfois finir par être divulgué aux utilisateurs. Ce code peut contenir des informations sensibles telles que des mots de passe de bases de données et des clés secrètes, qui peuvent aider des utilisateurs malveillants à formuler des attaques contre l'application.
+    locale: fr
+    remediation: Le code source côté serveur est normalement divulgué aux clients à la suite d'erreurs typographiques dans les scripts ou d'une mauvaise configuration, comme le fait de ne pas accorder de droits d'exécution à un script ou à un répertoire. Examinez la cause de la divulgation du code et empêchez-la de se produire.
+  
+  Source-Code-Disclosure_en (extends Source-Code-Disclosure_translation):
+    description: Source code intended to be kept server-side can sometimes end up being disclosed to users. Such code may contain sensitive information such as database passwords and secret keys, which may help malicious users formulate attacks against the application.
+    locale: en
+    remediation: Server-side source code is normally disclosed to clients as a result of typographical errors in scripts or because of misconfiguration, such as failing to grant executable permissions to a script or directory. Review the cause of the code disclosure and prevent it from happening.
+
+
+  Backup-File_translation (template):
+    name: Backup File
+
+  Backup-File_fr (extends Backup-File_translation):
+    description: Les sauvegardes accessibles au public et les copies périmées de fichiers peuvent fournir aux attaquants une surface d'attaque supplémentaire. Selon la configuration du serveur et le type de fichier, ils peuvent également exposer le code source, les détails de la configuration et d'autres informations destinées à rester secrètes.
+    locale: fr
+    remediation: Examinez le fichier pour déterminer s'il est destiné à être accessible au public, et supprimez-le de la racine web du serveur si ce n'est pas le cas. Il peut également être utile d'auditer le contenu du serveur pour trouver d'autres fichiers périmés et prendre des mesures pour éviter que le problème ne se reproduise.
+  
+  Backup-File_en (extends Backup-File_translation):
+    description: Publicly accessible backups and outdated copies of files can provide attackers with extra attack surface. Depending on the server configuration and file type, they may also expose source code, configuration details, and other information intended to remain secret. 
+    locale: en
+    remediation: Review the file to identify whether it's intended to be publicly accessible, and remove it from the server's web root if it isn't. It may also be worth auditing the server contents to find other outdated files, and taking measures to prevent the problem from reoccurring.

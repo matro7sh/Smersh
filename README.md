@@ -3,6 +3,7 @@
 ![License](https://img.shields.io/badge/License-MIT-darkred.svg)
 ![GitHub stars](https://img.shields.io/github/stars/CMEPW/Smersh)
 [![Rawsec's CyberSecurity Inventory](https://inventory.raw.pm/img/badges/Rawsec-inventoried-FF5050_flat.svg)](https://inventory.raw.pm/tools.html#rawsec_cli)
+[![Black Hat Arsenal](https://img.shields.io/badge/Blackhat%20Arsenal-EUROPE%202021-blue)](https://img.shields.io/badge/Blackhat%20Arsenal-EUROPE%202021-blue)
 
 <p align="center">
 <img width="100" alt="logo" src="https://raw.githubusercontent.com/CMEPW/Smersh/master/smersh-body.png">

@@ -36,7 +36,7 @@ git push origin MyBranch
 
 # Contributors 
 
-- Darkweak - https://github.com/Darkweak
+- darkweak - https://github.com/darkweak
 - michmich1000 - https://michmich.eu
 - SilouFr  - https://github.com/SilouFr
 - sanchis  - https://github.com/sanchis

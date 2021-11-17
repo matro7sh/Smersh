@@ -13,7 +13,7 @@ x-cache-from:
 
 services:
   traefik:
-    image: traefik:v2.4
+    image: traefik:v2.5
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.toml:/etc/traefik/traefik.toml
@@ -91,7 +91,7 @@ services:
     <<: *network
 
   db_codimd:
-    image: postgres:latest
+    image: postgres:12-alpine
     environment:
       - POSTGRES_DB=${CODI_DB_NAME}
       - POSTGRES_PASSWORD=${CODI_DB_PASS}

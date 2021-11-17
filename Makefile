@@ -1,4 +1,4 @@
-.PHONY: cache composer-install composer-update create-network help install jwt up update upAll
+.PHONY: cache composer-install composer-update create-network help install jwt setup-hosts up update upAll
 
 CONFIG_DIR=api/config
 DC=docker-compose
@@ -32,7 +32,7 @@ init-db:
 
 install: ## Install and setup project
 	cp api/.env-dist api/.env
-	$(MAKE) create-network up jwt composer-install cache
+	$(MAKE) setup-hosts create-network up jwt composer-install cache
 
 initialize: install reset-db ## Initialize and setup the project
 
@@ -43,6 +43,11 @@ load-data:
 	$(BIN_CONSOLE) ha:fi:load --quiet
 
 reset-db: init-db load-data
+
+setup-hosts:
+	@echo "Setup hosts..."
+	@(grep -q -F "127.0.0.1 smersh.lan api.smersh.lan bitwarden.smersh.lan www.smersh.lan codimd.smersh.lan" /etc/hosts) || \
+		(echo "127.0.0.1 smersh.lan api.smersh.lan bitwarden.smersh.lan www.smersh.lan codimd.smersh.lan" | sudo tee -a /etc/hosts > /dev/null)
 
 up: ## Start containers
 	$(DC_UP) client api

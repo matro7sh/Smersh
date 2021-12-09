@@ -1,17 +1,17 @@
 {
   "side-bar": {
-    "DASHBOARD": "Приборная панель",
+    "DASHBOARD": "Контрольная панель",
     "CLIENTS": "Клиенты",
-    "HOSTS": "Гости",
-    "IMPACTS": "Действия",
+    "HOSTS": "Имя домена",
+    "IMPACTS": "Последствия",
     "MISSIONS": "Миссии",
-    "USERS": "Пользователи",
+    "USERS": "Юзер",
     "VULNS": "Уязвимости"
   },
   "dashboard": {
-    "WELCOME": "Добро пожаловать в твою личную панель",
+    "WELCOME": "Добро пожаловать в вашу контрольная панель",
     "LINKED": "Назначенные миссии",
-    "NOMISSION": "У тебя еще нет миссии",
+    "NOMISSION": "У вас еще нет миссии",
     "MYMISSION": "Мои миссии",
     "MYROLES": "Мои роли"
   },
@@ -32,7 +32,8 @@
   },
   "client-create": {
     "CREATE": "Создать нового клиента",
-    "NAME": "Имя клиента",
+    "NAME": "Имя клиент`а",
+    "MAIL": "Мейл",
     "FIRSTNAME": "Имя",
     "LASTNAME": "Фамилия",
     "PHONE": "Номер телефона"
@@ -42,6 +43,70 @@
     "TARGET": "Цель"
   },
   "host-edit": {
-    "TECHNOLOGY": "Технология"
+    "TECHNOLOGY": "Технология",
+    "NAME": "Имя"
+  },
+  "impact-create": {
+    "NAME": "Имя"
+  },
+  "impact-edit": {
+    "NAME": "Имя"
+  },
+  "mission-create": {
+    "CREATENEW": "Нови мисся",
+    "STARTDATE": "Дата начала",
+    "ENDDATE": "Дата завершения",
+    "MISSIONNAME": "Название миссии",
+    "CREDENTIALS": "Идентификаторы",
+    "TYPEOFMISSION ": "Тип миссии",
+    "CLIENT": "Заказчик",
+    "SELECTPENTESTERS": "Хакеры",
+    "CODI": "Ссылка на КодиМд"
+  },
+  "mission-edit": {
+    "STARTDATE": "Дата начала",
+    "ENDDATE": "Дата завершения",
+    "CLIENTNAME": "Заказчик",
+    "CREDENTIALS": "Идентификаторы"
+  },
+  "mission-single": {
+    "STARTAT": "Дата начала",
+    "ENDAT": "Дата завершения",
+    "GENERATE-REPORT": "Генерировать доклад",
+    "DUMPJSON": "Скачать данные миссии (JSON)",
+    "CODI": "Добавить или изменить ссылку на КодиМД",
+    "BURP": "Загрузка файла конфигурации BurpSuite",
+    "CLIENTS": "Заказчики",
+    "IMPORT": "Привозить домени",
+    "ADDNEWHOST": "Добавлять домена",
+    "SCOPE": "Периметр",
+    "PENTESTERS": "Хакеры",
+    "STEPS": "Этапи",
+    "CREDENTIALS": "Идентификаторы"
+  },
+  "user-create": {
+    "USERNAME": "Имя пользователя",
+    "PASSWORD": "Пароль",
+    "EMAIL": "Эмаль",
+    "PHONE": "Номер телефона",
+    "CITY": "Город"
+  },
+  "user-edit": {
+    "USERNAME": "Имя пользователя",
+    "EMAIL": "Эмаль",
+    "PHONE": "Номер телефона",
+    "CITY": "город"
+  },
+  "vulns-create": {
+    "NAME": "Имя",
+    "DESCRIPTION": "Описание",
+    "REMEDIATION": "Ремедиация",
+    "SELECTVULNSTYPE": "Тип уязвимости",
+    "SELECTIMPACTS": "Последствия"
+  },
+  "vulns-edit": {
+    "NAME": "Имя",
+    "DESCRIPTION": "Описание",
+    "REMEDIATION": "Ремедиация"
   }
 }

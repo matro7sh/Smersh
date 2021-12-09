@@ -5,12 +5,12 @@
     "HOSTS": "Nom de domaine",
     "IMPACTS": "Impacts",
     "MISSIONS": "Missions",
-    "USERS": "Users",
-    "VULNS": "Vulnerabilities"
+    "USERS": "Utilisateurs",
+    "VULNS": "Vulnerabilités"
   },
   "dashboard": {
     "WELCOME": "Bienvenue sur votre tableau de bord",
-    "LINKED": "Mission assignés",
+    "LINKED": "Mission assignées",
     "NOMISSION": "Vous n'avez aucune mission pour le moment",
     "MYMISSION": "Mes missions",
     "MYROLES": "Mes rôles"
@@ -24,8 +24,8 @@
   },
   "add-vulns-to-host-external": {
     "ADDVULNTO": "Ajouter une vulnerabilité au domaine",
-    "SELECTVULNS": "Selectionnez une vulnerabilité",
-    "SELECTIMPACTS": "Selectionnez un impact",
+    "SELECTVULNS": "Selectionner une vulnerabilité",
+    "SELECTIMPACTS": "Selectionner un impact",
     "CURRENTSTATE": "Etat constaté",
     "CREATENEWVULN": "Créer une nouvelle vulnerabilité",
     "ADDPICTURE": "Ajouter une image"
@@ -39,11 +39,11 @@
     "PHONE": "Téléphone"
   },
   "edit-vuln-with-state": {
-    "VULN": "Vulnerability",
-    "TARGET": "Target"
+    "VULN": "Vulnerabilité",
+    "TARGET": "Cible"
   },
   "host-edit": {
-    "TECHNOLOGY": "Technology",
+    "TECHNOLOGY": "Technologie",
     "NAME": "Nom"
   },
   "impact-create": {
@@ -61,7 +61,7 @@
     "TYPEOFMISSION ": "Type de mission",
     "CLIENT": "Client",
     "SELECTPENTESTERS": "Pentesters",
-    "CODI": "Lien vers le CodiMD"
+    "CODI": "Lien vers l'interface CodiMD"
   },
   "mission-edit": {
     "STARTDATE": "Date de début",
@@ -74,11 +74,11 @@
     "ENDAT": "Date de fin",
     "GENERATE-REPORT": "Génération du rapport",
     "DUMPJSON": "Téléchargement des données mission (JSON)",
-    "CODI": "Ajoutez ou modifier le lien codiMD",
+    "CODI": "Ajouter ou modifier le lien codiMD",
     "BURP": "Téléchargement du fichier de configuration BurpSuite",
     "CLIENTS": "Client",
-    "IMPORT": "Import de plusieurs domaine",
-    "ADDNEWHOST": "Ajoutez un host manuellement",
+    "IMPORT": "Import de plusieurs noms de domaines",
+    "ADDNEWHOST": "Ajouter un nom de domaine manuellement",
     "SCOPE": "Périmètre",
     "PENTESTERS": "Auditeurs",
     "STEPS": "Etapes",

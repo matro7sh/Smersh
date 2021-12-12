@@ -11,7 +11,7 @@
   "dashboard": {
     "WELCOME": "Welcome to your dashboard",
     "LINKED": "Assigned missions",
-    "NOMISSON": "You don't have mission yet",
+    "NOMISSON": "You don't have any missions yet",
     "MUMISSION": "My missions",
     "MYROLES": "My roles"
   },
@@ -32,7 +32,7 @@
   },
   "client-create": {
     "create": "Create a new client",
-    "name": "Client name",
+    "name": "Client's name",
     "firstname": "Firstname",
     "lastname": "Lastname",
     "phone": "Phone"
@@ -72,7 +72,7 @@
     "STARTAT": "Start date",
     "ENDAT": "End date",
     "GENERATE-REPORT": "Generate report",
-    "DUMPJSON": "Dump data to json file",
+    "DUMPJSON": "Dump data to JSON file",
     "CODI": "Add or update codiMD link",
     "BURP": "Download burp configuration",
     "CLIENTS": "Client",

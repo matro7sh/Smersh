@@ -1,0 +1,112 @@
+{
+  "side-bar": {
+    "DASHBOARD": "Панель інструментів",
+    "CLIENTS": "Клієнт",
+    "HOSTS": "ім”я доменне",
+    "IMPACTS": "Впливів",
+    "MISSIONS": "місії",
+    "USERS": "Користувачі",
+    "VULNS": "Вразливості"
+  },
+  "dashboard": {
+    "WELCOME": "Ласкаво просимо до вашої панелі інструментів",
+    "LINKED": "Призначені місії",
+    "NOMISSION": "Ви не маєте жодних місій наразі",
+    "MYMISSION": "Мої міссії",
+    "MYROLES": "Мої ролі"
+  },
+  "button": {
+    "SHOW": "Бачити",
+    "EDIT": "Корегувати",
+    "DELETE": "Видалити",
+    "SUBMIT": "Створити",
+    "ADD": "Додати"
+  },
+  "add-vulns-to-host-external": {
+    "ADDVULNTO": "Додати вразливість домену",
+    "SELECTVULNS": "Обрати вразливість",
+    "SELECTIMPACTS": "Обрати вплив",
+    "CURRENTSTATE": "Констатація стану",
+    "CREATENEWVULN": "Створити нову вразливість",
+    "ADDPICTURE": "Додати зображення"
+  },
+  "client-create": {
+    "CREATE": "Створити нового клієнта",
+    "NAME": "ім'я клієнта",
+    "MAIL": "Мейл",
+    "FIRSTNAME": "ім'я",
+    "LASTNAME": "Прізвище",
+    "PHONE": "Телефонний номер"
+  },
+  "edit-vuln-with-state": {
+    "VULN": "Уразливість",
+    "TARGET": "Ціль"
+  },
+  "host-edit": {
+    "TECHNOLOGY": "Технологія",
+    "NAME": "ім'я"
+  },
+  "impact-create": {
+    "NAME": "ім'я"
+  },
+  "impact-edit": {
+    "NAME": "ім'я"
+  },
+  "mission-create": {
+    "CREATENEW": "Нова місіяn",
+    "STARTDATE": "Дата початку",
+    "ENDDATE": "Дата завершення",
+    "MISSIONNAME": "Прізвище de la mission",
+    "CREDENTIALS": "Ніки",
+    "TYPEOFMISSION ": "Тип місії",
+    "CLIENT": "Клієнт",
+    "SELECTPENTESTERS": "Партнери",
+    "CODI": "Посилання на кодіМД"
+  },
+  "mission-edit": {
+    "STARTDATE": "Дата початку",
+    "ENDDATE": "Дата завершення",
+    "CLIENTNAME": "Клієнт",
+    "CREDENTIALS": "Ніки"
+  },
+  "mission-single": {
+    "STARTAT": "Дата початку",
+    "ENDAT": "Дата завершення",
+    "GENERATE-REPORT": "Загальний звіт",
+    "DUMPJSON": "Завантаження даних місії (JSON)",
+    "CODI": "Додати або змінити посилання на кодіМД",
+    "BURP": "Завантаження файлу конфігурації BurpSuite",
+    "CLIENTS": "Клієнт",
+    "IMPORT": "Перенос декількох доменів",
+    "ADDNEWHOST": "Додати хост вручну",
+    "SCOPE": "Периметр",
+    "PENTESTERS": "Партнери",
+    "STEPS": "Етапи",
+    "CREDENTIALS": "Ніки"
+  },
+  "user-create": {
+    "USERNAME": "ім'я користувача",
+    "PASSWORD": "Пароль",
+    "EMAIL": "Мейл",
+    "PHONE": "Телефонний номер",
+    "CITY": "Місто"
+  },
+  "user-edit": {
+    "USERNAME": "ім'я користувача",
+    "EMAIL": "Мейл",
+    "PHONE": "Телефонний номер",
+    "CITY": "Місто"
+  },
+  "vulns-create": {
+    "NAME": "ім'я",
+    "DESCRIPTION": "Опис",
+    "REMEDIATION": "Санація",
+    "SELECTVULNSTYPE": "Вид вразливості",
+  "SELECTIMPACTS": "Вплив"
+  },
+  "vulns-edit": {
+    "NAME": "ім'я",
+    "DESCRIPTION": "Опис",
+    "REMEDIATION": "Санація"
+  }
+}

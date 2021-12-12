@@ -9,4 +9,4 @@ config/jwt/*.pem
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
-public/media/
+public/media/**

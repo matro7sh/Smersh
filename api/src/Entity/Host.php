@@ -40,7 +40,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      }
  * )
  * @ORM\Entity(repositoryClass=HostRepository::class)
- * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "technology": "ipartial"})
+ * @ApiFilter(SearchFilter::class, properties={"name": "ipartial", "technology": "ipartial", "state.code": "exact"})
  */
 class Host
 {
@@ -71,9 +71,16 @@ class Host
     /**
      * @ORM\Column(type="boolean", options={"default":0})
      * @Groups({"MissionSingleOutput", "HostDashboard"})
+     * @deprecated
      */
     private $checked = false;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="State::class", inversedBy="hosts")
+     * @JoinColumn(name="state_id", referencedColumnName="id", nullable=true)
+     * @Groups({"MissionSingleOutput", "HostDashboard"})
+     */
+    private ?State $state = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -186,5 +193,24 @@ class Host
     public function getHostVulns(): Collection
     {
         return $this->hostVulns;
+    }
+
+    /**
+     * @return State|null
+     */
+    public function getState(): ?State
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param State|null $state
+     * @return Host
+     */
+    public function setState(?State $state): self
+    {
+        $this->state = $state;
+
+        return $this;
     }
 }

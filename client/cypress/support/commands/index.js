@@ -52,7 +52,7 @@ Cypress.Commands.add(
     const timestamp = Date.now();
     cy.intercept(request).as(`handleRequest-${timestamp}`);
     action();
-    cy.wait(`@handleRequest-${timestamp}`).should(callback);
+    cy.wait(1000).wait(`@handleRequest-${timestamp}`).should(callback);
   }
 );
 

@@ -48,8 +48,14 @@ describe('Should test vulns', () => {
 
     cy.get('button[type=submit]').click();
 
+
     // should go to vulnerabilities after creating
     cy.urlInclude(vulnerabilities);
+
+    // should go to the next page
+    cy.get('button[type=button]').last().click();
+    cy.wait(750)
+
     cy.get('mat-row').last().contains(name);
     cy.get('mat-row').last().contains(description);
     cy.get('mat-row').last().contains(remediation);

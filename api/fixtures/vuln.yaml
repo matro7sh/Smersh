@@ -44,3 +44,53 @@ App\Entity\Vuln:
     translations:
       - '@OSinjection_fr'
       - '@OSinjection_en'
+
+  xpath-injection (extends vulnerability):
+    translations:
+      - '@XPATH-Injection_fr'
+      - '@XPATH-Injection_en'
+
+  hrhi (extends vulnerability):
+    translations:
+      - '@HRHI_fr'
+      - '@HRHI_en'
+
+  ldap-injection (extends vulnerability):
+    translations:
+      - '@LDAP-Injection_fr'
+      - '@LDAP-Injection_en'
+
+  ssi (extends vulnerability):
+    translations:
+      - '@SSI_fr'
+      - '@SSI_en'
+
+  xml-injection (extends vulnerability):
+    translations:
+      - '@XML-Injection_fr'
+      - '@XML-Injection_en'
+
+  code-injection (extends vulnerability):
+    translations:
+      - '@Code-Injection_fr'
+      - '@Code-Injection_en'
+
+  http-request-smuggling (extends vulnerability):
+    translations:
+      - '@HTTP-Request-Smuggling_fr'
+      - '@HTTP-Request-Smuggling_en'
+
+  web-cache-poisoning (extends vulnerability):
+    translations:
+      - '@Web-Cache-Poisoning_fr'
+      - '@Web-Cache-Poisoning_en'
+
+  source-code-disclosure (extends vulnerability):
+    translations:
+      - '@Source-Code-Disclosure_fr'
+      - '@Source-Code-Disclosure_en'
+
+  backup-file (extends vulnerability):
+    translations:
+      - '@Backup-File_fr'
+      - '@Backup-File_en'

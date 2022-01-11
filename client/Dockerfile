@@ -20,7 +20,7 @@ export const environment = { \n\
   TRANSPORT: '${TRANSPORT}', \n\
   API_ENDPOINT: '/api', \n\
   MAPS_KEY: '', \n\
-  version: '1.1.2', \n\
+  version: '1.1.3', \n\
   environment: 'prod', \n\
 } \n\
 " > src/environments/environment.prod.ts
@@ -31,7 +31,7 @@ export const environment = { \n\
   TRANSPORT: '${TRANSPORT}', \n\
   API_ENDPOINT: '/api', \n\
   MAPS_KEY: '', \n\
-  version: '1.1.2', \n\
+  version: '1.1.3', \n\
   environment: 'prod', \n\
 } \n\
 " > src/environments/environment.ts

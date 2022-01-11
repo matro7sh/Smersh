@@ -4,6 +4,6 @@ export const environment = {
   TRANSPORT: 'https://',
   API_ENDPOINT: '/api',
   MAPS_KEY: '',
-  version: '1.1.2',
+  version: '1.1.3',
   environment: 'prod',
 };

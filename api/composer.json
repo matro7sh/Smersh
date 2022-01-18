@@ -3,7 +3,7 @@
     "description": "Smersh API for the Smersh app",
     "license": "MIT",
     "require": {
-        "php": "^7.4.16",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/core": "^2.5",
@@ -11,29 +11,29 @@
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.3",
         "doctrine/doctrine-migrations-bundle": "^2.0",
-        "doctrine/orm": "^2.7",
-        "gedmo/doctrine-extensions": "2.4.42",
+        "doctrine/orm": "^2.10.4",
+        "gedmo/doctrine-extensions": "v3.4.0",
         "guzzlehttp/guzzle": "^6.3",
         "lexik/jwt-authentication-bundle": "^2.8",
-        "locastic/api-platform-translation-bundle": "^v1.3.3",
+        "locastic/api-platform-translation-bundle": "^v1.3.4",
         "nelmio/cors-bundle": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.2",
-        "stof/doctrine-extensions-bundle": "^1.4",
-        "symfony/asset": "5.1.*",
-        "symfony/console": "5.1.*",
-        "symfony/dotenv": "5.1.*",
-        "symfony/expression-language": "5.1.*",
+        "stof/doctrine-extensions-bundle": "^v1.7.0",
+        "symfony/asset": "5.2.*.*",
+        "symfony/console": "5.2.*",
+        "symfony/dotenv": "5.2.*",
+        "symfony/expression-language": "5.2.*",
         "symfony/flex": "^1.1",
-        "symfony/framework-bundle": "5.1.*",
+        "symfony/framework-bundle": "5.2.*",
         "symfony/mercure-bundle": "^0.2",
-        "symfony/property-access": "5.1.*",
-        "symfony/property-info": "5.1.*",
-        "symfony/proxy-manager-bridge": "5.1.*",
-        "symfony/security-bundle": "5.1.*",
-        "symfony/serializer": "5.1.*",
-        "symfony/twig-bundle": "5.1.*",
-        "symfony/validator": "5.1.*",
-        "symfony/yaml": "5.1.*",
+        "symfony/property-access": "5.2.*",
+        "symfony/property-info": "5.2.*",
+        "symfony/proxy-manager-bridge": "5.2.*",
+        "symfony/security-bundle": "5.2.*",
+        "symfony/serializer": "5.2.*",
+        "symfony/twig-bundle": "5.2.*",
+        "symfony/validator": "5.2.*",
+        "symfony/yaml": "5.2.*",
         "vich/uploader-bundle": "^1.17"
     },
     "require-dev": {
@@ -46,8 +46,8 @@
         "hautelook/alice-bundle": "^2.9",
         "phpunit/phpunit": "^9.5",
         "symfony/maker-bundle": "^1.23",
-        "symfony/stopwatch": "^5.1",
-        "symfony/web-profiler-bundle": "^5.1"
+        "symfony/stopwatch": "^5.2",
+        "symfony/web-profiler-bundle": "^5.2"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -91,7 +91,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.1.*"
+            "require": "5.2.*"
         }
     }
 }

@@ -4,7 +4,7 @@
 
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
-ARG PHP_VERSION=7.4.16
+ARG PHP_VERSION=8.0
 ARG OPENRESTY_VERSION=1.15.8.3
 ARG VARNISH_VERSION=6.4
 

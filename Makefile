@@ -38,7 +38,7 @@ install: ## Install and setup project
 initialize: install reset-db ## Initialize and setup the project
 
 jwt: ## Generate jwt
-	cd api && sh ./generateJWT.sh
+	sh ./api/generateJWT.sh
 
 load-data:
 	$(BIN_CONSOLE) ha:fi:load --quiet

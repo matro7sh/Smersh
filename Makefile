@@ -31,8 +31,7 @@ init-db:
 	$(BIN_CONSOLE) do:sc:up --force
 
 install: ## Install and setup project
-	cp api/.env-dist api/.env
-	$(MAKE) setup-hosts create-network up jwt composer-install cache
+	$(MAKE) create-network up jwt composer-install cache
 	sudo chmod -R 777 api/public/media
 
 initialize: install reset-db ## Initialize and setup the project

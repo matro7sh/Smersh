@@ -9,6 +9,7 @@ export enum Language {
   AR = 'ar',
   RU = 'ru',
   UA = 'ua',
+  IT = 'it',
 }
 
 @Injectable()

@@ -17,8 +17,7 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 # Documentation
 
-All information is available at the following address: https://docs.smersh.app
-
+All information is available at the following address: https://cmepw.github.io/documentation/
 
 # How to contribute ? 
 
@@ -44,6 +43,7 @@ git push origin MyBranch
 - Linda - https://github.com/proglin
 - Log_s - https://rmrf-logs.com/man-log_s/
 - Swiftoui - https://github.com/Swiftoui
+- noraj - https://pwn.by/noraj/
 
 # Official Discord Channel
 

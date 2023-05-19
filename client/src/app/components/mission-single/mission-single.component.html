@@ -59,7 +59,7 @@
                       <ng-template #elseBlock>hourglass_empty</ng-template>
                     </mat-icon>
                     <div id="host_vulnList" mat-line style="padding: 14px;">
-                      <a class="displayBlock">{{host.name}}</a>
+                      <span class="displayBlock" (click)="copyURLToClipboard(host.name)">{{host.name}}</span>
                       <mat-chip-list aria-label="Fish selection">
                         <mat-chip *ngIf="host.technology" class="smersh-techno" selected>{{host.technology}}</mat-chip>
                         <mat-chip (click)="editThisVuln(vuln.linked)" *ngFor="let vuln of host.vulns" [color]="vuln.impact.color"

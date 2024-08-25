@@ -70,7 +70,7 @@
   },
   "mission-single": {
     "STARTAT": "開始日",
-    "ENDAT": "End date",
+    "ENDAT": "終了日",
     "GENERATE-REPORT": "レポートの作成",
     "DUMPJSON": "データをJSONファイルにダンプする",
     "CODI": "codiMDリンクの追加または更新",

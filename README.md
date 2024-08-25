@@ -30,9 +30,6 @@ git commit -m "xx"
 git push origin MyBranch
 ```
 
-# Roadmap 
-- Coming soon
-
 # Contributors 
 
 - darkweak - https://github.com/darkweak
@@ -45,6 +42,13 @@ git push origin MyBranch
 - Swiftoui - https://github.com/Swiftoui
 - noraj - https://pwn.by/noraj/
 
-# Official Discord Channel
 
-[![Porchetta Industries](https://discordapp.com/api/guilds/736724457258745996/widget.png?style=banner3)](https://discord.gg/sEkn3aa)
+# Available languages : 
+
+- italian
+- Japanese
+- French
+- Spanish
+- Algerian
+- Ukranian
+- Russian

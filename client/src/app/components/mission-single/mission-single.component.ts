@@ -493,4 +493,8 @@ export class MissionSingleComponent implements OnInit {
   editThisVuln(id: string): void {
     this.router.navigateByUrl(HostVulnRouter.redirectToEdit(id));
   }
+
+  copyURLToClipboard(text: string): void {
+    navigator.clipboard.writeText(text.replace(/.+\/\/|/g, ''));
+  }
 }

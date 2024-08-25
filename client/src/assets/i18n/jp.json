@@ -1,0 +1,111 @@
+{
+  "side-bar": {
+    "DASHBOARD": "ダッシュボード",
+    "CLIENTS": "お客様",
+    "HOSTS": "ドメイン名",
+    "IMPACTS": "影響",
+    "MISSIONS": "ミッション",
+    "USERS": "ユーザー",
+    "VULNS": "脆弱性"
+  },
+  "dashboard": {
+    "WELCOME": "ダッシュボードへようこそ",
+    "LINKED": "割り当てられたミッション",
+    "NOMISSON": "まだミッションを持っていない",
+    "MUMISSION": "私の使命",
+    "MYROLES": "私の役割"
+  },
+  "button": {
+    "SHOW": "表示",
+    "EDIT": "編集",
+    "DELETE": "削除",
+    "ADD": "追加",
+    "SUBMIT": "投稿する"
+  },
+  "add-vulns-to-host-external": {
+    "ADDVULNTO": "脆弱性を追加する ",
+    "SELECTVULNS": "脆弱性の選択",
+    "SELECTIMPACTS": "インパクトを選択",
+    "CURRENTSTATE": "現状",
+    "CREATENEWVULN": "脆弱性の新規作成",
+    "ADDPICTURE": "スクリーンショットを追加"
+  },
+  "client-create": {
+    "create": "新しいクライアントを作成する",
+    "name": "クライアント名",
+    "firstname": "名",
+    "lastname": "ラストネーム",
+    "phone": "電話"
+  },
+  "edit-vuln-with-state": {
+    "vuln": "脆弱性",
+    "target": "ターゲット"
+  },
+  "host-edit": {
+    "NAME": "名称",
+    "Technology": "テクノロジー"
+  },
+  "impact-create": {
+    "NAME": "名称"
+  },
+  "impact-edit": {
+    "NAME": "名称"
+  },
+  "mission-create": {
+    "CREATENEW": "新しいミッション",
+    "STARTDATE": "開始日",
+    "ENDDATE": "終了日",
+    "MISSIONNAME": "ミッション名",
+    "CREDENTIALS": "資格証明書",
+    "TYPEOFMISSION ": "ミッション・タイプ",
+    "CLIENT": "クライアント",
+    "SELECTPENTESTERS": "ハッカー",
+    "CODI": "CodiMDへのリンク"
+  },
+  "mission-edit": {
+    "STARTDATE": "開始日",
+    "ENDDATE": "終了日",
+    "CLIENTNAME": "クライアント",
+    "CREDENTIALS": "資格証明書"
+  },
+  "mission-single": {
+    "STARTAT": "開始日",
+    "ENDAT": "End date",
+    "GENERATE-REPORT": "レポートの作成",
+    "DUMPJSON": "データをJSONファイルにダンプする",
+    "CODI": "codiMDリンクの追加または更新",
+    "BURP": "burpsuite設定のダウンロード",
+    "CLIENTS": "Client",
+    "IMPORT": "ドメインファイルのインポート",
+    "ADDNEWHOST": "新しいホストを手動で追加する",
+    "SCOPE": "外周",
+    "PENTESTERS": "ハッカー",
+    "STEPS": "ステップ",
+    "CREDENTIALS": "資格証明書"
+  },
+  "user-create": {
+    "USERNAME": "ユーザー名",
+    "PASSWORD": "パスワード",
+    "EMAIL": "電子メール",
+    "PHONE": "電話",
+    "CITY": "City"
+  },
+  "user-edit": {
+    "USERNAME": "ユーザー名",
+    "EMAIL": "電子メール",
+    "PHONE": "電話",
+    "CITY": "都市"
+  },
+  "vulns-create": {
+    "NAME": "クライアント名",
+    "DESCRIPTION": "説明",
+    "REMEDIATION": "鎮魂",
+    "SELECTVULNSTYPE": "タイプを選択",
+    "SELECTIMPACTS": "インパクトを選択"
+  },
+  "vulns-edit": {
+    "NAME": "クライアント名",
+    "DESCRIPTION": "説明",
+    "REMEDIATION": "鎮魂"
+  }
+}

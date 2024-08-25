@@ -5,6 +5,7 @@ import { Locale } from '../storage/Locale';
 export enum Language {
   EN = 'en',
   ES = 'es',
+  JP = 'jp',
   FR = 'fr',
   AR = 'ar',
   RU = 'ru',

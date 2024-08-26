@@ -17,7 +17,8 @@ Smersh is a pentest oriented collaborative tool used to track the progress of yo
 
 # Documentation
 
-All information is available at the following address: https://cmepw.github.io/documentation/
+All information is available at the following address: [https://cmepw.github.io/documentation/](https://matro7sh.github.io/documentation/)
+
 
 # How to contribute ? 
 
